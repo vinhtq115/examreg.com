@@ -1,0 +1,19 @@
+{
+  "name": "vinhtq115/examreg.com",
+  "description": "Project for INT3306-20",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Vinh Quang Tran",
+      "email": "starcraft6723@hotmail.com"
+    },
+    {
+      "name": "Cao Minh Nhat",
+      "email": "nhatcao99@gmail.com"
+    }
+  ],
+  "require": {
+    "phpoffice/phpspreadsheet": "1.10.0"
+  }
+}
