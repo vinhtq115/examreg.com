@@ -1,6 +1,6 @@
 <?php
-    require("account/view/AccountView.php");
+    require("account/view/LoginView.php");
 
-    $av = new \account\view\AccountView();
+    $av = new AccountView();
     $av->loginForm();
 

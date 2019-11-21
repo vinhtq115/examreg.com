@@ -9,9 +9,8 @@ class AccountModel {
 
     public function newAccount($u, $p) {
         $db = new PDOData();
-        $data = $db->doPreparedQuery("select * from nsd where tsd like ? and mk like password(?);", array($u, $p));
 
-        if (count($data) > 0) return true;
+        if (count() > 0) return true;
 
         return false;
     }
