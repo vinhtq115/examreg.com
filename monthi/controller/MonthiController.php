@@ -8,6 +8,7 @@
 
 class MonthiController {
     public function __construct() {}
+    private $data;
 
     /**
      * Hiện toàn bộ môn thi dưới dạng bảng
@@ -15,10 +16,20 @@ class MonthiController {
     public function table() {
         $monthi = new \monthi\model\Monthi();
 
-        $data = json_encode($monthi->getAll());
+        $this->data = json_encode($monthi->getAll());
 
-        $view = new MonthiView($data);
+        $view = new MonthiView($this->data);
         echo $view->tableView();
+    }
+
+    public function showAdd() {
+        $view = new MonthiView($this->data);
+        echo $view->addForm();
+    }
+
+    public function showDelete() {
+        $view = new MonthiView($this->data);
+        echo $view->deleteForm();
     }
 
     public function add($mamonthi, $tenmonthi, $tinchi) {

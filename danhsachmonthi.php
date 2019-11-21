@@ -13,8 +13,15 @@
     $monthictrl = new \monthi\controller\MonthiController();
 
     $monthictrl->table();
+    // Form thêm môn thi
+    $monthictrl->showAdd();
+    // Form xóa môn thi
+    $monthictrl->showDelete();
     ?>
-    <!-- Form thêm môn thi -->
-
+    <script>
+        function showHint(str) {
+            
+        }
+    </script>
 </body>
 </html>

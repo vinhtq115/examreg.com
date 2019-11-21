@@ -38,10 +38,11 @@ class MonthiView {
     }
 
     public function addForm() {
-        $html = "<form>
+        $html = "<h3>Thêm môn thi</h3>
+                <form>
                   <div class=\"form-group\">
                     <label for=\"mamonthi\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" placeholder=\"Nhập mã môn thi\">
+                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\">
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tenmonthi\">Tên môn thi</label>
@@ -52,6 +53,18 @@ class MonthiView {
                     <input type=\"number\" class=\"form-control\" id=\"tinchi\" placeholder=\"Tín chỉ\">
                   </div>
                   <button type=\"submit\" class=\"btn btn-primary\">Thêm</button>
+                </form>";
+        return $html;
+    }
+
+    public function deleteForm() {
+        $html = "<h3>Xóa môn thi</h3>
+                <form>
+                  <div class=\"form-group\">
+                    <label for=\"mamonthi\">Mã môn thi</label>
+                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" onkeyup='showHint(this.value)'>
+                  </div>
+                  <button type=\"submit\" class=\"btn btn-danger\">Xóa</button>
                 </form>";
         return $html;
     }
