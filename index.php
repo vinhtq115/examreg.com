@@ -1,4 +1,6 @@
 <?php
-    require_once('connection.php');
-    require_once('controllers/loginController.php');
-?>
+    require("account/view/AccountView.php");
+
+    $av = new \account\view\AccountView();
+    $av->loginForm();
+
