@@ -1,6 +1,10 @@
 <?php
-    require("account/view/LoginView.php");
 
-    $av = new AccountView();
-    $av->loginForm();
+
+require("account/controller/LoginController.php");
+
+$usercontroller = new LoginController();
+$usercontroller-> getLoginInfo();
+
+
 

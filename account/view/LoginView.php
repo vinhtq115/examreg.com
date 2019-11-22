@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Exam Register</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/examreg.com/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css">
 
     <style type="text/css">
         body {
@@ -118,13 +118,13 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                            <input type="text" class="form-control" name="id" placeholder="account ID" required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="text" class="form-control" name="password" placeholder="Password" required="required">
+                            <input type="text" class="form-control" name="pass" placeholder="Password" required="required">
                         </div>
                     </div>
                     <div class="form-group">

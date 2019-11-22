@@ -1,25 +1,30 @@
 <?php
 
 
-namespace core\data\model;
-use \PDO;
-use PDOException;
-
 class PDOData {
     protected $db = null; // Đối tượng PDO
+//    private $host = "localhost"; // SQL hostname
+//    private $dbname = "web"; // Database name
+//    private $username = "test"; // Username for connecting database
+//    private $password = "123456"; // Password for connecting database
     private $host = "localhost"; // SQL hostname
     private $dbname = "web"; // Database name
-    private $username = "test"; // Username for connecting database
-    private $password = "123456"; // Password for connecting database
+    private $username = "root"; // Username for connecting database
+    private $password = ""; // Password for connecting database
 
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __connect() {
         try {
             $this->db = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";", $this->username, $this->password);
+
         } catch (PDOException $e) {
             echo $e->getMessage();
+            echo "$this->host";"<br>";
+            echo "$this->dbname";"<br>";
+            echo "$this->username";"<br>";
+            echo "$this->password";"<br>";
         }
     }
 
@@ -97,3 +102,5 @@ class PDOData {
         return $count;
     }
 }
+$tem = new PDOData;
+$tem->__connect();
