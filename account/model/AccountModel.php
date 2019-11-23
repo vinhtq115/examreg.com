@@ -1,5 +1,5 @@
 <?php
-require_once("../../core/data/PDOData.php");
+require_once("core/data/PDOData.php");
 
 class AccountModel extends PDOData{
     public function __contruct() {
@@ -9,7 +9,7 @@ class AccountModel extends PDOData{
         $conn = $this->__connect();
         $sql = "SELECT `id`, `password`, `author` FROM `account` WHERE `id` = '$id' AND `password` = '$password';";
         $result = mysqli_query($conn, $sql);
-        $user = "anything";
+        echo $id . " " . $password ;
         if (mysqli_num_rows($result) > 0) {
             $user = mysqli_fetch_assoc($result);
         } else {

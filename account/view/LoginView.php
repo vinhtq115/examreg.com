@@ -101,7 +101,7 @@
             margin-top: 300px;
         }
         body{
-            background-color: #B8C3DC;
+            background-color: #f2f2f2;
         }
     </style>
 </head>
@@ -118,7 +118,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" name="id" placeholder="account ID" required="required">
+                            <input type="text" class="form-control" name="id" placeholder="Account ID" required="required">
                         </div>
                     </div>
                     <div class="form-group">

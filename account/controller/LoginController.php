@@ -1,5 +1,5 @@
 <?php
-require_once('../model/AccountModel.php');
+require_once('account/model/AccountModel.php');
 
 class LoginController
 {
@@ -20,10 +20,9 @@ class LoginController
             }
 
         }else{
-            echo "ko vao dc";"<br>";
             echo "$id";
             echo "$password";
-//            require_once('account/view/LoginView.php');
+            require_once('account/view/LoginView.php');
         }
     }
 }
