@@ -16,6 +16,7 @@
   "require": {
     "phpoffice/phpspreadsheet": "1.10.0",
     "ext-pdo": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-mysqli": "*"
   }
 }

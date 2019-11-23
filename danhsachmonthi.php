@@ -8,15 +8,15 @@
 <body>
     <!-- Danh sách môn thi -->
     <?php
-    require_once ("monthi/controller/MonthiController.php");
+        require_once ("monthi/controller/MonthiController.php");
 
-    $monthictrl = new \monthi\controller\MonthiController();
+        $monthictrl = new \monthi\controller\MonthiController();
 
-    $monthictrl->table();
-    // Form thêm môn thi
-    $monthictrl->showAdd();
-    // Form xóa môn thi
-    $monthictrl->showDelete();
+        $monthictrl->table();
+        // Form thêm môn thi
+        $monthictrl->showAdd();
+        // Form xóa môn thi
+        $monthictrl->showDelete();
     ?>
     <script>
         function showHint(str) {

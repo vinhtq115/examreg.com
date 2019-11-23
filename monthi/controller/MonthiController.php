@@ -17,7 +17,6 @@ class MonthiController {
         $monthi = new \monthi\model\Monthi();
 
         $this->data = json_encode($monthi->getAll());
-
         $view = new MonthiView($this->data);
         echo $view->tableView();
     }
