@@ -6,7 +6,7 @@
     <meta name="description" content="Affordable and professional web design">
     <meta name="keywords" content="web design, affordable web design, professional web design">
     <meta name="author" content="Brad Traversy">
-    <title>Administration Homepage</title>
+    <title>Administration's Homepage</title>
     <style>
         body{
             font: 15px/1.5 Arial, Helvetica,sans-serif;
