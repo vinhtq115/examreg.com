@@ -2,9 +2,11 @@
 
 
 namespace monthi\model;
-use core\data\model\PDOData;
+
 
 require_once ("core/data/PDOData.php");
+
+use PDOData;
 
 class Monthi extends PDOData {
     /**

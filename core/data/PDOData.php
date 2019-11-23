@@ -9,22 +9,18 @@ class PDOData {
 //    private $password = "123456"; // Password for connecting database
     private $host = "localhost"; // SQL hostname
     private $dbname = "web"; // Database name
-    private $username = "root"; // Username for connecting database
-    private $password = ""; // Password for connecting database
+    private $username = "test"; // Username for connecting database
+    private $password = "123456"; // Password for connecting database
 
     /**
      * Constructor
      */
-    public function __connect() {
+    public function __construct() {
         try {
             $this->db = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";", $this->username, $this->password);
 
         } catch (PDOException $e) {
             echo $e->getMessage();
-            echo "$this->host";"<br>";
-            echo "$this->dbname";"<br>";
-            echo "$this->username";"<br>";
-            echo "$this->password";"<br>";
         }
     }
 
@@ -102,5 +98,3 @@ class PDOData {
         return $count;
     }
 }
-$tem = new PDOData;
-$tem->__connect();
