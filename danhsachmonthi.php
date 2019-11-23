@@ -19,9 +19,7 @@
         $monthictrl->showDelete();
     ?>
     <script>
-        function showHint(str) {
-            
-        }
+
     </script>
 </body>
 </html>

@@ -38,4 +38,9 @@ class Monthi extends PDOData {
         $c = $this->doSql($sql);
         return $c;
     }
+
+    public function delete($mamonthi) {
+        $sql = "DELETE FROM monthi WHERE monthi.mamonthi = '$mamonthi'";
+        $this->doSql($sql);
+    }
 }

@@ -34,38 +34,40 @@ class MonthiView {
         }
         $html .= "</tbody></table>";
 
-        return $html;
+        echo $html;
     }
 
     public function addForm() {
         $html = "<h3>Thêm môn thi</h3>
-                <form>
+                <form method=\"post\">
+                  <input type=\"hidden\" name=\"add\" value=\"1\">
                   <div class=\"form-group\">
                     <label for=\"mamonthi\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\">
+                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\">
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tenmonthi\">Tên môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi\" placeholder=\"Tên môn thi\">
+                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi\" name=\"tenmonthi\" placeholder=\"Tên môn thi\">
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tinchi\">Tín chỉ</label>
-                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" placeholder=\"Tín chỉ\">
+                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" name=\"tinchi\" placeholder=\"Tín chỉ\">
                   </div>
                   <button type=\"submit\" class=\"btn btn-primary\">Thêm</button>
                 </form>";
-        return $html;
+        echo $html;
     }
 
     public function deleteForm() {
         $html = "<h3>Xóa môn thi</h3>
-                <form>
+                <form method=\"post\">
+                  <input type=\"hidden\" name=\"delete\" value=\"1\">
                   <div class=\"form-group\">
                     <label for=\"mamonthi\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" onkeyup='showHint(this.value)'>
+                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\">
                   </div>
                   <button type=\"submit\" class=\"btn btn-danger\">Xóa</button>
                 </form>";
-        return $html;
+        echo $html;
     }
 }
