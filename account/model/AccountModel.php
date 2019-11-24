@@ -1,20 +1,19 @@
 <?php
-require_once("core/data/PDOData.php");
+require_once("/Applications/XAMPP/xamppfiles/htdocs/examreg.com/core/data/PDOData.php");
 
 class AccountModel extends PDOData{
-    public function __contruct() {
+    public function __construct() {
+        parent::__construct();
+    }
+
+    public function __destruct()
+    {
+        parent::__destruct();
     }
 
     public function login($id , $password){ // the login function
-        $conn = $this->__connect();
-        $sql = "SELECT `id`, `password`, `author` FROM `account` WHERE `id` = '$id' AND `password` = '$password';";
-        $result = mysqli_query($conn, $sql);
-        echo $id . " " . $password ;
-        if (mysqli_num_rows($result) > 0) {
-            $user = mysqli_fetch_assoc($result);
-        } else {
-            require_once('account/view/LoginView.php');
-        }return $user;
+        $sql = $this->doQuery("SELECT * FROM `account` WHERE `id` = '$id' AND `password` = '$password';");
+        return $sql;
     }
 
     public function logout(){

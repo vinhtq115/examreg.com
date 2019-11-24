@@ -3,17 +3,22 @@
 
 class PDOData {
     protected $db = null; // Đối tượng PDO
-    private $host = 'localhost'; // SQL hostname
-    private $dbname = 'web'; // Database name
-    private $username = 'test'; // Username for connecting database
-    private $password = '123456';// Password for connecting database
+//    private $host = "localhost"; // SQL hostname
+//    private $dbname = "web"; // Database name
+//    private $username = "test"; // Username for connecting database
+//    private $password = "123456"; // Password for connecting database
+    private $host = "localhost"; // SQL hostname
+    private $dbname = "web"; // Database name
+    private $username = "root"; // Username for connecting database
+    private $password = ""; // Password for connecting database
 
     /**
      * Constructor
      */
     public function __construct() {
         try {
-            $this->db = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";charset=UTF8", $this->username, $this->password);
+            $this->db = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";", $this->username, $this->password);
+
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -93,3 +98,4 @@ class PDOData {
         return $count;
     }
 }
+
