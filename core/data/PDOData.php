@@ -18,7 +18,6 @@ class PDOData {
     public function __construct() {
         try {
             $this->db = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";", $this->username, $this->password);
-
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

@@ -4,16 +4,26 @@
 namespace monthi\model;
 
 
-require_once ("core/data/PDOData.php");
-
 use PDOData;
 
+require_once ("core/data/PDOData.php");
+
+
 class Monthi extends PDOData {
+    private $host = "localhost"; // SQL hostname
+    private $dbname = "web"; // Database name
+    private $username = "test"; // Username for connecting database
+    private $password = "123456"; // Password for connecting database
+
     /**
      * Monthi constructor.
      */
     public function __construct() {
-        parent::__construct();
+        try {
+            $this->db = new \PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";charset=UTF8", $this->username, $this->password);
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 
     /**
