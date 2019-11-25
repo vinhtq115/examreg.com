@@ -8,7 +8,7 @@
 <body>
     <!-- Danh sách môn thi -->
     <?php
-        require_once("controller/MonthiController.php");
+        require_once dirname(__FILE__)."/controller/MonthiController.php";
 
         $monthictrl = new \monthi\controller\MonthiController();
 

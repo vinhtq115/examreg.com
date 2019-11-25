@@ -5,7 +5,7 @@ namespace monthi\view;
 
 
 class MonthiView {
-    private $data; // Danh sach mon thi
+    private $data; // Danh sách môn thi
 
     /**
      * Khởi tạo monthiView.
@@ -25,8 +25,8 @@ class MonthiView {
         $html .= "<th>Tên môn thi</th>";
         $html .= "<th>Tín chỉ</th>";
         $html .= "</tr></thead><tbody>";
-        $size = sizeof($this->data);
-        if ($size > 0) {
+        $size = sizeof($this->data); // Chứa kích cỡ mảng data
+        if ($size > 0) { // Trả về dữ liệu nếu size > 0
             foreach ($this->data as $key => $value) {
                 $html .= "<tr>";
                 $html .= "<td>" . $value["mamonthi"] . "</td>";
@@ -34,12 +34,12 @@ class MonthiView {
                 $html .= "<td>" . $value["tinchi"] . "</td>";
                 $html .= "</tr>";
             }
-        } else {
-            $html .= "<td colspan='3' align='center'>Chưa có môn thi.</td>";
+        } else { // Tạo ô trống nếu size = 0
+            $html .= "<td colspan='3' style=\"text-align:center\">Chưa có môn thi.</td>";
         }
         $html .= "</tbody></table>";
 
-        echo $html;
+        return $html;
     }
 
     /**
@@ -49,17 +49,6 @@ class MonthiView {
      */
     public function addForm($success = "", $err = "") {
         $html = "<h3>Thêm môn thi</h3>
-                <form method=\"post\" enctype=\"multipart/form-data\">
-                    <input type='hidden' name='upload' value='1'>
-                    <div class=\"form-group\">
-                        Chọn file Excel (.xls, .xlsx) cần upload: 
-                        <input id=\"fileSelect\" type=\"file\" accept=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel\" />
-                    </div>
-                    <button type=\"submit\" class=\"btn btn-primary\">Tải lên</button>
-                </form>
-                <div class=\"alert alert-info\" role=\"alert\">
-                    File excel cần có 3 cột \"Mã môn học\", \"Tên môn học\" và \"Tín chỉ\" ở hàng đầu.
-                </div>
                 <form method=\"post\">
                   <input type=\"hidden\" name=\"add\" value=\"1\">
                   <div class=\"form-group\">
