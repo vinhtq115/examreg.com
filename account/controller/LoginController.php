@@ -1,6 +1,7 @@
 <?php
-require_once dirname(__FILE__).'/../../account/view/LoginView.php';
-require_once dirname(__FILE__).'/../../account/model/AccountModel.php';
+session_start();
+require_once('account/view/LoginView.php');
+require_once('account/model/AccountModel.php');
 
 class LoginController
 {
@@ -17,14 +18,19 @@ class LoginController
                 $result = str_replace(']','',$result);
                 $obj = json_decode($result,true);
                 $isAdmin = $obj["isAdmin"];
+                $ID = $obj["id"];
+                $_SESSION["id"] = $ID; // making session
+                $_SESSION["isAdmin"] = $isAdmin;// making session
+
                 if($isAdmin == 0){
                     echo '<script language="javascript">';
                     echo 'window.location.href="http://localhost/examreg.com/student/view/StudentView.php";';
                     echo '</script>';
-                }else if ($isAdmin ==1){
+                }else if ($isAdmin == 1){
                     echo '<script language="javascript">';
                     echo 'window.location.href="http://localhost/examreg.com/admin/view/AdminView.php";';
                     echo '</script>';
+
                 }
 
             }else{

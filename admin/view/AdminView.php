@@ -1,11 +1,20 @@
+<?php
+
+    namespace  account\controller;
+    use account\controller\LogoutController;
+    session_start();
+
+    if($_SESSION["isAdmin"] != 1){
+            $logout = new LogoutController();
+            $logout -> endSession();
+        }
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="description" content="Affordable and professional web design">
-    <meta name="keywords" content="web design, affordable web design, professional web design">
-    <meta name="author" content="Brad Traversy">
+    <script src="/Applications/XAMPP/xamppfiles/htdocs/examreg.com/jquery/jquery-3.4.1.js"></script>
     <title>Administration's Homepage</title>
     <style>
         body{
@@ -122,11 +131,11 @@
 <header>
     <div class="container">
         <div id="branding">
-            <h1><span class="highlight">Exam</span>Registration</h1>
+            <h1><span class="highlight">Exam</span>Reg</h1>
         </div>
         <nav>
             <ul>
-                <li class="current"><a href="">Log out</a></li>
+                <li class="current"><a id = "logout-btn" onclick="LogOutFunc()">Log out</a></li>
             </ul>
         </nav>
     </div>
@@ -161,5 +170,19 @@
 <footer>
     <p>Admin home page</p>
 </footer>
+<script>
+    //$(document).ready(function(){
+    //    $("#logout-btn").click(function(){
+    //        var tmp = "<?php // $logout = new LogoutController();
+    //            $logout -> endSession();?>//";
+    //        return tmp;
+    //    });
+    //});'
+    function LogOutFunc(){
+        var lang = <?php $logout = new LogoutController();
+        $logout -> endSession();?>
+        return lang;
+    }
+    </script>
 </body>
 </html>
