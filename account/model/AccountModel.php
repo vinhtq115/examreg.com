@@ -1,6 +1,7 @@
 <?php
-//require_once("/core/data/PDOData.php");
-require_once("core/data/PDOData.php");
+require_once("/Applications/XAMPP/xamppfiles/htdocs/examreg.com/core/data/PDOData.php");
+
+
 class AccountModel extends PDOData{
     public function __construct() {
         parent::__construct();
@@ -17,6 +18,9 @@ class AccountModel extends PDOData{
     }
 
     public function logout(){
-
+        session_start();
+        unset($_SESSION["id"]);
+        unset($_SESSION["isAdmin"]);
+        header("Location:http://localhost/examreg.com/");
     }
 };

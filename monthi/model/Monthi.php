@@ -4,10 +4,10 @@
 namespace monthi\model;
 
 
-//require_once ("core/data/PDOData.php");
+use PDOData;
+
 require_once ("core/data/PDOData.php");
 
-use PDOData;
 
 class Monthi extends PDOData {
     /**
@@ -37,6 +37,7 @@ class Monthi extends PDOData {
     public function add($mamonthi, $tenmonthi, $tinchi) {
         $sql = "INSERT INTO monthi(mamonthi, tenmonthi, tinchi) VALUES ('$mamonthi', '$tenmonthi', '$tinchi')";
         $c = $this->doSql($sql);
+        echo $c;
         return $c;
     }
 
