@@ -1,5 +1,5 @@
 <?php
-require_once("/Applications/XAMPP/xamppfiles/htdocs/examreg.com/core/data/PDOData.php");
+require_once dirname(__FILE__)."/../../core/data/PDOData.php";
 
 
 class AccountModel extends PDOData{

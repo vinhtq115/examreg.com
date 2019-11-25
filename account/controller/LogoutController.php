@@ -1,6 +1,6 @@
 <?php
 namespace account\controller;
-require_once ("../model/AccountModel.php");
+require_once dirname(__FILE__).("/../model/AccountModel.php");
 
 class LogoutController{
     public function endSession(){
