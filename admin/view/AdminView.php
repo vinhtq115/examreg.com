@@ -122,7 +122,7 @@
 <header>
     <div class="container">
         <div id="branding">
-            <h1><span class="highlight">Exam</span>Registration</h1>
+            <h1><span class="highlight">Exam</span>Reg</h1>
         </div>
         <nav>
             <ul>

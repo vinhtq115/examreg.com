@@ -1,6 +1,6 @@
 <?php
-require_once("/Applications/XAMPP/xamppfiles/htdocs/examreg.com/core/data/PDOData.php");
-
+//require_once("/core/data/PDOData.php");
+require_once("core/data/PDOData.php");
 class AccountModel extends PDOData{
     public function __construct() {
         parent::__construct();
