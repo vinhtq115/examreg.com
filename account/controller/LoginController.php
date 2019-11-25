@@ -34,12 +34,12 @@ class LoginController
                 }
 
             }else{
-                echo "No such employee exist";
+                echo "<script type='text/javascript'>alert('Either the password or the id is wrong');</script>";
                 require_once('account/view/LoginView.php');
             }
 
         }else{
-            echo "No such employee exist";
+            imap_alerts("Please complete the form");
             require_once('account/view/LoginView.php');
         }
     }}

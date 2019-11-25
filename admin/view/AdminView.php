@@ -1,131 +1,28 @@
 <?php
 
-    namespace  account\controller;
-    use account\controller\LogoutController;
+    require_once ("../../account/controller/LogoutController.php");
     session_start();
 
     if($_SESSION["isAdmin"] != 1){
-            $logout = new LogoutController();
-            $logout -> endSession();
-        }
+        header("Location:http://localhost/examreg.com/");
+    }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <script src="/Applications/XAMPP/xamppfiles/htdocs/examreg.com/jquery/jquery-3.4.1.js"></script>
     <title>Administration's Homepage</title>
-    <style>
-        body{
-            font: 15px/1.5 Arial, Helvetica,sans-serif;
-            padding:0;
-            margin:0;
-            background-color:#f4f4f4;
-        }
-
-        /* Global */
-        .container{
-            width:80%;
-            margin:auto;
-            overflow:hidden;
-        }
-
-        ul{
-            margin:0;
-            padding:0;
-        }
-
-        /* Header **/
-        header{
-            background:#35424a;
-            color:#ffffff;
-            padding-top:30px;
-            min-height:70px;
-            border-bottom:#8bc6da 3px solid;
-        }
-
-        header a{
-            color:#ffffff;
-            text-decoration:none;
-            text-transform: uppercase;
-            font-size:16px;
-        }
-
-        header li{
-            float:left;
-            display:inline;
-            padding: 0 20px 0 20px;
-        }
-
-        header #branding{
-            float:left;
-        }
-
-        header #branding h1{
-            margin:0;
-        }
-
-        header nav{
-            float:right;
-            margin-top:10px;
-        }
-
-        header .highlight, header .current a{
-            color:#8bc6da;
-            font-weight:bold;
-        }
-
-        header a:hover{
-            color:#cccccc;
-            font-weight:bold;
-        }
-        /*Showcase*/
-        #showcase{
-            min-height:400px;
-            background:url('img/showcase.jpg') no-repeat 0 -400px;
-            text-align:center;
-            color:#ffffff;
-        }
-
-        #showcase h1{
-            margin-top:100px;
-            font-size:55px;
-            margin-bottom:10px;
-        }
-
-        #showcase p{
-            font-size:20px;
-        }
-
-        /* Boxes */
-        #boxes{
-            margin-top:20px;
-        }
-
-        #boxes .box{
-            float:left;
-            text-align: center;
-            width:30%;
-            padding:10px;
-        }
-
-        #boxes .box img{
-            width:90px;
-        }
-
-
-        footer{
-            padding:20px;
-            margin-top:20px;
-            color:#ffffff;
-            background-color:#8bc6da;
-            text-align: center;
-        }
-
-
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="../../css/adminView.css">
+    <script src="../../jquery/jquery-3.4.1.js"></script>
+    <script>
+        //take the logout function to the client
+        $(document).ready(function(){
+            $("#logout-btn").click(function() {
+                window.location.href="http://localhost/examreg.com/account/view/LogoutView.php";
+            });
+        });
+    </script>
 </head>
 <body>
 <header>
@@ -135,7 +32,7 @@
         </div>
         <nav>
             <ul>
-                <li class="current"><a id = "logout-btn" onclick="LogOutFunc()">Log out</a></li>
+                <li class="current"><a id = "logout-btn">Log out</a></li>
             </ul>
         </nav>
     </div>
@@ -150,17 +47,17 @@
 <section id="boxes">
     <div class="container">
         <div class="box">
-            <a href=""><img src="img/graduate-student.png"></a>
+            <a href=""><img src="../../css/img/graduate-student.png"></a>
             <h3>Students Roaster</h3>
             <p>Administration keeping track and managing student profile which taking part in the examination</p>
         </div>
         <div class="box">
-            <a href=""><img src="img/microscope.png"></a>
+            <a href=""><img src="../../css/img/microscope.png"></a>
             <h3>Subjects List</h3>
             <p>Administration keeping track of subjects and courses of the examination</p>
         </div>
         <div class="box">
-            <a href=""><img src="img/logo_brush.png"></a>
+            <a href=""><img src="../../css/img/logo_brush.png"></a>
             <h3>The Exams</h3>
             <p>Administration creating and managing the upcoming examination </p>
         </div>
@@ -170,19 +67,6 @@
 <footer>
     <p>Admin home page</p>
 </footer>
-<script>
-    //$(document).ready(function(){
-    //    $("#logout-btn").click(function(){
-    //        var tmp = "<?php // $logout = new LogoutController();
-    //            $logout -> endSession();?>//";
-    //        return tmp;
-    //    });
-    //});'
-    function LogOutFunc(){
-        var lang = <?php $logout = new LogoutController();
-        $logout -> endSession();?>
-        return lang;
-    }
-    </script>
+
 </body>
 </html>
