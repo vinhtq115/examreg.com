@@ -43,25 +43,36 @@ class MonthiView {
     }
 
     /**
-     * Hiện form thêm môn học. Hiện thị lỗi hoặc thông báo thành công nếu có.
+     * Hiện form thêm môn học. Hiển thị lỗi hoặc thông báo thành công nếu có.
      * @param $success: Thông báo thành công
      * @param $err: Thông báo lỗi
      */
-    public function addForm($success, $err) {
+    public function addForm($success = "", $err = "") {
         $html = "<h3>Thêm môn thi</h3>
+                <form method=\"post\" enctype=\"multipart/form-data\">
+                    <input type='hidden' name='upload' value='1'>
+                    <div class=\"form-group\">
+                        Chọn file Excel (.xls, .xlsx) cần upload: 
+                        <input id=\"fileSelect\" type=\"file\" accept=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel\" />
+                    </div>
+                    <button type=\"submit\" class=\"btn btn-primary\">Tải lên</button>
+                </form>
+                <div class=\"alert alert-info\" role=\"alert\">
+                    File excel cần có 3 cột \"Mã môn học\", \"Tên môn học\" và \"Tín chỉ\" ở hàng đầu.
+                </div>
                 <form method=\"post\">
                   <input type=\"hidden\" name=\"add\" value=\"1\">
                   <div class=\"form-group\">
                     <label for=\"mamonthi\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\">
+                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\" maxlength='20' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tenmonthi\">Tên môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi\" name=\"tenmonthi\" placeholder=\"Tên môn thi\">
+                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tinchi\">Tín chỉ</label>
-                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" name=\"tinchi\" placeholder=\"Tín chỉ\">
+                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='0'>
                   </div>";
         if (!empty($err)) { // Có lỗi
             $html .= "<div class=\"alert alert-danger\" role=\"alert\">$err</div>";
@@ -72,7 +83,12 @@ class MonthiView {
         echo $html;
     }
 
-    public function deleteForm($success, $err) {
+    /**
+     * Hiện form xóa môn học theo mã môn học. Hiển thị lỗi hoặc thông báo thành công nếu có.
+     * @param $success: Thông báo thành công
+     * @param $err: Thông báo lỗi
+     */
+    public function deleteForm($success = "", $err = "") {
         $html = "<h3>Xóa môn thi</h3>
                 <form method=\"post\">
                   <input type=\"hidden\" name=\"delete\" value=\"1\">

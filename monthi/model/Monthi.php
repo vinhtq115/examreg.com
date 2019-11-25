@@ -6,7 +6,7 @@ namespace monthi\model;
 
 use PDOData;
 
-require_once ("core/data/PDOData.php");
+require_once dirname(__FILE__).("/../../core/data/PDOData.php");
 
 
 class Monthi extends PDOData {
@@ -30,14 +30,13 @@ class Monthi extends PDOData {
      * @return array: Mảng danh sách môn thi
      */
     public function getAll() {
-        $ret = $this->doQuery("SELECT * FROM monthi");
+        $ret = $this->doQuery("SELECT * FROM monthi ORDER BY tenmonthi");
         return $ret;
     }
 
     public function add($mamonthi, $tenmonthi, $tinchi) {
         $sql = "INSERT INTO monthi(mamonthi, tenmonthi, tinchi) VALUES ('$mamonthi', '$tenmonthi', '$tinchi')";
         $c = $this->doSql($sql);
-        echo $c;
         return $c;
     }
 

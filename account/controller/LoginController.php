@@ -1,6 +1,6 @@
 <?php
-require_once('/Applications/XAMPP/xamppfiles/htdocs/examreg.com/account/view/LoginView.php');
-require_once('/Applications/XAMPP/xamppfiles/htdocs/examreg.com/account/model/AccountModel.php');
+require_once dirname(__FILE__).'/../../account/view/LoginView.php';
+require_once dirname(__FILE__).'/../../account/model/AccountModel.php';
 
 class LoginController
 {

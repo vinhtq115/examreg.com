@@ -2,13 +2,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh sách môn thi</title>
-    <link rel="stylesheet" href="bootstrap/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/custom.css">
 </head>
 <body>
     <!-- Danh sách môn thi -->
     <?php
-        require_once ("monthi/controller/MonthiController.php");
+        require_once("controller/MonthiController.php");
 
         $monthictrl = new \monthi\controller\MonthiController();
 
