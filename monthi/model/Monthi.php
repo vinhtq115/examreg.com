@@ -10,20 +10,11 @@ require_once ("core/data/PDOData.php");
 
 
 class Monthi extends PDOData {
-    private $host = "localhost"; // SQL hostname
-    private $dbname = "web"; // Database name
-    private $username = "test"; // Username for connecting database
-    private $password = "123456"; // Password for connecting database
-
     /**
      * Monthi constructor.
      */
     public function __construct() {
-        try {
-            $this->db = new \PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";charset=UTF8", $this->username, $this->password);
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
+        parent::__construct();
     }
 
     /**
@@ -46,6 +37,7 @@ class Monthi extends PDOData {
     public function add($mamonthi, $tenmonthi, $tinchi) {
         $sql = "INSERT INTO monthi(mamonthi, tenmonthi, tinchi) VALUES ('$mamonthi', '$tenmonthi', '$tinchi')";
         $c = $this->doSql($sql);
+        echo $c;
         return $c;
     }
 

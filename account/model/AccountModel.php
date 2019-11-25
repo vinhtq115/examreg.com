@@ -1,9 +1,19 @@
 <?php
-require_once("/Applications/XAMPP/xamppfiles/htdocs/examreg.com/core/data/PDOData.php");
 
-class AccountModel extends PDOData{
+require_once ("core/data/PDOData.php");
+
+class AccountModel extends PDOData {
+    private $host = "localhost"; // SQL hostname
+    private $dbname = "web"; // Database name
+    private $username = "test"; // Username for connecting database
+    private $password = "123456"; // Password for connecting database
+
     public function __construct() {
-        parent::__construct();
+        try {
+            $this->db = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";", $this->username, $this->password);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function __destruct()
