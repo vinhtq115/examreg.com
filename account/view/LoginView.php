@@ -6,11 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Exam Register</title>
-    <link rel= "stylesheet" type = "text/css" href="../../css/loginView.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css">
 
-    <style>
+    <style type="text/css">
         body {
             font-family: 'Varela Round', sans-serif;
         }
@@ -119,7 +118,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" name="id" placeholder="Account ID" required="required"> <!--required make you have to fill out the file-->
+                            <input type="text" class="form-control" name="id" placeholder="Account ID" required="required">
                         </div>
                     </div>
                     <div class="form-group">

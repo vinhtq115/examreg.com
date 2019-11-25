@@ -5,7 +5,7 @@ namespace monthi\view;
 
 
 class MonthiView {
-    private $data; // Danh sach mon thi
+    private $data; // Danh sách môn thi
 
     /**
      * Khởi tạo monthiView.
@@ -25,8 +25,8 @@ class MonthiView {
         $html .= "<th>Tên môn thi</th>";
         $html .= "<th>Tín chỉ</th>";
         $html .= "</tr></thead><tbody>";
-        $size = sizeof($this->data);
-        if ($size > 0) {
+        $size = sizeof($this->data); // Chứa kích cỡ mảng data
+        if ($size > 0) { // Trả về dữ liệu nếu size > 0
             foreach ($this->data as $key => $value) {
                 $html .= "<tr>";
                 $html .= "<td>" . $value["mamonthi"] . "</td>";
@@ -34,34 +34,34 @@ class MonthiView {
                 $html .= "<td>" . $value["tinchi"] . "</td>";
                 $html .= "</tr>";
             }
-        } else {
-            $html .= "<td colspan='3' align='center'>Chưa có môn thi.</td>";
+        } else { // Tạo ô trống nếu size = 0
+            $html .= "<td colspan='3' style=\"text-align:center\">Chưa có môn thi.</td>";
         }
         $html .= "</tbody></table>";
 
-        echo $html;
+        return $html;
     }
 
     /**
-     * Hiện form thêm môn học. Hiện thị lỗi hoặc thông báo thành công nếu có.
+     * Hiện form thêm môn học. Hiển thị lỗi hoặc thông báo thành công nếu có.
      * @param $success: Thông báo thành công
      * @param $err: Thông báo lỗi
      */
-    public function addForm($success, $err) {
+    public function addForm($success = "", $err = "") {
         $html = "<h3>Thêm môn thi</h3>
                 <form method=\"post\">
                   <input type=\"hidden\" name=\"add\" value=\"1\">
                   <div class=\"form-group\">
                     <label for=\"mamonthi\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\">
+                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\" maxlength='20' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tenmonthi\">Tên môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi\" name=\"tenmonthi\" placeholder=\"Tên môn thi\">
+                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tinchi\">Tín chỉ</label>
-                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" name=\"tinchi\" placeholder=\"Tín chỉ\">
+                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='0'>
                   </div>";
         if (!empty($err)) { // Có lỗi
             $html .= "<div class=\"alert alert-danger\" role=\"alert\">$err</div>";
@@ -72,7 +72,12 @@ class MonthiView {
         echo $html;
     }
 
-    public function deleteForm($success, $err) {
+    /**
+     * Hiện form xóa môn học theo mã môn học. Hiển thị lỗi hoặc thông báo thành công nếu có.
+     * @param $success: Thông báo thành công
+     * @param $err: Thông báo lỗi
+     */
+    public function deleteForm($success = "", $err = "") {
         $html = "<h3>Xóa môn thi</h3>
                 <form method=\"post\">
                   <input type=\"hidden\" name=\"delete\" value=\"1\">

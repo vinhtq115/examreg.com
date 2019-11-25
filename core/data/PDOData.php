@@ -9,8 +9,8 @@ class PDOData {
 //    private $password = "123456"; // Password for connecting database
     private $host = "localhost"; // SQL hostname
     private $dbname = "web"; // Database name
-    private $username = "root"; // Username for connecting database
-    private $password = ""; // Password for connecting database
+    private $username = "test"; // Username for connecting database
+    private $password = "123456"; // Password for connecting database
 
     /**
      * Constructor
@@ -37,9 +37,9 @@ class PDOData {
     }
 
     /**
-     * Do query statement
-     * @param $query: SELECT
-     * @return array: Mảng các bản ghi, số trang
+     * Thực hiện câu lệnh truy vấn.
+     * @param $query: Câu lệnh SQL (SELECT)
+     * @return array: Mảng các bản ghi
      */
     public function doQuery($query) {
         $ret = array(); // Return array
@@ -59,13 +59,13 @@ class PDOData {
     }
 
     /**
-     * Do a prepared query statement
-     * @param $queryTemplate: Query statement template
-     * @param $params: Parameters
+     * Thực hiện truy vấn theo câu lệnh chuẩn bị trước.
+     * @param $queryTemplate: Mẫu câu truy vấn
+     * @param $params: Mảng các tham số cho truy vấn
      * @return array: Mảng các bản ghi
      */
     public function doPreparedQuery($queryTemplate, $params) {
-        $ret = array(); // Return array
+        $ret = array(); // Mảng chứa kết quả
 
         try {
             $stmt = $this->db->prepare($queryTemplate);
@@ -84,7 +84,7 @@ class PDOData {
     }
 
     /**
-     * Perform SQL update command (INSERT, DELETE, UPDATE,...)
+     * Chạy lệnh SQL (INSERT, DELETE, UPDATE,...) và trả về số lượng bản ghi được cập nhật.
      * @param $sql: SQL statement
      * @return int: Number of updated records.
      */
