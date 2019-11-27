@@ -13,7 +13,8 @@ class AccountModel extends PDOData{
     }
 
     public function login($id , $password){ // the login function
-        $sql = $this->doQuery("SELECT * FROM `account` WHERE `id` = '$id' AND `password` = '$password';");
+        $sql = $this->doQuery("SELECT * FROM `account` WHERE `id` = '$id' AND `password` = PASSWORD('$password');");
+        //the Password Function is used to encrypt the $password as the password in database is encrypted
         return $sql;
     }
 

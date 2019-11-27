@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once('account/view/LoginView.php');
-require_once('account/model/AccountModel.php');
+require_once('../view/LoginView.php');
+require_once('../model/AccountModel.php');
 
 class LoginController
 {
@@ -40,7 +40,7 @@ class LoginController
 
         }else{
             imap_alerts("Please complete the form");
-            require_once('account/view/LoginView.php');
+            require_once('../account/view/LoginView.php');
         }
     }}
 }
