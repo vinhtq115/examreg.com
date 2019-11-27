@@ -61,7 +61,7 @@ class MonthiView {
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tinchi\">Tín chỉ</label>
-                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='0'>
+                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='0' required>
                   </div>";
         if (!empty($err)) { // Có lỗi
             $html .= "<div class=\"alert alert-danger\" role=\"alert\">$err</div>";
@@ -83,7 +83,7 @@ class MonthiView {
                   <input type=\"hidden\" name=\"delete\" value=\"1\">
                   <div class=\"form-group\">
                     <label for=\"mamonthi\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\">
+                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" required>
                   </div>";
         if (!empty($err)) { // Có lỗi
             $html .= "<div class=\"alert alert-danger\" role=\"alert\">$err</div>";
