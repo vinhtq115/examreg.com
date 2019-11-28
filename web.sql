@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 24, 2019 at 05:49 PM
+-- Generation Time: Nov 28, 2019 at 02:43 PM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
--- PHP Version: 7.3.11-1+ubuntu18.04.1+deb.sury.org+1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `account` (
   `id` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `isAdmin` tinyint(1) NOT NULL
+  `isAdmin` tinyint(1) NOT NULL,
+  `idsinhvien` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -193,6 +194,13 @@ CREATE TABLE `sinhvien_hoc_hocphan` (
 --
 
 --
+-- Indexes for table `account`
+--
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idsinhvien` (`idsinhvien`);
+
+--
 -- Indexes for table `cathi`
 --
 ALTER TABLE `cathi`
@@ -266,6 +274,12 @@ ALTER TABLE `kythi`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `account`
+--
+ALTER TABLE `account`
+  ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`idsinhvien`) REFERENCES `sinhvien` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `cathi`
