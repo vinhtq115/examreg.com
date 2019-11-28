@@ -1,25 +1,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách môn thi</title>
+    <title>Quản lý môn thi</title>
     <link rel="stylesheet" href="../bootstrap/bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/monthi.css">
 </head>
 <body>
     <!-- Danh sách môn thi -->
-    <?php
-        require_once dirname(__FILE__)."/controller/MonthiController.php";
-
-        $monthictrl = new \monthi\controller\MonthiController();
-
-        $monthictrl->table();
-        // Form thêm môn thi
-        $monthictrl->showAdd();
-        // Form xóa môn thi
-        $monthictrl->showDelete();
-    ?>
-    <script>
-
-    </script>
+    <div id="table">
+        <div id="table-container">
+        <?php
+            require_once dirname(__FILE__)."/controller/MonthiController.php";
+            $monthictrl = new \monthi\controller\MonthiController();
+            echo $monthictrl->table();
+        ?></div>
+    </div>
+    <div>
+        <h3>Thêm môn thi</h3>
+        <?php
+            // Form thêm môn thi
+            echo $monthictrl->showAdd();
+        ?>
+    </div>
+    <div>
+        <h3>Xóa môn thi</h3>
+        <?php
+            // Form xóa môn thi
+            echo $monthictrl->showDelete();
+        ?>
+    </div>
+    <div>
+        <h3>Sửa môn thi</h3>
+        <?php
+            // Form sửa môn thi
+            echo $monthictrl->showEdit();
+        ?>
+    </div>
+    <script src="ajax.js"></script>
 </body>
 </html>

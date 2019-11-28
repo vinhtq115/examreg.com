@@ -1,0 +1,10 @@
+/**
+ * Set default style for invalid elements.
+ */
+:not(output):-moz-ui-invalid {
+    box-shadow: 0 0 0 0;
+}
+
+:not(output):-moz-ui-invalid:-moz-focusring {
+    box-shadow: 0 0 0 0;
+}

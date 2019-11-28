@@ -20,7 +20,7 @@ class MonthiView {
      * @return string: Code HTML
      */
     public function tableView() {
-        $html = "<table class='table table-bordered'><thead><tr>";
+        $html = "<table class='table table-bordered table-striped table-hover'><thead><tr>";
         $html .= "<th>Mã môn thi</th>";
         $html .= "<th>Tên môn thi</th>";
         $html .= "<th>Tín chỉ</th>";
@@ -29,9 +29,9 @@ class MonthiView {
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
             foreach ($this->data as $key => $value) {
                 $html .= "<tr>";
-                $html .= "<td>" . $value["mamonthi"] . "</td>";
-                $html .= "<td>" . $value["tenmonthi"] . "</td>";
-                $html .= "<td>" . $value["tinchi"] . "</td>";
+                $html .= "<td class='mamonthi'>" . $value["mamonthi"] . "</td>";
+                $html .= "<td class='tenmonthi'>" . $value["tenmonthi"] . "</td>";
+                $html .= "<td class='tinchi'>" . $value["tinchi"] . "</td>";
                 $html .= "</tr>";
             }
         } else { // Tạo ô trống nếu size = 0
@@ -43,54 +43,61 @@ class MonthiView {
     }
 
     /**
-     * Hiện form thêm môn học. Hiển thị lỗi hoặc thông báo thành công nếu có.
-     * @param $success: Thông báo thành công
-     * @param $err: Thông báo lỗi
+     * Hiện form thêm môn học.
      */
-    public function addForm($success = "", $err = "") {
-        $html = "<h3>Thêm môn thi</h3>
-                <form method=\"post\">
-                  <input type=\"hidden\" name=\"add\" value=\"1\">
+    public function addForm() {
+        $html = "<form method=\"post\" id='form_add'>
                   <div class=\"form-group\">
                     <label for=\"mamonthi\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\" maxlength='20' minlength='1' required>
+                    <input type=\"text\" class=\"form-control\" id=\"mamonthi_add\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\" maxlength='20' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tenmonthi\">Tên môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
+                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi_add\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
                     <label for=\"tinchi\">Tín chỉ</label>
-                    <input type=\"number\" class=\"form-control\" id=\"tinchi\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='0' required>
+                    <input type=\"number\" class=\"form-control\" id=\"tinchi_add\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='1' required>
                   </div>";
-        if (!empty($err)) { // Có lỗi
-            $html .= "<div class=\"alert alert-danger\" role=\"alert\">$err</div>";
-        } elseif (!empty($success)) { // Thành công
-            $html .= "<div class=\"alert alert-success\" role=\"alert\">$success</div>";
-        }
-        $html .= "<button type=\"submit\" class=\"btn btn-primary\">Thêm</button></form>";
-        echo $html;
+        $html .= "<button type=\"button\" id='add-button' class=\"btn btn-primary\">Thêm</button></form>";
+        return $html;
     }
 
     /**
-     * Hiện form xóa môn học theo mã môn học. Hiển thị lỗi hoặc thông báo thành công nếu có.
-     * @param $success: Thông báo thành công
-     * @param $err: Thông báo lỗi
+     * Hiện form xóa môn học theo mã môn học.
      */
-    public function deleteForm($success = "", $err = "") {
-        $html = "<h3>Xóa môn thi</h3>
-                <form method=\"post\">
-                  <input type=\"hidden\" name=\"delete\" value=\"1\">
+    public function deleteForm() {
+        $html = "<form method=\"post\" id='form_delete' autocomplete='off'>
                   <div class=\"form-group\">
                     <label for=\"mamonthi\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" required>
-                  </div>";
-        if (!empty($err)) { // Có lỗi
-            $html .= "<div class=\"alert alert-danger\" role=\"alert\">$err</div>";
-        } elseif (!empty($success)) { // Thành công
-            $html .= "<div class=\"alert alert-success\" role=\"alert\">$success</div>";
+                    <input list='danhsachmonhoc' type=\"text\" class=\"form-control\" id=\"mamonthi_delete\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" required>
+                    <datalist id='danhsachmonhoc'>";
+        foreach ($this->data as $key => $value) {
+            $html .= "<option value=\"".$value["mamonthi"]."\">";
         }
-        $html .= "<button type=\"submit\" class=\"btn btn-danger\">Xóa</button></form>";
-        echo $html;
+        $html .= "</datalist></div>";
+        $html .= "<button type=\"button\" id='delete-button' class=\"btn btn-danger\">Xóa</button></form>";
+        return $html;
+    }
+
+    /**
+     * Hiện form sửa môn học.
+     */
+    public function editForm() {
+        $html = "<form method=\"post\" id='form_edit' autocomplete='off'>
+                    <div class=\"form-group\">
+                        <label for=\"mamonthi\">Mã môn thi</label>
+                        <input list='danhsachmonhoc' type=\"text\" class=\"form-control\" id=\"mamonthi_edit\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn sửa\" maxlength='20' minlength='1' required>
+                    </div>
+                  <div class=\"form-group\">
+                    <label for=\"tenmonthi\">Tên môn thi</label>
+                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi_edit\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
+                  </div>
+                  <div class=\"form-group\">
+                    <label for=\"tinchi\">Tín chỉ</label>
+                    <input type=\"number\" class=\"form-control\" id=\"tinchi_edit\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='1' required>
+                  </div>";
+        $html .= "<button type=\"button\" class=\"btn btn-primary\" id='edit-button'>Sửa</button></form>";
+        return $html;
     }
 }

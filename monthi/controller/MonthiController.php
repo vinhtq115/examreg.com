@@ -8,66 +8,45 @@ require_once dirname(__FILE__)."/../model/Monthi.php";
 require_once dirname(__FILE__)."/../view/MonthiView.php";
 
 class MonthiController {
-    private $error_msg_add = ""; // Chứa thông báo lỗi của form add
-    private $success_msg_add = ""; // Chứa thông báo thành công của form add
-    private $error_msg_delete = ""; // Chứa thông báo lỗi của form delete
-    private $success_msg_delete = ""; // Chứa thông báo thành công của form delete
-
     private $data; // Chứa dữ liệu cho view (JSON)
+    private $monthi; // Model monthi
+    private $view; // View monthi
 
     /**
      * MonthiController constructor.
      */
     public function __construct() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST["add"]) && isset($_POST["mamonthi"]) && isset($_POST["tenmonthi"]) && isset($_POST["tinchi"])
-                && !empty($_POST["mamonthi"]) && !empty($_POST["tenmonthi"]) && !empty($_POST["tinchi"]) && $_POST["add"] == 1) {
-                $count = $this->add($_POST["mamonthi"], $_POST["tenmonthi"], $_POST["tinchi"]);
-                if ($count == 1) { // Success
-                    $this->success_msg_add = "Môn học được thêm thành công.";
-                    $this->error_msg_add = "";
-                } else {
-                    $this->success_msg_add = "";
-                    $this->error_msg_add = "Có lỗi. Môn học có thể đã tồn tại trong hệ thống.";
-                }
-            } elseif (isset($_POST["delete"]) && isset($_POST["mamonthi"]) && !empty($_POST["mamonthi"]) && $_POST["delete"] == 1) {
-                $count = $this->delete($_POST["mamonthi"]);
-                if ($count == 1) {
-                    $this->success_msg_delete = "Môn học đã được xóa.";
-                    $this->error_msg_delete = "";
-                } else {
-                    $this->success_msg_delete = "";
-                    $this->error_msg_delete = "Môn học không tồn tại trong hệ thống.";
-                }
-            }
-        }
+        $this->monthi = new Monthi();
+        $this->data = json_encode($this->monthi->getAll());
+        $this->view = new MonthiView($this->data);
     }
 
     /**
      * Hiện toàn bộ môn thi dưới dạng bảng.
      */
     public function table() {
-        $monthi = new Monthi();
-
-        $this->data = json_encode($monthi->getAll());
-        $view = new MonthiView($this->data);
-        echo $view->tableView();
+        return $this->view->tableView();
     }
 
     /**
      * Hiện form thêm môn thi.
      */
     public function showAdd() {
-        $view = new MonthiView($this->data);
-        $view->addForm($this->success_msg_add, $this->error_msg_add);
+        return $this->view->addForm();
     }
 
     /**
      * Hiện form xóa môn thi.
      */
     public function showDelete() {
-        $view = new MonthiView($this->data);
-        $view->deleteForm($this->success_msg_delete, $this->error_msg_delete);
+        return $this->view->deleteForm();
+    }
+
+    /**
+     * Hiện form sửa môn thi.
+     */
+    public function showEdit() {
+        return $this->view->editForm();
     }
 
     /**
@@ -78,8 +57,7 @@ class MonthiController {
      * @return int: Số bản ghi được cập nhật.
      */
     public function add($mamonthi, $tenmonthi, $tinchi) {
-        $monthi = new Monthi();
-        return $monthi->add($mamonthi, $tenmonthi, $tinchi);
+        return $this->monthi->add($mamonthi, $tenmonthi, $tinchi);
     }
 
     /**
@@ -88,7 +66,18 @@ class MonthiController {
      * @return int: Số bản ghi được cập nhật.
      */
     public function delete($mamonthi) {
-        $monthi = new Monthi();
-        return $monthi->delete($mamonthi);
+        return $this->monthi->delete($mamonthi);
+    }
+
+    /**
+     * Hàm sửa môn thi.
+     * @param $mamonthicu: Mã môn thi cũ.
+     * @param $mamonthimoi: Mã môn thi mới.
+     * @param $tenmonthimoi: Tên môn thi mới.
+     * @param $tinchimoi: Số tín chỉ mới.
+     * @return int: Số bản ghi được cập nhật.
+     */
+    public function edit($mamonthicu, $mamonthimoi, $tenmonthimoi, $tinchimoi) {
+        return $this->monthi->edit($mamonthicu, $mamonthimoi, $tenmonthimoi, $tinchimoi);
     }
 }
