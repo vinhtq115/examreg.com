@@ -20,8 +20,8 @@
     private $db = null; // Đối tượng PDO
     private $servername = "localhost"; // SQL hostname
     private $database = "examreg"; // Database name
-    private $username = "root"; // Username for connecting database
-    private $password = ""; // Password for connecting database
+    private $username = "test"; // Username for connecting database
+    private $password = "123456"; // Password for connecting database
 
     /**
      * Constructor
