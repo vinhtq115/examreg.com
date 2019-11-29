@@ -3,7 +3,6 @@
 
 namespace monthi\model;
 
-
 use PDOData;
 
 require_once dirname(__FILE__)."/../../core/data/PDOData.php";

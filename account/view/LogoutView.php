@@ -1,5 +1,4 @@
 <?php
-//require_once ("../controller/LogoutController.php");
-require_once ("../account/controller/LogoutController.php");
+require_once dirname(__FILE__)."/../controller/LogoutController.php";
 $logout = new LogoutController();
 $logout -> endSession();

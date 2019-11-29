@@ -48,15 +48,15 @@ class MonthiView {
     public function addForm() {
         $html = "<form method=\"post\" id='form_add'>
                   <div class=\"form-group\">
-                    <label for=\"mamonthi\">Mã môn thi</label>
+                    <label for=\"mamonthi_add\">Mã môn thi</label>
                     <input type=\"text\" class=\"form-control\" id=\"mamonthi_add\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\" maxlength='20' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
-                    <label for=\"tenmonthi\">Tên môn thi</label>
+                    <label for=\"tenmonthi_add\">Tên môn thi</label>
                     <input type=\"text\" class=\"form-control\" id=\"tenmonthi_add\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
-                    <label for=\"tinchi\">Tín chỉ</label>
+                    <label for=\"tinchi_add\">Tín chỉ</label>
                     <input type=\"number\" class=\"form-control\" id=\"tinchi_add\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='1' required>
                   </div>";
         $html .= "<button type=\"button\" id='add-button' class=\"btn btn-primary\">Thêm</button></form>";
@@ -69,7 +69,7 @@ class MonthiView {
     public function deleteForm() {
         $html = "<form method=\"post\" id='form_delete' autocomplete='off'>
                   <div class=\"form-group\">
-                    <label for=\"mamonthi\">Mã môn thi</label>
+                    <label for=\"mamonthi_delete\">Mã môn thi</label>
                     <input list='danhsachmonhoc' type=\"text\" class=\"form-control\" id=\"mamonthi_delete\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" required>
                     <datalist id='danhsachmonhoc'>";
         foreach ($this->data as $key => $value) {
@@ -86,15 +86,15 @@ class MonthiView {
     public function editForm() {
         $html = "<form method=\"post\" id='form_edit' autocomplete='off'>
                     <div class=\"form-group\">
-                        <label for=\"mamonthi\">Mã môn thi</label>
+                        <label for=\"mamonthi_edit\">Mã môn thi</label>
                         <input list='danhsachmonhoc' type=\"text\" class=\"form-control\" id=\"mamonthi_edit\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn sửa\" maxlength='20' minlength='1' required>
                     </div>
                   <div class=\"form-group\">
-                    <label for=\"tenmonthi\">Tên môn thi</label>
+                    <label for=\"tenmonthi_edit\">Tên môn thi</label>
                     <input type=\"text\" class=\"form-control\" id=\"tenmonthi_edit\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
                   </div>
                   <div class=\"form-group\">
-                    <label for=\"tinchi\">Tín chỉ</label>
+                    <label for=\"tinchi_edit\">Tín chỉ</label>
                     <input type=\"number\" class=\"form-control\" id=\"tinchi_edit\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='1' required>
                   </div>";
         $html .= "<button type=\"button\" class=\"btn btn-primary\" id='edit-button'>Sửa</button></form>";

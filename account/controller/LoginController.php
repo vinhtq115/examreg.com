@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once('../view/LoginView.php');
-require_once('../model/AccountModel.php');
+require_once dirname(__FILE__).'/../view/LoginView.php';
+require_once dirname(__FILE__).'/../model/AccountModel.php';
 
 class LoginController
 {
@@ -24,11 +24,11 @@ class LoginController
 
                 if($isAdmin == 0){
                     echo '<script language="javascript">';
-                    echo 'window.location.href="http://localhost/examreg.com/student/view/StudentView.php";';
+                    echo 'window.location.href="http://examreg.com/student/view/StudentView.php";';
                     echo '</script>';
                 }else if ($isAdmin == 1){
                     echo '<script language="javascript">';
-                    echo 'window.location.href="http://localhost/examreg.com/admin/view/AdminView.php";';
+                    echo 'window.location.href="http://examreg.com/admin/view/AdminView.php";';
                     echo '</script>';
 
                 }
@@ -40,7 +40,7 @@ class LoginController
 
         }else{
             imap_alerts("Please complete the form");
-            require_once('../account/view/LoginView.php');
+            require_once dirname(__FILE__).'/../../account/view/LoginView.php';
         }
     }}
 }

@@ -22,6 +22,6 @@ class AccountModel extends PDOData{
         session_start();
         unset($_SESSION["id"]);
         unset($_SESSION["isAdmin"]);
-        header("Location:http://localhost/examreg.com/");
+        header("Location:http://examreg.com/");
     }
 };

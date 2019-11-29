@@ -17,6 +17,7 @@
     "phpoffice/phpspreadsheet": "1.10.0",
     "ext-pdo": "*",
     "ext-json": "*",
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "ext-imap": "*"
   }
 }
