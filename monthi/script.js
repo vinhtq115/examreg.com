@@ -9,6 +9,9 @@ let edit_form = document.getElementById("form_edit");
 
 var old_mamonthi = null; // Dùng để sửa mã môn thi
 
+var mondangsua = document.getElementById("mondangsua"); // Thông tin về môn đang sửa
+var mondangxoa = document.getElementById("mondangxoa"); // Thông tin về môn đang xóa
+
 add_button.onclick = function () {
     // Xóa thông báo cũ
     if (document.getElementById("message") != null) {
@@ -94,6 +97,8 @@ delete_button.onclick = function () {
         };
         // Làm trống form
         document.getElementById("mamonthi_delete").value = "";
+        // Xóa thông tin về môn đang xóa
+        mondangxoa.innerText = "";
     }
 };
 
@@ -143,6 +148,8 @@ edit_button.onclick = function () {
         document.getElementById("tenmonthi_edit").value = "";
         document.getElementById("tinchi_edit").value = "";
         old_mamonthi = null; // Reset mã môn thi cũ
+        // Xóa thông tin môn đang sửa
+        mondangsua.innerText = "";
     }
 };
 
@@ -211,13 +218,30 @@ document.getElementById("mamonthi_edit").onblur = function () {
     // Tìm tên môn học và tín chỉ ứng với mã môn học
     var table_body = table.firstElementChild.firstElementChild.nextElementSibling;
     var list_size = table_body.childElementCount;
-    for (i = 0; i < list_size; i++) {
+    for (var i = 0; i < list_size; i++) {
         var row = table_body.childNodes[i];
         if (row.childNodes[0].innerText == this.value) {
             old_mamonthi = this.value;
             tenmonhoc_edit.value = row.childNodes[1].innerText;
             tinchi_edit.value = row.childNodes[2].innerText;
-            break;
+            mondangsua.innerText = "Mã môn đang sửa: " + this.value + "\nTên môn: " + row.childNodes[1].innerText + "\nTín chỉ: " + row.childNodes[2].innerText + "\n\n";
+            return;
         }
     }
+};
+
+// Hiện môn thi đang xóa
+document.getElementById("mamonthi_delete").onblur = function () {
+    // Tìm tên môn học và tín chỉ ứng với mã môn học
+    var table_body = table.firstElementChild.firstElementChild.nextElementSibling;
+    var list_size = table_body.childElementCount;
+    for (var i = 0; i < list_size; i++) {
+        var row = table_body.childNodes[i];
+        if (row.childNodes[0].innerText == this.value) {
+            mondangxoa.innerText = "Mã môn đang sửa: " + this.value + "\nTên môn: " + row.childNodes[1].innerText + "\nTín chỉ: " + row.childNodes[2].innerText + "\n\n";
+            return;
+        }
+    }
+    // Xóa thông tin về môn đang xóa khi không trùng mã môn.
+    mondangxoa.innerText = "";
 };

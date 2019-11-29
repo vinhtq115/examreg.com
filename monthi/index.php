@@ -24,6 +24,7 @@
     </div>
     <div>
         <h3>Xóa môn thi</h3>
+        <div id="mondangxoa"></div>
         <?php
             // Form xóa môn thi
             echo $monthictrl->showDelete();
@@ -31,11 +32,12 @@
     </div>
     <div>
         <h3>Sửa môn thi</h3>
+        <div id="mondangsua"></div>
         <?php
             // Form sửa môn thi
             echo $monthictrl->showEdit();
         ?>
     </div>
-    <script src="ajax.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
