@@ -4,7 +4,7 @@
     session_start();
 
     if($_SESSION["isAdmin"] != 1){
-        header("Location:http://localhost/examreg.com/");
+        header("Location:http://examreg.com/");
     }
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
         //take the logout function to the client
         $(document).ready(function(){
             $("#logout-btn").click(function() {
-                window.location.href="http://localhost/examreg.com/account/view/LogoutView.php";
+                window.location.href="http://examreg.com/account/view/LogoutView.php";
             });
         });
     </script>
