@@ -3,7 +3,6 @@
     <meta charset="UTF-8">
     <title>Quản lý môn thi</title>
     <link rel="stylesheet" href="../bootstrap/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../css/monthi.css">
 </head>
 <body>
