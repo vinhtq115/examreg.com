@@ -1,6 +1,6 @@
 <?php
 
-    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
+    require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
     session_start();
 
     if($_SESSION["isAdmin"] != 1){
@@ -15,14 +15,14 @@
     <title>Administration's Homepage</title>
     <link rel="stylesheet" type="text/css" href="../../css/adminView.css">
     <script src="../../jquery/jquery-3.4.1.js"></script>
-    <script>
+    <!--<script>
         //take the logout function to the client
         $(document).ready(function(){
             $("#logout-btn").click(function() {
                 window.location.href="http://examreg.com/account/view/LogoutView.php";
             });
         });
-    </script>
+    </script>-->
 </head>
 <body>
 <header>
@@ -32,7 +32,7 @@
         </div>
         <nav>
             <ul>
-                <li class="current"><a id = "logout-btn">Log out</a></li>
+                <li class="current"><a id = "logout-btn" href="http://examreg.com/account/view/LogoutView.php">Log out</a></li>
             </ul>
         </nav>
     </div>
