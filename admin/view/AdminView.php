@@ -1,10 +1,10 @@
 <?php
 
-    require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
+    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
     session_start();
 
     if($_SESSION["isAdmin"] != 1){
-        header("Location:http://examreg.com/");
+        header("Location:http://examreg.com/account/view/LogoutView.php");
     }
 ?>
 <!DOCTYPE html>
@@ -52,7 +52,7 @@
             <p>Administration keeping track and managing student profile which taking part in the examination</p>
         </div>
         <div class="box">
-            <a href=""><img src="../../css/img/microscope.png"></a>
+            <a href="http://examreg.com/monthi/"><img src="../../css/img/microscope.png"></a>
             <h3>Subjects List</h3>
             <p>Administration keeping track of subjects and courses of the examination</p>
         </div>

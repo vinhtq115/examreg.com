@@ -3,6 +3,9 @@ session_start();
 require_once dirname(__FILE__).'/../view/LoginView.php';
 require_once dirname(__FILE__).'/../model/AccountModel.php';
 
+//require_once('/../view/LoginView.php');
+//require_once ('/../model/AccountModel/php');
+
 class LoginController
 {
     public function getLoginInfo(){
@@ -24,11 +27,11 @@ class LoginController
 
                 if($isAdmin == 0){
                     echo '<script language="javascript">';
-                    echo 'window.location.href="http://examreg.com/student/view/StudentView.php";';
+                    echo 'window.location.pathname="../student/view/StudentView.php";';
                     echo '</script>';
                 }else if ($isAdmin == 1){
                     echo '<script language="javascript">';
-                    echo 'window.location.href="http://examreg.com/admin/view/AdminView.php";';
+                    echo 'window.location.pathname="../admin/view/AdminView.php";';
                     echo '</script>';
 
                 }
