@@ -26,11 +26,22 @@ class Monthi extends PDOData {
     }
 
     /**
-     * Lấy toàn bộ danh sách môn thi
-     * @return array: Mảng danh sách môn thi
+     * Lấy toàn bộ danh sách môn thi.
+     * @return array: Mảng danh sách môn thi.
      */
     public function getAll() {
         $ret = $this->doQuery("SELECT * FROM monthi ORDER BY tenmonthi");
+        return $ret;
+    }
+
+    /**
+     * Lấy danh sách môn thi theo trang.
+     * @param $page: Trang.
+     * @param $items_per_page: Số lượng môn thi mỗi trang.
+     * @return array: Mảng danh sách môn thi.
+     */
+    public function getByPage($items_per_page, $page = 1) {
+        $ret = $this->doQuery("SELECT * FROM monthi ORDER BY tenmonthi LIMIT ".($page-1)*$items_per_page.",".$items_per_page);
         return $ret;
     }
 
@@ -86,6 +97,50 @@ class Monthi extends PDOData {
         // Môn học tồn tại trong hệ thống
         // Xóa môn học khỏi CSDL
         $sql = "DELETE FROM monthi WHERE monthi.mamonthi = '$mamonthi'";
+        $c = $this->doSql($sql);
+        // Mở khóa bảng
+        $sql = "UNLOCK TABLES";
+        $this->doSql($sql);
+
+        return $c;
+    }
+
+    /**
+     * Hàm sửa môn thi.
+     * @param $old_mamonthi: Mã môn thi cũ
+     * @param $mamonthi: Mã môn thi mới.
+     * @param $tenmonthi: Tên môn thi mới.
+     * @param $tinchi: Số tín chỉ mới.
+     * @return int: Số bản ghi được cập nhật.
+     */
+    public function edit($old_mamonthi, $mamonthi, $tenmonthi, $tinchi) {
+        // Khóa bảng
+        $sql = "LOCK TABLES monthi WRITE";
+        $this->doSql($sql);
+        // Kiểm tra xem mã môn thi cũ có tồn tại trong CSDL không
+        $sql = "SELECT * FROM monthi WHERE mamonthi = '$old_mamonthi'";
+        $arr = $this->doQuery($sql); // Lấy mảng môn thi trùng mã vừa nhập
+        if (count($arr) == 0) { // Mã môn học cũ không tồn tại trong hệ thống
+            // Mở khóa bảng
+            $sql = "UNLOCK TABLES";
+            $this->doSql($sql);
+            return 0;
+        }
+
+        // Mã môn học cũ tồn tại trong hệ thống.
+        // Kiểm tra xem mã môn thi mới đã tồn tại trong CSDL chưa
+        $sql = "SELECT * FROM monthi WHERE mamonthi = '$mamonthi'";
+        $arr = $this->doQuery($sql); // Lấy mảng môn thi trùng mã vừa nhập
+        if (count($arr) > 0) { // Môn học đã tồn tại trong hệ thống
+            // Mở khóa bảng
+            $sql = "UNLOCK TABLES";
+            $this->doSql($sql);
+            return 0;
+        }
+
+        // Mã môn học mới không tồn tại trong hệ thống
+        // Sửa tên và số tín chỉ
+        $sql = "UPDATE monthi SET mamonthi = '$mamonthi', tenmonthi = '$tenmonthi', tinchi = '$tinchi' WHERE monthi.mamonthi = '$old_mamonthi'";
         $c = $this->doSql($sql);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
