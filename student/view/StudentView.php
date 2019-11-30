@@ -1,3 +1,11 @@
+<?php
+require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
+session_start();
+
+if($_SESSION["isAdmin"] != 1 || $_SESSION["isAdmin"] != 0){
+    header("Location:http://examreg.com/account/view/LogoutView.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
