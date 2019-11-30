@@ -1,6 +1,7 @@
 <?php
+require_once dirname(__FILE__)."/../../core/data/PDOData.php";
 
-    class getStudentModel extends PDOData{
+class getStudentModel extends PDOData{
         public function __construct() {
             parent::__construct();
         }
@@ -10,7 +11,11 @@
             parent::__destruct();
         }
 
-        public function getStudent(){
+        public function addStudentData($id , $hodem , $ten ,$dateOfBirth , $dieuKienThi){
+            //add the data to the database
+            $sql = "INSERT INTO sinhvien (id, hodem, ten, ngaysinh, dieukienduthi) 
+                    VALUES ('$id', '$hodem', '$ten' , '$dateOfBirth' , '$dieuKienThi')";
+            $this->insertSQL($sql);
 
         }
 
