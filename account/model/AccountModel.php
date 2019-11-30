@@ -14,7 +14,7 @@ class AccountModel extends PDOData{
 
     public function login($id , $password){ // the login function
         $sql = $this->doQuery("SELECT * FROM `account` WHERE `id` = '$id' AND `password` = PASSWORD('$password');");
-        //the Password Function is used to encrypt the $password as the password in database is encrypted
+        //the Password Function is used to decrypt the $password as the password in database is encrypted
         return $sql;
     }
 
@@ -23,5 +23,17 @@ class AccountModel extends PDOData{
         unset($_SESSION["id"]);
         unset($_SESSION["isAdmin"]);
         header("Location:http://examreg.com/");
+    }
+
+    public function changePass($password,$id){
+        $sql = "UPDATE `account` SET `password`=PASSWORD($password) WHERE 
+                `id` = '$id';";
+        $this->TrySQL($sql);
+    }
+
+    public function retPass($id){
+        $sql = $this->doQuery("SELECT * FROM `account` WHERE `id` = '$id';");
+        //the Password Function is used to decrypt the $password as the password in database is encrypted
+        return $sql;
     }
 };

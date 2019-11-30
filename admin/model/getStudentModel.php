@@ -15,7 +15,7 @@ class getStudentModel extends PDOData{
             //add the data to the database
             $sql = "INSERT INTO sinhvien (id, hodem, ten, ngaysinh, dieukienduthi) 
                     VALUES ('$id', '$hodem', '$ten' , '$dateOfBirth' , '$dieuKienThi')";
-            $this->insertSQL($sql);
+            $this->trySQL($sql);
 
         }
 
