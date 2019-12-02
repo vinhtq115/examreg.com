@@ -1,6 +1,6 @@
-var table_hash = null;
+var table_hash = document.getElementById("tablehash").innerText;
 
-// Lấy hash lần đầu, tránh bị refresh lần đầu
+/*// Lấy hash lần đầu, tránh bị refresh lần đầu
 function get_initial_hash() {
     // Bắt đầu Ajax
     let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
@@ -11,10 +11,11 @@ function get_initial_hash() {
         if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
             let response = JSON.parse(ajaxEngine.responseText);
             table_hash = response['hash'];
+            console.log(table_hash);
         }
     }
 }
-get_initial_hash();
+get_initial_hash();*/
 
 // Bật pagination
 $(document).ready(function () {
@@ -211,10 +212,8 @@ function refresh_table() {
                 refresh_datalist();
                 $('#tablemonthi').DataTable();
                 $('.dataTables_length').addClass('bs-select');
-                console.log('new data');
-            } else {
-                console.log('old data');
             }
+            // If hash match (data not changed), do nothing.
         }
     }
 }

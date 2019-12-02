@@ -21,9 +21,9 @@ class MonthiView {
      */
     public function tableView() {
         $html = "<table id='tablemonthi' class='table table-bordered table-striped table-hover table-sm'><thead><tr>";
-        $html .= "<th class=\"th-sm\">Mã môn thi</th>";
-        $html .= "<th class=\"th-sm\">Tên môn thi</th>";
-        $html .= "<th class=\"th-sm\">Tín chỉ</th>";
+        $html .= "<th class='th-sm'>Mã môn thi</th>";
+        $html .= "<th class='th-sm'>Tên môn thi</th>";
+        $html .= "<th class='th-sm'>Tín chỉ</th>";
         $html .= "</tr></thead><tbody>";
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
@@ -37,7 +37,9 @@ class MonthiView {
         } else { // Tạo ô trống nếu size = 0
             $html .= "<td colspan='3' style=\"text-align:center\">Chưa có môn thi.</td>";
         }
-        $html .= "</tbody></table>";
+        $html .= "</tbody><tfoot><tr>";
+        $html .= "<th>Mã môn thi</th><th>Tên môn thi</th><th>Tín chỉ</th>";
+        $html .= "</tr></tfoot></table>";
 
         return $html;
     }

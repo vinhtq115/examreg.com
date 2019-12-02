@@ -57,6 +57,7 @@ class MonthiController {
      * @return int: Số bản ghi được cập nhật.
      */
     public function add($mamonthi, $tenmonthi, $tinchi) {
+        // TODO: clean input
         return $this->monthi->add($mamonthi, $tenmonthi, $tinchi);
     }
 
@@ -66,6 +67,7 @@ class MonthiController {
      * @return int: Số bản ghi được cập nhật.
      */
     public function delete($mamonthi) {
+        // TODO: clean input
         return $this->monthi->delete($mamonthi);
     }
 
@@ -78,6 +80,7 @@ class MonthiController {
      * @return int: Số bản ghi được cập nhật.
      */
     public function edit($mamonthicu, $mamonthimoi, $tenmonthimoi, $tinchimoi) {
+        // TODO: clean input
         return $this->monthi->edit($mamonthicu, $mamonthimoi, $tenmonthimoi, $tinchimoi);
     }
 }

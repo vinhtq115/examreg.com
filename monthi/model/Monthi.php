@@ -34,17 +34,6 @@ class Monthi extends PDOData {
     }
 
     /**
-     * Lấy danh sách môn thi theo trang.
-     * @param $page: Trang.
-     * @param $items_per_page: Số lượng môn thi mỗi trang.
-     * @return array: Mảng danh sách môn thi.
-     */
-    public function getByPage($items_per_page, $page = 1) {
-        $ret = $this->doQuery("SELECT * FROM monthi ORDER BY tenmonthi LIMIT ".($page-1)*$items_per_page.",".$items_per_page);
-        return $ret;
-    }
-
-    /**
      * Hàm thêm môn thi.
      * @param $mamonthi: Mã môn thi.
      * @param $tenmonthi: Tên môn thi.
