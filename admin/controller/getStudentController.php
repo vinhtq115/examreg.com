@@ -74,7 +74,7 @@ class getStudentController
                         $id = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(0, $row)->getValue()); // get the ID of the  student
                         $courseid = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(1, $row)->getValue());
                         $maky = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(2, $row)->getValue());
-                        $this->model->updateDisqualifiedStudent($id);
+                        $this->model->updateCourse($id,&$courseid,$maky);
                     }
                 }
             }

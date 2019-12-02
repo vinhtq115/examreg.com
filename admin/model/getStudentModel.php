@@ -31,8 +31,9 @@ class getStudentModel extends PDOData{
         }
 
         public function updateCourse($id , $courseid , $maky){
-            $sql = "";
+            $sql = "INSERT INTO `hocphan`(`soluong`, `mahocphan`, `mamonthi`) VALUES ('$id','$courseid','$maky')";
             $this->TrySQL($sql);
         }
+
 }
 
