@@ -28,7 +28,7 @@
     <!--MDBootstrap Datatables-->
     <script src="../externals/MDB/js/addons/datatables.min.js"></script>
     <!--Custom CSS-->
-    <link rel="stylesheet" href="../css/monthi.css">
+    <link rel="stylesheet" href="../css/custom.css">
 </head>
 <body>
     <!-- Danh sách môn thi -->
@@ -40,6 +40,11 @@
                 $table = $monthictrl->table();
                 echo $table;
                 echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+            ?>
+        </div>
+        <div id='datalistcontainer'>
+            <?php
+                echo $monthictrl->datalist();
             ?>
         </div>
     </div>

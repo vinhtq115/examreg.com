@@ -1,32 +1,28 @@
 <?php
     //TODO: implement session thing.
 
-    require_once dirname(__FILE__)."/controller/MonthiController.php";
-    $monthictrl = new \monthi\controller\MonthiController();
+    require_once dirname(__FILE__)."/controller/HocphanController.php";
+    $hocphanctrl = new \hocphan\controller\HocphanController();
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $res = new stdClass(); // Chứa response
-        $table = $monthictrl->table();
+        $table = $hocphanctrl->table();
         $hash = hash('sha256', $table);
         if (!isset($_GET['hash']) || $_GET['hash'] != $hash) {
-            $res->table = $monthictrl->table();
-            $res->datalist = $monthictrl->datalist();
+            $res->table = $hocphanctrl->table();
             $res->hash = $hash;
         } else if (isset($_GET['gethash']) && $_GET['gethash'] == 1) {
             $res->hash = $hash;
         }
-
         echo json_encode($res);
     } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $res = new stdClass();
-        if (isset($_POST["add"]) && isset($_POST["mamonthi"]) && isset($_POST["tenmonthi"]) && isset($_POST["tinchi"])
-        && !empty($_POST["mamonthi"]) && !empty($_POST["tenmonthi"]) && !empty($_POST["tinchi"]) && $_POST["add"] == 1) { // Kiểm tra xem có phải add không
-            if (is_numeric($_POST["tinchi"]) && strlen($_POST["tenmonthi"]) >= 1 && strlen($_POST["tenmonthi"]) <= 100
-            && strlen($_POST["mamonthi"]) >= 1 && strlen($_POST["mamonthi"]) <= 20) { // Kiểm tra xem độ dài data và kiểu dữ liệu có thỏa mãn không
-                $count = $monthictrl->add($_POST["mamonthi"], $_POST["tenmonthi"], $_POST["tinchi"]); // Đếm số bản ghi được cập nhật
+        $res = new stdClass(); // Chứa response
+        if (isset($_POST["add"]) && isset($_POST["mamonthi"]) && isset($_POST["mahocphan"]) && !empty($_POST["mamonthi"]) && !empty($_POST["mahocphan"]) && $_POST["add"] == 1) { // Kiểm tra xem có phải add không
+            if (strlen($_POST["mahocphan"]) >= 1 && strlen($_POST["mahocphan"]) <= 20 && strlen($_POST["mamonthi"]) >= 1 && strlen($_POST["mamonthi"]) <= 20) { // Kiểm tra xem độ dài data có thỏa mãn không
+                $count = $hocphanctrl->add($_POST["mahocphan"], $_POST["mamonthi"]); // Đếm số bản ghi được cập nhật
                 if ($count == 1) { // Thành công nếu có 1 bản ghi được thêm.
-                    $res->success_msg = "Môn học được thêm thành công.";
+                    $res->success_msg = "Học phần được thêm thành công.";
                 } else { // Thất bại nếu không có bản ghi nào được thêm.
-                    $res->error_msg = "Có lỗi. Môn học có thể đã tồn tại trong hệ thống.";
+                    $res->error_msg = "Có lỗi. Học phần có thể đã tồn tại trong hệ thống.";
                 }
             } else { // Không thỏa mãn
                 $res->error_msg = "Đã xảy ra lỗi. Vui lòng thử lại.";

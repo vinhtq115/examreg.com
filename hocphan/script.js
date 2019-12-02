@@ -3,25 +3,20 @@ var table_hash = document.getElementById("tablehash").innerText;
 
 // Bật pagination
 $(document).ready(function () {
-    $('#tablemonthi').DataTable();
+    $('#tablehocphan').DataTable({
+        "sorting": [[1, "asc"]] // Mặc định sort theo tên môn thi
+    });
     $('.dataTables_length').addClass('bs-select');
 });
 
 let add_button = document.getElementById('add-button');
 let delete_button = document.getElementById('delete-button');
-let edit_button = document.getElementById('edit-button');
 let table = document.getElementById("table-container");
 
 let add_form = document.getElementById("form_add");
 let delete_form = document.getElementById("form_delete");
-let edit_form = document.getElementById("form_edit");
 
-var old_mamonthi = null; // Dùng để sửa mã môn thi
-
-var mondangsua = document.getElementById("mondangsua"); // Thông tin về môn đang sửa
-var mondangxoa = document.getElementById("mondangxoa"); // Thông tin về môn đang xóa
-
-let datalist = document.getElementById("datalistcontainer");
+var hocphandangxoa = document.getElementById("hocphandangxoa"); // Thông tin về học phần đang xóa
 
 add_button.onclick = function () {
     // Xóa thông báo cũ
@@ -31,29 +26,26 @@ add_button.onclick = function () {
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
     let mamonthi = document.getElementById("mamonthi_add").value; // Lấy mã môn thi
-    let tenmonthi = document.getElementById("tenmonthi_add").value; // Lấy tên môn thi
-    let tinchi = document.getElementById("tinchi_add").value; // Lấy số tín chỉ
+    let mahocphan = document.getElementById("mahocphan_add").value; // Lấy tên môn thi
     // Kiểm tra
     if (mamonthi == "") { // Nếu trống mã môn thi
-        add_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), add_form.nextSibling);
-    } else if (tenmonthi == "") { // Nếu trống tên môn thi
-        add_form.parentNode.insertBefore(createMessage("Tên môn học không được để trống.", -1), add_form.nextSibling);
-    } else if (tinchi == "" || tinchi.indexOf(".") != -1 || tinchi == "0") { // Nếu trống tín chỉ hoặc không đúng dạng
-        add_form.parentNode.insertBefore(createMessage("Số tín chỉ phải là một số nguyên dương lớn hơn 0.", -1), add_form.nextSibling);
+        add_form.parentNode.insertBefore(createMessage("Mã môn thi không được để trống.", -1), add_form.nextSibling);
+    } else if (mahocphan == "") { // Nếu trống tên môn thi
+        add_form.parentNode.insertBefore(createMessage("Mã học phần không được để trống.", -1), add_form.nextSibling);
     } else {
         // Bắt đầu Ajax Engine và gửi request
         let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
         ajaxEngine.open("POST", "ajax.php", true);
         ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("add=" + 1 + "&mamonthi=" + mamonthi + "&tenmonthi=" + tenmonthi + "&tinchi=" + tinchi);
+        ajaxEngine.send("add=" + 1 + "&mamonthi=" + mamonthi + "&mahocphan=" + mahocphan);
         // Xử lý sau khi Ajax trả về
         ajaxEngine.onreadystatechange = function () {
             if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
                 let response = JSON.parse(ajaxEngine.responseText);
-                refresh_table();
+                refresh_table(); // Refresh lại table
                 var success;
                 var message;
-                if (response.hasOwnProperty("success_msg")) { // Môn học được thêm thành công
+                if (response.hasOwnProperty("success_msg")) { // Học phần được thêm thành công
                     success = 1;
                     message = response["success_msg"];
                 } else { // Lỗi
@@ -66,8 +58,7 @@ add_button.onclick = function () {
         };
         // Làm trống form
         document.getElementById("mamonthi_add").value = "";
-        document.getElementById("tenmonthi_add").value = "";
-        document.getElementById("tinchi_add").value = "";
+        document.getElementById("mahocphan_add").value = "";
     }
 };
 
@@ -78,16 +69,16 @@ delete_button.onclick = function () {
     }
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
-    let mamonthi = document.getElementById("mamonthi_delete").value; // Lấy mã môn thi
+    let mahocphan = document.getElementById("mahocphan_delete").value; // Lấy mã học phần
     // Kiểm tra
-    if (mamonthi == "") { // Nếu trống mã môn thi
-        delete_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), delete_form.nextSibling);
+    if (mahocphan == "") { // Nếu trống mã môn thi
+        delete_form.parentNode.insertBefore(createMessage("Mã học phần không được để trống.", -1), delete_form.nextSibling);
     } else {
         // Bắt đầu Ajax Engine và gửi request
         let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
         ajaxEngine.open("POST", "ajax.php", true);
         ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("delete=" + 1 + "&mamonthi=" + mamonthi);
+        ajaxEngine.send("delete=" + 1 + "&mahocphan=" + mahocphan);
         // Xử lý sau khi Ajax trả về
         ajaxEngine.onreadystatechange = function () {
             if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
@@ -95,7 +86,7 @@ delete_button.onclick = function () {
                 refresh_table();
                 var success;
                 var message;
-                if (response.hasOwnProperty("success_msg")) { // Môn học được xóa thành công
+                if (response.hasOwnProperty("success_msg")) { // Học phần được xóa thành công
                     success = 1;
                     message = response["success_msg"];
                 } else { // Lỗi
@@ -107,60 +98,9 @@ delete_button.onclick = function () {
             }
         };
         // Làm trống form
-        document.getElementById("mamonthi_delete").value = "";
+        document.getElementById("mahocphan_delete").value = "";
         // Xóa thông tin về môn đang xóa
-        mondangxoa.innerText = "";
-    }
-};
-
-edit_button.onclick = function () {
-    // Xóa thông báo cũ
-    if (document.getElementById("message") != null) {
-        removeElement("message");
-    }
-    // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
-    // Lấy thông tin từ form
-    let mamonthi = document.getElementById("mamonthi_edit").value; // Lấy mã môn thi
-    let tenmonthi = document.getElementById("tenmonthi_edit").value; // Lấy tên môn thi
-    let tinchi = document.getElementById("tinchi_edit").value; // Lấy số tín chỉ
-    // Kiểm tra
-    if (mamonthi == "") { // Nếu trống mã môn thi
-        edit_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), edit_form.nextSibling);
-    } else if (tenmonthi == "") { // Nếu trống tên môn thi
-        edit_form.parentNode.insertBefore(createMessage("Tên môn học không được để trống.", -1), edit_form.nextSibling);
-    } else if (tinchi == "" || tinchi.indexOf(".") != -1 || tinchi == "0") { // Nếu trống tín chỉ hoặc không đúng dạng
-        edit_form.parentNode.insertBefore(createMessage("Số tín chỉ phải là một số nguyên dương lớn hơn 0.", -1), edit_form.nextSibling);
-    } else {
-        // Bắt đầu Ajax Engine và gửi request
-        let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
-        ajaxEngine.open("POST", "ajax.php", true);
-        ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("edit=" + 1 + "&mamonthicu=" + old_mamonthi + "&mamonthi=" + mamonthi + "&tenmonthi=" + tenmonthi + "&tinchi=" + tinchi);
-        // Xử lý sau khi Ajax trả về
-        ajaxEngine.onreadystatechange = function () {
-            if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
-                let response = JSON.parse(ajaxEngine.responseText);
-                refresh_table();
-                var success;
-                var message;
-                if (response.hasOwnProperty("success_msg")) { // Môn học được thêm thành công
-                    success = 1;
-                    message = response["success_msg"];
-                } else { // Lỗi
-                    success = -1;
-                    message = response["error_msg"];
-                }
-                // Thêm vào sau form add
-                edit_form.parentNode.insertBefore(createMessage(message, success), edit_form.nextSibling);
-            }
-        };
-        // Làm trống form
-        document.getElementById("mamonthi_edit").value = "";
-        document.getElementById("tenmonthi_edit").value = "";
-        document.getElementById("tinchi_edit").value = "";
-        old_mamonthi = null; // Reset mã môn thi cũ
-        // Xóa thông tin môn đang sửa
-        mondangsua.innerText = "";
+        hocphandangxoa.innerText = "";
     }
 };
 
@@ -181,7 +121,7 @@ function createMessage(_message, success) {
     return message;
 }
 
-// Hàm dùng để refresh lại table sau khi sửa, xóa, thêm
+// Hàm dùng để refresh lại table sau khi xóa, thêm học phần
 function refresh_table() {
     // Bắt đầu Ajax
     let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
@@ -195,12 +135,32 @@ function refresh_table() {
                 table_hash = response['hash'];
                 table.innerHTML = response["table"];
                 // Refresh lại datalist
-                datalist.innerHTML = response["datalist"];
+                refresh_datalist("danhsachmonhoc", 0);
+                refresh_datalist("danhsachhocphan", 2);
                 $('#tablemonthi').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             }
             // If hash match (data not changed), do nothing.
         }
+    }
+}
+
+// Hàm dùng để refresh lại datalist môn học
+function refresh_datalist(elementid, pos) {
+    let datalist = document.getElementById(elementid);
+    datalist.innerHTML = ""; // Xóa datalist cũ
+    var res = new Set();
+    var table_body = table.firstElementChild.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.nextElementSibling;
+    var list_size = table_body.childElementCount;
+    for (var i = 0; i < list_size; i++) {
+        var row = table_body.childNodes[i];
+        var opt = document.createElement("option");
+        opt.setAttribute("value", row.childNodes[pos].innerText);
+        res.add(opt.outerHTML);
+    }
+    var arr = Array.from(res);
+    for (var i = 0; i < arr.length; i++) {
+        datalist.innerHTML += arr[i];
     }
 }
 

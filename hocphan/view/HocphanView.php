@@ -1,0 +1,90 @@
+<?php
+
+
+namespace hocphan\view;
+
+
+class HocphanView {
+    private $data; // Danh sách học phần
+    private $monthi; // Danh sách môn thi
+
+    /**
+     * Khởi tạo HocphanView.
+     * @param $data: Chứa danh sách học phần (JSON).
+     */
+    public function __construct($data) {
+        $this->data = json_decode($data, true);
+        $monthi = [];
+        foreach ($this->data as $key => $value) {
+            array_push($monthi, $value['mamonthi']);
+        }
+        $this->monthi = array_unique($monthi);
+    }
+
+    /**
+     * Bảng các học phần
+     * @return string: Code HTML
+     */
+    public function tableView() {
+        $html = "<table id='tablehocphan' class='table table-bordered table-striped table-hover table-sm'><thead><tr>";
+        $html .= "<th class=\"th-sm\">Mã môn thi</th>";
+        $html .= "<th class=\"th-sm\">Tên môn thi</th>";
+        $html .= "<th class=\"th-sm\">Mã học phần</th>";
+        $html .= "</tr></thead><tbody>";
+        $size = sizeof($this->data); // Chứa kích cỡ mảng data
+        if ($size > 0) { // Trả về dữ liệu nếu size > 0
+            foreach ($this->data as $key => $value) {
+                $html .= "<tr>";
+                $html .= "<td class='mamonthi'>" . $value["mamonthi"] . "</td>";
+                $html .= "<td class='tenmonthi'>" . $value["tenmonthi"] . "</td>";
+                $html .= "<td class='mahocphan'>" . $value["mahocphan"] . "</td>";
+                $html .= "</tr>";
+            }
+        } else { // Tạo ô trống nếu size = 0
+            $html .= "<td colspan='3' style=\"text-align:center\">Chưa có học phần.</td>";
+        }
+        $html .= "</tbody><tfoot><tr>";
+        $html .= "<th>Mã môn thi</th><th>Tên môn thi</th><th>Mã học phần</th>";
+        $html .= "</tr></tfoot></table>";
+
+        return $html;
+    }
+
+    /**
+     * Hiện form thêm học phần.
+     */
+    public function addForm() {
+        $html = "<form method=\"post\" id='form_add' autocomplete='off'>
+                  <div class=\"form-group\">
+                    <label for=\"mamonthi_add\">Mã môn thi</label>
+                    <input type=\"text\" list='danhsachmonhoc' class=\"form-control\" id=\"mamonthi_add\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm học phần\" maxlength='20' minlength='1' required>
+                    <datalist id='danhsachmonhoc'>";
+        foreach ($this->monthi as $value) {
+            $html .= "<option value=\"".$value."\">";
+        }
+        $html .= "</datalist></div>
+                  <div class=\"form-group\">
+                    <label for=\"mahocphan_add\">Mã học phần</label>
+                    <input type=\"text\" class=\"form-control\" id=\"mahocphan_add\" name=\"mahocphan\" placeholder=\"Nhập mã học phần muốn thêm\" maxlength='20' minlength='1' required>
+                  </div>";
+        $html .= "<button type=\"button\" id='add-button' class=\"btn btn-primary\">Thêm</button></form>";
+        return $html;
+    }
+
+    /**
+     * Hiện form xóa học phần theo mã học phần.
+     */
+    public function deleteForm() {
+        $html = "<form method='post' id='form_delete' autocomplete='off'>
+                  <div class='form-group'>
+                    <label for='mahocphan_delete'>Mã học phần</label>
+                    <input list='danhsachhocphan' type='text' class='form-control' id=\"mahocphan_delete\" name=\"mahocphan\" placeholder=\"Nhập mã học phần cần xóa\" required>
+                    <datalist id='danhsachhocphan'>";
+        foreach ($this->data as $key => $value) {
+            $html .= "<option value=\"".$value["mahocphan"]."\">";
+        }
+        $html .= "</datalist></div>";
+        $html .= "<button type=\"button\" id='delete-button' class=\"btn btn-danger\">Xóa</button></form>";
+        return $html;
+    }
+}

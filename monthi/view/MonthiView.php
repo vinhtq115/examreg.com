@@ -44,11 +44,25 @@ class MonthiView {
         return $html;
     }
 
+    public function datalist($json) {
+        $ds = json_decode($json, true);
+        $size = sizeof($ds);
+        // Hiện datalist
+        $html = "<datalist id='danhsachmonhoc'>";
+        for ($i = 0; $i < $size; $i++) {
+            $a = json_encode($ds[$i]);
+            $b = json_decode($a);
+            $html .= "<option value=\"".$b->mamonthi."\">";
+        }
+        $html .= "</datalist>";
+        return $html;
+    }
+
     /**
      * Hiện form thêm môn học.
      */
     public function addForm() {
-        $html = "<form method=\"post\" id='form_add'>
+        $html = "<form method=\"post\" id='form_add' autocomplete='off'>
                   <div class=\"form-group\">
                     <label for=\"mamonthi_add\">Mã môn thi</label>
                     <input type=\"text\" class=\"form-control\" id=\"mamonthi_add\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\" maxlength='20' minlength='1' required>
@@ -72,12 +86,7 @@ class MonthiView {
         $html = "<form method=\"post\" id='form_delete' autocomplete='off'>
                   <div class=\"form-group\">
                     <label for=\"mamonthi_delete\">Mã môn thi</label>
-                    <input list='danhsachmonhoc' type=\"text\" class=\"form-control\" id=\"mamonthi_delete\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" required>
-                    <datalist id='danhsachmonhoc'>";
-        foreach ($this->data as $key => $value) {
-            $html .= "<option value=\"".$value["mamonthi"]."\">";
-        }
-        $html .= "</datalist></div>";
+                    <input list='danhsachmonhoc' type=\"text\" class=\"form-control\" id=\"mamonthi_delete\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" required>";
         $html .= "<button type=\"button\" id='delete-button' class=\"btn btn-danger\">Xóa</button></form>";
         return $html;
     }

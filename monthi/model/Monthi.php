@@ -34,6 +34,15 @@ class Monthi extends PDOData {
     }
 
     /**
+     * Lấy toàn bộ danh sách mã môn thi.
+     * @return array: Mảng danh sách mã môn thi.
+     */
+    public function getAllmamonthi() {
+        $ret = $this->doQuery("SELECT mamonthi FROM monthi");
+        return $ret;
+    }
+
+    /**
      * Hàm thêm môn thi.
      * @param $mamonthi: Mã môn thi.
      * @param $tenmonthi: Tên môn thi.

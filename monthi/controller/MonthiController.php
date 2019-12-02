@@ -29,6 +29,15 @@ class MonthiController {
     }
 
     /**
+     * Lấy mã môn thi
+     * @return false|string
+     */
+    public function datalist() {
+        $arr = $this->monthi->getAllmamonthi();
+        return $this->view->datalist(json_encode($arr));
+    }
+
+    /**
      * Hiện form thêm môn thi.
      */
     public function showAdd() {
