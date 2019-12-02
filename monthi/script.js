@@ -219,7 +219,7 @@ document.getElementById("mamonthi_edit").onblur = function () {
     var tinchi_edit = document.getElementById("tinchi_edit");
 
     // Tìm tên môn học và tín chỉ ứng với mã môn học
-    var table_body = table.firstElementChild.firstElementChild.nextElementSibling;
+    var table_body = table.firstElementChild.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.nextElementSibling;
     var list_size = table_body.childElementCount;
     for (var i = 0; i < list_size; i++) {
         var row = table_body.childNodes[i];
@@ -236,12 +236,12 @@ document.getElementById("mamonthi_edit").onblur = function () {
 // Hiện môn thi đang xóa
 document.getElementById("mamonthi_delete").onblur = function () {
     // Tìm tên môn học và tín chỉ ứng với mã môn học
-    var table_body = table.firstElementChild.firstElementChild.nextElementSibling;
+    var table_body = table.firstElementChild.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.nextElementSibling;
     var list_size = table_body.childElementCount;
     for (var i = 0; i < list_size; i++) {
         var row = table_body.childNodes[i];
         if (row.childNodes[0].innerText == this.value) {
-            mondangxoa.innerText = "Mã môn đang sửa: " + this.value + "\nTên môn: " + row.childNodes[1].innerText + "\nTín chỉ: " + row.childNodes[2].innerText + "\n\n";
+            mondangxoa.innerText = "Mã môn đang xóa: " + this.value + "\nTên môn: " + row.childNodes[1].innerText + "\nTín chỉ: " + row.childNodes[2].innerText + "\n\n";
             return;
         }
     }
