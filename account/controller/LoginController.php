@@ -1,5 +1,13 @@
 <?php
 session_start();
+if($_SESSION["id"] != ""){
+    if($_SESSION["isAdmin"] == 1){
+        header('Location: http://examreg.com//admin/view/AdminView.php');
+    }else if($_SESSION["isAdmin"] == 0){
+        header('Location: http://examreg.com//student/view/StudentView.php');
+    }
+}
+
 require_once dirname(__FILE__).'/../view/LoginView.php';
 require_once dirname(__FILE__).'/../model/AccountModel.php';
 
