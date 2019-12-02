@@ -1,3 +1,27 @@
+var table_hash = null;
+
+// Lấy hash lần đầu, tránh bị refresh lần đầu
+function get_initial_hash() {
+    // Bắt đầu Ajax
+    let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
+    ajaxEngine.open("GET", "ajax.php?gethash=1", true);
+    ajaxEngine.send(null);
+    // Xử lý sau khi Ajax trả về
+    ajaxEngine.onreadystatechange = function () {
+        if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
+            let response = JSON.parse(ajaxEngine.responseText);
+            table_hash = response['hash'];
+        }
+    }
+}
+get_initial_hash();
+
+// Bật pagination
+$(document).ready(function () {
+    $('#tablemonthi').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+});
+
 let add_button = document.getElementById('add-button');
 let delete_button = document.getElementById('delete-button');
 let edit_button = document.getElementById('edit-button');
@@ -180,9 +204,17 @@ function refresh_table() {
     ajaxEngine.onreadystatechange = function () {
         if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
             let response = JSON.parse(ajaxEngine.responseText);
-            table.innerHTML = response["table"];
-            // Refresh lại datalist
-            refresh_datalist();
+            if (table_hash != response['hash']) {
+                table_hash = response['hash'];
+                table.innerHTML = response["table"];
+                // Refresh lại datalist
+                refresh_datalist();
+                $('#tablemonthi').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+                console.log('new data');
+            } else {
+                console.log('old data');
+            }
         }
     }
 }

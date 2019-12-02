@@ -9,8 +9,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Quản lý môn thi</title>
-    <link rel="stylesheet" href="../bootstrap/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="../bootstrap/bootstrap-4.3.1-dist/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="../MDB/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="../MDB/css/addons/datatables.min.css">-->
     <link rel="stylesheet" href="../css/monthi.css">
+    <script src="/jquery/jquery-3.4.1.min.js"></script>
 </head>
 <body>
     <!-- Danh sách môn thi -->
@@ -47,5 +50,6 @@
         ?>
     </div>
     <script src="script.js"></script>
+    <script src="/MDB/js/addons/datatables.min.js"></script>
 </body>
 </html>
