@@ -48,6 +48,8 @@ class getStudentView{
 </html>";
         return $html;
     }
+
+
     public function returnStudentExcel($output){
         echo $output; // this will return the data
     }

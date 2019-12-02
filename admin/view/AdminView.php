@@ -15,14 +15,7 @@
     <title>Administration's Homepage</title>
     <link rel="stylesheet" type="text/css" href="../../css/adminView.css">
     <script src="../../jquery/jquery-3.4.1.js"></script>
-    <!--<script>
-        //take the logout function to the client
-        $(document).ready(function(){
-            $("#logout-btn").click(function() {
-                window.location.href="http://examreg.com/account/view/LogoutView.php";
-            });
-        });
-    </script>-->
+
 </head>
 <body>
 <header>
@@ -47,7 +40,7 @@
 <section id="boxes">
     <div class="container">
         <div class="box">
-            <a href=""><img src="../../css/img/graduate-student.png"></a>
+            <a href="http://examreg.com/admin/getStudentIndex/"><img src="../../css/img/graduate-student.png"></a>
             <h3>Students Roaster</h3>
             <p>Administration keeping track and managing student profile which taking part in the examination</p>
         </div>
@@ -56,10 +49,27 @@
             <h3>Subjects List</h3>
             <p>Administration keeping track of subjects and courses of the examination</p>
         </div>
+        <div class="course">
+            <a href=""><img src="../../css/img/logo_brush.png"></a>
+            <h3>The Exams</h3>
+            <p>Administration creating and managing the upcoming examination </p>
+        </div>
+    </div>
+    <div class="container">
         <div class="box">
             <a href=""><img src="../../css/img/logo_brush.png"></a>
             <h3>The Exams</h3>
             <p>Administration creating and managing the upcoming examination </p>
+        </div>
+        <div class="box">
+            <a href=""><img src="../../css/img/door.png"></a>
+            <h3>Create Room</h3>
+            <p>Administration keeping track and managing student profile which taking part in the examination</p>
+        </div>
+        <div class="box">
+            <a href="http://examreg.com/monthi/"><img src="../../css/img/microscope.png"></a>
+            <h3>Subjects List</h3>
+            <p>Administration keeping track of subjects and courses of the examination</p>
         </div>
     </div>
 </section>
