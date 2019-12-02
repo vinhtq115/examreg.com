@@ -4,8 +4,16 @@
     require_once dirname(__FILE__)."/controller/MonthiController.php";
     $monthictrl = new \monthi\controller\MonthiController();
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $res = new stdClass();
-        $res->table = $monthictrl->table();
+        $res = new stdClass(); // Chứa response
+        $table = $monthictrl->table();
+        $hash = hash('sha256', $table);
+        if (!isset($_GET['hash']) || $_GET['hash'] != $hash) {
+            $res->table = $monthictrl->table();
+            $res->hash = $hash;
+        } else if (isset($_GET['gethash']) && $_GET['gethash'] == 1) {
+            $res->hash = $hash;
+        }
+
         echo json_encode($res);
     } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $res = new stdClass();

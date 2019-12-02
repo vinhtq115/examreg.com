@@ -20,10 +20,10 @@ class MonthiView {
      * @return string: Code HTML
      */
     public function tableView() {
-        $html = "<table class='table table-bordered table-striped table-hover'><thead><tr>";
-        $html .= "<th>Mã môn thi</th>";
-        $html .= "<th>Tên môn thi</th>";
-        $html .= "<th>Tín chỉ</th>";
+        $html = "<table id='tablemonthi' class='table table-bordered table-striped table-hover table-sm'><thead><tr>";
+        $html .= "<th class=\"th-sm\">Mã môn thi</th>";
+        $html .= "<th class=\"th-sm\">Tên môn thi</th>";
+        $html .= "<th class=\"th-sm\">Tín chỉ</th>";
         $html .= "</tr></thead><tbody>";
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
