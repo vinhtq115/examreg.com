@@ -11,13 +11,28 @@ class getStudentModel extends PDOData{
             parent::__destruct();
         }
 
-        public function addStudentData($id , $hodem , $ten ,$dateOfBirth , $dieuKienThi){
-            //add the data to the database
-            $sql = "INSERT INTO sinhvien (id, hodem, ten, ngaysinh, dieukienduthi) 
-                    VALUES ('$id', '$hodem', '$ten' , '$dateOfBirth' , '$dieuKienThi')";
+        public function addStudentData($id , $hodem , $ten ,$dateOfBirth){
+            //add the data to the student database
+            $sql = "INSERT INTO sinhvien (id, hodem, ten, ngaysinh) 
+                    VALUES ('$id', '$hodem', '$ten' , '$dateOfBirth')";
             $this->trySQL($sql);
 
         }
 
+        public function createStudentAccount($account , $password,$idsinhvien){
+            //add the data to the account database
+            $sql = "INSERT INTO `account`(`id`, `isAdmin`, `password`, `idsinhvien`) VALUES ('$account',0,'$password','$idsinhvien')";
+            $this->TrySQL($sql);
+        }
+
+        public function updateDisqualifiedStudent($id){
+            $sql = "UPDATE `sinhvien` SET `dudieukienduthi`= 0 WHERE `id` = '$id';";
+            $this->TrySQL($sql);
+        }
+
+        public function updateCourse($id , $courseid , $maky){
+            $sql = "";
+            $this->TrySQL($sql);
+        }
 }
 

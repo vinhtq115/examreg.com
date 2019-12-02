@@ -17,9 +17,9 @@ class getStudentController
     public function showInterface(){
         return $this->view->getStudentExcelInterface();
     }
-    function getStudentExcel(){
-        $model = new getStudentModel();
-        if(isset($_POST["import"])){
+
+    function getStudentExcel(){ // this controller to get student info from excell and get it to database
+        if(isset($_POST["importStudent"])){
             $extension = end(explode(".", $_FILES["excel"]["name"])); // Getting Extension of selected file
             $allowed_extension = array("xls" , "xlsx" , "csv"); // the file extension of excel which is allowed
             if(in_array($extension , $allowed_extension)){
@@ -32,8 +32,49 @@ class getStudentController
                             $middleName = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(1, $row)->getValue());
                             $name = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(2, $row)->getValue());
                             $DateOfBirth = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(3, $row)->getValue());
-                            $DieuKienBool = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(4, $row)->getValue());
-                            $this->model->addStudentData($id , $middleName , $name , $DateOfBirth , $DieuKienBool);
+                            $this->model->addStudentData($id , $middleName , $name , $DateOfBirth); // call model function
+                         //create account
+                            $account = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(4, $row)->getValue());
+                            $password = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(5, $row)->getValue());
+                            $this->model->createStudentAccount($account,$password,$id); // call model function
+                    }
+                }
+            }
+        }
+    }
+
+    function  updateDisqualified(){ // this function is to update the student that is not qualified to take exam
+        if(isset($_POST["importDisqualified"])){
+            $extension = end(explode(".", $_FILES["excel"]["name"]));
+            $allowed_extension = array("xls" , "xlsx" , "csv");
+            if(in_array($extension , $allowed_extension)){
+                $StudentPhpExcel = PHPExcel_IOFactory::load(/*$file*/); // create object of PHPExcel
+                foreach ($StudentPhpExcel->getWorksheetIterator() as $worksheet){
+                    $highestRow = $worksheet->getHighestRow(); //the index number of the last row
+                    for($row = 2 ; $row <= $highestRow ; $row++) { // 0 : the A B C in excel, 1 : the columns name , from 2: the data
+                        // get the data and use the mysqli function to make the string update-able to the database
+                        $id = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(0, $row)->getValue()); // get the ID of the Disqualified student
+                        $this->model->updateDisqualifiedStudent($id);
+                    }
+                }
+            }
+        }
+    }
+
+    function updateCourseSem(){ // update hocphan trong hoc ky
+        if(isset($_POST["importCourse"])){
+            $extension = end(explode(".", $_FILES["excel"]["name"]));
+            $allowed_extension = array("xls" , "xlsx" , "csv");
+            if(in_array($extension , $allowed_extension)){
+                $StudentPhpExcel = PHPExcel_IOFactory::load(/*$file*/); // create object of PHPExcel
+                foreach ($StudentPhpExcel->getWorksheetIterator() as $worksheet){
+                    $highestRow = $worksheet->getHighestRow(); //the index number of the last row
+                    for($row = 2 ; $row <= $highestRow ; $row++) { // 0 : the A B C in excel, 1 : the columns name , from 2: the data
+                        // get the data and use the mysqli function to make the string update-able to the database
+                        $id = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(0, $row)->getValue()); // get the ID of the  student
+                        $courseid = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(1, $row)->getValue());
+                        $maky = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(2, $row)->getValue());
+                        $this->model->updateDisqualifiedStudent($id);
                     }
                 }
             }
