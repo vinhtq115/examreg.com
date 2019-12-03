@@ -11,8 +11,6 @@ if($_SESSION["id"] != ""){
 require_once dirname(__FILE__).'/../view/LoginView.php';
 require_once dirname(__FILE__).'/../model/AccountModel.php';
 
-//require_once('/../view/LoginView.php');
-//require_once ('/../model/AccountModel/php');
 
 class LoginController
 {

@@ -40,7 +40,7 @@
 <section id="boxes">
     <div class="container">
         <div class="box">
-            <a href="http://examreg.com/admin/getStudentIndex/"><img src="../../css/img/graduate-student.png"></a>
+            <a href="http://examreg.com/admin/getStudentIndex/"><img src="../../css/img/graduate-student.png"></a> <!--This will redirect to getting student excel-->
             <h3>Students Roaster</h3>
             <p>Administration keeping track and managing student profile which taking part in the examination</p>
         </div>
@@ -55,23 +55,23 @@
             <p>Administration creating and managing the upcoming examination </p>
         </div>
     </div>
-    <div class="container">
-        <div class="box">
-            <a href=""><img src="../../css/img/logo_brush.png"></a>
-            <h3>The Exams</h3>
-            <p>Administration creating and managing the upcoming examination </p>
-        </div>
-        <div class="box">
-            <a href=""><img src="../../css/img/door.png"></a>
-            <h3>Create Room</h3>
-            <p>Administration keeping track and managing student profile which taking part in the examination</p>
-        </div>
-        <div class="box">
-            <a href="http://examreg.com/monthi/"><img src="../../css/img/microscope.png"></a>
-            <h3>Subjects List</h3>
-            <p>Administration keeping track of subjects and courses of the examination</p>
-        </div>
-    </div>
+<!--    <div class="container">-->
+<!--        <div class="box">-->
+<!--            <a href=""><img src="../../css/img/logo_brush.png"></a>-->
+<!--            <h3>The Exams</h3>-->
+<!--            <p>Administration creating and managing the upcoming examination </p>-->
+<!--        </div>-->
+<!--        <div class="box">-->
+<!--            <a href=""><img src="../../css/img/door.png"></a>-->
+<!--            <h3>Create Room</h3>-->
+<!--            <p>Administration keeping track and managing student profile which taking part in the examination</p>-->
+<!--        </div>-->
+<!--        <div class="box">-->
+<!--            <a href="http://examreg.com/monthi/"><img src="../../css/img/microscope.png"></a>-->
+<!--            <h3>Subjects List</h3>-->
+<!--            <p>Administration keeping track of subjects and courses of the examination</p>-->
+<!--        </div>-->
+<!--    </div>-->
 </section>
 
 <footer>

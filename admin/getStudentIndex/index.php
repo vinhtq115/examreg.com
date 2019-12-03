@@ -1,14 +1,13 @@
 <?php
+//session_start();
+
 require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
-session_start();
 if($_SESSION["isAdmin"] != 1){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
 require_once dirname(__FILE__)."/../controller/getStudentController.php";
-
-$getStudent = new getStudentController();
-$getStudent -> showInterface();
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,6 +18,9 @@ $getStudent -> showInterface();
     <title>Student Managing</title>
 </head>
 <body>
-    <?php ?>
+<?php
+    $control = new getStudentController();
+    $control->__construct();
+?>
 </body>
 </html>

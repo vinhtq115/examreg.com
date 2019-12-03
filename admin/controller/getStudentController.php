@@ -1,8 +1,8 @@
 <?php
 //include the tool to be able to get data from Excell xls file
-require_once dirname(__FILE__)."../PHPExcel/IOFactory.php";
-require_once dirname(__FILE__)."../view/getStudentView.php";
-require_once dirname(__FILE__)."../model/getStudentModel.php";
+require_once dirname(__FILE__)."/../PHPExcelFile/Classes/PHPExcel/IOFactory.php";
+require_once dirname(__FILE__)."/../view/getStudentView.php";
+require_once dirname(__FILE__)."/../model/getStudentModel.php";
 class getStudentController
 {
     private $view; // set up view Class
@@ -12,14 +12,27 @@ class getStudentController
     {
         $this ->view =  new getStudentView();
         $this ->model = new getStudentModel();
-    }
+        $this->view->getStudentExcelInterface();
+        if(isset($_POST["importStudent"])){ // the condition to start function upon clicking the button
+            $this->getStudentExcel();
+            // add view code here...
+        }
+        if(isset($_POST["importDisqualified"])){
+            $this->updateDisqualified(); // the condition to start function upon clicking the button
+            // add view code here...
 
-    public function showInterface(){
-        return $this->view->getStudentExcelInterface();
+        }
+        if(isset($_POST["importCourse"])){
+            $this->updateCourseSem(); // the condition to start function upon clicking the button
+            // add view code here...
+
+        }
+
+        //making bbuffer to call the view function so the index could call it!!!!!
     }
 
     function getStudentExcel(){ // this controller to get student info from excell and get it to database
-        if(isset($_POST["importStudent"])){
+        //if(isset($_POST["importStudent"])){
             $extension = end(explode(".", $_FILES["excel"]["name"])); // Getting Extension of selected file
             $allowed_extension = array("xls" , "xlsx" , "csv"); // the file extension of excel which is allowed
             if(in_array($extension , $allowed_extension)){
@@ -40,7 +53,7 @@ class getStudentController
                     }
                 }
             }
-        }
+        //}
     }
 
     function  updateDisqualified(){ // this function is to update the student that is not qualified to take exam
@@ -61,7 +74,7 @@ class getStudentController
         }
     }
 
-    function updateCourseSem(){ // update hocphan trong hoc ky
+    function updateCourseSem(){ // update hoc phan trong hoc ky
         if(isset($_POST["importCourse"])){
             $extension = end(explode(".", $_FILES["excel"]["name"]));
             $allowed_extension = array("xls" , "xlsx" , "csv");
@@ -74,10 +87,11 @@ class getStudentController
                         $id = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(0, $row)->getValue()); // get the ID of the  student
                         $courseid = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(1, $row)->getValue());
                         $maky = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(2, $row)->getValue());
-                        $this->model->updateCourse($id,&$courseid,$maky);
+                        $this->model->updateCourse($id,$courseid,$maky);
                     }
                 }
             }
         }
     }
+
 }
