@@ -44,7 +44,12 @@ class MonthiView {
         return $html;
     }
 
-    public function datalist($json) {
+    /**
+     * Datalist các mã môn thi
+     * @param $json
+     * @return string
+     */
+    public function datalist_monthi($json) {
         $ds = json_decode($json, true);
         $size = sizeof($ds);
         // Hiện datalist

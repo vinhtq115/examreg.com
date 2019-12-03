@@ -7,22 +7,13 @@ $(document).ready(function () {
     $('.dataTables_length').addClass('bs-select');
 });
 
-let add_button = document.getElementById('add-button');
-let delete_button = document.getElementById('delete-button');
-let edit_button = document.getElementById('edit-button');
 let table = document.getElementById("table-container");
-
-let add_form = document.getElementById("form_add");
-let delete_form = document.getElementById("form_delete");
-let edit_form = document.getElementById("form_edit");
-
-var old_mamonthi = null; // Dùng để sửa mã môn thi
-
-var mondangsua = document.getElementById("mondangsua"); // Thông tin về môn đang sửa
-var mondangxoa = document.getElementById("mondangxoa"); // Thông tin về môn đang xóa
 
 let datalist = document.getElementById("datalistcontainer");
 
+// Hành vi cho nút thêm
+let add_button = document.getElementById('add-button');
+let add_form = document.getElementById("form_add");
 add_button.onclick = function () {
     // Xóa thông báo cũ
     if (document.getElementById("message") != null) {
@@ -71,6 +62,9 @@ add_button.onclick = function () {
     }
 };
 
+// Hành vi cho nút xóa
+let delete_button = document.getElementById('delete-button');
+let delete_form = document.getElementById("form_delete");
 delete_button.onclick = function () {
     // Xóa thông báo cũ
     if (document.getElementById("message") != null) {
@@ -113,6 +107,10 @@ delete_button.onclick = function () {
     }
 };
 
+// Hành vi cho nút sửa
+var old_mamonthi = null; // Dùng để sửa mã môn thi
+let edit_button = document.getElementById('edit-button');
+let edit_form = document.getElementById("form_edit");
 edit_button.onclick = function () {
     // Xóa thông báo cũ
     if (document.getElementById("message") != null) {
@@ -214,6 +212,7 @@ function removeElement(elementId) {
 }
 
 // Auto-complete (Tự động điền cho form sửa môn học dựa trên mã môn học)
+var mondangsua = document.getElementById("mondangsua"); // Thông tin về môn đang sửa
 document.getElementById("mamonthi_edit").onblur = function () {
     var tenmonhoc_edit = document.getElementById("tenmonthi_edit");
     var tinchi_edit = document.getElementById("tinchi_edit");
@@ -234,6 +233,7 @@ document.getElementById("mamonthi_edit").onblur = function () {
 };
 
 // Hiện môn thi đang xóa
+var mondangxoa = document.getElementById("mondangxoa"); // Thông tin về môn đang xóa
 document.getElementById("mamonthi_delete").onblur = function () {
     // Tìm tên môn học và tín chỉ ứng với mã môn học
     var table_body = table.firstElementChild.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.nextElementSibling;
