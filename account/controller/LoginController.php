@@ -1,5 +1,6 @@
 <?php
-session_start();
+//session_start();
+$isAdmin = 2; // a global variance set to default = 2
 if($_SESSION["id"] != ""){
     if($_SESSION["isAdmin"] == 1){
         header('Location: http://examreg.com/admin/view/AdminView.php');
@@ -8,7 +9,7 @@ if($_SESSION["id"] != ""){
     }
 }
 
-require_once dirname(__FILE__).'/../view/LoginView.php';
+//require_once dirname(__FILE__).'/../view/LoginView.php';
 require_once dirname(__FILE__).'/../model/AccountModel.php';
 
 
@@ -30,27 +31,18 @@ class LoginController
                 $ID = $obj["id"];
                 $_SESSION["id"] = $ID; // making session
                 $_SESSION["isAdmin"] = $isAdmin;// making session
-
                 if($isAdmin == 0){
-                    echo '<script language="javascript">';
-                    echo 'window.location.pathname="../student/view/StudentView.php";';
-                    echo '</script>';
+                    header("Location:../student/view/StudentView.php");
                 }else if ($isAdmin == 1){
-                    echo '<script language="javascript">';
-                    echo 'window.location.pathname="../admin/view/AdminView.php";';
-                    echo '</script>';
-
+                    header("Location:../admin/view/AdminView.php");
                 }
-
-            }else{
-                echo "<script type='text/javascript'>alert('Either the password or the id is wrong');</script>";
-                require_once('account/view/LoginView.php');
             }
+            //if($isAdmin == 1){}
+            //echo $isAdmin;
 
-        }else{
-            imap_alerts("Please complete the form");
-            require_once dirname(__FILE__).'/../../account/view/LoginView.php';
         }
-    }}
+    }
+    }
 }
-
+$tmp = new LoginController();
+$tmp-> getLoginInfo();

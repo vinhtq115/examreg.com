@@ -49,7 +49,7 @@
             <h3>Subjects List</h3>
             <p>Administration keeping track of subjects and courses of the examination</p>
         </div>
-        <div class="course">
+        <div class="box">
             <a href=""><img src="../../css/img/logo_brush.png"></a>
             <h3>The Exams</h3>
             <p>Administration creating and managing the upcoming examination </p>

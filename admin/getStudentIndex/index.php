@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 
 require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
 if($_SESSION["isAdmin"] != 1){
