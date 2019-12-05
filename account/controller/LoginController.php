@@ -1,6 +1,5 @@
 <?php
-//session_start();
-$isAdmin = 2; // a global variance set to default = 2
+session_start();
 if($_SESSION["id"] != ""){
     if($_SESSION["isAdmin"] == 1){
         header('Location: http://examreg.com/admin/view/AdminView.php');
@@ -8,14 +7,24 @@ if($_SESSION["id"] != ""){
         header('Location: http://examreg.com/student/view/StudentView.php');
     }
 }
-
-//require_once dirname(__FILE__).'/../view/LoginView.php';
+require_once dirname(__FILE__).'/../view/LoginView.php';
 require_once dirname(__FILE__).'/../model/AccountModel.php';
 
+$isAdmin = 2; // a global variance set to default = 2
+//$id = mysqli_real_escape_string($_POST["id"]); // receive the info ajax sent w/ jquery
+//$pass = mysqli_real_escape_string($_POST["password"]);
 
 class LoginController
 {
+    public function __construct()
+    {
+        $userview = new LoginView();
+        $userview -> getView();
+        $this->getLoginInfo();
+    }
+
     public function getLoginInfo(){
+
         if(isset($_POST['id']) && isset($_POST['pass']) && !empty($_POST['id']) && !empty($_POST['pass'])){
         $id = $_POST['id'];
         $password = $_POST['pass'];
@@ -27,22 +36,22 @@ class LoginController
                 $result = str_replace('[','',$result);
                 $result = str_replace(']','',$result);
                 $obj = json_decode($result,true);
-                $isAdmin = $obj["isAdmin"];
+                $isAdmin = $obj["isAdmin"]; // reinnitialize the global variance
                 $ID = $obj["id"];
                 $_SESSION["id"] = $ID; // making session
                 $_SESSION["isAdmin"] = $isAdmin;// making session
-                if($isAdmin == 0){
-                    header("Location:../student/view/StudentView.php");
-                }else if ($isAdmin == 1){
-                    header("Location:../admin/view/AdminView.php");
+                if($isAdmin == 1){
+                    header("Location: http://examreg.com/admin/view/AdminView.php");
+                }else if ($isAdmin == 0){
+                    header("Location: http://examreg.com/student/view/StudentView.php");
                 }
-            }
-            //if($isAdmin == 1){}
-            //echo $isAdmin;
 
+            }else{
+                echo '<script language="javascript">';
+                echo 'window.alert("Username and Password");';
+                echo '</script>';
+            }
         }
     }
     }
 }
-$tmp = new LoginController();
-$tmp-> getLoginInfo();
