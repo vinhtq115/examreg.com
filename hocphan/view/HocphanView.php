@@ -51,6 +51,44 @@ class HocphanView {
     }
 
     /**
+     * Datalist môn thi
+     * @param $json
+     * @return string
+     */
+    public function datalist_monthi($json) {
+        $ds = json_decode($json, true);
+        $size = sizeof($ds);
+        // Hiện datalist
+        $html = "<datalist id='danhsachmonhoc'>";
+        for ($i = 0; $i < $size; $i++) {
+            $a = json_encode($ds[$i]);
+            $b = json_decode($a);
+            $html .= "<option value=\"".$b->mamonthi."\">";
+        }
+        $html .= "</datalist>";
+        return $html;
+    }
+
+    /**
+     * Datalist học phần
+     * @param $json
+     * @return string
+     */
+    public function datalist_hocphan($json) {
+        $ds = json_decode($json, true);
+        $size = sizeof($ds);
+        // Hiện datalist
+        $html = "<datalist id='danhsachhocphan'>";
+        for ($i = 0; $i < $size; $i++) {
+            $a = json_encode($ds[$i]);
+            $b = json_decode($a);
+            $html .= "<option value=\"".$b->mahocphan."\">";
+        }
+        $html .= "</datalist>";
+        return $html;
+    }
+
+    /**
      * Hiện form thêm học phần.
      */
     public function addForm() {
@@ -58,11 +96,7 @@ class HocphanView {
                   <div class=\"form-group\">
                     <label for=\"mamonthi_add\">Mã môn thi</label>
                     <input type=\"text\" list='danhsachmonhoc' class=\"form-control\" id=\"mamonthi_add\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm học phần\" maxlength='20' minlength='1' required>
-                    <datalist id='danhsachmonhoc'>";
-        foreach ($this->monthi as $value) {
-            $html .= "<option value=\"".$value."\">";
-        }
-        $html .= "</datalist></div>
+                  </div>
                   <div class=\"form-group\">
                     <label for=\"mahocphan_add\">Mã học phần</label>
                     <input type=\"text\" class=\"form-control\" id=\"mahocphan_add\" name=\"mahocphan\" placeholder=\"Nhập mã học phần muốn thêm\" maxlength='20' minlength='1' required>
@@ -79,11 +113,7 @@ class HocphanView {
                   <div class='form-group'>
                     <label for='mahocphan_delete'>Mã học phần</label>
                     <input list='danhsachhocphan' type='text' class='form-control' id=\"mahocphan_delete\" name=\"mahocphan\" placeholder=\"Nhập mã học phần cần xóa\" required>
-                    <datalist id='danhsachhocphan'>";
-        foreach ($this->data as $key => $value) {
-            $html .= "<option value=\"".$value["mahocphan"]."\">";
-        }
-        $html .= "</datalist></div>";
+                  </div>";
         $html .= "<button type=\"button\" id='delete-button' class=\"btn btn-danger\">Xóa</button></form>";
         return $html;
     }

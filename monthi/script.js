@@ -1,6 +1,13 @@
 // table_hash dùng để chứa kết quả băm của bảng, sau này được dùng để so sánh với kết quả trên server.
 var table_hash = document.getElementById("tablehash").innerText;
 
+// Lấy dữ liệu từ bảng ban đầu
+var _data = [];
+var tbody_monthi = document.getElementById('tablemonthi').childNodes[1];
+for (var i = 0; i < tbody_monthi.childElementCount; i++) {
+    _data.push([tbody_monthi.childNodes[i].childNodes[0].innerText, tbody_monthi.childNodes[i].childNodes[1].innerText, tbody_monthi.childNodes[i].childNodes[2].innerText]);
+}
+
 // Bật pagination
 $(document).ready(function () {
     $('#tablemonthi').DataTable();
@@ -194,6 +201,11 @@ function refresh_table() {
                 table.innerHTML = response["table"];
                 // Refresh lại datalist
                 datalist.innerHTML = response["datalist"];
+                tbody_monthi = document.getElementById('tablemonthi').childNodes[1];
+                _data = []; // Xóa hết thông tin môn học cũ để thêm lại
+                for (var i = 0; i < tbody_monthi.childElementCount; i++) {
+                    _data.push([tbody_monthi.childNodes[i].childNodes[0].innerText, tbody_monthi.childNodes[i].childNodes[1].innerText, tbody_monthi.childNodes[i].childNodes[2].innerText]);
+                }
                 $('#tablemonthi').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             }
@@ -218,15 +230,13 @@ document.getElementById("mamonthi_edit").onblur = function () {
     var tinchi_edit = document.getElementById("tinchi_edit");
 
     // Tìm tên môn học và tín chỉ ứng với mã môn học
-    var table_body = table.firstElementChild.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.nextElementSibling;
-    var list_size = table_body.childElementCount;
+    var list_size = _data.length;
     for (var i = 0; i < list_size; i++) {
-        var row = table_body.childNodes[i];
-        if (row.childNodes[0].innerText == this.value) {
+        if (_data[i][0] == this.value) {
             old_mamonthi = this.value;
-            tenmonhoc_edit.value = row.childNodes[1].innerText;
-            tinchi_edit.value = row.childNodes[2].innerText;
-            mondangsua.innerText = "Mã môn đang sửa: " + this.value + "\nTên môn: " + row.childNodes[1].innerText + "\nTín chỉ: " + row.childNodes[2].innerText + "\n\n";
+            tenmonhoc_edit.value = _data[i][1];
+            tinchi_edit.value = _data[i][2];
+            mondangsua.innerText = "Mã môn đang sửa: " + this.value + "\nTên môn: " + tenmonhoc_edit.value + "\nTín chỉ: " + tinchi_edit.value + "\n\n";
             return;
         }
     }
@@ -236,12 +246,9 @@ document.getElementById("mamonthi_edit").onblur = function () {
 var mondangxoa = document.getElementById("mondangxoa"); // Thông tin về môn đang xóa
 document.getElementById("mamonthi_delete").onblur = function () {
     // Tìm tên môn học và tín chỉ ứng với mã môn học
-    var table_body = table.firstElementChild.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.nextElementSibling;
-    var list_size = table_body.childElementCount;
-    for (var i = 0; i < list_size; i++) {
-        var row = table_body.childNodes[i];
-        if (row.childNodes[0].innerText == this.value) {
-            mondangxoa.innerText = "Mã môn đang xóa: " + this.value + "\nTên môn: " + row.childNodes[1].innerText + "\nTín chỉ: " + row.childNodes[2].innerText + "\n\n";
+    for (var i = 0; i < _data.length; i++) {
+        if (_data[i][0] == this.value) {
+            mondangxoa.innerText = "Mã môn đang xóa: " + this.value + "\nTên môn: " + _data[i][1] + "\nTín chỉ: " + _data[i][2] + "\n\n";
             return;
         }
     }

@@ -1,3 +1,10 @@
+<?php
+    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
+    session_start();
+    if($_SESSION["isAdmin"] != 1){
+        header("Location:http://examreg.com/account/view/LogoutView.php");
+    }
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,6 +40,12 @@
                 $table = $hocphanctrl->table();
                 echo $table;
                 echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+            ?>
+        </div>
+        <div id="datalistcontainer">
+            <?php
+                echo $hocphanctrl->datalist_hocphan();
+                echo $hocphanctrl->datalist_monthi();
             ?>
         </div>
     </div>

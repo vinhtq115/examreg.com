@@ -78,6 +78,6 @@ class KythiController {
      * @return int: Số bản ghi được cập nhật.
      */
     public function edit($makythi, $nambatdau, $namketthuc, $ky) {
-        return $this->monthi->edit($makythi, $ky, $nambatdau, $namketthuc);
+        return $this->kythi->edit($makythi, $ky, $nambatdau, $namketthuc);
     }
 }
