@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2019 at 10:26 AM
+-- Generation Time: Dec 05, 2019 at 01:35 PM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.3.12-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -240,7 +240,8 @@ ALTER TABLE `account`
 --
 ALTER TABLE `cathi`
   ADD PRIMARY KEY (`macathi`),
-  ADD KEY `cathi_hocphan` (`mahocphan`,`makythi`);
+  ADD KEY `mahocphan` (`mahocphan`),
+  ADD KEY `makythi` (`makythi`);
 
 --
 -- Indexes for table `hocphan`
@@ -312,7 +313,7 @@ ALTER TABLE `cathi`
 -- AUTO_INCREMENT for table `hocphan`
 --
 ALTER TABLE `hocphan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `kythi`
@@ -337,10 +338,37 @@ ALTER TABLE `sinhvien_cathi_phongthi`
 --
 
 --
+-- Constraints for table `account`
+--
+ALTER TABLE `account`
+  ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`idsinhvien`) REFERENCES `sinhvien` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `cathi`
+--
+ALTER TABLE `cathi`
+  ADD CONSTRAINT `cathi_ibfk_1` FOREIGN KEY (`makythi`) REFERENCES `kythi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `hocphan`
 --
 ALTER TABLE `hocphan`
   ADD CONSTRAINT `hocphan_ibfk_1` FOREIGN KEY (`mamonthi`) REFERENCES `monthi` (`mamonthi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `phongthi_cathi`
+--
+ALTER TABLE `phongthi_cathi`
+  ADD CONSTRAINT `phongthi_cathi_ibfk_1` FOREIGN KEY (`maphongthi`) REFERENCES `phongthi` (`maphongthi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `phongthi_cathi_ibfk_2` FOREIGN KEY (`macathi`) REFERENCES `cathi` (`macathi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sinhvien_cathi_phongthi`
+--
+ALTER TABLE `sinhvien_cathi_phongthi`
+  ADD CONSTRAINT `sinhvien_cathi_phongthi_ibfk_1` FOREIGN KEY (`masinhvien`) REFERENCES `sinhvien` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sinhvien_cathi_phongthi_ibfk_2` FOREIGN KEY (`macathi`) REFERENCES `cathi` (`macathi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sinhvien_cathi_phongthi_ibfk_3` FOREIGN KEY (`maphongthi`) REFERENCES `phongthi` (`maphongthi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sinhvien_hoc_hocphan`
