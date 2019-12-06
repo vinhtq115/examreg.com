@@ -44,6 +44,18 @@ class getStudentView{
             ";
         echo $html;
     }
+
+    public function getResponsive(){
+
+    }
+
+    public function getTable($stmt){
+        if($stmt->rowCount()){
+            while($row= $stmt->fetch()){
+                echo "<tr><td>..</td></tr>";
+            }
+        }
+    }
     /**
      * the functions below will have input as the file ,
      * data receive from db

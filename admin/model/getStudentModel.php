@@ -36,8 +36,8 @@ class getStudentModel extends PDOData{
         }
 
     public function getStudentInfo(){ //getdatafunction
-       $stmt = $this->db->query("SELECT `id`, `hodem`, `ten`, `ngaysinh`, `dudieukienduthi` FROM `sinhvien`;");
-       return $stmt; // return stmt first then fetch later on table
+       $stmt = $this->db->query("SELECT `id`, `hodem`, `ten`, `ngaysinh`, `dudieukienduthi` FROM `sinhvien`;"); // prepare the query for controller
+       return $stmt; // return stmt first then fetch later on controller
     }
 }
 

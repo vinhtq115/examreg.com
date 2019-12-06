@@ -105,10 +105,18 @@ class getStudentController
 function getStudentData()
 { // get the student data
     $usermodel = new getStudentModel();
-    $result = $usermodel->getStudentInfo();
-    while($row =$result->fetch_assoc())
-    {
-        echo "<tr><td>".$row["id"]."</td><td>".$row["hodem"]."</td><td>".$row["ten"]."</td><td>".$row["ngaysinh"]."</td><td>".$row["dudienkienthi"]."</td></tr>";
+    $id = "";
+    $hodem = "";
+    $ten = "";
+    $ngaythi = "";
+    $dudieukienthi = "";
+    $stmt = $usermodel->getStudentInfo();
+    $stmt->execute([$id,$hodem,$ten,$ngaythi,$dudieukienthi]);
+    //echo $stmt->rowCount();
+    if($stmt->rowCount()){
+        while($row= $stmt->fetch()){
+            echo "<tr><td>".$row['id']."</td><td>".$row["hodem"]."</td><td>".$row["ten"]."</td><td>".$row["ngaysinh"]."</td><td>".$row["dudieukienduthi"]."</td></tr>";
+        }
     }
 }}
 

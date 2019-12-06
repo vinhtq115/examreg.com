@@ -1,7 +1,8 @@
 <?php
 session_start();
 //require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
-require_once dirname(__FILE__)."/../../admin/view/getStudentView.php";
+require_once dirname(__FILE__)."/../view/getStudentView.php";
+require_once dirname(__FILE__)."/../controller/getStudentController.php";
 require_once dirname(__FILE__)."/../PHPExcelFile/Classes/PHPExcel/IOFactory.php";
 require_once dirname(__FILE__)."/../PHPExcelFile/Classes/PHPExcel.php";
 
@@ -39,7 +40,7 @@ if($_SESSION["isAdmin"] != 1){
     </span>
 
     <ul class="navbar-nav">
-        <li><a>Student Management</li>
+        <li><a href = "#">Student Management</li>
     </ul>
 </nav>
 
@@ -56,15 +57,15 @@ if($_SESSION["isAdmin"] != 1){
             <tr>
                 <td>Student ID</td>
                 <td>Family Middle Name</td>
-                <td>Name</td>
+                <td>First Name</td>
                 <td>Date Taking Exam</td>
                 <td>Qualified To Take Exam</td>
             </tr>
             </thead>
             <tbody>
             <?php
-//            $control = new getStudentController();
-//            $control->getStudentData();
+            $control = new getStudentController();
+            $control->getStudentData();
             ?>
             </tbody>
         </table>
