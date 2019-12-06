@@ -32,7 +32,7 @@ class AccountModel extends PDOData{
     }
 
     public function retPass($id){
-        $sql = $this->doQuery("SELECT * FROM `account` WHERE `id` = '$id';");
+        $sql = $this->trySql("SELECT * FROM `account` WHERE `id` = '$id';");
         //the Password Function is used to decrypt the $password as the password in database is encrypted
         return $sql;
     }

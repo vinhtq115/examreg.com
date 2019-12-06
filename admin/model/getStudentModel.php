@@ -35,5 +35,9 @@ class getStudentModel extends PDOData{
             $this->TrySQL($sql);
         }
 
+    public function getStudentInfo(){ //getdatafunction
+       $stmt = $this->db->query("SELECT `id`, `hodem`, `ten`, `ngaysinh`, `dudieukienduthi` FROM `sinhvien`;");
+       return $stmt; // return stmt first then fetch later on table
+    }
 }
 
