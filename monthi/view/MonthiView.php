@@ -46,18 +46,16 @@ class MonthiView {
 
     /**
      * Datalist các mã môn thi
-     * @param $json
      * @return string
      */
-    public function datalist_monthi($json) {
-        $ds = json_decode($json, true);
-        $size = sizeof($ds);
+    public function datalist_monthi() {
+        $size = sizeof($this->data);
         // Hiện datalist
         $html = "<datalist id='danhsachmonhoc'>";
         for ($i = 0; $i < $size; $i++) {
-            $a = json_encode($ds[$i]);
+            $a = json_encode($this->data[$i]);
             $b = json_decode($a);
-            $html .= "<option value=\"".$b->mamonthi."\">";
+            $html .= "<option value=\"".$b->mamonthi."\">".$b->tenmonthi." --- ".$b->mamonthi;
         }
         $html .= "</datalist>";
         return $html;

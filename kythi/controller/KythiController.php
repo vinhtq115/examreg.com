@@ -29,6 +29,14 @@ class KythiController {
     }
 
     /**
+     * Lấy mã kỳ thi
+     * @return false|string
+     */
+    public function datalist() {
+        return $this->view->datalist_kythi();
+    }
+
+    /**
      * Hiện form thêm kỳ thi.
      */
     public function showAdd() {

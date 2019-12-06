@@ -10,13 +10,13 @@
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $res = new stdClass(); // Chứa response
         $hash = hash('sha256', $monthictrl->table());
-        if (isset($_GET['danhsachmonthi']) && $_GET['danhsachmonthi'] == 1) {
+        if (isset($_GET['danhsachmonthi']) && $_GET['danhsachmonthi'] == 1) { // Client yêu cầu gửi danh sách môn thi
             $res->monthi = $monthictrl->datalist();
-        } else if (!isset($_GET['hash']) || $_GET['hash'] != $hash) {
+        } else if (!isset($_GET['hash']) || $_GET['hash'] != $hash) { // Client kiểm tra xem hash của client có trùng server không. Nếu không trùng, server trả về bảng, datalist và hash mới.
             $res->table = $monthictrl->table();
             $res->datalist = $monthictrl->datalist();
             $res->hash = $hash;
-        } else if (isset($_GET['gethash']) && $_GET['gethash'] == 1) {
+        } else if (isset($_GET['hash']) && $_GET['hash'] == $hash) { // Nếu trùng hash, chỉ trả về hash
             $res->hash = $hash;
         }
 

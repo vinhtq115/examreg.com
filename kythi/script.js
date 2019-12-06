@@ -3,14 +3,17 @@ var table_hash = document.getElementById("tablehash").innerText;
 
 // Lấy dữ liệu từ bảng ban đầu
 var _data = [];
-var tbody_monthi = document.getElementById('tablemonthi').childNodes[1];
-for (var i = 0; i < tbody_monthi.childElementCount; i++) {
-    _data.push([tbody_monthi.childNodes[i].childNodes[0].innerText, tbody_monthi.childNodes[i].childNodes[1].innerText, tbody_monthi.childNodes[i].childNodes[2].innerText]);
+var tbody_kythi = document.getElementById('tablekythi').childNodes[1];
+for (var i = 0; i < tbody_kythi.childElementCount; i++) {
+    _data.push([tbody_kythi.childNodes[i].childNodes[0].innerText,
+                tbody_kythi.childNodes[i].childNodes[1].innerText,
+                tbody_kythi.childNodes[i].childNodes[2].innerText,
+                tbody_kythi.childNodes[i].childNodes[3].innerText]);
 }
 
 // Bật pagination
 $(document).ready(function () {
-    $('#tablemonthi').DataTable();
+    $('#tablekythi').DataTable();
     $('.dataTables_length').addClass('bs-select');
 });
 
@@ -28,22 +31,22 @@ add_button.onclick = function () {
     }
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
-    let mamonthi = document.getElementById("mamonthi_add").value; // Lấy mã môn thi
-    let tenmonthi = document.getElementById("tenmonthi_add").value; // Lấy tên môn thi
-    let tinchi = document.getElementById("tinchi_add").value; // Lấy số tín chỉ
+    let nambatdau = document.getElementById("nambatdau_add").value; // Lấy năm bắt đầu
+    let namketthuc = document.getElementById("namketthuc_add").value; // Lấy năm kết thúc
+    let ky = document.getElementById("ky_add").value; // Lấy chỉ số kỳ
     // Kiểm tra
-    if (mamonthi == "") { // Nếu trống mã môn thi
-        add_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), add_form.nextSibling);
-    } else if (tenmonthi == "") { // Nếu trống tên môn thi
-        add_form.parentNode.insertBefore(createMessage("Tên môn học không được để trống.", -1), add_form.nextSibling);
-    } else if (tinchi == "" || tinchi.indexOf(".") != -1 || tinchi == "0") { // Nếu trống tín chỉ hoặc không đúng dạng
-        add_form.parentNode.insertBefore(createMessage("Số tín chỉ phải là một số nguyên dương lớn hơn 0.", -1), add_form.nextSibling);
+    if (nambatdau == "") { // Nếu trống năm bắt đầu
+        add_form.parentNode.insertBefore(createMessage("Năm bắt đầu không được để trống.", -1), add_form.nextSibling);
+    } else if (namketthuc == "") { // Nếu trống năm kết thúc
+        add_form.parentNode.insertBefore(createMessage("Năm kết thúc không được để trống.", -1), add_form.nextSibling);
+    } else if (ky == "") { // Nếu trống kỳ
+        add_form.parentNode.insertBefore(createMessage("Kỳ không được để trống.", -1), add_form.nextSibling);
     } else {
         // Bắt đầu Ajax Engine và gửi request
         let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
         ajaxEngine.open("POST", "ajax.php", true);
         ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("add=" + 1 + "&mamonthi=" + mamonthi + "&tenmonthi=" + tenmonthi + "&tinchi=" + tinchi);
+        ajaxEngine.send("add=" + 1 + "&nambatdau=" + nambatdau + "&namketthuc=" + namketthuc + "&ky=" + ky);
         // Xử lý sau khi Ajax trả về
         ajaxEngine.onreadystatechange = function () {
             if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
@@ -63,9 +66,9 @@ add_button.onclick = function () {
             }
         };
         // Làm trống form
-        document.getElementById("mamonthi_add").value = "";
-        document.getElementById("tenmonthi_add").value = "";
-        document.getElementById("tinchi_add").value = "";
+        document.getElementById("nambatdau_add").value = "";
+        document.getElementById("namketthuc_add").value = "";
+        document.getElementById("ky_add").value = "";
     }
 };
 
@@ -79,16 +82,16 @@ delete_button.onclick = function () {
     }
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
-    let mamonthi = document.getElementById("mamonthi_delete").value; // Lấy mã môn thi
+    let makythi = document.getElementById("makythi_delete").value; // Lấy mã kỳ thi
     // Kiểm tra
-    if (mamonthi == "") { // Nếu trống mã môn thi
-        delete_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), delete_form.nextSibling);
+    if (makythi == "") { // Nếu trống mã môn thi
+        delete_form.parentNode.insertBefore(createMessage("Mã kỳ thi không được để trống.", -1), delete_form.nextSibling);
     } else {
         // Bắt đầu Ajax Engine và gửi request
         let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
         ajaxEngine.open("POST", "ajax.php", true);
         ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("delete=" + 1 + "&mamonthi=" + mamonthi);
+        ajaxEngine.send("delete=" + 1 + "&makythi=" + makythi);
         // Xử lý sau khi Ajax trả về
         ajaxEngine.onreadystatechange = function () {
             if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
@@ -108,14 +111,13 @@ delete_button.onclick = function () {
             }
         };
         // Làm trống form
-        document.getElementById("mamonthi_delete").value = "";
+        document.getElementById("makythi_delete").value = "";
         // Xóa thông tin về môn đang xóa
-        mondangxoa.innerText = "";
+        kythidangxoa.innerText = "";
     }
 };
 
 // Hành vi cho nút sửa
-var old_mamonthi = null; // Dùng để sửa mã môn thi
 let edit_button = document.getElementById('edit-button');
 let edit_form = document.getElementById("form_edit");
 edit_button.onclick = function () {
@@ -125,22 +127,25 @@ edit_button.onclick = function () {
     }
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
-    let mamonthi = document.getElementById("mamonthi_edit").value; // Lấy mã môn thi
-    let tenmonthi = document.getElementById("tenmonthi_edit").value; // Lấy tên môn thi
-    let tinchi = document.getElementById("tinchi_edit").value; // Lấy số tín chỉ
+    let makythi = document.getElementById("makythi_edit").value; // Lấy mã kỳ thi
+    let nambatdau = document.getElementById("nambatdau_edit").value; // Lấy năm bắt đầu
+    let namketthuc = document.getElementById("namketthuc_edit").value; // Lấy năm kết thúc
+    let ky = document.getElementById("ky_edit").value; // Lấy chỉ số kỳ
     // Kiểm tra
-    if (mamonthi == "") { // Nếu trống mã môn thi
-        edit_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), edit_form.nextSibling);
-    } else if (tenmonthi == "") { // Nếu trống tên môn thi
-        edit_form.parentNode.insertBefore(createMessage("Tên môn học không được để trống.", -1), edit_form.nextSibling);
-    } else if (tinchi == "" || tinchi.indexOf(".") != -1 || tinchi == "0") { // Nếu trống tín chỉ hoặc không đúng dạng
-        edit_form.parentNode.insertBefore(createMessage("Số tín chỉ phải là một số nguyên dương lớn hơn 0.", -1), edit_form.nextSibling);
+    if (makythi == "") { // Nếu trống mã kỳ thi
+        edit_form.parentNode.insertBefore(createMessage("Mã kỳ thi không được để trống.", -1), edit_form.nextSibling);
+    } else if (nambatdau == "") { // Nếu trống năm bắt đầu
+        edit_form.parentNode.insertBefore(createMessage("Năm bắt đầu không được để trống.", -1), edit_form.nextSibling);
+    } else if (namketthuc == "") { // Nếu trống năm kết thúc
+        edit_form.parentNode.insertBefore(createMessage("Năm kết thúc không được để trống.", -1), edit_form.nextSibling);
+    } else if (ky == "") { // Nếu trống kỳ
+        edit_form.parentNode.insertBefore(createMessage("Kỳ không được để trống.", -1), edit_form.nextSibling);
     } else {
         // Bắt đầu Ajax Engine và gửi request
         let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
         ajaxEngine.open("POST", "ajax.php", true);
         ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("edit=" + 1 + "&mamonthicu=" + old_mamonthi + "&mamonthi=" + mamonthi + "&tenmonthi=" + tenmonthi + "&tinchi=" + tinchi);
+        ajaxEngine.send("edit=" + 1 + "&makythi=" + makythi + "&nambatdau=" + nambatdau + "&namketthuc=" + namketthuc + "&ky=" + ky);
         // Xử lý sau khi Ajax trả về
         ajaxEngine.onreadystatechange = function () {
             if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
@@ -160,12 +165,12 @@ edit_button.onclick = function () {
             }
         };
         // Làm trống form
-        document.getElementById("mamonthi_edit").value = "";
-        document.getElementById("tenmonthi_edit").value = "";
-        document.getElementById("tinchi_edit").value = "";
-        old_mamonthi = null; // Reset mã môn thi cũ
-        // Xóa thông tin môn đang sửa
-        mondangsua.innerText = "";
+        document.getElementById("makythi_edit").value = "";
+        document.getElementById("nambatdau_edit").value = "";
+        document.getElementById("namketthuc_edit").value = "";
+        document.getElementById("ky_edit").value = "";
+        // Xóa thông tin kỳ thi đang sửa
+        kythidangsua.innerText = "";
     }
 };
 
@@ -201,12 +206,15 @@ function refresh_table() {
                 table.innerHTML = response["table"];
                 // Refresh lại datalist
                 datalist.innerHTML = response["datalist"];
-                tbody_monthi = document.getElementById('tablemonthi').childNodes[1];
+                tbody_kythi = document.getElementById('tablekythi').childNodes[1];
                 _data = []; // Xóa hết thông tin môn học cũ để thêm lại
-                for (var i = 0; i < tbody_monthi.childElementCount; i++) {
-                    _data.push([tbody_monthi.childNodes[i].childNodes[0].innerText, tbody_monthi.childNodes[i].childNodes[1].innerText, tbody_monthi.childNodes[i].childNodes[2].innerText]);
+                for (var i = 0; i < tbody_kythi.childElementCount; i++) {
+                    _data.push([tbody_kythi.childNodes[i].childNodes[0].innerText,
+                        tbody_kythi.childNodes[i].childNodes[1].innerText,
+                        tbody_kythi.childNodes[i].childNodes[2].innerText,
+                        tbody_kythi.childNodes[i].childNodes[3].innerText]);
                 }
-                $('#tablemonthi').DataTable();
+                $('#tablekythi').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             }
             // If hash match (data not changed), do nothing.
@@ -224,34 +232,35 @@ function removeElement(elementId) {
 }
 
 // Auto-complete (Tự động điền cho form sửa môn học dựa trên mã môn học)
-var mondangsua = document.getElementById("mondangsua"); // Thông tin về môn đang sửa
-document.getElementById("mamonthi_edit").onblur = function () {
-    var tenmonhoc_edit = document.getElementById("tenmonthi_edit");
-    var tinchi_edit = document.getElementById("tinchi_edit");
+var kythidangsua = document.getElementById("kythidangsua"); // Thông tin về kỳ thi đang sửa
+document.getElementById("makythi_edit").onblur = function () {
+    var nambatdau_edit = document.getElementById("nambatdau_edit");
+    var namketthuc_edit = document.getElementById("namketthuc_edit");
+    var ky_edit = document.getElementById("ky_edit");
 
     // Tìm tên môn học và tín chỉ ứng với mã môn học
     var list_size = _data.length;
     for (var i = 0; i < list_size; i++) {
         if (_data[i][0] == this.value) {
-            old_mamonthi = this.value;
-            tenmonhoc_edit.value = _data[i][1];
-            tinchi_edit.value = _data[i][2];
-            mondangsua.innerText = "Mã môn đang sửa: " + this.value + "\nTên môn: " + tenmonhoc_edit.value + "\nTín chỉ: " + tinchi_edit.value + "\n\n";
+            nambatdau_edit.value = _data[i][1];
+            namketthuc_edit.value = _data[i][2];
+            ky_edit.value = _data[i][3];
+            kythidangsua.innerText = "Mã kỳ thi đang sửa: " + this.value + "\nNăm bắt đầu: " + nambatdau_edit.value + "\nNăm kết thúc: " + namketthuc_edit.value + "\nKỳ: " + ky_edit.value + "\n\n";
             return;
         }
     }
 };
 
-// Hiện môn thi đang xóa
-var mondangxoa = document.getElementById("mondangxoa"); // Thông tin về môn đang xóa
-document.getElementById("mamonthi_delete").onblur = function () {
-    // Tìm tên môn học và tín chỉ ứng với mã môn học
+// Hiện thông tin kỳ thi đang xóa
+var kythidangxoa = document.getElementById("kythidangxoa"); // Thông tin về kỳ thi đang xóa
+document.getElementById("makythi_delete").onblur = function () {
+    // Tìm thông tin ứng với mã kỳ thi
     for (var i = 0; i < _data.length; i++) {
         if (_data[i][0] == this.value) {
-            mondangxoa.innerText = "Mã môn đang xóa: " + this.value + "\nTên môn: " + _data[i][1] + "\nTín chỉ: " + _data[i][2] + "\n\n";
+            kythidangxoa.innerText = "Mã kỳ thi đang xóa: " + this.value + "\nNăm bắt đầu: " + _data[i][1] + "\nNăm kết thúc: " + _data[i][2] + "\nKỳ: " + _data[i][3] + "\n\n";
             return;
         }
     }
-    // Xóa thông tin về môn đang xóa khi không trùng mã môn.
-    mondangxoa.innerText = "";
+    // Xóa thông tin về kỳ thi đang xóa khi không trùng mã kỳ thi.
+    kythidangxoa.innerText = "";
 };

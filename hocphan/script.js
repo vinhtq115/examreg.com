@@ -140,7 +140,6 @@ function refresh_table() {
                 table_hash = response['hash'];
                 table.innerHTML = response["table"];
                 // Refresh lại datalist
-                //refresh_datalist("danhsachmonhoc", 0);
                 refresh_datalist_hocphan(); // Học phần
                 refresh_datalist_monthi(); // Môn thi
                 $('#tablemonthi').DataTable();
@@ -154,20 +153,17 @@ function refresh_table() {
 // Hàm dùng để refresh lại datalist học phần
 function refresh_datalist_hocphan() {
     var datalist = document.getElementById('danhsachhocphan');
-    datalist.innerHTML = ""; // Xóa datalist cũ
-    var res = new Set();
-    var table_body = table.firstElementChild.firstElementChild.nextElementSibling;
-    var list_size = table_body.childElementCount;
-    for (var i = 0; i < list_size; i++) {
-        var row = table_body.childNodes[i];
-        var opt = document.createElement("option");
-        opt.setAttribute("value", row.childNodes[2].innerText);
-        res.add(opt.outerHTML);
-    }
-    var arr = Array.from(res);
-    for (var i = 0; i < arr.length; i++) {
-        datalist.innerHTML += arr[i];
-    }
+    // Bắt đầu Ajax Engine và gửi request
+    let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
+    ajaxEngine.open("GET", "/hocphan/ajax.php?danhsachhocphan=1", true);
+    ajaxEngine.send(null);
+    // Xử lý sau khi Ajax trả về
+    ajaxEngine.onreadystatechange = function () {
+        if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
+            let response = JSON.parse(ajaxEngine.responseText);
+            datalist.innerHTML = response['danhsachhocphan'];
+        }
+    };
 }
 
 // Hàm dùng để refresh lại datalist môn thi
@@ -181,7 +177,6 @@ function refresh_datalist_monthi() {
     ajaxEngine.onreadystatechange = function () {
         if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
             let response = JSON.parse(ajaxEngine.responseText);
-            //var datalistcontainer = document.getElementById('datalistcontainer');
             datalist.innerHTML = response['monthi'];
         }
     };

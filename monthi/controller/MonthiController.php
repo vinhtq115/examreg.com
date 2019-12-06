@@ -33,8 +33,7 @@ class MonthiController {
      * @return false|string
      */
     public function datalist() {
-        $arr = $this->monthi->getAllmamonthi();
-        return $this->view->datalist_monthi(json_encode($arr));
+        return $this->view->datalist_monthi();
     }
 
     /**
