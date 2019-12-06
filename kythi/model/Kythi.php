@@ -26,7 +26,7 @@ class Kythi extends PDOData {
 
     /**
      * Lấy toàn bộ danh sách kỳ thi.
-     * @return array: Mảng danh sách kỳ thi.
+     * @return array: Mảng danh sách kỳ thi (mã, năm bắt đầu, năm kết thúc, kỳ).
      */
     public function getAll() {
         $ret = $this->doQuery("SELECT * FROM kythi ORDER BY nambatdau, ky");
@@ -114,7 +114,15 @@ class Kythi extends PDOData {
             $this->doSql($sql);
             return 0;
         }
-
+        // Kiểm tra xem mã thông tin kỳ thi mới có tồn tại trong CSDL không
+        $sql = "SELECT * FROM kythi WHERE nambatdau = '$nambatdau' AND namketthuc = '$namketthuc' AND ky = '$ky'";
+        $arr = $this->doQuery($sql); // Lấy mảng kỳ thi trùng mã vừa nhập
+        if (count($arr) > 0) { // Kỳ thi mới tồn tại trong hệ thống
+            // Mở khóa bảng
+            $sql = "UNLOCK TABLES";
+            $this->doSql($sql);
+            return 0;
+        }
         // Sửa thông tin
         $sql = "UPDATE kythi SET ky = '$ky', nambatdau = '$nambatdau', namketthuc = '$namketthuc' WHERE kythi.id = '$id'";
         $c = $this->doSql($sql);

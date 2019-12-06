@@ -190,7 +190,7 @@ function createMessage(_message, success) {
 function refresh_table() {
     // Bắt đầu Ajax
     let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
-    ajaxEngine.open("GET", "ajax.php", true);
+    ajaxEngine.open("GET", "ajax.php?hash=" + table_hash, true);
     ajaxEngine.send(null);
     // Xử lý sau khi Ajax trả về
     ajaxEngine.onreadystatechange = function () {

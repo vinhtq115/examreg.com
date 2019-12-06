@@ -20,11 +20,11 @@ class KythiView {
      * @return string: Code HTML
      */
     public function tableView() {
-        $html = "<table class='table table-bordered table-striped table-hover'><thead><tr>";
-        $html .= "<th>Mã kỳ thi</th>";
-        $html .= "<th>Năm bắt đầu</th>";
-        $html .= "<th>Năm kết thúc</th>";
-        $html .= "<th>Kỳ</th>";
+        $html = "<table id='tablekythi' class='table table-bordered table-striped table-hover table-sm'><thead><tr>";
+        $html .= "<th class='th-sm'>Mã kỳ thi</th>";
+        $html .= "<th class='th-sm'>Năm bắt đầu</th>";
+        $html .= "<th class='th-sm'>Năm kết thúc</th>";
+        $html .= "<th class='th-sm'>Kỳ</th>";
         $html .= "</tr></thead><tbody>";
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
@@ -39,8 +39,27 @@ class KythiView {
         } else { // Tạo ô trống nếu size = 0
             $html .= "<td colspan='4' style=\"text-align:center\">Chưa có kỳ thi.</td>";
         }
-        $html .= "</tbody></table>";
+        $html .= "</tbody><tfoot><tr>";
+        $html .= "<th>Mã kỳ thi</th><th>Năm bắt đầu</th><th>Năm kết thúc</th><th>Kỳ</th>";
+        $html .= "</tr></tfoot></table>";
 
+        return $html;
+    }
+
+    /**
+     * Datalist các mã kỳ thi
+     * @return string
+     */
+    public function datalist_kythi() {
+        $size = sizeof($this->data);
+        // Hiện datalist
+        $html = "<datalist id='danhsachkythi'>";
+        for ($i = 0; $i < $size; $i++) {
+            $a = json_encode($this->data[$i]);
+            $b = json_decode($a);
+            $html .= "<option value=\"".$b->id."\">"."Kỳ ".$b->ky." năm ".$b->nambatdau."-".$b->namketthuc;
+        }
+        $html .= "</datalist>";
         return $html;
     }
 

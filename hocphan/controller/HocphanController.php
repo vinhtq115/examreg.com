@@ -37,7 +37,7 @@ class HocphanController {
      * @return string
      */
     public function datalist_monthi() {
-        $arr = $this->monthi->getAllmamonthi();
+        $arr = $this->monthi->getAll();
         return $this->view->datalist_monthi(json_encode($arr));
     }
 
@@ -46,8 +46,7 @@ class HocphanController {
      * @return string
      */
     public function datalist_hocphan() {
-        $arr = $this->hocphan->getAllmahocphan();
-        return $this->view->datalist_hocphan(json_encode($arr));
+        return $this->view->datalist_hocphan();
     }
 
     /**
@@ -71,7 +70,6 @@ class HocphanController {
      * @return int: Số bản ghi được cập nhật.
      */
     public function add($mahocphan, $mamonthi) {
-        // TODO: clean input
         return $this->hocphan->add($mahocphan, $mamonthi);
     }
 
@@ -81,7 +79,6 @@ class HocphanController {
      * @return int: Số bản ghi được cập nhật.
      */
     public function delete($mahocphan) {
-        // TODO: clean input
         return $this->hocphan->delete($mahocphan);
     }
 }

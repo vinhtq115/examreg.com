@@ -34,6 +34,9 @@
             ?>
         </div>
         <div id='datalistcontainer'>
+            <?php
+                echo $kythictrl->datalist();
+            ?>
         </div>
     </div>
     <div>
