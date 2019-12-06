@@ -30,7 +30,9 @@
             <?php
                 require_once dirname(__FILE__)."/controller/KythiController.php";
                 $kythictrl = new \kythi\controller\KythiController();
-                echo $kythictrl->table();
+                $table = $kythictrl->table();
+                echo $table;
+                echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
             ?>
         </div>
         <div id='datalistcontainer'>
@@ -50,7 +52,7 @@
         <h3>Xóa kỳ thi</h3>
         <div id="kythidangxoa"></div>
         <?php
-            // Form xóa môn thi
+            // Form xóa kỳ thi
             echo $kythictrl->showDelete();
         ?>
     </div>
@@ -58,10 +60,10 @@
         <h3>Sửa kỳ thi</h3>
         <div id="kythidangsua"></div>
         <?php
-            // Form sửa kỳ thi thi
+            // Form sửa kỳ thi
             echo $kythictrl->showEdit();
         ?>
     </div>
-    <!--<script src="script.js"></script>-->
+    <script src="script.js"></script>
 </body>
 </html>
