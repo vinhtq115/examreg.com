@@ -21,7 +21,7 @@
     <!--MDBootstrap Datatables-->
     <script src="../externals/MDB/js/addons/datatables.min.js"></script>
     <!--Custom CSS-->
-    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/kythi.css">
 </head>
 <body>
     <!-- Danh sách kỳ thi -->
