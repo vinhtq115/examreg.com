@@ -29,7 +29,7 @@ class KythiView {
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
             foreach ($this->data as $key => $value) {
-                $html .= "<tr>";
+                $html .= "<tr class='clickable-row' data-href='http://examreg.com/kythi/".$value["id"]."'>";
                 $html .= "<td class='makythi'>" . $value["id"] . "</td>";
                 $html .= "<td class='nambatdau'>" . $value["nambatdau"] . "</td>";
                 $html .= "<td class='namketthuc'>" . $value["namketthuc"] . "</td>";

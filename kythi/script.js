@@ -15,6 +15,9 @@ for (var i = 0; i < tbody_kythi.childElementCount; i++) {
 $(document).ready(function () {
     $('#tablekythi').DataTable();
     $('.dataTables_length').addClass('bs-select');
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
 });
 
 let table = document.getElementById("table-container");
@@ -263,4 +266,11 @@ document.getElementById("makythi_delete").onblur = function () {
     }
     // Xóa thông tin về kỳ thi đang xóa khi không trùng mã kỳ thi.
     kythidangxoa.innerText = "";
+};
+
+// Tự động điền năm kết thúc sau khi điền năm bắt đầu
+document.getElementById("nambatdau_add").onblur = function () {
+    if (this.value !== "") {
+        document.getElementById("namketthuc_add").value = parseInt(this.value) + 1;
+    }
 };
