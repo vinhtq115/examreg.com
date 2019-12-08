@@ -3,17 +3,17 @@ namespace hocphan\controller;
 
 use hocphan\model\Hocphan;
 use hocphan\view\HocphanView;
-use monthi\model\Monthi;
+use monthi\controller\MonthiController;
 
 require_once dirname(__FILE__)."/../model/Hocphan.php";
 require_once dirname(__FILE__)."/../view/HocphanView.php";
-require_once dirname(__FILE__)."/../../monthi/model/Monthi.php";
+require_once dirname(__FILE__)."/../../monthi/controller/MonthiController.php";
 
 class HocphanController {
     private $data; // Chứa dữ liệu cho view (JSON)
     private $hocphan; // Model hocphan
     private $view; // View hocphan
-    private $monthi; // Model monthi
+    private $monthictrl; // Controller monthi
 
     /**
      * HocphanController constructor.
@@ -22,7 +22,7 @@ class HocphanController {
         $this->hocphan = new Hocphan();
         $this->data = json_encode($this->hocphan->getAll());
         $this->view = new HocphanView($this->data);
-        $this->monthi = new Monthi();
+        $this->monthictrl = new MonthiController();
     }
 
     /**
@@ -37,8 +37,7 @@ class HocphanController {
      * @return string
      */
     public function datalist_monthi() {
-        $arr = $this->monthi->getAll();
-        return $this->view->datalist_monthi(json_encode($arr));
+        return $this->monthictrl->datalist();
     }
 
     /**

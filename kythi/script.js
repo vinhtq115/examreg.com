@@ -15,9 +15,6 @@ for (var i = 0; i < tbody_kythi.childElementCount; i++) {
 $(document).ready(function () {
     $('#tablekythi').DataTable();
     $('.dataTables_length').addClass('bs-select');
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
 });
 
 let table = document.getElementById("table-container");

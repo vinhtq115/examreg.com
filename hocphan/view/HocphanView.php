@@ -51,25 +51,6 @@ class HocphanView {
     }
 
     /**
-     * Datalist môn thi
-     * @param $json
-     * @return string
-     */
-    public function datalist_monthi($json) {
-        $ds = json_decode($json, true);
-        $size = sizeof($ds);
-        // Hiện datalist
-        $html = "<datalist id='danhsachmonhoc'>";
-        for ($i = 0; $i < $size; $i++) {
-            $a = json_encode($ds[$i]);
-            $b = json_decode($a);
-            $html .= "<option value=\"".$b->mamonthi."\">".$b->tenmonthi." --- ".$b->mamonthi;
-        }
-        $html .= "</datalist>";
-        return $html;
-    }
-
-    /**
      * Datalist học phần
      * @return string
      */
