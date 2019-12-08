@@ -12,9 +12,15 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>Student HomePage</title>
     <link rel="stylesheet" type="text/css" href="/../../css/responsive.css">
-
+    <style>
+        .navbar{
+            background-color:#6495ED;
+            overflow:hidden;
+            height:65px;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
@@ -29,8 +35,7 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
     </span>
 
     <ul class="navbar-nav">
-        <li><a>Show Name</li>
-        <li><a>Show ID</li>
+        <li><img src="/../../css/img/logo.png" alt="examregImage"></li>
     </ul>
 </nav>
 
@@ -39,7 +44,6 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
 </div>
 
 <div id="main">
-    <h1>Responsive Side Menu</h1>
 </div>
 
 <script>
