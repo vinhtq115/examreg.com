@@ -1,6 +1,6 @@
 <?php
 //include the tool to be able to get data from Excell xls file
-include dirname(__FILE__)."/../PHPExcelFile/Classes/PHPExcel/IOFactory.php";
+include dirname(__FILE__)."/../Classes/PHPExcel.php";
 require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../model/getStudentModel.php";
 class getStudentController
@@ -34,48 +34,57 @@ class getStudentController
     }
 
     function getStudentExcel(){ // this controller to get student info from excell and get it to database
- //       if(isset($_POST["ImportStudent"])){
-//            $extension = end(explode(".", $_FILES["excel"]["name"])); // Getting Extension of selected file
-//            $allowed_extension = array("xls" , "xlsx" , "csv"); // the file extension of excel which is allowed
-//            if(in_array($extension , $allowed_extension)){
+        if(isset($_POST['ImportStudent'])){
+           $file = $_FILES['file']['tmp_name']; // the file here is type not name
 
-//                  $StudentPhpExcel = PHPExcel_IOFactory::load($file); // create object of PHPExcel
-//                foreach ($StudentPhpExcel->getWorksheetIterator() as $worksheet){
-//                    $highestRow = $worksheet->getHighestRow(); //the index number of the last row
-//                    for($row = 2 ; $row <= $highestRow ; $row++) { // 0 : the A B C in excel, 1 : the columns name , from 2: the data
-//                        // get the data and use the mysqli function to make the string update-able to the database
-//                            $id = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(0, $row)->getValue());
-//                            $middleName = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(1, $row)->getValue());
-//                            $name = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(2, $row)->getValue());
-//                            $DateOfBirth = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(3, $row)->getValue());
-//                            $this->model->addStudentData($id , $middleName , $name , $DateOfBirth); // call model function
-//                         //create account
-//                            $account = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(4, $row)->getValue());
-//                            $password = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(5, $row)->getValue());
-//                            $this->model->createStudentAccount($account,$password,$id); // call model function
-//                    }
-//                }
-//            }
-       // }
+           		$objReader = PHPExcel_IOFactory::createReaderForFile($file);
+           		$objReader->setLoadSheetsOnly('Sheet1');
+
+           		$objExcel = $objReader->load($file);
+           		$sheetData = $objExcel->getActiveSheet()->toArray('null' , true , true , true);
+           		print_r($sheetData);
+           
+		        $highestRow = $objExcel->setActiveSheetIndex()->getHighestRow();
+
+//            for($row = 2 ; $row <= $highestRow ; $row ++){ // run through the row
+//                $id = $sheetData[$row]['A'];
+//                $hodem = $sheetData[$row]['B'];
+//                $ten = $sheetData[$row]['C'];
+//                $ngaysinh = $sheetData[$row]['D'];
+//                $account = $sheetData[$row]['E'];
+//                $account = $sheetData[$row]['F'];
+//                //These query job are for later
+//
+//                //$password;
+//                //$sql = "INSERT INTO `test`(`CustomerID`, `CustomerName`, `Address`, `City`, `PostalCode`, `Country`) VALUES ('$CustomerID','$CustomerName','$Address','$City','$PostalCode','$Country')";
+//                // need database connection
+//                //$mysqli->query($sql);
+//
+//            }echo "Inserted!";
+        }
     }
 
     function  updateDisqualified(){ // this function is to update the student that is not qualified to take exam
-        if(isset($_POST["importDisqualified"])){
-            $extension = end(explode(".", $_FILES["excel"]["name"]));
-            $allowed_extension = array("xls" , "xlsx" , "csv");
-            if(in_array($extension , $allowed_extension)){
-                include dirname(__FILE__)."/../PHPExcelFile/Classes/PHPExcel/IOFactory.php";
-                $file = $_FILES["excel"]["tmp_name"];// getting temporary source of excel file
-                $StudentPhpExcel = PHPExcel_IOFactory::load($file); // create object of PHPExcel
-                foreach ($StudentPhpExcel->getWorksheetIterator() as $worksheet){
-                    $highestRow = $worksheet->getHighestRow(); //the index number of the last row
-                    for($row = 2 ; $row <= $highestRow ; $row++) { // 0 : the A B C in excel, 1 : the columns name , from 2: the data
-                        // get the data and use the mysqli function to make the string update-able to the database
-                        $id = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(0, $row)->getValue()); // get the ID of the Disqualified student
-                        $this->model->updateDisqualifiedStudent($id);
-                    }
-                }
-            }
+        if(isset($_POST['updateDis'])){
+            $file = $_FILES['file']['tmp_name'];
+
+            $objReader = PHPExcel_IOFactory::createReaderForFile($file); // creating reader for file
+            $objReader->setLoadSheetsOnly('Sheet1'); // read a specific sheet only (for now hopefully)
+
+            $objExcel = $objReader->load($file); // load file
+            //Make sheetData
+            $sheetData = $objExcel->getActiveSheet()->toArray('null' , true , true , true);
+            print_r($sheetData); //print to easily debug and code it will return array with index
+
+            $highestRow = $objExcel->setActiveSheetIndex()->getHighestRow(); // get the Highest arrow
+            for($row = 2 ; $row <= $highestRow ; $row ++){ // run through the row
+                $id = $sheetData[$row]['A'];
+                //$password;
+                //$sql = "INSERT INTO `test`(`CustomerID`, `CustomerName`, `Address`, `City`, `PostalCode`, `Country`) VALUES ('$CustomerID','$CustomerName','$Address','$City','$PostalCode','$Country')";
+                // need database connection
+                //$mysqli->query($sql);
+
+            }echo "Inserted!";
         }
     }
 

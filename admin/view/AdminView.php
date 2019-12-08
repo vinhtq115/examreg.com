@@ -47,31 +47,31 @@
         <div class="box">
             <a href="http://examreg.com/monthi/"><img src="../../css/img/microscope.png"></a>
             <h3>Subjects List</h3>
-            <p>Administration keeping track of subjects and courses of the examination</p>
+            <p>Administration keeping track of subjects of the examination</p>
         </div>
+        <div class="box">
+            <a href="http://examreg.com/hocphan/"><img src="../../css/img/book.png"></a>
+            <h3>Courses</h3>
+            <p>Administration keeping track of courses of the examination</p>
+        </div>
+    </div>
+    <div class="container">
         <div class="box">
             <a href=""><img src="../../css/img/logo_brush.png"></a>
             <h3>The Exams</h3>
             <p>Administration creating and managing the upcoming examination </p>
         </div>
+        <div class="box">
+            <a href=""><img src="../../css/img/clock.png"></a>
+            <h3>Shift In Exam</h3>
+            <p>Administration keep track of Shifts in the Exam</p>
+        </div>
+        <div class="box">
+            <a href=""><img src="../../css/img/door.png"></a>
+            <h3>Exam Room</h3>
+            <p>Administration keep track Exam Rooms and Students in Exam Room</p>
+        </div>
     </div>
-<!--    <div class="container">-->
-<!--        <div class="box">-->
-<!--            <a href=""><img src="../../css/img/logo_brush.png"></a>-->
-<!--            <h3>The Exams</h3>-->
-<!--            <p>Administration creating and managing the upcoming examination </p>-->
-<!--        </div>-->
-<!--        <div class="box">-->
-<!--            <a href=""><img src="../../css/img/door.png"></a>-->
-<!--            <h3>Create Room</h3>-->
-<!--            <p>Administration keeping track and managing student profile which taking part in the examination</p>-->
-<!--        </div>-->
-<!--        <div class="box">-->
-<!--            <a href="http://examreg.com/monthi/"><img src="../../css/img/microscope.png"></a>-->
-<!--            <h3>Subjects List</h3>-->
-<!--            <p>Administration keeping track of subjects and courses of the examination</p>-->
-<!--        </div>-->
-<!--    </div>-->
 </section>
 
 <footer>
