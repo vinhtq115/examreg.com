@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
-//session_start();
+session_start();
+require_once dirname(__FILE__)."/../controller/StudentController.php";
 
 if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
     header("Location:http://examreg.com/account/view/LogoutView.php");
@@ -14,13 +15,25 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student HomePage</title>
     <link rel="stylesheet" type="text/css" href="/../../css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="/../../css/getStudentTable.css">
+    <link rel="stylesheet" type="text/css" href="/../../css/getStudent.css">
     <style>
         .navbar{
             background-color:#6495ED;
             overflow:hidden;
             height:65px;
         }
+        .content-table thead tr {
+            background-color: #6495ED;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #6495ED;
+        }
     </style>
+    <link
 </head>
 <body>
 <nav class="navbar">
@@ -44,6 +57,35 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
 </div>
 
 <div id="main">
+        <table class="content-table">
+            <thead>
+            <tr>
+                <td>Student ID</td>
+                <td>Middle Name</td>
+                <td>Name</td>
+            </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $controller = new StudentController();
+                    $controller->getSelf();
+                ?>
+            </tbody>
+        </table>
+    <div align="center" class = "container box">
+        <table class="content-table">
+            <thead>
+            <tr>
+                <td>Course ID</td>
+                <td>SubjectID</td>
+                <td>SubjectName</td>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>

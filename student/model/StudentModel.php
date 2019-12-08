@@ -12,12 +12,20 @@ class StudentModel extends PDOData{
         parent::__destruct();
     }
 
-    public function getCourse($idSinhvien){
-        $stmt = $this->db->query("SELECT `masinhvien`, `mahocphan`, `idhocky` FROM `sinhvien_hoc_hocphan` WHERE `masinhvien` = '$idSinhvien'"); // prepare the query for controller
+    public function getStudentInfo($idSD){
+        $stmt = $this->db->query("SELECT `account`.id, `account`.idsinhvien, `sinhvien`.hodem , `sinhvien`.ten 
+                                            FROM `account` INNER JOIN `sinhvien` ON `account`.idsinhvien=`sinhvien`.id Where `account`.id = '$idSD';");
+        return $stmt;
+    }
+
+    public function CourseOfStudent($idSinhvien){
+        $stmt = $this->db->query("SELECT `mahocphan`, `idhocky` FROM `sinhvien_hoc_hocphan` WHERE `masinhvien` = '$idSinhvien';"); // prepare the query for controller
         return $stmt; // return stmt first then fetch later on controller
     }
 
-    public function getSubject(){
-
+    public function getSubjectSt($idhocphan){
+        $stmt = $this->db->query("SELECT hocphan.mamonthi, monthi.tenmonthi 
+        FROM hocphan INNER JOIN monthi ON hocphan.mamonthi=monthi.mamonthi Where hocphan.mahocphan = '$idhocphan';");
+        return $stmt;
     }
 }
