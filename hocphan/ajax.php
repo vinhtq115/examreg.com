@@ -21,7 +21,7 @@
             // Nếu khác thì trả về hash và bảng
             $res->table = $table;
             $res->hash = $hash;
-        } else if (isset($_GET['gethash']) && $_GET['gethash'] == $hash) {
+        } else if (isset($_GET['hash']) && $_GET['hash'] == $hash) {
             // Nếu giống thì chỉ trả về hash
             $res->hash = $hash;
         }

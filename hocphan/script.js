@@ -3,9 +3,9 @@ var table_hash = document.getElementById("tablehash").innerText;
 
 // Lấy dữ liệu từ bảng ban đầu
 var _data = [];
-var tbody_monthi = document.getElementById('tablehocphan').childNodes[1];
-for (var i = 0; i < tbody_monthi.childElementCount; i++) {
-    _data.push([tbody_monthi.childNodes[i].childNodes[0].innerText, tbody_monthi.childNodes[i].childNodes[1].innerText, tbody_monthi.childNodes[i].childNodes[2].innerText]);
+var tbody_hocphan = document.getElementById('tablehocphan').childNodes[1];
+for (var i = 0; i < tbody_hocphan.childElementCount; i++) {
+    _data.push([tbody_hocphan.childNodes[i].childNodes[0].innerText, tbody_hocphan.childNodes[i].childNodes[1].innerText, tbody_hocphan.childNodes[i].childNodes[2].innerText]);
 }
 
 // Bật pagination
@@ -27,7 +27,7 @@ add_button.onclick = function () {
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
     let mamonthi = document.getElementById("mamonthi_add").value; // Lấy mã môn thi
-    let mahocphan = document.getElementById("mahocphan_add").value; // Lấy tên môn thi
+    let mahocphan = document.getElementById("mahocphan_add").value; // Lấy mã học phần
     // Kiểm tra
     if (mamonthi == "") { // Nếu trống mã môn thi
         add_form.parentNode.insertBefore(createMessage("Mã môn thi không được để trống.", -1), add_form.nextSibling);
@@ -130,7 +130,7 @@ let table = document.getElementById("table-container");
 function refresh_table() {
     // Bắt đầu Ajax
     let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
-    ajaxEngine.open("GET", "ajax.php", true);
+    ajaxEngine.open("GET", "ajax.php?hash=" + table_hash, true);
     ajaxEngine.send(null);
     // Xử lý sau khi Ajax trả về
     ajaxEngine.onreadystatechange = function () {
