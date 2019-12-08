@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2019 at 01:35 PM
+-- Generation Time: Dec 08, 2019 at 10:58 AM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.3.12-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -58,6 +58,14 @@ CREATE TABLE `cathi` (
   `gioketthuc` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `cathi`
+--
+
+INSERT INTO `cathi` (`macathi`, `mahocphan`, `makythi`, `ngaythi`, `giobatdau`, `gioketthuc`) VALUES
+(2, 'ELT2035 20', 1, '2017-12-15', '10:05:08', '12:05:08'),
+(3, 'MAT1041 1', 1, '2017-12-16', '15:00:00', '16:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -82,7 +90,8 @@ INSERT INTO `hocphan` (`id`, `mahocphan`, `mamonthi`) VALUES
 (6, 'MAT1093 11', 'MAT1093'),
 (21, 'ELT2035 20', 'ELT2035'),
 (23, 'MAT1093 1', 'MAT1093'),
-(24, 'MAT1041 1', 'MAT1041');
+(24, 'MAT1041 1', 'MAT1041'),
+(26, 'MAT1041 8', 'MAT1041');
 
 -- --------------------------------------------------------
 
@@ -107,7 +116,12 @@ INSERT INTO `kythi` (`id`, `ky`, `nambatdau`, `namketthuc`) VALUES
 (3, 1, 2018, 2019),
 (4, 2, 2018, 2019),
 (5, 1, 2019, 2020),
-(6, 2, 2019, 2020);
+(6, 2, 2019, 2020),
+(7, 1, 2020, 2021),
+(8, 2, 2020, 2021),
+(9, 1, 2021, 2022),
+(10, 2, 2021, 2022),
+(11, 1, 2022, 2023);
 
 -- --------------------------------------------------------
 
@@ -307,19 +321,19 @@ ALTER TABLE `sinhvien_hoc_hocphan`
 -- AUTO_INCREMENT for table `cathi`
 --
 ALTER TABLE `cathi`
-  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `hocphan`
 --
 ALTER TABLE `hocphan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `kythi`
 --
 ALTER TABLE `kythi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `phongthi_cathi`
@@ -347,7 +361,8 @@ ALTER TABLE `account`
 -- Constraints for table `cathi`
 --
 ALTER TABLE `cathi`
-  ADD CONSTRAINT `cathi_ibfk_1` FOREIGN KEY (`makythi`) REFERENCES `kythi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cathi_ibfk_1` FOREIGN KEY (`makythi`) REFERENCES `kythi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cathi_ibfk_2` FOREIGN KEY (`mahocphan`) REFERENCES `hocphan` (`mahocphan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `hocphan`
