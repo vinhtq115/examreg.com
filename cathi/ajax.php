@@ -1,5 +1,10 @@
 <?php
-    //TODO: session
+    // Kiểm tra session xem có phải là admin không. Nếu không thì logout.
+    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
+    session_start();
+    if($_SESSION["isAdmin"] != 1){
+        header("Location:http://examreg.com/account/view/LogoutView.php");
+    }
 
     require_once dirname(__FILE__)."/controller/CathiController.php";
     require_once dirname(__FILE__)."/../utils/Utils.php";
