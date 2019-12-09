@@ -40,8 +40,6 @@ class HocphanView {
                 $html .= "<td class='mahocphan'>" . $value["mahocphan"] . "</td>";
                 $html .= "</tr>";
             }
-        } else { // Tạo ô trống nếu size = 0
-            $html .= "<td colspan='3' style=\"text-align:center\">Chưa có học phần.</td>";
         }
         $html .= "</tbody><tfoot><tr>";
         $html .= "<th>Mã môn thi</th><th>Tên môn thi</th><th>Mã học phần</th>";

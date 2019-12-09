@@ -38,8 +38,6 @@ class KythiView {
                 $html .= "<td class='qlct align-middle'><a class='btn btn-indigo btn-sm m-0' href='http://examreg.com/kythi/".$value["id"]."'>Xem ca thi</a></td>";
                 $html .= "</tr>";
             }
-        } else { // Tạo ô trống nếu size = 0
-            $html .= "<td colspan='5' style=\"text-align:center\">Chưa có kỳ thi.</td>";
         }
         $html .= "</tbody><tfoot><tr>";
         $html .= "<th>Mã kỳ thi</th><th>Năm bắt đầu</th><th>Năm kết thúc</th><th>Kỳ</th><th>Ca thi</th>";

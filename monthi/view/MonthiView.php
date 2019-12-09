@@ -34,8 +34,6 @@ class MonthiView {
                 $html .= "<td class='tinchi'>" . $value["tinchi"] . "</td>";
                 $html .= "</tr>";
             }
-        } else { // Tạo ô trống nếu size = 0
-            $html .= "<td colspan='3' style=\"text-align:center\">Chưa có môn thi.</td>";
         }
         $html .= "</tbody><tfoot><tr>";
         $html .= "<th>Mã môn thi</th><th>Tên môn thi</th><th>Tín chỉ</th>";

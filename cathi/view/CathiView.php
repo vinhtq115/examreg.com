@@ -51,8 +51,6 @@ class CathiView {
                 $html .= "<td>" . $value["gioketthuc"] . "</td>";
                 $html .= "</tr>";
             }
-        } else { // Tạo ô trống nếu size = 0
-            $html .= "<td colspan='6' style=\"text-align:center\">Chưa có ca thi.</td>";
         }
         $html .= "</tbody><tfoot><tr>";
         $html .= "<th>Mã ca thi</th><th>Mã học phần</th><th>Tên môn thi</th><th>Ngày thi</th><th>Giờ bắt đầu</th><th>Giờ kết thúc</th>";
