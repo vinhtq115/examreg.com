@@ -91,12 +91,12 @@ if(isset($_POST["UpdateDis"])){
     </div>
 </div>
 <div class="container box">
-    <h3 align="center">UPDATE DISQUALIFIED</h3></h3><br />
+    <h3 align="center">UPDATE STUDENT QUALIFICATION</h3></h3><br />
     <form method="POST" enctype="multipart/form-data">
         <label>Select Excel File</label>
-        <input type="file" name="excel"/>
+        <input type="file" name="file"/>
         <br />
-        <button type="submit" name="UpdateDis" class="btn btn-info" value="UpdateDisqulified">Updata Disqualified</button>
+        <button type="submit" name="UpdateDis" class="btn btn-info" value="UpdateDisqulified">Update Disqualified</button>
     </form>
     <br />
     <br />

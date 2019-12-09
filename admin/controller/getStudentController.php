@@ -34,11 +34,12 @@ class getStudentController
         if(isset($_POST['UpdateDis'])){
             $file = $_FILES['file']['tmp_name']; // the file here is type not name
             $sheetData = getExcelReturnData($file);
-
+            print_r($sheetData);
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
                 $idsinhvien = $sheetData[$row]['A'];
+                $qualification = $sheetData[$row]['B'];
                 $model = new getStudentModel();
-                $model->updateDisqualifiedStudent($idsinhvien);
+                $model->updateDisqualifiedStudent($idsinhvien,$qualification);
             }
         }
     }
