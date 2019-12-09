@@ -30,50 +30,53 @@
     <!--Custom CSS-->
     <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../css/kythi.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
     <?php
         include dirname(__FILE__)."/../include/header.php";
     ?>
-    <!-- Danh sách kỳ thi -->
-    <div id="table">
-        <div id="table-container">
+    <div id="main">
+        <!-- Danh sách kỳ thi -->
+        <div id="table">
+            <div id="table-container">
+                <?php
+                    require_once dirname(__FILE__)."/controller/KythiController.php";
+                    $kythictrl = new \kythi\controller\KythiController();
+                    $table = $kythictrl->table();
+                    echo $table;
+                    echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                ?>
+            </div>
+            <div id='datalistcontainer'>
+                <?php
+                    echo $kythictrl->datalist();
+                ?>
+            </div>
+        </div>
+        <div>
+            <h3>Thêm kỳ thi</h3>
             <?php
-                require_once dirname(__FILE__)."/controller/KythiController.php";
-                $kythictrl = new \kythi\controller\KythiController();
-                $table = $kythictrl->table();
-                echo $table;
-                echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                // Form thêm kỳ thi
+                echo $kythictrl->showAdd();
             ?>
         </div>
-        <div id='datalistcontainer'>
+        <div>
+            <h3>Xóa kỳ thi</h3>
+            <div id="kythidangxoa"></div>
             <?php
-                echo $kythictrl->datalist();
+                // Form xóa kỳ thi
+                echo $kythictrl->showDelete();
             ?>
         </div>
-    </div>
-    <div>
-        <h3>Thêm kỳ thi</h3>
-        <?php
-            // Form thêm kỳ thi
-            echo $kythictrl->showAdd();
-        ?>
-    </div>
-    <div>
-        <h3>Xóa kỳ thi</h3>
-        <div id="kythidangxoa"></div>
-        <?php
-            // Form xóa kỳ thi
-            echo $kythictrl->showDelete();
-        ?>
-    </div>
-    <div>
-        <h3>Sửa kỳ thi</h3>
-        <div id="kythidangsua"></div>
-        <?php
-            // Form sửa kỳ thi
-            echo $kythictrl->showEdit();
-        ?>
+        <div>
+            <h3>Sửa kỳ thi</h3>
+            <div id="kythidangsua"></div>
+            <?php
+                // Form sửa kỳ thi
+                echo $kythictrl->showEdit();
+            ?>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
