@@ -6,6 +6,13 @@
         header("Location:http://examreg.com/");
     }
 ?>
+<style>
+    .current{
+        font-family: sans-serif;
+        color: #8bc6da;
+        font-size: x-large;
+    }
+</style>
 <header>
     <div class="container">
         <div id="branding">
