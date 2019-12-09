@@ -1,0 +1,10 @@
+.qlct {
+    white-space: nowrap;
+    width: 1%;
+}
+
+td a {
+    text-align: center;
+    display:block;
+    width:100%;
+}

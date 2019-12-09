@@ -40,32 +40,11 @@ class HocphanView {
                 $html .= "<td class='mahocphan'>" . $value["mahocphan"] . "</td>";
                 $html .= "</tr>";
             }
-        } else { // Tạo ô trống nếu size = 0
-            $html .= "<td colspan='3' style=\"text-align:center\">Chưa có học phần.</td>";
         }
         $html .= "</tbody><tfoot><tr>";
         $html .= "<th>Mã môn thi</th><th>Tên môn thi</th><th>Mã học phần</th>";
         $html .= "</tr></tfoot></table>";
 
-        return $html;
-    }
-
-    /**
-     * Datalist môn thi
-     * @param $json
-     * @return string
-     */
-    public function datalist_monthi($json) {
-        $ds = json_decode($json, true);
-        $size = sizeof($ds);
-        // Hiện datalist
-        $html = "<datalist id='danhsachmonhoc'>";
-        for ($i = 0; $i < $size; $i++) {
-            $a = json_encode($ds[$i]);
-            $b = json_decode($a);
-            $html .= "<option value=\"".$b->mamonthi."\">".$b->tenmonthi." --- ".$b->mamonthi;
-        }
-        $html .= "</datalist>";
         return $html;
     }
 

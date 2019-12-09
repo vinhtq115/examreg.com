@@ -207,7 +207,7 @@ function refresh_table() {
                 // Refresh lại datalist
                 datalist.innerHTML = response["datalist"];
                 tbody_kythi = document.getElementById('tablekythi').childNodes[1];
-                _data = []; // Xóa hết thông tin môn học cũ để thêm lại
+                _data = []; // Xóa hết thông tin kỳ thi cũ để thêm lại
                 for (var i = 0; i < tbody_kythi.childElementCount; i++) {
                     _data.push([tbody_kythi.childNodes[i].childNodes[0].innerText,
                         tbody_kythi.childNodes[i].childNodes[1].innerText,
@@ -217,7 +217,7 @@ function refresh_table() {
                 $('#tablekythi').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             }
-            // If hash match (data not changed), do nothing.
+            // Nếu trùng hash, không làm gì cả.
         }
     }
 }
@@ -231,14 +231,14 @@ function removeElement(elementId) {
     element.parentNode.removeChild(element);
 }
 
-// Auto-complete (Tự động điền cho form sửa môn học dựa trên mã môn học)
+// Auto-complete (Tự động điền cho form sửa kỳ thi dựa trên mã kỳ thi)
 var kythidangsua = document.getElementById("kythidangsua"); // Thông tin về kỳ thi đang sửa
 document.getElementById("makythi_edit").onblur = function () {
     var nambatdau_edit = document.getElementById("nambatdau_edit");
     var namketthuc_edit = document.getElementById("namketthuc_edit");
     var ky_edit = document.getElementById("ky_edit");
 
-    // Tìm tên môn học và tín chỉ ứng với mã môn học
+    // Tìm thông tin ứng với mã kỳ thi
     var list_size = _data.length;
     for (var i = 0; i < list_size; i++) {
         if (_data[i][0] == this.value) {
@@ -263,4 +263,11 @@ document.getElementById("makythi_delete").onblur = function () {
     }
     // Xóa thông tin về kỳ thi đang xóa khi không trùng mã kỳ thi.
     kythidangxoa.innerText = "";
+};
+
+// Tự động điền năm kết thúc sau khi điền năm bắt đầu
+document.getElementById("nambatdau_add").onblur = function () {
+    if (this.value !== "") {
+        document.getElementById("namketthuc_add").value = parseInt(this.value) + 1;
+    }
 };

@@ -25,22 +25,22 @@ class KythiView {
         $html .= "<th class='th-sm'>Năm bắt đầu</th>";
         $html .= "<th class='th-sm'>Năm kết thúc</th>";
         $html .= "<th class='th-sm'>Kỳ</th>";
+        $html .= "<th class='th-sm qlct'>Ca thi</th>";
         $html .= "</tr></thead><tbody>";
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
             foreach ($this->data as $key => $value) {
                 $html .= "<tr>";
-                $html .= "<td class='makythi'>" . $value["id"] . "</td>";
-                $html .= "<td class='nambatdau'>" . $value["nambatdau"] . "</td>";
-                $html .= "<td class='namketthuc'>" . $value["namketthuc"] . "</td>";
-                $html .= "<td class='ky'>" . $value["ky"] . "</td>";
+                $html .= "<td class='makythi align-middle'>" . $value["id"] . "</td>";
+                $html .= "<td class='nambatdau align-middle'>" . $value["nambatdau"] . "</td>";
+                $html .= "<td class='namketthuc align-middle'>" . $value["namketthuc"] . "</td>";
+                $html .= "<td class='ky align-middle'>" . $value["ky"] . "</td>";
+                $html .= "<td class='qlct align-middle'><a class='btn btn-indigo btn-sm m-0' href='http://examreg.com/kythi/".$value["id"]."'>Xem ca thi</a></td>";
                 $html .= "</tr>";
             }
-        } else { // Tạo ô trống nếu size = 0
-            $html .= "<td colspan='4' style=\"text-align:center\">Chưa có kỳ thi.</td>";
         }
         $html .= "</tbody><tfoot><tr>";
-        $html .= "<th>Mã kỳ thi</th><th>Năm bắt đầu</th><th>Năm kết thúc</th><th>Kỳ</th>";
+        $html .= "<th>Mã kỳ thi</th><th>Năm bắt đầu</th><th>Năm kết thúc</th><th>Kỳ</th><th>Ca thi</th>";
         $html .= "</tr></tfoot></table>";
 
         return $html;
@@ -65,6 +65,7 @@ class KythiView {
 
     /**
      * Hiện form thêm kỳ thi.
+     * @return string
      */
     public function addForm() {
         $html = "<form method=\"post\" id='form_add'>
@@ -86,17 +87,14 @@ class KythiView {
 
     /**
      * Hiện form xóa kỳ thi theo mã kỳ thi.
+     * @return string
      */
     public function deleteForm() {
         $html = "<form method=\"post\" id='form_delete' autocomplete='off'>
                   <div class=\"form-group\">
                     <label for=\"makythi\">Mã kỳ thi</label>
                     <input list='danhsachkythi' type=\"text\" class=\"form-control\" id=\"makythi_delete\" name=\"makythi\" placeholder=\"Nhập mã kỳ thi cần xóa\" minlength='1' maxlength='11' required>
-                    <datalist id='danhsachkythi'>";
-        foreach ($this->data as $key => $value) {
-            $html .= "<option value=\"".$value["id"]."\">";
-        }
-        $html .= "</datalist></div>";
+                </div>";
         $html .= "<button type=\"button\" id='delete-button' class=\"btn btn-danger\">Xóa</button></form>";
         return $html;
     }

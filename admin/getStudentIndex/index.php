@@ -3,13 +3,22 @@ session_start();
 //require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
 require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../controller/getStudentController.php";
-require_once dirname(__FILE__)."/../PHPExcelFile/Classes/PHPExcel/IOFactory.php";
-require_once dirname(__FILE__)."/../PHPExcelFile/Classes/PHPExcel.php";
+require_once dirname(__FILE__)."/../Classes/PHPExcel.php";
 
 if($_SESSION["isAdmin"] != 1){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
+$control = new getStudentController(); // initiate a controller
+if(isset($_POST["ImportStudent"])){
+    $file = $_FILES['file']['tmp_name']; // the file here is type not name
 
+    $objReader = PHPExcel_IOFactory::createReaderForFile($file);
+    $objReader->setLoadSheetsOnly('Sheet1');
+
+    $objExcel = $objReader->load($file);
+    $sheetData = $objExcel->getActiveSheet()->toArray('null' , true , true , true);
+    print_r($sheetData);
+}
 ?>
 
 <!doctype html>
@@ -46,7 +55,9 @@ if($_SESSION["isAdmin"] != 1){
 
 <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="http://examreg.com/admin/view/AdminView.php" >Admin HomePage</a>
+    <a href="http://examreg.com/admin/view/AdminView.php" >HomePage</a>
+    <a href="http://examreg.com/monthi/">Subjects</a>
+    <a href="http://examreg.com/hocphan/">Courses</a>
     <a href="http://examreg.com/account/view/LogoutView.php">Log out</a>
 </div>
 
@@ -64,8 +75,7 @@ if($_SESSION["isAdmin"] != 1){
             </thead>
             <tbody>
             <?php
-            $control = new getStudentController();
-            $control->getStudentData();
+             $control->getStudentData();
             ?>
             </tbody>
         </table>
@@ -74,13 +84,26 @@ if($_SESSION["isAdmin"] != 1){
         <h3 align="center">IMPORT STUDENT FILES</h3></h3><br />
         <form method="POST" enctype="multipart/form-data">
             <label>Select Excel File</label>
-            <input type="file" name="excel"/>
+            <input type="file" name="file"/>
             <br />
-            <input type="submit" name="ImportStudent" class="btn btn-info" value="Import Student"/>
+            <button type="submit" name="ImportStudent" class="btn btn-info" value="Import Student">Import Students</button>
         </form>
         <br />
         <br />
     </div>
+</div>
+<div class="container box">
+    <h3 align="center">UPDATE DISQUALIFIED</h3></h3><br />
+    <form method="POST" enctype="multipart/form-data">
+        <label>Select Excel File</label>
+        <input type="file" name="excel"/>
+        <br />
+        <button type="submit" name="UpdateDis" class="btn btn-info" value="UpdateDisqulified">Updata Disqualified</button>
+    </form>
+    <br />
+    <br />
+</div>
+
 </div>
 
 <script>

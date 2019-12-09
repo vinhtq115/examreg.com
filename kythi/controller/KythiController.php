@@ -29,8 +29,8 @@ class KythiController {
     }
 
     /**
-     * Lấy mã kỳ thi
-     * @return false|string
+     * Lấy mã kỳ thi.
+     * @return string
      */
     public function datalist() {
         return $this->view->datalist_kythi();

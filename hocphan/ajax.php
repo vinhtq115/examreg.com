@@ -14,13 +14,14 @@
         // Lấy bảng từ controller và hash lại để so sánh với hash client gửi lên
         $table = $hocphanctrl->table();
         $hash = hash('sha256', $table);
+
         if (isset($_GET['danhsachhocphan']) && $_GET['danhsachhocphan'] == 1) {
             $res->danhsachhocphan = $hocphanctrl->datalist_hocphan();
         } else if (!isset($_GET['hash']) || $_GET['hash'] != $hash) {
             // Nếu khác thì trả về hash và bảng
-            $res->table = $hocphanctrl->table();
+            $res->table = $table;
             $res->hash = $hash;
-        } else if (isset($_GET['gethash']) && $_GET['gethash'] == $hash) {
+        } else if (isset($_GET['hash']) && $_GET['hash'] == $hash) {
             // Nếu giống thì chỉ trả về hash
             $res->hash = $hash;
         }

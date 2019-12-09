@@ -83,7 +83,7 @@ class Kythi extends PDOData {
             return 0;
         }
         // Kỳ thi tồn tại trong hệ thống
-        // Xóa môn học khỏi CSDL
+        // Xóa kỳ thi khỏi CSDL
         $sql = "DELETE FROM kythi WHERE kythi.id = '$makythi'";
         $c = $this->doSql($sql);
         // Mở khóa bảng
