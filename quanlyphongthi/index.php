@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="../css/custom.css">
 </head>
 <body>
+    <?php
+        include dirname(__FILE__)."/../include/header.php";
+    ?>
     <!-- Danh sách phòng thi -->
     <div id="table">
         <div id="table-container">

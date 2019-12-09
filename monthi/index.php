@@ -29,47 +29,53 @@
     <script src="../externals/MDB/js/addons/datatables.min.js"></script>
     <!--Custom CSS-->
     <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
-    <!-- Danh sách môn thi -->
-    <div id="table">
-        <div id="table-container">
+    <?php
+        include dirname(__FILE__)."/../include/header.php";
+    ?>
+    <div id="main">
+        <!-- Danh sách môn thi -->
+        <div id="table">
+            <div id="table-container">
+                <?php
+                    require_once dirname(__FILE__)."/controller/MonthiController.php";
+                    $monthictrl = new \monthi\controller\MonthiController();
+                    $table = $monthictrl->table();
+                    echo $table;
+                    echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                ?>
+            </div>
+            <div id='datalistcontainer'>
+                <?php
+                    echo $monthictrl->datalist();
+                ?>
+            </div>
+        </div>
+        <div>
+            <h3>Thêm môn thi</h3>
             <?php
-                require_once dirname(__FILE__)."/controller/MonthiController.php";
-                $monthictrl = new \monthi\controller\MonthiController();
-                $table = $monthictrl->table();
-                echo $table;
-                echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                // Form thêm môn thi
+                echo $monthictrl->showAdd();
             ?>
         </div>
-        <div id='datalistcontainer'>
+        <div>
+            <h3>Xóa môn thi</h3>
+            <div id="mondangxoa"></div>
             <?php
-                echo $monthictrl->datalist();
+                // Form xóa môn thi
+                echo $monthictrl->showDelete();
             ?>
         </div>
-    </div>
-    <div>
-        <h3>Thêm môn thi</h3>
-        <?php
-            // Form thêm môn thi
-            echo $monthictrl->showAdd();
-        ?>
-    </div>
-    <div>
-        <h3>Xóa môn thi</h3>
-        <div id="mondangxoa"></div>
-        <?php
-            // Form xóa môn thi
-            echo $monthictrl->showDelete();
-        ?>
-    </div>
-    <div>
-        <h3>Sửa môn thi</h3>
-        <div id="mondangsua"></div>
-        <?php
-            // Form sửa môn thi
-            echo $monthictrl->showEdit();
-        ?>
+        <div>
+            <h3>Sửa môn thi</h3>
+            <div id="mondangsua"></div>
+            <?php
+                // Form sửa môn thi
+                echo $monthictrl->showEdit();
+            ?>
+        </div>
     </div>
     <script src="script.js"></script>
     <script src="/externals/MDB/js/addons/datatables.min.js"></script>

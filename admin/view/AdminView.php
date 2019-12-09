@@ -14,22 +14,13 @@
     <meta name="viewport" content="width=device-width">
     <title>Trang chủ quản trị viên</title>
     <link rel="stylesheet" type="text/css" href="../../css/adminView.css">
+    <link rel="stylesheet" type="text/css" href="../../css/header.css">
     <script src="../../jquery/jquery-3.4.1.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div id="branding">
-                <h1><span class="highlight">Exam</span>Reg</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li class="current">Xin chào <?php echo $_SESSION["id"]?></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    <?php
+        include dirname(__FILE__)."/../../include/header.php";
+    ?>
     <section id="showcase">
         <div class="container">
             <h1>TRANG QUẢN TRỊ HỆ THỐNG KỲ THI</h1>

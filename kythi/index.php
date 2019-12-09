@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="../css/kythi.css">
 </head>
 <body>
+    <?php
+        include dirname(__FILE__)."/../include/header.php";
+    ?>
     <!-- Danh sách kỳ thi -->
     <div id="table">
         <div id="table-container">

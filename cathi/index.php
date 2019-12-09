@@ -38,6 +38,7 @@
     <?php
         require_once dirname(__FILE__)."/controller/CathiController.php";
         $cathictrl = new \cathi\controller\CathiController($_GET["kythi"]);
+        include dirname(__FILE__)."/../include/header.php";
         echo "<p id='kythi' hidden>".$_GET["kythi"]."</p>"; // Chứa mã kỳ thi
     ?>
     <div>
