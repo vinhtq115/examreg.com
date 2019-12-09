@@ -1,9 +1,9 @@
 <?php
-    /*require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
+    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
     session_start();
     if($_SESSION["isAdmin"] != 1){ // Kiểm tra xem có phải là admin không. Nếu không phải thì logout ra ngoài
         header("Location:http://examreg.com/account/view/LogoutView.php");
-    }*/
+    }
 
     require_once dirname(__FILE__)."/controller/KythiController.php";
     require_once dirname(__FILE__)."/../utils/Utils.php";

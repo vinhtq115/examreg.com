@@ -1,3 +1,14 @@
+<?php
+    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
+    require_once dirname(__FILE__)."/../utils/Utils.php";
+    session_start();
+    if($_SESSION["isAdmin"] != 1){
+        header("Location:http://examreg.com/account/view/LogoutView.php");
+    }
+    if (!isset($_GET["kythi"]) || empty($_GET["kythi"]) || !is_numeric($_GET["kythi"]) || !checkInteger($_GET["kythi"])) {
+        header("Location:http://examreg.com/kythi");
+    }
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
