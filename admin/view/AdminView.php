@@ -62,14 +62,14 @@
             <p>Administration creating and managing the upcoming examination </p>
         </div>
         <div class="box">
-            <a href=""><img src="../../css/img/clock.png"></a>
-            <h3>Shift In Exam</h3>
-            <p>Administration keep track of Shifts in the Exam</p>
-        </div>
-        <div class="box">
             <a href=""><img src="../../css/img/door.png"></a>
             <h3>Exam Room</h3>
             <p>Administration keep track Exam Rooms and Students in Exam Room</p>
+        </div>
+        <div class="box">
+            <a href="http://examreg.com/account/view/LogoutView.php"><img src="../../css/img/clock.png"></a>
+            <h3>Log Out</h3>
+            <p>Good bye Admin. Hope you have an effective working day</p>
         </div>
     </div>
 </section>

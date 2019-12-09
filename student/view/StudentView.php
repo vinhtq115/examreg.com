@@ -54,6 +54,7 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
 
 <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+    <a href="http://examreg.com/account/view/LogoutView.php">Log out</a>
 </div>
 
 <div id="main">

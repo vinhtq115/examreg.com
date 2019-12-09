@@ -1,112 +1,59 @@
 <?php
 //include the tool to be able to get data from Excell xls file
-include dirname(__FILE__)."/../Classes/PHPExcel.php";
+//include dirname(__FILE__)."/../Classes/PHPExcel.php";
 require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../model/getStudentModel.php";
+require_once dirname(__FILE__)."/../../utils/getExcelData.php";
 class getStudentController
 {
-    private $view; // set up view Class
     private $model; // set up model
-    private $output; // this is for the view
-    function __construct()
-    {
-        //$this ->view =  new getStudentView();
-        //$this->view->getStudentExcelInterface();
-        //$this -> getStudentExcel();
-//        $this ->model = new getStudentModel();
-//
-//        if(isset($_POST["ImportStudent"])){ // the condition to start function upon clicking the button
-//            $this->getStudentExcel();
-//            // add view code here...
-//        }
-//        if(isset($_POST["ImportDisqualified"])){
-//            $this->updateDisqualified(); // the condition to start function upon clicking the button
-//            // add view code here...
-//
-//        }
-//        if(isset($_POST["ImportCourse"])){
-//            $this->updateCourseSem(); // the condition to start function upon clicking the button
-//            // add view code here...
-//
-//        }
+    function __construct(){
 
-        //making buffer to call the view function so the index could call it!!!!!
     }
 
     function getStudentExcel(){ // this controller to get student info from excell and get it to database
         if(isset($_POST['ImportStudent'])){
-           $file = $_FILES['file']['tmp_name']; // the file here is type not name
+            $file = $_FILES['file']['tmp_name']; // the file here is type not name
+            $sheetData = getExcelReturnData($file);
 
-           		$objReader = PHPExcel_IOFactory::createReaderForFile($file);
-           		$objReader->setLoadSheetsOnly('Sheet1');
-
-           		$objExcel = $objReader->load($file);
-           		$sheetData = $objExcel->getActiveSheet()->toArray('null' , true , true , true);
-           		print_r($sheetData);
-           
-		        $highestRow = $objExcel->setActiveSheetIndex()->getHighestRow();
-
-//            for($row = 2 ; $row <= $highestRow ; $row ++){ // run through the row
-//                $id = $sheetData[$row]['A'];
-//                $hodem = $sheetData[$row]['B'];
-//                $ten = $sheetData[$row]['C'];
-//                $ngaysinh = $sheetData[$row]['D'];
-//                $account = $sheetData[$row]['E'];
-//                $account = $sheetData[$row]['F'];
-//                //These query job are for later
-//
-//                //$password;
-//                //$sql = "INSERT INTO `test`(`CustomerID`, `CustomerName`, `Address`, `City`, `PostalCode`, `Country`) VALUES ('$CustomerID','$CustomerName','$Address','$City','$PostalCode','$Country')";
-//                // need database connection
-//                //$mysqli->query($sql);
-//
-//            }echo "Inserted!";
+            for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
+                $id = $sheetData[$row]['A'];
+                $hodem = $sheetData[$row]['B'];
+                $ten = $sheetData[$row]['C'];
+                $ngaysinh = $sheetData[$row]['D'];
+                $account = $sheetData[$row]['E'];
+                $pass = $sheetData[$row]['F'];
+                $model = new getStudentModel();
+                $model -> addStudentData($id , $hodem , $ten , $ngaysinh);
+                $model -> createStudentAccount($pass,$id);
+            }
         }
     }
 
     function  updateDisqualified(){ // this function is to update the student that is not qualified to take exam
-        if(isset($_POST['updateDis'])){
-            $file = $_FILES['file']['tmp_name'];
+        if(isset($_POST['UpdateDis'])){
+            $file = $_FILES['file']['tmp_name']; // the file here is type not name
+            $sheetData = getExcelReturnData($file);
 
-            $objReader = PHPExcel_IOFactory::createReaderForFile($file); // creating reader for file
-            $objReader->setLoadSheetsOnly('Sheet1'); // read a specific sheet only (for now hopefully)
-
-            $objExcel = $objReader->load($file); // load file
-            //Make sheetData
-            $sheetData = $objExcel->getActiveSheet()->toArray('null' , true , true , true);
-            print_r($sheetData); //print to easily debug and code it will return array with index
-
-            $highestRow = $objExcel->setActiveSheetIndex()->getHighestRow(); // get the Highest arrow
-            for($row = 2 ; $row <= $highestRow ; $row ++){ // run through the row
-                $id = $sheetData[$row]['A'];
-                //$password;
-                //$sql = "INSERT INTO `test`(`CustomerID`, `CustomerName`, `Address`, `City`, `PostalCode`, `Country`) VALUES ('$CustomerID','$CustomerName','$Address','$City','$PostalCode','$Country')";
-                // need database connection
-                //$mysqli->query($sql);
-
-            }echo "Inserted!";
+            for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
+                $idsinhvien = $sheetData[$row]['A'];
+                $model = new getStudentModel();
+                $model->updateDisqualifiedStudent($idsinhvien);
+            }
         }
     }
 
     function updateCourseSem(){ // update hoc phan trong hoc ky
-        if(isset($_POST["importCourse"])){
-            include dirname(__FILE__)."/../PHPExcelFile/Classes/PHPExcel/IOFactory.php";
+        if(isset($_POST[""])){
+            $file = $_FILES['file']['tmp_name']; // the file here is type not name
+            $sheetData = getExcelReturnData($file);
 
-            $extension = end(explode(".", $_FILES["excel"]["name"]));
-            $allowed_extension = array("xls" , "xlsx" , "csv");
-            if(in_array($extension , $allowed_extension)){
-                $file = $_FILES["excel"]["tmp_name"];// getting temporary source of excel file
-                $StudentPhpExcel = PHPExcel_IOFactory::load($file); // create object of PHPExcel
-                foreach ($StudentPhpExcel->getWorksheetIterator() as $worksheet){
-                    $highestRow = $worksheet->getHighestRow(); //the index number of the last row
-                    for($row = 2 ; $row <= $highestRow ; $row++) { // 0 : the A B C in excel, 1 : the columns name , from 2: the data
-                        // get the data and use the mysqli function to make the string update-able to the database
-                        $id = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(0, $row)->getValue()); // get the ID of the  student
-                        $courseid = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(1, $row)->getValue());
-                        $maky = mysqli_real_escape_string($worksheet->getCellByColumnAndRow(2, $row)->getValue());
-                        $this->model->updateCourse($id,$courseid,$maky);
-                    }
-                }
+            for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
+                $id = $sheetData[$row]['A'];
+                $courseID = $sheetData[$row]['B'];
+                $kythi = $sheetData[$row]['C'];
+                $model = new getStudentModel();
+                $model->updateCourse($id , $courseID , $kythi);
             }
         }
     }

@@ -4,20 +4,18 @@ session_start();
 require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../controller/getStudentController.php";
 require_once dirname(__FILE__)."/../Classes/PHPExcel.php";
+require dirname(__FILE__)."/../../vendor/autoload.php";
+require_once dirname(__FILE__)."/../../vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php"; // include phpspreadsheet from vendor
 
 if($_SESSION["isAdmin"] != 1){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
 $control = new getStudentController(); // initiate a controller
 if(isset($_POST["ImportStudent"])){
-    $file = $_FILES['file']['tmp_name']; // the file here is type not name
-
-    $objReader = PHPExcel_IOFactory::createReaderForFile($file);
-    $objReader->setLoadSheetsOnly('Sheet1');
-
-    $objExcel = $objReader->load($file);
-    $sheetData = $objExcel->getActiveSheet()->toArray('null' , true , true , true);
-    print_r($sheetData);
+    $control->getStudentExcel();
+}
+if(isset($_POST["UpdateDis"])){
+    $control->updateDisqualified();
 }
 ?>
 

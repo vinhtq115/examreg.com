@@ -16,12 +16,11 @@ class getStudentModel extends PDOData{
             $sql = "INSERT INTO sinhvien (id, hodem, ten, ngaysinh) 
                     VALUES ('$id', '$hodem', '$ten' , '$dateOfBirth')";
             $this->trySQL($sql);
-
         }
 
-        public function createStudentAccount($account , $password,$idsinhvien){
+        public function createStudentAccount($password,$idsinhvien){
             //add the data to the account database
-            $sql = "INSERT INTO `account`(`id`, `isAdmin`, `password`, `idsinhvien`) VALUES ('$account',0,'$password','$idsinhvien')";
+            $sql = "INSERT INTO `account`(`id`, `isAdmin`, `password`, `idsinhvien`) VALUES ('$idsinhvien',0,'$password','$idsinhvien')";
             $this->TrySQL($sql);
         }
 
