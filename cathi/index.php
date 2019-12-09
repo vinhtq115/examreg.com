@@ -33,6 +33,7 @@
     <script src="../externals/MDB/js/addons/datatables.min.js"></script>
     <!--Custom CSS-->
     <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
     <?php
@@ -41,56 +42,58 @@
         include dirname(__FILE__)."/../include/header.php";
         echo "<p id='kythi' hidden>".$_GET["kythi"]."</p>"; // Chứa mã kỳ thi
     ?>
-    <div>
-        <?php
-            $years = $cathictrl->getYear()[0];
-            $nambatdau = $years["nambatdau"];
-            $namketthuc = $years["namketthuc"];
-            $ky = $years["ky"];
-            echo "<p>Mã kỳ thi: ".$_GET["kythi"]."<br>";
-            echo "Năm bắt đầu: ".$nambatdau."<br>";
-            echo "Năm kết thúc: ".$namketthuc."<br>";
-            echo "Kỳ: ".$ky."</p>";
-        ?>
-    </div>
-    <!-- Danh sách ca thi -->
-    <div id="table">
-        <div id="table-container">
+    <div id="main">
+        <div>
             <?php
-                $table = $cathictrl->table();
-                echo $table;
-                echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                $years = $cathictrl->getYear()[0];
+                $nambatdau = $years["nambatdau"];
+                $namketthuc = $years["namketthuc"];
+                $ky = $years["ky"];
+                echo "<p>Mã kỳ thi: ".$_GET["kythi"]."<br>";
+                echo "Năm bắt đầu: ".$nambatdau."<br>";
+                echo "Năm kết thúc: ".$namketthuc."<br>";
+                echo "Kỳ: ".$ky."</p>";
             ?>
         </div>
-    </div>
-    <div id='datalistcontainer'>
-        <?php
-        echo $cathictrl->datalist();
-        echo $cathictrl->datalist_hocphan();
-        ?>
-    </div>
-    <div>
-        <h3>Thêm ca thi</h3>
-        <?php
-            // Form thêm ca thi
-            echo $cathictrl->showAdd();
-        ?>
-    </div>
-    <div>
-        <h3>Xóa ca thi</h3>
-        <div id="cathidangxoa"></div>
-        <?php
-            // Form xóa ca thi
-            echo $cathictrl->showDelete();
-        ?>
-    </div>
-    <div>
-        <h3>Sửa ca thi</h3>
-        <div id="cathidangsua"></div>
-        <?php
-            // Form sửa ca thi
-            echo $cathictrl->showEdit();
-        ?>
+        <!-- Danh sách ca thi -->
+        <div id="table">
+            <div id="table-container">
+                <?php
+                    $table = $cathictrl->table();
+                    echo $table;
+                    echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                ?>
+            </div>
+        </div>
+        <div id='datalistcontainer'>
+            <?php
+            echo $cathictrl->datalist();
+            echo $cathictrl->datalist_hocphan();
+            ?>
+        </div>
+        <div>
+            <h3>Thêm ca thi</h3>
+            <?php
+                // Form thêm ca thi
+                echo $cathictrl->showAdd();
+            ?>
+        </div>
+        <div>
+            <h3>Xóa ca thi</h3>
+            <div id="cathidangxoa"></div>
+            <?php
+                // Form xóa ca thi
+                echo $cathictrl->showDelete();
+            ?>
+        </div>
+        <div>
+            <h3>Sửa ca thi</h3>
+            <div id="cathidangsua"></div>
+            <?php
+                // Form sửa ca thi
+                echo $cathictrl->showEdit();
+            ?>
+        </div>
     </div>
     <script src="/cathi/script.js"></script>
 </body>

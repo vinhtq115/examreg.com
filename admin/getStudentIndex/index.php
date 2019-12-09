@@ -64,11 +64,11 @@ if(isset($_POST["UpdateDis"])){
         <table class="content-table">
             <thead>
             <tr>
-                <td>Student ID</td>
-                <td>Family Middle Name</td>
-                <td>First Name</td>
-                <td>Date Taking Exam</td>
-                <td>Qualified To Take Exam</td>
+                <td>Mã sinh viên</td>
+                <td>Họ đệm</td>
+                <td>Tên</td>
+                <td>Ngày sinh</td>
+                <td>Đủ điều kiện dự thi</td>
             </tr>
             </thead>
             <tbody>
@@ -79,24 +79,24 @@ if(isset($_POST["UpdateDis"])){
         </table>
     </div>
     <div class="container box">
-        <h3 align="center">IMPORT STUDENT FILES</h3></h3><br />
+        <h3 align="center">Nhập danh sách sinh viên</h3></h3><br />
         <form method="POST" enctype="multipart/form-data">
-            <label>Select Excel File</label>
+            <label>Chọn file Excel</label>
             <input type="file" name="file"/>
             <br />
-            <button type="submit" name="ImportStudent" class="btn btn-info" value="Import Student">Import Students</button>
+            <button type="submit" name="ImportStudent" class="btn btn-info" value="Import Student">Tải lên</button>
         </form>
         <br />
         <br />
     </div>
 </div>
 <div class="container box">
-    <h3 align="center">UPDATE STUDENT QUALIFICATION</h3></h3><br />
+    <h3 align="center">Cập nhật trạng thái đủ điều kiện dự thi</h3></h3><br />
     <form method="POST" enctype="multipart/form-data">
-        <label>Select Excel File</label>
+        <label>Chọn file Excel</label>
         <input type="file" name="file"/>
         <br />
-        <button type="submit" name="UpdateDis" class="btn btn-info" value="UpdateDisqulified">Update Disqualified</button>
+        <button type="submit" name="UpdateDis" class="btn btn-info" value="UpdateDisqulified">Tải lên</button>
     </form>
     <br />
     <br />

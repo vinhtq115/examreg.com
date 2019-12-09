@@ -12,3 +12,11 @@
 #main {
     margin: 20px;
 }
+
+body, input {
+    background-color: #f4f4f4;
+}
+
+.even, th {
+    background-color: white;
+}

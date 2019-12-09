@@ -78,6 +78,5 @@
         </div>
     </div>
     <script src="script.js"></script>
-    <script src="/externals/MDB/js/addons/datatables.min.js"></script>
 </body>
 </html>
