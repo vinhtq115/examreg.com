@@ -6,6 +6,7 @@
         header("Location:http://examreg.com/account/view/LogoutView.php");
     }
 
+    header("Content-type:application/json"); // Set kiểu trả về dưới dạng JSON
     require_once dirname(__FILE__)."/controller/HocphanController.php";
     $hocphanctrl = new \hocphan\controller\HocphanController();
 

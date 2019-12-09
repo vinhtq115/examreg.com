@@ -53,63 +53,63 @@ class MonthiView {
         for ($i = 0; $i < $size; $i++) {
             $a = json_encode($this->data[$i]);
             $b = json_decode($a);
-            $html .= "<option value=\"".$b->mamonthi."\">".$b->tenmonthi." --- ".$b->mamonthi;
+            $html .= "<option value='".$b->mamonthi."'>".$b->tenmonthi." --- ".$b->mamonthi;
         }
         $html .= "</datalist>";
         return $html;
     }
 
     /**
-     * Hiện form thêm môn học.
+     * Hiện form thêm môn thi.
      */
     public function addForm() {
-        $html = "<form method=\"post\" id='form_add' autocomplete='off'>
-                  <div class=\"form-group\">
-                    <label for=\"mamonthi_add\">Mã môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mamonthi_add\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm\" maxlength='20' minlength='1' required>
+        $html = "<form method='post' id='form_add' autocomplete='off'>
+                  <div class='form-group'>
+                    <label for='mamonthi_add'>Mã môn thi</label>
+                    <input type='text' class='form-control' id='mamonthi_add' name='mamonthi' placeholder='Nhập mã môn thi muốn thêm' maxlength='20' minlength='1' required>
                   </div>
-                  <div class=\"form-group\">
-                    <label for=\"tenmonthi_add\">Tên môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi_add\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
+                  <div class='form-group'>
+                    <label for='tenmonthi_add'>Tên môn thi</label>
+                    <input type='text' class='form-control' id='tenmonthi_add' name='tenmonthi' placeholder='Tên môn thi' maxlength='100' minlength='1' required>
                   </div>
-                  <div class=\"form-group\">
-                    <label for=\"tinchi_add\">Tín chỉ</label>
-                    <input type=\"number\" class=\"form-control\" id=\"tinchi_add\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='1' required>
+                  <div class='form-group'>
+                    <label for='tinchi_add'>Tín chỉ</label>
+                    <input type='number' class='form-control' id='tinchi_add' name='tinchi' placeholder='Tín chỉ' min='1' required>
                   </div>";
-        $html .= "<button type=\"button\" id='add-button' class=\"btn btn-primary\">Thêm</button></form>";
+        $html .= "<button type='button' id='add-button' class='btn btn-primary'>Thêm</button></form>";
         return $html;
     }
 
     /**
-     * Hiện form xóa môn học theo mã môn học.
+     * Hiện form xóa môn thi theo mã.
      */
     public function deleteForm() {
-        $html = "<form method=\"post\" id='form_delete' autocomplete='off'>
-                  <div class=\"form-group\">
-                    <label for=\"mamonthi_delete\">Mã môn thi</label>
-                    <input list='danhsachmonhoc' type=\"text\" class=\"form-control\" id=\"mamonthi_delete\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi cần xóa\" required>";
-        $html .= "<button type=\"button\" id='delete-button' class=\"btn btn-danger\">Xóa</button></form>";
+        $html = "<form method='post' id='form_delete' autocomplete='off'>
+                  <div class='form-group'>
+                    <label for='mamonthi_delete'>Mã môn thi</label>
+                    <input list='danhsachmonhoc' type='text' class='form-control' id='mamonthi_delete' name='mamonthi' placeholder='Nhập mã môn thi cần xóa' required>";
+        $html .= "<button type='button' id='delete-button' class='btn btn-danger'>Xóa</button></form>";
         return $html;
     }
 
     /**
-     * Hiện form sửa môn học.
+     * Hiện form sửa môn thi.
      */
     public function editForm() {
-        $html = "<form method=\"post\" id='form_edit' autocomplete='off'>
-                    <div class=\"form-group\">
-                        <label for=\"mamonthi_edit\">Mã môn thi</label>
-                        <input list='danhsachmonhoc' type=\"text\" class=\"form-control\" id=\"mamonthi_edit\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn sửa\" maxlength='20' minlength='1' required>
+        $html = "<form method='post' id='form_edit' autocomplete='off'>
+                    <div class='form-group'>
+                        <label for='mamonthi_edit'>Mã môn thi</label>
+                        <input list='danhsachmonhoc' type='text' class='form-control' id='mamonthi_edit' name='mamonthi' placeholder='Nhập mã môn thi muốn sửa' maxlength='20' minlength='1' required>
                     </div>
-                  <div class=\"form-group\">
-                    <label for=\"tenmonthi_edit\">Tên môn thi</label>
-                    <input type=\"text\" class=\"form-control\" id=\"tenmonthi_edit\" name=\"tenmonthi\" placeholder=\"Tên môn thi\" maxlength='100' minlength='1' required>
+                  <div class='form-group'>
+                    <label for='tenmonthi_edit'>Tên môn thi</label>
+                    <input type='text' class='form-control' id='tenmonthi_edit' name='tenmonthi' placeholder='Tên môn thi' maxlength='100' minlength='1' required>
                   </div>
-                  <div class=\"form-group\">
-                    <label for=\"tinchi_edit\">Tín chỉ</label>
-                    <input type=\"number\" class=\"form-control\" id=\"tinchi_edit\" name=\"tinchi\" placeholder=\"Tín chỉ\" min='1' required>
+                  <div class='form-group'>
+                    <label for='tinchi_edit'>Tín chỉ</label>
+                    <input type='number' class='form-control' id='tinchi_edit' name='tinchi' placeholder='Tín chỉ' min='1' required>
                   </div>";
-        $html .= "<button type=\"button\" class=\"btn btn-primary\" id='edit-button'>Sửa</button></form>";
+        $html .= "<button type='button' class='btn btn-primary' id='edit-button'>Sửa</button></form>";
         return $html;
     }
 }

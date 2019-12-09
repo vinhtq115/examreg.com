@@ -5,7 +5,9 @@
         header("Location:http://examreg.com/account/view/LogoutView.php");
     }
 
+    header("Content-type:application/json"); // Set kiểu trả về dưới dạng JSON
     require_once dirname(__FILE__)."/controller/MonthiController.php";
+    require_once dirname(__FILE__)."/../utils/Utils.php";
     $monthictrl = new \monthi\controller\MonthiController();
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $res = new stdClass(); // Chứa response
@@ -25,7 +27,7 @@
         $res = new stdClass();
         if (isset($_POST["add"]) && isset($_POST["mamonthi"]) && isset($_POST["tenmonthi"]) && isset($_POST["tinchi"])
         && !empty($_POST["mamonthi"]) && !empty($_POST["tenmonthi"]) && !empty($_POST["tinchi"]) && $_POST["add"] == 1) { // Kiểm tra xem có phải add không
-            if (is_numeric($_POST["tinchi"]) && $_POST["tinchi"] >= 1 && strlen($_POST["tenmonthi"]) >= 1 && strlen($_POST["tenmonthi"]) <= 100
+            if (is_numeric($_POST["tinchi"]) && checkInteger($_POST["tinchi"]) && $_POST["tinchi"] >= 1 && strlen($_POST["tenmonthi"]) >= 1 && strlen($_POST["tenmonthi"]) <= 100
             && strlen($_POST["mamonthi"]) >= 1 && strlen($_POST["mamonthi"]) <= 20) { // Kiểm tra xem độ dài và kiểu dữ liệu có thỏa mãn không
                 // Kiểm tra regex
                 if (preg_match("/^\b[a-zA-Z0-9]+\b$/", $_POST["mamonthi"])) {
@@ -71,6 +73,8 @@
                 } else {
                     $res->error_msg = "Có lỗi. Mã môn học cũ/mới chỉ được phép là 1 từ chứa ký tự từ a-z, A-Z, 0-9.";
                 }
+            } else { // Không thỏa mãn
+                $res->error_msg = "Đã xảy ra lỗi. Vui lòng thử lại.";
             }
         }
         echo json_encode($res);

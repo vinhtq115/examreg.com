@@ -3,14 +3,14 @@ var table_hash = document.getElementById("tablehash").innerText;
 
 // Lấy dữ liệu từ bảng ban đầu
 var _data = [];
-var tbody_monthi = document.getElementById('tablemonthi').childNodes[1];
-for (var i = 0; i < tbody_monthi.childElementCount; i++) {
-    _data.push([tbody_monthi.childNodes[i].childNodes[0].innerText, tbody_monthi.childNodes[i].childNodes[1].innerText, tbody_monthi.childNodes[i].childNodes[2].innerText]);
+var tbody_phongthi = document.getElementById('tablephongthi').childNodes[1];
+for (var i = 0; i < tbody_phongthi.childElementCount; i++) {
+    _data.push([tbody_phongthi.childNodes[i].childNodes[0].innerText, tbody_phongthi.childNodes[i].childNodes[1].innerText, tbody_phongthi.childNodes[i].childNodes[2].innerText]);
 }
 
 // Bật pagination
 $(document).ready(function () {
-    $('#tablemonthi').DataTable();
+    $('#tablephongthi').DataTable();
     $('.dataTables_length').addClass('bs-select');
 });
 
@@ -28,22 +28,22 @@ add_button.onclick = function () {
     }
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
-    let mamonthi = document.getElementById("mamonthi_add").value; // Lấy mã môn thi
-    let tenmonthi = document.getElementById("tenmonthi_add").value; // Lấy tên môn thi
-    let tinchi = document.getElementById("tinchi_add").value; // Lấy số tín chỉ
+    let maphongthi = document.getElementById("maphongthi_add").value; // Lấy mã phòng thi
+    let diadiem = document.getElementById("diadiem_add").value; // Lấy địa điểm
+    let soluongmay = document.getElementById("soluongmay_add").value; // Lấy số lượng máy
     // Kiểm tra
-    if (mamonthi == "") { // Nếu trống mã môn thi
-        add_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), add_form.nextSibling);
-    } else if (tenmonthi == "") { // Nếu trống tên môn thi
-        add_form.parentNode.insertBefore(createMessage("Tên môn học không được để trống.", -1), add_form.nextSibling);
-    } else if (tinchi == "" || tinchi.indexOf(".") != -1 || tinchi == "0") { // Nếu trống tín chỉ hoặc không đúng dạng
-        add_form.parentNode.insertBefore(createMessage("Số tín chỉ phải là một số nguyên dương lớn hơn 0.", -1), add_form.nextSibling);
+    if (maphongthi == "") { // Nếu trống mã phòng thi
+        add_form.parentNode.insertBefore(createMessage("Mã phòng thi không được để trống.", -1), add_form.nextSibling);
+    } else if (diadiem == "") { // Nếu trống địa điểm
+        add_form.parentNode.insertBefore(createMessage("Địa điểm không được để trống.", -1), add_form.nextSibling);
+    } else if (soluongmay == "" || soluongmay.indexOf(".") != -1 || soluongmay == "0") { // Nếu trống số lượng máy hoặc không đúng dạng
+        add_form.parentNode.insertBefore(createMessage("Số lượng máy phải là một số nguyên dương lớn hơn 0.", -1), add_form.nextSibling);
     } else {
         // Bắt đầu Ajax Engine và gửi request
         let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
         ajaxEngine.open("POST", "ajax.php", true);
         ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("add=" + 1 + "&mamonthi=" + mamonthi + "&tenmonthi=" + tenmonthi + "&tinchi=" + tinchi);
+        ajaxEngine.send("add=" + 1 + "&maphongthi=" + maphongthi + "&diadiem=" + diadiem + "&soluongmay=" + soluongmay);
         // Xử lý sau khi Ajax trả về
         ajaxEngine.onreadystatechange = function () {
             if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
@@ -51,7 +51,7 @@ add_button.onclick = function () {
                 refresh_table();
                 var success;
                 var message;
-                if (response.hasOwnProperty("success_msg")) { // Môn học được thêm thành công
+                if (response.hasOwnProperty("success_msg")) { // Phòng thi được thêm thành công
                     success = 1;
                     message = response["success_msg"];
                 } else { // Lỗi
@@ -63,9 +63,9 @@ add_button.onclick = function () {
             }
         };
         // Làm trống form
-        document.getElementById("mamonthi_add").value = "";
-        document.getElementById("tenmonthi_add").value = "";
-        document.getElementById("tinchi_add").value = "";
+        document.getElementById("maphongthi_add").value = "";
+        document.getElementById("diadiem_add").value = "";
+        document.getElementById("soluongmay_add").value = "";
     }
 };
 
@@ -79,16 +79,16 @@ delete_button.onclick = function () {
     }
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
-    let mamonthi = document.getElementById("mamonthi_delete").value; // Lấy mã môn thi
+    let maphongthi = document.getElementById("maphongthi_delete").value; // Lấy mã phòng thi
     // Kiểm tra
-    if (mamonthi == "") { // Nếu trống mã môn thi
-        delete_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), delete_form.nextSibling);
+    if (maphongthi == "") { // Nếu trống mã phòng thi
+        delete_form.parentNode.insertBefore(createMessage("Mã phòng thi không được để trống.", -1), delete_form.nextSibling);
     } else {
         // Bắt đầu Ajax Engine và gửi request
         let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
         ajaxEngine.open("POST", "ajax.php", true);
         ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("delete=" + 1 + "&mamonthi=" + mamonthi);
+        ajaxEngine.send("delete=" + 1 + "&maphongthi=" + maphongthi);
         // Xử lý sau khi Ajax trả về
         ajaxEngine.onreadystatechange = function () {
             if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
@@ -96,7 +96,7 @@ delete_button.onclick = function () {
                 refresh_table();
                 var success;
                 var message;
-                if (response.hasOwnProperty("success_msg")) { // Môn học được xóa thành công
+                if (response.hasOwnProperty("success_msg")) { // Phòng thi được xóa thành công
                     success = 1;
                     message = response["success_msg"];
                 } else { // Lỗi
@@ -108,14 +108,14 @@ delete_button.onclick = function () {
             }
         };
         // Làm trống form
-        document.getElementById("mamonthi_delete").value = "";
+        document.getElementById("maphongthi_delete").value = "";
         // Xóa thông tin về môn đang xóa
-        mondangxoa.innerText = "";
+        phongthidangxoa.innerText = "";
     }
 };
 
 // Hành vi cho nút sửa
-var old_mamonthi = null; // Dùng để sửa mã môn thi
+var old_maphongthi = null; // Dùng để sửa mã phòng thi
 let edit_button = document.getElementById('edit-button');
 let edit_form = document.getElementById("form_edit");
 edit_button.onclick = function () {
@@ -125,22 +125,22 @@ edit_button.onclick = function () {
     }
     // Kiểm tra xem form có trống không. Nếu có thì hiện thông báo lỗi.
     // Lấy thông tin từ form
-    let mamonthi = document.getElementById("mamonthi_edit").value; // Lấy mã môn thi
-    let tenmonthi = document.getElementById("tenmonthi_edit").value; // Lấy tên môn thi
-    let tinchi = document.getElementById("tinchi_edit").value; // Lấy số tín chỉ
+    let maphongthi = document.getElementById("maphongthi_edit").value; // Lấy mã phòng thi
+    let diadiem = document.getElementById("diadiem_edit").value; // Lấy địa điểm
+    let soluongmay = document.getElementById("soluongmay_edit").value; // Lấy số lượng máy
     // Kiểm tra
-    if (mamonthi == "") { // Nếu trống mã môn thi
-        edit_form.parentNode.insertBefore(createMessage("Mã môn học không được để trống.", -1), edit_form.nextSibling);
-    } else if (tenmonthi == "") { // Nếu trống tên môn thi
+    if (maphongthi == "") { // Nếu trống mã phòng thi
+        edit_form.parentNode.insertBefore(createMessage("Mã phòng thi không được để trống.", -1), edit_form.nextSibling);
+    } else if (diadiem == "") { // Nếu trống địa điểm
         edit_form.parentNode.insertBefore(createMessage("Tên môn học không được để trống.", -1), edit_form.nextSibling);
-    } else if (tinchi == "" || tinchi.indexOf(".") != -1 || tinchi == "0") { // Nếu trống tín chỉ hoặc không đúng dạng
-        edit_form.parentNode.insertBefore(createMessage("Số tín chỉ phải là một số nguyên dương lớn hơn 0.", -1), edit_form.nextSibling);
+    } else if (soluongmay == "" || soluongmay.indexOf(".") != -1 || soluongmay == "0") { // Nếu trống số lượng máy hoặc không đúng dạng
+        edit_form.parentNode.insertBefore(createMessage("Số lượng máy phải là một số nguyên dương lớn hơn 0.", -1), edit_form.nextSibling);
     } else {
         // Bắt đầu Ajax Engine và gửi request
         let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
         ajaxEngine.open("POST", "ajax.php", true);
         ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajaxEngine.send("edit=" + 1 + "&mamonthicu=" + old_mamonthi + "&mamonthi=" + mamonthi + "&tenmonthi=" + tenmonthi + "&tinchi=" + tinchi);
+        ajaxEngine.send("edit=" + 1 + "&maphongthicu=" + old_maphongthi + "&maphongthi=" + maphongthi + "&diadiem=" + diadiem + "&soluongmay=" + soluongmay);
         // Xử lý sau khi Ajax trả về
         ajaxEngine.onreadystatechange = function () {
             if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
@@ -148,7 +148,7 @@ edit_button.onclick = function () {
                 refresh_table();
                 var success;
                 var message;
-                if (response.hasOwnProperty("success_msg")) { // Môn học được sửa thành công
+                if (response.hasOwnProperty("success_msg")) { // Phòng thi được sửa thành công
                     success = 1;
                     message = response["success_msg"];
                 } else { // Lỗi
@@ -160,12 +160,12 @@ edit_button.onclick = function () {
             }
         };
         // Làm trống form
-        document.getElementById("mamonthi_edit").value = "";
-        document.getElementById("tenmonthi_edit").value = "";
-        document.getElementById("tinchi_edit").value = "";
-        old_mamonthi = null; // Reset mã môn thi cũ
-        // Xóa thông tin môn đang sửa
-        mondangsua.innerText = "";
+        document.getElementById("maphongthi_edit").value = "";
+        document.getElementById("diadiem_edit").value = "";
+        document.getElementById("soluongmay_edit").value = "";
+        old_maphongthi = null; // Reset mã phòng thi cũ
+        // Xóa thông tin phòng đang sửa
+        phongthidangsua.innerText = "";
     }
 };
 
@@ -201,12 +201,12 @@ function refresh_table() {
                 table.innerHTML = response["table"];
                 // Refresh lại datalist
                 datalist.innerHTML = response["datalist"];
-                tbody_monthi = document.getElementById('tablemonthi').childNodes[1];
-                _data = []; // Xóa hết thông tin môn học cũ để thêm lại
-                for (var i = 0; i < tbody_monthi.childElementCount; i++) {
-                    _data.push([tbody_monthi.childNodes[i].childNodes[0].innerText, tbody_monthi.childNodes[i].childNodes[1].innerText, tbody_monthi.childNodes[i].childNodes[2].innerText]);
+                tbody_phongthi = document.getElementById('tablephongthi').childNodes[1];
+                _data = []; // Xóa hết thông tin phòng thi cũ để thêm lại
+                for (var i = 0; i < tbody_phongthi.childElementCount; i++) {
+                    _data.push([tbody_phongthi.childNodes[i].childNodes[0].innerText, tbody_phongthi.childNodes[i].childNodes[1].innerText, tbody_phongthi.childNodes[i].childNodes[2].innerText]);
                 }
-                $('#tablemonthi').DataTable();
+                $('#tablephongthi').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             }
             // If hash match (data not changed), do nothing.
@@ -223,35 +223,35 @@ function removeElement(elementId) {
     element.parentNode.removeChild(element);
 }
 
-// Auto-complete (Tự động điền cho form sửa môn học dựa trên mã môn học)
-var mondangsua = document.getElementById("mondangsua"); // Thông tin về môn đang sửa
-document.getElementById("mamonthi_edit").onblur = function () {
-    var tenmonhoc_edit = document.getElementById("tenmonthi_edit");
-    var tinchi_edit = document.getElementById("tinchi_edit");
+// Auto-complete (Tự động điền cho form sửa phòng thi dựa trên mã phòng thi)
+var phongthidangsua = document.getElementById("phongthidangsua"); // Thông tin về phòng đang sửa
+document.getElementById("maphongthi_edit").onblur = function () {
+    var diadiem_edit = document.getElementById("diadiem_edit");
+    var soluongmay_edit = document.getElementById("soluongmay_edit");
 
-    // Tìm tên môn học và tín chỉ ứng với mã môn học
+    // Tìm địa điểm và số lượng máy ứng với mã phòng thi
     var list_size = _data.length;
     for (var i = 0; i < list_size; i++) {
         if (_data[i][0] == this.value) {
-            old_mamonthi = this.value;
-            tenmonhoc_edit.value = _data[i][1];
-            tinchi_edit.value = _data[i][2];
-            mondangsua.innerText = "Mã môn đang sửa: " + this.value + "\nTên môn: " + tenmonhoc_edit.value + "\nTín chỉ: " + tinchi_edit.value + "\n\n";
+            old_maphongthi = this.value;
+            diadiem_edit.value = _data[i][1];
+            soluongmay_edit.value = _data[i][2];
+            phongthidangsua.innerText = "Mã phòng đang sửa: " + this.value + "\nĐịa điểm: " + diadiem_edit.value + "\nSố lượng máy: " + soluongmay_edit.value + "\n\n";
             return;
         }
     }
 };
 
-// Hiện môn thi đang xóa
-var mondangxoa = document.getElementById("mondangxoa"); // Thông tin về môn đang xóa
-document.getElementById("mamonthi_delete").onblur = function () {
-    // Tìm tên môn học và tín chỉ ứng với mã môn học
+// Hiện phòng thi đang xóa
+var phongthidangxoa = document.getElementById("phongthidangxoa"); // Thông tin về phòng đang xóa
+document.getElementById("maphongthi_delete").onblur = function () {
+    // Tìm địa điểm và số lượng máy ứng với mã phòng thi
     for (var i = 0; i < _data.length; i++) {
         if (_data[i][0] == this.value) {
-            mondangxoa.innerText = "Mã môn đang xóa: " + this.value + "\nTên môn: " + _data[i][1] + "\nTín chỉ: " + _data[i][2] + "\n\n";
+            phongthidangxoa.innerText = "Mã phòng đang xóa: " + this.value + "\nĐịa điểm: " + _data[i][1] + "\nSố lượng máy: " + _data[i][2] + "\n\n";
             return;
         }
     }
-    // Xóa thông tin về môn đang xóa khi không trùng mã môn.
-    mondangxoa.innerText = "";
+    // Xóa thông tin về phòng đang xóa khi không trùng mã phòng.
+    phongthidangxoa.innerText = "";
 };
