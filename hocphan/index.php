@@ -29,43 +29,46 @@
     <script src="../externals/MDB/js/addons/datatables.min.js"></script>
     <!--Custom CSS-->
     <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
     <?php
         include dirname(__FILE__)."/../include/header.php";
     ?>
-    <div id="table">
-        <!-- Danh sách học phần -->
-        <div id="table-container">
+    <div id="main">
+        <div id="table">
+            <!-- Danh sách học phần -->
+            <div id="table-container">
+                <?php
+                    require_once dirname(__FILE__)."/controller/HocphanController.php";
+                    $hocphanctrl = new \hocphan\controller\HocphanController();
+                    $table = $hocphanctrl->table();
+                    echo $table;
+                    echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                ?>
+            </div>
+            <div id="datalistcontainer">
+                <?php
+                    echo $hocphanctrl->datalist_hocphan();
+                    echo $hocphanctrl->datalist_monthi();
+                ?>
+            </div>
+        </div>
+        <div>
+            <h3>Thêm học phần</h3>
             <?php
-                require_once dirname(__FILE__)."/controller/HocphanController.php";
-                $hocphanctrl = new \hocphan\controller\HocphanController();
-                $table = $hocphanctrl->table();
-                echo $table;
-                echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                // Form thêm học phần
+                echo $hocphanctrl->showAdd();
             ?>
         </div>
-        <div id="datalistcontainer">
+        <div>
+            <h3>Xóa học phần</h3>
+            <div id="hocphandangxoa"></div>
             <?php
-                echo $hocphanctrl->datalist_hocphan();
-                echo $hocphanctrl->datalist_monthi();
+                // Form xóa môn thi
+                echo $hocphanctrl->showDelete();
             ?>
         </div>
-    </div>
-    <div>
-        <h3>Thêm học phần</h3>
-        <?php
-            // Form thêm học phần
-            echo $hocphanctrl->showAdd();
-        ?>
-    </div>
-    <div>
-        <h3>Xóa học phần</h3>
-        <div id="hocphandangxoa"></div>
-        <?php
-            // Form xóa môn thi
-            echo $hocphanctrl->showDelete();
-        ?>
     </div>
     <script src="script.js"></script>
 </body>

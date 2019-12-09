@@ -29,50 +29,53 @@
     <script src="../externals/MDB/js/addons/datatables.min.js"></script>
     <!--Custom CSS-->
     <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
     <?php
         include dirname(__FILE__)."/../include/header.php";
     ?>
-    <!-- Danh sách phòng thi -->
-    <div id="table">
-        <div id="table-container">
+    <div id="main">
+        <!-- Danh sách phòng thi -->
+        <div id="table">
+            <div id="table-container">
+                <?php
+                    require_once dirname(__FILE__)."/controller/PhongthiController.php";
+                    $phongthictrl = new \quanlyphongthi\controller\PhongthiController();
+                    $table = $phongthictrl->table();
+                    echo $table;
+                    echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                ?>
+            </div>
+            <div id='datalistcontainer'>
+                <?php
+                    echo $phongthictrl->datalist();
+                ?>
+            </div>
+        </div>
+        <div>
+            <h3>Thêm phòng thi</h3>
             <?php
-                require_once dirname(__FILE__)."/controller/PhongthiController.php";
-                $phongthictrl = new \quanlyphongthi\controller\PhongthiController();
-                $table = $phongthictrl->table();
-                echo $table;
-                echo "<p id='tablehash' hidden>".hash("sha256", $table)."</p>";
+                // Form thêm phòng thi
+                echo $phongthictrl->showAdd();
             ?>
         </div>
-        <div id='datalistcontainer'>
+        <div>
+            <h3>Xóa phòng thi</h3>
+            <div id="phongthidangxoa"></div>
             <?php
-                echo $phongthictrl->datalist();
+                // Form xóa phòng thi
+                echo $phongthictrl->showDelete();
             ?>
         </div>
-    </div>
-    <div>
-        <h3>Thêm phòng thi</h3>
-        <?php
-            // Form thêm phòng thi
-            echo $phongthictrl->showAdd();
-        ?>
-    </div>
-    <div>
-        <h3>Xóa phòng thi</h3>
-        <div id="phongthidangxoa"></div>
-        <?php
-            // Form xóa phòng thi
-            echo $phongthictrl->showDelete();
-        ?>
-    </div>
-    <div>
-        <h3>Sửa phòng thi</h3>
-        <div id="phongthidangsua"></div>
-        <?php
-            // Form sửa phòng thi
-            echo $phongthictrl->showEdit();
-        ?>
+        <div>
+            <h3>Sửa phòng thi</h3>
+            <div id="phongthidangsua"></div>
+            <?php
+                // Form sửa phòng thi
+                echo $phongthictrl->showEdit();
+            ?>
+        </div>
     </div>
     <script src="script.js"></script>
     <script src="/externals/MDB/js/addons/datatables.min.js"></script>
