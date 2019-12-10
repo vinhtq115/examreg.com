@@ -26,18 +26,25 @@ class getStudentModel extends PDOData{
         }
 
         public function updateDisqualifiedStudent($id,$qualification){
+            // this function is used to update the dukienthi attribute of the sinhvien table on the db
             $sql = "UPDATE `sinhvien` SET `dudieukienduthi`= '$qualification' WHERE `id` = '$id';";
             $this->TrySQL($sql);
         }
 
         public function updateCourse($id , $courseid , $maky){
-            $sql = "INSERT INTO `hocphan`(`soluong`, `mahocphan`, `mamonthi`) VALUES ('$id','$courseid','$maky')";
+            //this function is used to add courses to the database
+            $sql = "INSERT INTO `sinhvien_hoc_hocphan`(`masinhvien`, `mahocphan`, `idhocky`) VALUES ('$id','$courseid','$maky')";
             $this->TrySQL($sql);
         }
 
-    public function getStudentInfo(){ //getdatafunction
-       $stmt = $this->db->query("SELECT `id`, `hodem`, `ten`, `ngaysinh`, `dudieukienduthi` FROM `sinhvien`;"); // prepare the query for controller
-       return $stmt; // return stmt first then fetch later on controller
-    }
+        public function getStudentInfo(){ //getdatafunction
+           $stmt = $this->db->query("SELECT `id`, `hodem`, `ten`, `ngaysinh`, `dudieukienduthi` FROM `sinhvien` ORDER BY `id` ASC;"); // prepare the query for controller
+           return $stmt; // return stmt first then fetch later on controller
+        }
+
+        public function getStudentCourseHKInfo(){
+            $stmt = $this->db->query("SELECT `masinhvien`, `mahocphan`, `idhocky` FROM `sinhvien_hoc_hocphan` Order By `masinhvien` ASC;"); // prepare the query for controller
+            return $stmt; // return stmt first then fetch later on controller
+        }
 }
 

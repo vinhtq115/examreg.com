@@ -1,21 +1,26 @@
 <?php
 session_start();
-//require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
-require_once dirname(__FILE__)."/../view/getStudentView.php";
+require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
+//require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../controller/getStudentController.php";
-require_once dirname(__FILE__)."/../Classes/PHPExcel.php";
-require dirname(__FILE__)."/../../vendor/autoload.php";
-require_once dirname(__FILE__)."/../../vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php"; // include phpspreadsheet from vendor
+//require dirname(__FILE__)."/../../vendor/autoload.php";
+//require_once dirname(__FILE__)."/../../vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php"; // include phpspreadsheet from vendor
 
 if($_SESSION["isAdmin"] != 1){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
 $control = new getStudentController(); // initiate a controller
-if(isset($_POST["ImportStudent"])){
+if(isset($_POST["ImportStudent"])){  // if the form below is POSTED , these will take action
     $control->getStudentExcel();
 }
 if(isset($_POST["UpdateDis"])){
     $control->updateDisqualified();
+}
+if(isset($_POST["DeleteStudent"])){
+    $control->DeleteStudent();
+}
+if(isset($_POST["UpdateCourses"])){
+    $control->updateCourseSem();
 }
 ?>
 
@@ -33,6 +38,12 @@ if(isset($_POST["UpdateDis"])){
     <link rel="stylesheet" type="text/css" href="/../../css/getStudent.css">
     <link rel="stylesheet" type="text/css" href="/../../css/getStudentTable.css">
     <link rel="stylesheet" type="text/css" href="/../../css/responsive.css">
+    <style>
+        .current{
+            font-family: sans-serif;
+            font-size: large;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
@@ -49,6 +60,9 @@ if(isset($_POST["UpdateDis"])){
     <ul class="navbar-nav">
         <li><a href = "#">Student Management</li>
     </ul>
+<!--    <ul class = "navbar-nav">-->
+<!--        <li class="current">Xin chào --><?php //echo $_SESSION["id"]?><!--</li>-->
+<!--    </ul>-->
 </nav>
 
 <div id="side-menu" class="side-nav">
@@ -102,6 +116,47 @@ if(isset($_POST["UpdateDis"])){
     <br />
 </div>
 
+<div class="container box">
+    <h3 align="center">Delete Student</h3></h3><br />
+    <form method="POST" enctype="multipart/form-data">
+        <label>Chọn file Excel</label>
+        <input type="file" name="file"/>
+        <br />
+        <button type="submit" name="DeleteStudent" class="btn btn-info" value="DelStud">Tải lên</button>
+    </form>
+    <br />
+    <br />
+</div>
+
+<div class = "container box">
+    <table class="content-table">
+        <thead>
+        <tr>
+            <td>Mã sinh viên</td>
+            <td>Ma hoc phan</td>
+            <td>Ma Ki Thi</td>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+            $control->getSVCourseSem();
+        ?>
+        </tbody>
+    </table>
+</div>
+
+<div class="container box">
+    <h3 align="center">Update Courses</h3></h3><br />
+    <form method="POST" enctype="multipart/form-data">
+        <label>Chọn file Excel</label>
+        <input type="file" name="file"/>
+        <br />
+        <button type="submit" name="UpdateCourses" class="btn btn-info" value="DelStud">Tải lên</button>
+    </form>
+    <br />
+    <br />
+</div>
+<!--TODO: Add delete for every update-->
 </div>
 
 <script>
