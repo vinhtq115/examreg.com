@@ -64,10 +64,8 @@ class getStudentController
 
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
                 $id = $sheetData[$row]['A'];
-                $courseID = $sheetData[$row]['B'];
-                $kythi = $sheetData[$row]['C'];
                 $model = new getStudentModel();
-                $model->updateCourse($id , $courseID , $kythi);
+                $model->DeleteStudentWID($id);
             }
         }
     }
@@ -101,7 +99,7 @@ class getStudentController
         //echo $stmt->rowCount();
         if($stmt->rowCount()){
             while($row= $stmt->fetch()){
-                echo "<tr><td>".$row['masinhvien']."</td><td>".$row["mahocphan"]."</td><td>".$row["mahocky"]."</td></tr>";
+                echo "<tr><td>".$row['masinhvien']."</td><td>".$row["mahocphan"]."</td><td>".$row["idhocky"]."</td></tr>";
             } // print the vars out on the table
         }
     }

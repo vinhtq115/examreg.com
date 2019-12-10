@@ -42,9 +42,14 @@ class getStudentModel extends PDOData{
            return $stmt; // return stmt first then fetch later on controller
         }
 
-        public function getStudentCourseHKInfo(){
+        public function getStudentCourseHKInfo(){ // get course and semester to display
             $stmt = $this->db->query("SELECT `masinhvien`, `mahocphan`, `idhocky` FROM `sinhvien_hoc_hocphan` Order By `masinhvien` ASC;"); // prepare the query for controller
             return $stmt; // return stmt first then fetch later on controller
+        }
+
+        public function DeleteStudentWID($idSV){ //delete function
+            $sql = "DELETE FROM `sinhvien` WHERE `id` = '$idSV'";
+            $this->TrySQL($sql);
         }
 }
 
