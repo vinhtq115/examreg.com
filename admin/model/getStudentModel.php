@@ -51,5 +51,10 @@ class getStudentModel extends PDOData{
             $sql = "DELETE FROM `sinhvien` WHERE `id` = '$idSV'";
             $this->TrySQL($sql);
         }
+
+        public function deleteCourseHK($sinhvien,$hocphan,$hocky){
+            $sql = "DELETE FROM `sinhvien_hoc_hocphan` WHERE `masinhvien`='$sinhvien' AND `mahocphan`='$hocphan' AND `idhocky`='$hocky';";
+            $this->TrySQL($sql);
+        }
 }
 
