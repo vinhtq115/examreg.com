@@ -99,7 +99,12 @@ class getStudentController
         //echo $stmt->rowCount();
         if($stmt->rowCount()){
             while($row= $stmt->fetch()){
-                echo "<tr><td>".$row['masinhvien']."</td><td>".$row["mahocphan"]."</td><td>".$row["idhocky"]."</td></tr>";
+                $idSV = $row['masinhvien'];
+                $mph = $row['mahocphan'];
+                $hk = $row['idhocky'];
+                echo "<tr><td>".$row['masinhvien']."</td><td>".$row["mahocphan"]."</td><td>".$row["idhocky"]."</td><td><button 
+class = \"btn btn-danger\"  name = \"delete_btn\" data-id1 = \"$idSV\" data-id2 = \"$mph\" data-id3 = \"$hk\">Delete</button></td></tr>";
+                //Im creating custom ID data-id1,2,3 on this button so I can get it using jquery and use ajax to post it to a php file
             } // print the vars out on the table
         }
     }

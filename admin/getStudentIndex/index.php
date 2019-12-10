@@ -32,17 +32,13 @@ if(isset($_POST["UpdateCourses"])){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student Managing</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="/../../bootstrap/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <link href="/../../bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/../../css/getStudent.css">
     <link rel="stylesheet" type="text/css" href="/../../css/getStudentTable.css">
     <link rel="stylesheet" type="text/css" href="/../../css/responsive.css">
     <style>
-        .current{
-            font-family: sans-serif;
-            font-size: large;
-        }
     </style>
 </head>
 <body>
@@ -135,6 +131,7 @@ if(isset($_POST["UpdateCourses"])){
             <td>Mã sinh viên</td>
             <td>Ma hoc phan</td>
             <td>Ma Ki Thi</td>
+            <td></td>
         </tr>
         </thead>
         <tbody>
@@ -147,11 +144,11 @@ if(isset($_POST["UpdateCourses"])){
 
 <div class="container box">
     <h3 align="center">Update Courses</h3></h3><br />
-    <form method="POST" enctype="multipart/form-data">
+    <form align = "center" method="POST" enctype="multipart/form-data">
         <label>Chọn file Excel</label>
         <input type="file" name="file"/>
         <br />
-        <button type="submit" name="UpdateCourses" class="btn btn-info" value="DelStud">Tải lên</button>
+        <button type="submit" name="UpdateCourses" class="btn btn-info" value="UpdateStudent">Tải lên</button>
     </form>
     <br />
     <br />
@@ -169,6 +166,25 @@ if(isset($_POST["UpdateCourses"])){
         document.getElementById('side-menu').style.width = '0';
         document.getElementById('main').style.marginLeft = '0';
     }
+
+    $(document).ready(function () {
+        $(document).on('click', '.delete btn', function(){
+            var id1=$(this).data("id1");
+            var id2=$(this).data("id2");
+            var id3=$(this).data("id3");
+            if(confirm("Are you sure you want to delete this?"))
+            {
+                $.ajax({
+                    url:"deleteSvHocPhanKyThi.php",
+                    method:"POST",
+                    data:{id1:id1,id2:id2,id3:id3},
+                    dataType:"text",
+                    success:function(data){
+                    }
+                });
+            }
+        });
+    });
 </script>
 </body>
 
