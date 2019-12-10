@@ -71,6 +71,7 @@ if(isset($_POST["DeleteCourse"])){
     <a href="http://examreg.com/admin/view/AdminView.php" >HomePage</a>
     <a href="http://examreg.com/monthi/">Subjects</a>
     <a href="http://examreg.com/hocphan/">Courses</a>
+    <a href="http://examreg.com/account/view/ChangePassView.php">Change Password</a>
     <a href="http://examreg.com/account/view/LogoutView.php">Log out</a>
 </div>
 

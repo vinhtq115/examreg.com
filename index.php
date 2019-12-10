@@ -24,7 +24,7 @@ if($_SESSION["id"] != ""){
     <link rel="stylesheet" href="bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" type = "text/css" href = "css/loginView.css">
     <script src="/jquery/jquery-3.4.1.js" type = "text/javascript"></script>
-    <script src = "account/ajaxLogin.js" type = "text/javascript"></script>
+
 </head>
 <body>
 <?php

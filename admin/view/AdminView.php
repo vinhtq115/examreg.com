@@ -1,5 +1,4 @@
 <?php
-
     require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
     session_start();
 
@@ -18,9 +17,18 @@
     <script src="../../jquery/jquery-3.4.1.js"></script>
 </head>
 <body>
-    <?php
-        include dirname(__FILE__)."/../../include/header.php";
-    ?>
+<header>
+    <div class="container">
+        <div id="branding">
+            <h1><span class="highlight">Exam</span>Reg</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="current"><a id = "logout-btn" href="http://examreg.com/account/view/LogoutView.php">Log out</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
     <section id="showcase">
         <div class="container">
             <h1>TRANG QUẢN TRỊ HỆ THỐNG KỲ THI</h1>
@@ -57,9 +65,9 @@
                 <p>Trang quản lý danh sách phòng thi và thông tin từng phòng</p>
             </div>
             <div class="box">
-                <a href="http://examreg.com/account/view/LogoutView.php"><img src="../../css/img/clock.png"></a>
-                <h3>Đăng xuất</h3>
-                <p>Thoát khỏi hệ thống ExamReg</p>
+                <a href="http://examreg.com/account/view/ChangePassView.php"><img src="../../css/img/clock.png"></a>
+                <h3>Change Password</h3>
+                <p>Change the user password. Both student and admin can use</p>
             </div>
         </div>
     </section>
