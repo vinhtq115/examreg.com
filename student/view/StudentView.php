@@ -19,22 +19,22 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
     <link rel="stylesheet" type="text/css" href="/../../css/getStudent.css">
     <style>
         .navbar{
-            background-color:#6495ED;
+            background-color:#1F7DDE;
             overflow:hidden;
-            height:90px;
+            height:55px;
         }
         .content-table thead tr {
-            background-color: #6495ED;
+            background-color: #1F7DDE;
             color: #ffffff;
             text-align: left;
             font-weight: bold;
         }
         .content-table tbody tr:last-of-type {
-            border-bottom: 2px solid #6495ED;
+            border-bottom: 2px solid #1F7DDE;
         }
         .current{
             font-family: sans-serif;
-            color: crimson;
+            color: #ffffff;
             font-size: x-large;
         }
     </style>
@@ -56,12 +56,13 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
     <ul class="navbar-nav">
         <li><img src="/../../css/img/logo.png" alt="examregImage"></li>
     </ul>
-    <ul class ="navbar-nav">
-        <li class="current">Xin chào <?php echo $_SESSION["id"]?></li>
-    </ul>
+<!--    <ul class ="navbar-nav">-->
+<!--        <li class="current">Xin chào --><?php //echo $_SESSION["id"]?><!--</li>-->
+<!--    </ul>-->
 </nav>
 <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+    <a href="http://examreg.com/account/view/ChangePassView.php">Change Password</a>
     <a href="http://examreg.com/account/view/LogoutView.php">Log out</a>
 </div>
 
