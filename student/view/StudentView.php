@@ -32,6 +32,9 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
         .content-table tbody tr:last-of-type {
             border-bottom: 2px solid #1F7DDE;
         }
+        .container box{
+            margin-left: 50px;
+        }
         .current{
             font-family: sans-serif;
             color: #ffffff;
@@ -86,13 +89,17 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
         <table class="content-table">
             <thead>
             <tr>
+<!--                TODO:use backend to get these 3 atrribute-->
                 <td>Course ID</td>
                 <td>SubjectID</td>
                 <td>SubjectName</td>
+                <td>Semester</td>
+                <td>Year Begin</td>
+                <td>Year End</td>
             </tr>
             </thead>
             <tbody>
-
+                <?php $controller->getCourseAndSubject();?>
             </tbody>
         </table>
     </div>

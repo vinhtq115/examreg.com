@@ -11,34 +11,43 @@ class StudentController{
         $idsinhvien = '';
         $hodem = '';
         $ten = '';
-        $stmt = $model->getStudentInfo($ssid);
+        $stmt = $model->getStudentInfo($ssid); //get student info
         $stmt->execute([$id,$idsinhvien,$hodem,$ten]);
         //echo $stmt->rowCount();
         if($stmt->rowCount()){
             while($row= $stmt->fetch()){ // this will only run one time
-                $_SESSION["IDSV"] = $row["idsinhvien"];
                 echo "<tr><td>".$row["idsinhvien"]."</td><td>".$row["hodem"]."</td><td>".$row["ten"]."</td></tr>";
             }
         }
     }
 
     public function getCourseAndSubject(){
-        $svid = $_SESSION["IDSV"]; // get the session , the Session will alway be initialized
+        $svid = $_SESSION["id"]; // get the session , the Session will alway be initialized
         // by the function above as controller will call it first
         $model = new StudentModel();
         $mahocphan = "";
         $idhocky = "";
-        $stmt = $model->CourseOfStudent(); // this get all the courses ID of the student loggin in
-        $stmt -> execute([$mahocphan,$idhocky]);
+        $stmt = $model->CourseOfStudent($svid); // this get all the courses ID of the student loggin in
+        $stmt -> execute([$mahocphan,$idhocky]); // it have the ID of the course's semester as well
         if($stmt->rowCount()){
-           while($row = $stmt->fetch()){
-               $ranID = $row["mahocphan"];
-               $new_stmt = $model->getSubjectSt($ranID);
+           while($row = $stmt->fetch()){ // for every row return a courseID and a semID
+               $courseID = $row["mahocphan"]; // get course ID
+               $semID = $row["idhocky"];//get the semester
+               //this part get the subject
+               $new_stmt = $model->getSubjectSt($courseID); //get the subject of course
                $mamonthi = "";
                $tenmonthi = "";
-               $new_stmt-> execute([$mamonthi ,$tenmonthi]);
+               //this part get the semester info
+               $new_stmt2 = $model->getSemester($semID);
+               $sem = "";
+               $yearBegin = "";
+               $yearEnd = "";
+               $new_stmt2->execute([$sem,$yearBegin,$yearEnd]);
+               $new_stmt-> execute([$mamonthi ,$tenmonthi]); //new variance for data to parse to fetch
                while($new_row = $new_stmt->fetch()){
-                   echo "<tr><td>".$ranID."</td><td>".$new_row["mamonthi"]."</td><td>".$new_row["tenmonthi"]."</td></tr>";
+                   $new_sem = $new_stmt2->fetch(); // this will fetch once only
+                   echo "<tr><td>".$courseID."</td><td>".$new_row["mamonthi"]."</td><td>".$new_row["tenmonthi"]."</td>
+                         <td>".$new_sem["sem"]."</td><td>".$new_sem["yearBegin"]."</td><td>".$new_sem["yearEnd"]."</td></tr>";
                }
            }
         }
