@@ -39,15 +39,15 @@ class StudentController{
                $tenmonthi = "";
                //this part get the semester info
                $new_stmt2 = $model->getSemester($semID);
-               $sem = "";
-               $yearBegin = "";
-               $yearEnd = "";
-               $new_stmt2->execute([$sem,$yearBegin,$yearEnd]);
+               $ky = "";
+               $nambatdau = "";
+               $namketthuc = "";
+               $new_stmt2->execute([$ky,$nambatdau,$namketthuc]);
                $new_stmt-> execute([$mamonthi ,$tenmonthi]); //new variance for data to parse to fetch
                while($new_row = $new_stmt->fetch()){
                    $new_sem = $new_stmt2->fetch(); // this will fetch once only
                    echo "<tr><td>".$courseID."</td><td>".$new_row["mamonthi"]."</td><td>".$new_row["tenmonthi"]."</td>
-                         <td>".$new_sem["sem"]."</td><td>".$new_sem["yearBegin"]."</td><td>".$new_sem["yearEnd"]."</td></tr>";
+                         <td>".$new_sem["ky"]."</td><td>".$new_sem["nambatdau"]."</td><td>".$new_sem["namketthuc"]."</td></tr>";
                }
            }
         }

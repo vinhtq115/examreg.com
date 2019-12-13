@@ -44,6 +44,9 @@ if(isset($_POST["DeleteCourse"])){
         .btn btn-primary btn-block{
             background-color: #0b2e13;
         }
+        .content-table{
+            margin-left: 25px;
+        }
     </style>
 </head>
 <body>
@@ -60,19 +63,17 @@ if(isset($_POST["DeleteCourse"])){
 
     <ul class="navbar-nav">
         <li><a href = "#">Student Management</li>
+<!--        this is no link , this is just abusing the good css of tag a-->
     </ul>
-<!--    <ul class = "navbar-nav">-->
-<!--        <li class="current">Xin chào --><?php //echo $_SESSION["id"]?><!--</li>-->
-<!--    </ul>-->
 </nav>
 
 <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="http://examreg.com/admin/view/AdminView.php" >HomePage</a>
-    <a href="http://examreg.com/monthi/">Subjects</a>
-    <a href="http://examreg.com/hocphan/">Courses</a>
-    <a href="http://examreg.com/account/view/ChangePassView.php">Change Password</a>
-    <a href="http://examreg.com/account/view/LogoutView.php">Log out</a>
+    <a href="http://examreg.com/admin/view/AdminView.php" ><img src = "/../../css/img/smallhome.png">HomePage</a>
+    <a href="http://examreg.com/monthi/"><img src = "/../../css/img/smallbook.png">Subjects</a>
+    <a href="http://examreg.com/hocphan/"><img src = "/../../css/img/smallglass.png">Courses</a>
+    <a href="http://examreg.com/account/view/ChangePassView.php"><img src = "/../../css/img/smalltext.png">Alter Password</a>
+    <a href="http://examreg.com/account/view/LogoutView.php"><img src = "/../../css/img/smalldoor.png">Log out</a>
 </div>
 
 <div id="main">

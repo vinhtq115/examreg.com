@@ -25,6 +25,16 @@ class getStudentModel extends PDOData{
             $this->TrySQL($sql);
         }
 
+        public function UpdateStudentInfo($idSV , $hodem , $ten ,$dateOfBirth){
+            $sql = "UPDATE `sinhvien` SET `id`='$idSV',`hodem`='$hodem',`ten`='$ten',`ngaysinh`='$dateOfBirth' WHERE `id` = '$idSV';";
+            $this->trySQL($sql);
+        }
+
+        public function UpdateAccount($password,$idsinhvien){
+            $sql = "UPDATE `account` SET `id`= '$idsinhvien',`password`= PASSWORD('$password'),`idsinhvien`= '$idsinhvien' WHERE `account` = '$idsinhvien';";
+            $this->trySQL($sql);
+        }
+
         public function updateDisqualifiedStudent($id,$qualification){
             // this function is used to update the dukienthi attribute of the sinhvien table on the db
             $sql = "UPDATE `sinhvien` SET `dudieukienduthi`= '$qualification' WHERE `id` = '$id';";
@@ -40,6 +50,11 @@ class getStudentModel extends PDOData{
         public function getStudentInfo(){ //getdatafunction
            $stmt = $this->db->query("SELECT `id`, `hodem`, `ten`, `ngaysinh`, `dudieukienduthi` FROM `sinhvien` ORDER BY `id` ASC;"); // prepare the query for controller
            return $stmt; // return stmt first then fetch later on controller
+        }
+
+        public function getIDOnly($idSV){
+            $stmt = $this->db->query("SELECT `id` FROM `sinhvien` WHERE `id` = '$idSV';"); // prepare the query for controller
+            return $stmt; // return stmt first then fetch later on controller
         }
 
         public function getStudentCourseHKInfo(){ // get course and semester to display

@@ -24,8 +24,16 @@ class getStudentController
                 $account = $sheetData[$row]['E'];
                 $pass = $sheetData[$row]['F'];
                 $model = new getStudentModel();
-                $model -> addStudentData($id , $hodem , $ten , $ngaysinh);
-                $model -> createStudentAccount($pass,$id);
+                $stmt = $model->getIDOnly($id);
+                $idSV = ""; // this won't do much
+                $stmt ->fetch([$idSV]);
+                if($stmt->rowCount() > 0){ // the id already exist
+                    $model -> UpdateStudentInfo($id , $hodem , $ten , $ngaysinh); // update the information of the id
+                    $model -> UpdateAccount($pass,$id); // update the password of the Student
+                }else{ //the id doesn't exist
+                    $model -> addStudentData($id , $hodem , $ten , $ngaysinh);
+                    $model -> createStudentAccount($pass,$id);
+                }
             }
         }
     }

@@ -3,7 +3,7 @@ require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
 session_start();
 require_once dirname(__FILE__)."/../controller/StudentController.php";
 
-if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
+if(empty($_SESSION["id"])){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
 ?>
@@ -32,13 +32,10 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
         .content-table tbody tr:last-of-type {
             border-bottom: 2px solid #1F7DDE;
         }
-        .container box{
-            margin-left: 50px;
-        }
-        .current{
-            font-family: sans-serif;
-            color: #ffffff;
-            font-size: x-large;
+
+        #info-box{
+            table-layout: auto;
+            width: 95%;
         }
     </style>
     <link
@@ -59,14 +56,11 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
     <ul class="navbar-nav">
         <li><img src="/../../css/img/logo.png" alt="examregImage"></li>
     </ul>
-<!--    <ul class ="navbar-nav">-->
-<!--        <li class="current">Xin chào --><?php //echo $_SESSION["id"]?><!--</li>-->
-<!--    </ul>-->
 </nav>
 <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="http://examreg.com/account/view/ChangePassView.php">Change Password</a>
-    <a href="http://examreg.com/account/view/LogoutView.php">Log out</a>
+    <a href="http://examreg.com/account/view/ChangePassView.php"><img src = "/../../css/img/smalltext.png">Alter Password</a>
+    <a href="http://examreg.com/account/view/LogoutView.php"><img src = "/../../css/img/smalldoor.png">Log out</a>
 </div>
 
 <div id="main">
@@ -85,8 +79,10 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
                 ?>
             </tbody>
         </table>
-    <div align="center" class = "container box">
-        <table class="content-table">
+        <br/>
+        <br/>
+<!--    <div align="center" class = "container box">-->
+        <table class="content-table" id = "info-box">
             <thead>
             <tr>
 <!--                TODO:use backend to get these 3 atrribute-->
@@ -102,7 +98,12 @@ if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
                 <?php $controller->getCourseAndSubject();?>
             </tbody>
         </table>
-    </div>
+        <br/>
+        <br/>
+        <table>
+<!--            TODO: Add a cathi available to hoc phan for dang ky-->
+        </table>
+<!--    </div>-->
 </div>
 
 <script>
