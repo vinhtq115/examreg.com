@@ -78,6 +78,21 @@ class KythiController {
     }
 
     /**
+     * Hàm kiểm tra xem kỳ thi có tồn tại hay không.
+     * @param $makythi: Mã kỳ thi.
+     * @return mixed
+     */
+    public function check($makythi) {
+        $data = json_decode(json_encode($this->kythi->getAll()), true);
+        foreach ($data as $key => $value) {
+            if ($value["id"] == $makythi) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Hàm sửa kỳ thi.
      * @param $makythi: Mã kỳ thi.
      * @param $nambatdau: Năm bắt đầu kỳ.

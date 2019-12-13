@@ -21,7 +21,8 @@ class CathiController {
      */
     public function __construct($kythi) {
         $this->cathi = new Cathi($kythi);
-        $this->data = json_encode($this->cathi->getAll());
+        $data = $this->cathi->getAll();;
+        $this->data = json_encode($data);
         $this->view = new CathiView($this->data);
         $this->view->setYear($this->getYear()[0]);
         $this->hocphanctrl = new HocphanController();

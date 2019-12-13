@@ -37,8 +37,16 @@
 </head>
 <body>
     <?php
+        // Kiểm tra xem kỳ thi có tồn tại hay không
+        $kythi = $_GET["kythi"];
+        require_once dirname(__FILE__)."/../kythi/controller/KythiController.php";
+        $kythictrl = new kythi\controller\KythiController();
+        if (!$kythictrl->check($kythi)) {
+            header("Location: http://examreg.com/404.html");
+        }
+        // Kỳ thi tồn tại trong hệ thống
         require_once dirname(__FILE__)."/controller/CathiController.php";
-        $cathictrl = new \cathi\controller\CathiController($_GET["kythi"]);
+        $cathictrl = new \cathi\controller\CathiController($kythi);
         include dirname(__FILE__)."/../include/header.php";
         echo "<p id='kythi' hidden>".$_GET["kythi"]."</p>"; // Chứa mã kỳ thi
     ?>
