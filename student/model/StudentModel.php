@@ -33,4 +33,9 @@ class StudentModel extends PDOData{
         $stmt = $this->db->query("SELECT `ky`, `nambatdau`, `namketthuc` FROM `kythi` WHERE `id` = '$idsem';;");
         return $stmt;
     }
+
+    public function getQualification($idSV){
+        $stmt = $this->db->query("SELECT  `dudieukienduthi` FROM `sinhvien` WHERE `id` = '$idSV';");
+        return $stmt;
+    }
 }

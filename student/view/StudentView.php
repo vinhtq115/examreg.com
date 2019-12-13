@@ -6,6 +6,12 @@ require_once dirname(__FILE__)."/../controller/StudentController.php";
 if(empty($_SESSION["id"])){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
+
+$random_controller = new StudentController();
+$decide = $random_controller->isQuaified(); //to check if student is qualified to take the exam
+if(!$decide){ // return false
+    header("Location:http://examreg.com/NotQualified.html");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

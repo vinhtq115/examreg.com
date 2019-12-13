@@ -52,4 +52,18 @@ class StudentController{
            }
         }
     }
+
+    public function isQuaified(){
+        $model = new StudentModel();
+        $idSV = $_SESSION["id"];
+        $model->getQualification($idSV);
+        $stmt = $model->getQualification($idSV);
+        $dudienkienthi = "";
+        $stmt->execute([$dudienkienthi]);
+        $row = $stmt->fetch();
+        if($row["dudieukienduthi"] == 0){
+            return false;
+        }
+        return true;
+    }
 }
