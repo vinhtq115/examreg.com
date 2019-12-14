@@ -20,10 +20,10 @@ if($_SESSION["id"] != ""){
           content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">
     <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
     <title>Exam Register</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/externals/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/externals/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" type = "text/css" href = "css/loginView.css">
-    <script src="/jquery/jquery-3.4.1.js" type = "text/javascript"></script>
+    <script src="/externals/jquery/jquery-3.4.1.js" type = "text/javascript"></script>
 
 </head>
 <body>

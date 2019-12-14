@@ -18,7 +18,7 @@
     <!--MDBootstrap Datatables-->
     <link rel="stylesheet" href="/externals/MDB/css/addons/datatables.min.css">
     <!--JQuery-->
-    <script src="/jquery/jquery-3.4.1.min.js"></script>
+    <script src="/externals/jquery/jquery-3.4.1.min.js"></script>
     <!--Bootstrap tooltips-->
     <script src="/externals/popper.js/umd/popper.min.js"></script>
     <!--Bootstrap core JavaScript-->

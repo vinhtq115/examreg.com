@@ -69,7 +69,7 @@ class HocphanView {
      * Hiện form thêm học phần.
      */
     public function addForm() {
-        $html = "<form method=\"post\" id='form_add' autocomplete='off'>
+        $html = "<form id='form_add' autocomplete='off'>
                   <div class=\"form-group\">
                     <label for=\"mamonthi_add\">Mã môn thi</label>
                     <input type=\"text\" list='danhsachmonhoc' class=\"form-control\" id=\"mamonthi_add\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm học phần\" maxlength='20' minlength='1' required>

@@ -142,7 +142,7 @@ function refresh_table() {
                 // Refresh lại datalist
                 refresh_datalist_hocphan(); // Học phần
                 refresh_datalist_monthi(); // Môn thi
-                $('#tablemonthi').DataTable();
+                $('#tablehocphan').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             }
             // If hash match (data not changed), do nothing.
