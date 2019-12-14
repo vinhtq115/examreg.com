@@ -23,7 +23,7 @@ class CathiController {
         $this->cathi = new Cathi($kythi);
         $data = $this->cathi->getAll();;
         $this->data = json_encode($data);
-        $this->view = new CathiView($this->data);
+        $this->view = new CathiView($this->data, $kythi);
         $this->view->setYear($this->getYear()[0]);
         $this->hocphanctrl = new HocphanController();
     }
@@ -103,6 +103,28 @@ class CathiController {
      */
     public function delete($macathi) {
         return $this->cathi->delete($macathi);
+    }
+
+    /**
+     * Kiểm tra xem ca thi có tồn tại hay không
+     * @param $macathi: Mã ca thi
+     * @return bool|\stdClass
+     */
+    public function check($macathi) {
+        $data = json_decode(json_encode($this->cathi->getAll()), true);
+        foreach ($data as $key => $value) {
+            if ($value["macathi"] == $macathi) {
+                $cathi = new \stdClass();
+                $cathi->macathi = $value["macathi"];
+                $cathi->mahocphan = $value["mahocphan"];
+                $cathi->tenmonthi = $value["tenmonthi"];
+                $cathi->ngaythi = $value["ngaythi"];
+                $cathi->giobatdau = $value["giobatdau"];
+                $cathi->gioketthuc = $value["gioketthuc"];
+                return $cathi;
+            }
+        }
+        return false;
     }
 
     /**

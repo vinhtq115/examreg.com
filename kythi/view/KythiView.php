@@ -35,7 +35,7 @@ class KythiView {
                 $html .= "<td class='nambatdau align-middle'>" . $value["nambatdau"] . "</td>";
                 $html .= "<td class='namketthuc align-middle'>" . $value["namketthuc"] . "</td>";
                 $html .= "<td class='ky align-middle'>" . $value["ky"] . "</td>";
-                $html .= "<td class='qlct align-middle'><a class='btn btn-indigo btn-sm m-0' href='http://examreg.com/kythi/".$value["id"]."'>Xem ca thi</a></td>";
+                $html .= "<td class='qlct align-middle'><a class='btn btn-indigo btn-sm m-0' href='http://examreg.com/kythi/".$value["id"]."'>Ca thi</a></td>";
                 $html .= "</tr>";
             }
         }

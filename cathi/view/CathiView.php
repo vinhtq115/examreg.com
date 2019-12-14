@@ -8,13 +8,15 @@ class CathiView {
     private $data; // Danh sách ca thi
     private $nambatdau; // Năm bắt đầu
     private $namketthuc; // Năm kết thúc
+    private $kythi; // Kỳ thi
 
     /**
      * CathiView constructor.
      * @param $data: Chứa danh sách ca thi (JSON).
      */
-    public function __construct($data) {
+    public function __construct($data, $kythi) {
         $this->data = json_decode($data, true);
+        $this->kythi = $kythi;
     }
 
     /**
@@ -38,22 +40,24 @@ class CathiView {
         $html .= "<th class='th-sm'>Ngày thi</th>";
         $html .= "<th class='th-sm'>Giờ bắt đầu</th>";
         $html .= "<th class='th-sm'>Giờ kết thúc</th>";
+        $html .= "<th class='th-sm qlpt'>Phòng thi</th>";
         $html .= "</tr></thead><tbody>";
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
             foreach ($this->data as $key => $value) {
                 $html .= "<tr>";
-                $html .= "<td>" . $value["macathi"] . "</td>";
-                $html .= "<td>" . $value["mahocphan"] . "</td>";
-                $html .= "<td>" . $value["tenmonthi"] . "</td>";
-                $html .= "<td>" . $value["ngaythi"] . "</td>";
-                $html .= "<td>" . $value["giobatdau"] . "</td>";
-                $html .= "<td>" . $value["gioketthuc"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["macathi"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["mahocphan"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["tenmonthi"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["ngaythi"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["giobatdau"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["gioketthuc"] . "</td>";
+                $html .= "<td class='qlct align-middle'><a class='btn btn-indigo btn-sm m-0' href='http://examreg.com/kythi/".$this->kythi."/cathi/".$value["macathi"]."'>Phòng thi</a></td>";
                 $html .= "</tr>";
             }
         }
         $html .= "</tbody><tfoot><tr>";
-        $html .= "<th>Mã ca thi</th><th>Mã học phần</th><th>Tên môn thi</th><th>Ngày thi</th><th>Giờ bắt đầu</th><th>Giờ kết thúc</th>";
+        $html .= "<th>Mã ca thi</th><th>Mã học phần</th><th>Tên môn thi</th><th>Ngày thi</th><th>Giờ bắt đầu</th><th>Giờ kết thúc</th><th>Phòng thi</th>";
         $html .= "</tr></tfoot></table>";
 
         return $html;

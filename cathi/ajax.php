@@ -69,7 +69,7 @@
             if (isset($_POST["add"]) && $_POST["add"] == 1) { // Client thêm ca thi
                 if (!isset($_POST["mahocphan"]) || empty($_POST["mahocphan"])) { // Nếu trống mã học phần
                     $res->error_msg = "Mã học phần không được để trống.";
-                } elseif (!preg_match("/^\b[a-zA-Z0-9]+\s[0-9]+\b$/", $_POST["mahocphan"])) { // Mã học phần sai định dạng
+                } elseif (!preg_match("/^\b[a-zA-Z0-9]+\s[0-9]+\b$/", $_POST["mahocphan"]) || strlen($_POST["mahocphan"]) > 20 || strlen($_POST["mahocphan"]) < 1) { // Mã học phần sai định dạng
                     $res->error_msg = "Mã học phần sai định dạng.";
                 } elseif (!isset($_POST["ngaythi"]) || empty($_POST["ngaythi"])) { // Nếu trống ngày thi
                     $res->error_msg = "Ngày thi không được để trống.";

@@ -53,7 +53,7 @@ class PhongthiView {
         for ($i = 0; $i < $size; $i++) {
             $a = json_encode($this->data[$i]);
             $b = json_decode($a);
-            $html .= "<option value=\"".$b->maphongthi."\">Mã phòng thi: ".$b->maphongthi." --- Địa điểm: ".$b->mamonthi." --- Số lượng máy: ".$b->soluongmay;
+            $html .= "<option value=\"".$b->maphongthi."\">Mã phòng thi: ".$b->maphongthi." --- Địa điểm: ".$b->diadiem." --- Số lượng máy: ".$b->soluongmay;
         }
         $html .= "</datalist>";
         return $html;
@@ -87,7 +87,7 @@ class PhongthiView {
         $html = "<form method='post' id='form_delete' autocomplete='off'>
                   <div class='form-group'>
                     <label for='maphongthi_delete'>Mã phòng thi</label>
-                    <input list='danhsachphongthi' type='text' class='form-control' id='maphongthi_delete' name='maphongthi' placeholder='Nhập mã phòng thi cần xóa' required>";
+                    <input list='danhsachphongthi' type='text' class='form-control' id='maphongthi_delete' name='maphongthi' placeholder='Nhập mã phòng thi cần xóa' maxlength='20' minlength='1' required>";
         $html .= "<button type='button' id='delete-button' class='btn btn-danger'>Xóa</button></form>";
         return $html;
     }

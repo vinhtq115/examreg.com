@@ -29,8 +29,7 @@ class Monthi extends PDOData {
      * @return array: Mảng danh sách môn thi.
      */
     public function getAll() {
-        $ret = $this->doQuery("SELECT * FROM monthi ORDER BY tenmonthi");
-        return $ret;
+        return $this->doQuery("SELECT * FROM monthi ORDER BY tenmonthi");
     }
 
     /**

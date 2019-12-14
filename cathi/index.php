@@ -5,9 +5,6 @@
     if($_SESSION["isAdmin"] != 1){
         header("Location:http://examreg.com/account/view/LogoutView.php");
     }
-    if (!isset($_GET["kythi"]) || empty($_GET["kythi"]) || !is_numeric($_GET["kythi"]) || !checkInteger($_GET["kythi"])) {
-        header("Location:http://examreg.com/kythi");
-    }
 ?>
 <html lang="en">
 <head>
@@ -34,6 +31,7 @@
     <!--Custom CSS-->
     <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/kythi.css">
 </head>
 <body>
     <?php
@@ -51,6 +49,7 @@
         echo "<p id='kythi' hidden>".$_GET["kythi"]."</p>"; // Chứa mã kỳ thi
     ?>
     <div id="main">
+        <!-- Thông tin kỳ thi -->
         <div>
             <?php
                 $years = $cathictrl->getYear()[0];
