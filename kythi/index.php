@@ -28,14 +28,51 @@
     <!--MDBootstrap Datatables-->
     <script src="/externals/MDB/js/addons/datatables.min.js"></script>
     <!--Custom CSS-->
-    <link rel="stylesheet" href="../css/custom.css">
-    <link rel="stylesheet" href="../css/kythi.css">
-    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/kythi.css">
+    <!--<link rel="stylesheet" href="../css/header.css">-->
 </head>
 <body>
     <?php
-        include dirname(__FILE__)."/../include/header.php";
+        //include dirname(__FILE__)."/../include/header.php";
     ?>
+    <!--Thanh điều hướng-->
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+        <!-- Tên trang web -->
+        <a class="navbar-brand" href="/">ExamReg</a>
+        <!-- Nội dung thanh điều hướng -->
+        <div class="collapse navbar-collapse">
+            <!-- Đường dẫn -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/monthi">Môn thi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/hocphan">Học phần</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link disabled" href="/kythi">Kỳ thi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/quanlyphongthi">Phòng thi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/getStudentIndex/">Sinh viên</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/view/ChangePassView.php"><i class="fas fa-lock"></i>Đổi mật khẩu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/view/LogoutView.php"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div id="main">
         <!-- Danh sách kỳ thi -->
         <div id="table">

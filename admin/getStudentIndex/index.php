@@ -35,11 +35,11 @@ if(isset($_POST["DeleteCourse"])){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student Managing</title>
-    <script src="/../../bootstrap/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <link href="/../../bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/../../css/getStudent.css">
-    <link rel="stylesheet" type="text/css" href="/../../css/getStudentTable.css">
-    <link rel="stylesheet" type="text/css" href="/../../css/responsive.css">
+    <script src="/externals/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link href="/externals/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/css/getStudent.css">
+    <link rel="stylesheet" type="text/css" href="/css/getStudentTable.css">
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css">
     <style>
         .btn btn-primary btn-block{
             background-color: #0b2e13;
@@ -69,11 +69,11 @@ if(isset($_POST["DeleteCourse"])){
 
 <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="http://examreg.com/admin/view/AdminView.php" ><img src = "/../../css/img/smallhome.png">HomePage</a>
-    <a href="http://examreg.com/monthi/"><img src = "/../../css/img/smallbook.png">Subjects</a>
-    <a href="http://examreg.com/hocphan/"><img src = "/../../css/img/smallglass.png">Courses</a>
-    <a href="http://examreg.com/account/view/ChangePassView.php"><img src = "/../../css/img/smalltext.png">Alter Password</a>
-    <a href="http://examreg.com/account/view/LogoutView.php"><img src = "/../../css/img/smalldoor.png">Log out</a>
+    <a href="http://examreg.com/admin/view/AdminView.php" ><img src = "/css/img/smallhome.png">HomePage</a>
+    <a href="http://examreg.com/monthi/"><img src = "/css/img/smallbook.png">Subjects</a>
+    <a href="http://examreg.com/hocphan/"><img src = "/css/img/smallglass.png">Courses</a>
+    <a href="http://examreg.com/account/view/ChangePassView.php"><img src = "/css/img/smalltext.png">Alter Password</a>
+    <a href="http://examreg.com/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Log out</a>
 </div>
 
 <div id="main">
