@@ -1,5 +1,4 @@
 <?php
-    require_once dirname(__FILE__) . "/../../account/controller/LogoutController.php";
     session_start();
     if($_SESSION["isAdmin"] != 0 || !isset($_SESSION["id"])) {
         header("Location:http://examreg.com/");
@@ -67,6 +66,7 @@
     <div id="main">
         <?php
             echo $controller->showWelcomeMessage();
+            echo $controller->showCurrentSemester();
             echo $controller->showInstruction();
         ?>
     </div>

@@ -1,9 +1,7 @@
 <?php
-    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
-    require_once dirname(__FILE__)."/../utils/Utils.php";
     session_start();
     if($_SESSION["isAdmin"] != 1){
-        header("Location:http://examreg.com/account/view/LogoutView.php");
+        header("Location:http://examreg.com/");
     }
 ?>
 <html lang="en">
@@ -45,7 +43,6 @@
         // Kỳ thi tồn tại trong hệ thống
         require_once dirname(__FILE__)."/controller/CathiController.php";
         $cathictrl = new \cathi\controller\CathiController($kythi);
-        //include dirname(__FILE__)."/../include/header.php";
         echo "<p id='kythi' hidden>".$_GET["kythi"]."</p>"; // Chứa mã kỳ thi
     ?>
     <!--Thanh điều hướng-->

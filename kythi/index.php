@@ -1,8 +1,7 @@
 <?php
-    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
     session_start();
     if($_SESSION["isAdmin"] != 1){
-        header("Location:http://examreg.com/account/view/LogoutView.php");
+        header("Location:http://examreg.com/");
     }
 ?>
 <html lang="en">

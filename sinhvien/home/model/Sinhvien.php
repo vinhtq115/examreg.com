@@ -33,4 +33,12 @@ class Sinhvien extends PDOData {
     public function getInfo() {
         return $this->doQuery("SELECT * FROM sinhvien WHERE id = $this->mssv");
     }
+
+    /**
+     * Lấy kỳ thi hiện tại.
+     * @return array: Mảng chứa kỳ thi hiện tại
+     */
+    public function getCurrentSemester() {
+        return $this->doQuery("SELECT * FROM kythi WHERE active = 1");
+    }
 }

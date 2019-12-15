@@ -1,8 +1,7 @@
 <?php
-    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
     session_start();
     if($_SESSION["isAdmin"] != 1){
-        header("Location:http://examreg.com/account/view/LogoutView.php");
+        header("Location:http://examreg.com/");
     }
 ?>
 <html lang="en">
@@ -53,7 +52,6 @@
         }
 
         // Ca thi tồn tại trong hệ thống
-        //include dirname(__FILE__)."/../include/header.php";
         echo "<p id='kythi' hidden>".$_GET["kythi"]."</p>"; // Chứa mã kỳ thi
         echo "<p id='cathi' hidden>".$_GET["cathi"]."</p>"; // Chứa mã ca thi
     ?>

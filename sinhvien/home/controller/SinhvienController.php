@@ -54,4 +54,9 @@ class SinhvienController {
     public function showInstruction() {
         return $this->view->instruction();
     }
+
+    public function showCurrentSemester() {
+        $current_semester = $this->model->getCurrentSemester();
+        return $this->view->currentSemester(json_encode($current_semester));
+    }
 }

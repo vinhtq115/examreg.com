@@ -33,6 +33,25 @@ class SinhvienView {
     }
 
     /**
+     * Hiện kỳ thi hiện tại.
+     * @param $semester: Mảng kỳ thi hiện tại.
+     * @return string: HTML
+     */
+    public function currentSemester($semester) {
+        $processed = json_decode($semester, true);
+        $html = "<div class='alert alert-primary' role='alert'>";
+        $size = sizeof($processed); // Chứa kích cỡ mảng data
+        if ($size > 0) { // Trả về dữ liệu nếu size > 0
+            foreach ($processed as $key => $value) {
+                $html .= "Kỳ thi hiện tại sẽ diễn ra từ ngày ".$value["ngaybatdau"]." đến ngày ".$value["ngayketthuc"].".";
+                break;
+            }
+        }
+        $html .= "</div>";
+        return $html;
+    }
+
+    /**
      * Hiện hướng dẫn.
      * @return string: HTML
      */
@@ -57,8 +76,13 @@ class SinhvienView {
             $html .= "</div>";
             return $html;
         } else { // Nếu đủ điều kiện dự thi
-            $html = "<div class='alert alert-primary' role='alert'>";
-            $html .= "</div>";
+            $html = "<div>";
+            $html .= "<h1>Thông tin về hệ thống ExamReg</h1>";
+            $html .= "<p>Quy trình đăng ký thi:<ol>";
+            $html .= "<li>Đăng ký ca thi tương ứng với học phần đã học.</li>";
+            $html .= "<li>Xuất lịch thi ra phiếu báo dự thi.</li>";
+            $html .= "<li>In phiếu báo dự thi để mang đi hôm thi.</li>";
+            $html .= "</ol></p></div>";
             return $html;
         }
     }

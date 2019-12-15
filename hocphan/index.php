@@ -1,8 +1,7 @@
 <?php
-    require_once dirname(__FILE__)."/../account/controller/LogoutController.php";
     session_start();
     if($_SESSION["isAdmin"] != 1){
-        header("Location:http://examreg.com/account/view/LogoutView.php");
+        header("Location:http://examreg.com/");
     }
 ?>
 <html lang="en">
@@ -32,9 +31,6 @@
     <!--<link rel="stylesheet" href="../css/header.css">-->
 </head>
 <body>
-    <?php
-        //include dirname(__FILE__)."/../include/header.php";
-    ?>
     <!--Thanh điều hướng-->
     <nav class="navbar navbar-expand-lg navbar-dark primary-color">
         <!-- Tên trang web -->
