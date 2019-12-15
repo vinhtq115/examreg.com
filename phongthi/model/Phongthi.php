@@ -57,8 +57,8 @@ class Phongthi extends PDOData {
 
         // Phòng thi tồn tại trong hệ thống
         // Kiểm tra xem mã phòng thi đã tồn tại trong ca thi chưa
-        $sql = "SELECT * FROM phongthi_cathi WHERE maphongthi = ?";
-        $arr = $this->doPreparedQuery($sql, [$maphongthi]);
+        $sql = "SELECT * FROM phongthi_cathi WHERE maphongthi = ? AND macathi = ?";
+        $arr = $this->doPreparedQuery($sql, [$maphongthi, $this->cathi]);
         if (count($arr) > 0) { // Phòng thi đã có sẵn trong ca thi
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
