@@ -30,12 +30,8 @@
     <!--Custom CSS-->
     <link rel="stylesheet" href="/css/custom.css">
     <link rel="stylesheet" href="/css/kythi.css">
-    <!--<link rel="stylesheet" href="../css/header.css">-->
 </head>
 <body>
-    <?php
-        //include dirname(__FILE__)."/../include/header.php";
-    ?>
     <!--Thanh điều hướng-->
     <nav class="navbar navbar-expand-lg navbar-dark primary-color">
         <!-- Tên trang web -->
@@ -96,6 +92,14 @@
             <?php
                 // Form thêm kỳ thi
                 echo $kythictrl->showAdd();
+            ?>
+        </div>
+        <div>
+            <h3>Chọn kỳ thi hiện tại</h3>
+            <div id="kythidangchon"></div>
+            <?php
+                // Form chọn kỳ thi hiện tại
+                echo $kythictrl->showSetActive();
             ?>
         </div>
         <div>

@@ -39,7 +39,8 @@ class LoginController
                 if($isAdmin == 1){
                     header("Location: http://examreg.com/admin/view/AdminView.php");
                 }else if ($isAdmin == 0){
-                    header("Location: http://examreg.com/student/view/StudentView.php");
+                    /*header("Location: http://examreg.com/student/view/StudentView.php");*/
+                    header("Location: http://examreg.com/sinhvien");
                 }
 
             }else{

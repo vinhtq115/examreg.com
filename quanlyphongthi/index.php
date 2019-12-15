@@ -32,9 +32,6 @@
     <!--<link rel="stylesheet" href="../css/header.css">-->
 </head>
 <body>
-    <?php
-        //include dirname(__FILE__)."/../include/header.php";
-    ?>
     <!--Thanh điều hướng-->
     <nav class="navbar navbar-expand-lg navbar-dark primary-color">
         <!-- Tên trang web -->

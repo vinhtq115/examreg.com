@@ -58,14 +58,23 @@ class KythiController {
     }
 
     /**
+     * Hiện form chọn kỳ thi hiện tại.
+     */
+    public function showSetActive() {
+        return $this->view->chooseActiveSemester();
+    }
+
+    /**
      * Hàm thêm kỳ thi.
-     * @param $nambatdau: Năm bắt đầu kỳ.
-     * @param $namketthuc: Năm kết thúc kỳ.
-     * @param $ky: Số chỉ kỳ.
+     * @param $nambatdau : Năm bắt đầu kỳ.
+     * @param $namketthuc : Năm kết thúc kỳ.
+     * @param $ky : Số chỉ kỳ.
+     * @param $ngaybatdau : Ngày bắt đầu thi.
+     * @param $ngayketthuc : Ngày kết thúc thi.
      * @return int: Số bản ghi được cập nhật.
      */
-    public function add($nambatdau, $namketthuc, $ky) {
-        return $this->kythi->add($nambatdau, $namketthuc, $ky);
+    public function add($nambatdau, $namketthuc, $ky, $ngaybatdau, $ngayketthuc) {
+        return $this->kythi->add($nambatdau, $namketthuc, $ky, $ngaybatdau, $ngayketthuc);
     }
 
     /**
@@ -94,13 +103,24 @@ class KythiController {
 
     /**
      * Hàm sửa kỳ thi.
-     * @param $makythi: Mã kỳ thi.
-     * @param $nambatdau: Năm bắt đầu kỳ.
-     * @param $namketthuc: Năm kết thúc kỳ.
-     * @param $ky: Số chỉ kỳ.
+     * @param $makythi : Mã kỳ thi.
+     * @param $nambatdau : Năm bắt đầu kỳ.
+     * @param $namketthuc : Năm kết thúc kỳ.
+     * @param $ky : Số chỉ kỳ.
+     * @param $ngaybatdau : Ngày bắt đầu thi.
+     * @param $ngayketthuc : Ngày kết thúc thi.
      * @return int: Số bản ghi được cập nhật.
      */
-    public function edit($makythi, $nambatdau, $namketthuc, $ky) {
-        return $this->kythi->edit($makythi, $ky, $nambatdau, $namketthuc);
+    public function edit($makythi, $nambatdau, $namketthuc, $ky, $ngaybatdau, $ngayketthuc) {
+        return $this->kythi->edit($makythi, $ky, $nambatdau, $namketthuc, $ngaybatdau, $ngayketthuc);
+    }
+
+    /**
+     * Chọn kỳ thi hiện tại.
+     * @param $makythi : Mã kỳ thi
+     * @return int : Số bản ghi được cập nhật
+     */
+    public function setActive($makythi) {
+        return $this->kythi->setActive($makythi);
     }
 }

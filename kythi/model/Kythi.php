@@ -34,13 +34,43 @@ class Kythi extends PDOData {
     }
 
     /**
+     * Set kỳ thi hiện tại.
+     * @param $makythi : Mã kỳ thi
+     * @return int : Số bản ghi được cập nhật
+     */
+    public function setActive($makythi) {
+        // Kiểm tra xem mã kỳ thi có tồn tại trong CSDL không
+        $sql = "SELECT * FROM kythi WHERE id = '$makythi'";
+        $arr = $this->doQuery($sql); // Lấy mảng kỳ thi trùng mã vừa nhập
+        if (count($arr) == 0) { // Kỳ thi không tồn tại trong hệ thống
+            return 0;
+        }
+        // Khóa bảng
+        $sql = "LOCK TABLES kythi WRITE";
+        $this->doSql($sql);
+        // Bỏ kỳ thi hiện tại
+        $sql = "UPDATE kythi SET active = 0";
+        $this->doSql($sql);
+        // Set kỳ thi hiện tại
+        $sql = "UPDATE kythi SET active = 1 WHERE kythi.id = '$makythi'";
+        $c = $this->doSql($sql);
+        // Mở khóa bảng
+        $sql = "UNLOCK TABLES";
+        $this->doSql($sql);
+
+        return $c;
+    }
+
+    /**
      * Hàm thêm học kỳ.
      * @param $nambatdau: Năm bắt đầu học kỳ.
      * @param $namketthuc: Năm kết thúc học kỳ.
      * @param $hocky: Học kỳ (1, 2, 3, ...)
+     * @param $ngaybatdau: Ngày bắt đầu thi.
+     * @param $ngayketthuc: Ngày kết thúc thi.
      * @return int Số bản ghi được cập nhật
      */
-    public function add($nambatdau, $namketthuc, $hocky) {
+    public function add($nambatdau, $namketthuc, $hocky, $ngaybatdau, $ngayketthuc) {
         // Khóa bảng
         $sql = "LOCK TABLES kythi WRITE";
         $this->doSql($sql);
@@ -55,7 +85,7 @@ class Kythi extends PDOData {
         }
         // Kỳ thi chưa tồn tại trong hệ thống.
         // Thêm môn học vào CSDL
-        $sql = "INSERT INTO kythi(ky, nambatdau, namketthuc) VALUES ('$hocky', '$nambatdau', '$namketthuc')";
+        $sql = "INSERT INTO kythi(ky, nambatdau, namketthuc, ngaybatdau, ngayketthuc) VALUES ('$hocky', '$nambatdau', '$namketthuc', '$ngaybatdau', '$ngayketthuc')";
         $c = $this->doSql($sql);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
@@ -99,9 +129,11 @@ class Kythi extends PDOData {
      * @param $ky: Số chỉ kỳ thi mới.
      * @param $nambatdau: Năm bắt đầu mới.
      * @param $namketthuc: Năm kết thúc mới.
+     * @param $ngaybatdau: Ngày bắt đầu thi mới.
+     * @param $ngayketthuc: Ngày kết thúc thi mới.
      * @return int: Số bản ghi được cập nhật.
      */
-    public function edit($id, $ky, $nambatdau, $namketthuc) {
+    public function edit($id, $ky, $nambatdau, $namketthuc, $ngaybatdau, $ngayketthuc) {
         // Khóa bảng
         $sql = "LOCK TABLES kythi WRITE";
         $this->doSql($sql);
@@ -124,7 +156,7 @@ class Kythi extends PDOData {
             return 0;
         }
         // Sửa thông tin
-        $sql = "UPDATE kythi SET ky = '$ky', nambatdau = '$nambatdau', namketthuc = '$namketthuc' WHERE kythi.id = '$id'";
+        $sql = "UPDATE kythi SET ky = '$ky', nambatdau = '$nambatdau', namketthuc = '$namketthuc', ngaybatdau = '$ngaybatdau', ngayketthuc = '$ngayketthuc' WHERE kythi.id = '$id'";
         $c = $this->doSql($sql);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
