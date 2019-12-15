@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 14, 2019 at 03:10 PM
+-- Generation Time: Dec 15, 2019 at 05:45 PM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.3.12-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -40,6 +40,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `password`, `isAdmin`, `idsinhvien`) VALUES
+('17021204', '*00A51F3F48415C7D4E8908980D443C29C69B60C9', 0, '17021204'),
 ('17021345', '*4264A63AF9DB6B1D2839E745DBD9297A06700919', 0, '17021345'),
 ('17021353', '*12453C42110E67C856D612317C1B48E4DA5A8333', 0, '17021353'),
 ('17021357', '*00A51F3F48415C7D4E8908980D443C29C69B60C9', 0, '17021357'),
@@ -79,10 +80,11 @@ INSERT INTO `cathi` (`macathi`, `mahocphan`, `makythi`, `ngaythi`, `giobatdau`, 
 (11, 'ELT2035 20', 1, '2017-12-31', '08:00:00', '09:00:00'),
 (12, 'ELT2035 20', 1, '2017-12-30', '08:00:00', '21:00:00'),
 (13, 'PHY1100 2', 1, '2018-01-02', '08:00:00', '09:00:00'),
-(14, 'INT3011 3', 1, '2018-01-02', '09:00:00', '11:00:00'),
 (15, 'MAT1041 1', 1, '2017-12-26', '08:30:00', '10:00:00'),
 (16, 'MAT1093 1', 1, '2017-12-27', '08:00:00', '09:00:00'),
-(17, 'PHY1100 2', 1, '2018-03-01', '08:00:00', '09:00:00');
+(17, 'PHY1100 2', 1, '2018-03-01', '08:00:00', '09:00:00'),
+(18, 'MAT1041 10', 5, '2019-12-24', '08:00:00', '09:30:00'),
+(19, 'ELT2035 20', 5, '2019-12-31', '14:00:00', '15:30:00');
 
 -- --------------------------------------------------------
 
@@ -109,10 +111,8 @@ INSERT INTO `hocphan` (`id`, `mahocphan`, `mamonthi`) VALUES
 (21, 'ELT2035 20', 'ELT2035'),
 (23, 'MAT1093 1', 'MAT1093'),
 (24, 'MAT1041 1', 'MAT1041'),
-(26, 'MAT1041 8', 'MAT1041'),
 (27, 'INT3011 1', 'INT3011'),
-(28, 'INT3011 2', 'INT3011'),
-(29, 'INT3011 3', 'INT3011');
+(28, 'INT3011 2', 'INT3011');
 
 -- --------------------------------------------------------
 
@@ -124,24 +124,23 @@ CREATE TABLE `kythi` (
   `id` int(11) NOT NULL,
   `ky` int(11) NOT NULL,
   `nambatdau` int(4) NOT NULL,
-  `namketthuc` int(4) NOT NULL
+  `namketthuc` int(4) NOT NULL,
+  `ngaybatdau` date NOT NULL,
+  `ngayketthuc` date NOT NULL,
+  `active` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kythi`
 --
 
-INSERT INTO `kythi` (`id`, `ky`, `nambatdau`, `namketthuc`) VALUES
-(1, 1, 2017, 2018),
-(2, 2, 2017, 2018),
-(3, 1, 2018, 2019),
-(4, 2, 2018, 2019),
-(5, 1, 2019, 2020),
-(6, 2, 2019, 2020),
-(7, 1, 2020, 2021),
-(8, 2, 2020, 2021),
-(9, 1, 2021, 2022),
-(10, 2, 2021, 2022);
+INSERT INTO `kythi` (`id`, `ky`, `nambatdau`, `namketthuc`, `ngaybatdau`, `ngayketthuc`, `active`) VALUES
+(1, 1, 2017, 2018, '2017-12-04', '2018-01-07', 0),
+(2, 2, 2017, 2018, '2018-05-21', '2018-06-17', 0),
+(3, 1, 2018, 2019, '2018-12-10', '2019-01-06', 0),
+(4, 2, 2018, 2019, '2019-05-27', '2019-06-16', 0),
+(5, 1, 2019, 2020, '2019-12-09', '2020-01-05', 1),
+(6, 2, 2019, 2020, '2020-05-25', '2020-06-14', 0);
 
 -- --------------------------------------------------------
 
@@ -228,7 +227,10 @@ CREATE TABLE `phongthi_cathi` (
 --
 
 INSERT INTO `phongthi_cathi` (`macathi`, `maphongthi`) VALUES
-(2, 'PM 201-G2');
+(2, 'PM 201-G2'),
+(18, 'PM 208-G2'),
+(18, 'PM 306-G2'),
+(19, 'PM 201-G2');
 
 -- --------------------------------------------------------
 
@@ -270,6 +272,13 @@ CREATE TABLE `sinhvien_cathi_phongthi` (
   `macathi` int(11) NOT NULL,
   `maphongthi` varchar(20) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sinhvien_cathi_phongthi`
+--
+
+INSERT INTO `sinhvien_cathi_phongthi` (`masinhvien`, `macathi`, `maphongthi`) VALUES
+('17021357', 2, 'PM 201-G2');
 
 -- --------------------------------------------------------
 
@@ -367,31 +376,31 @@ ALTER TABLE `sinhvien_hoc_hocphan`
 -- AUTO_INCREMENT for table `cathi`
 --
 ALTER TABLE `cathi`
-  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `hocphan`
 --
 ALTER TABLE `hocphan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `kythi`
 --
 ALTER TABLE `kythi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `phongthi_cathi`
 --
 ALTER TABLE `phongthi_cathi`
-  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `sinhvien_cathi_phongthi`
 --
 ALTER TABLE `sinhvien_cathi_phongthi`
-  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
