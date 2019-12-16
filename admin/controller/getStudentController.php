@@ -15,8 +15,76 @@ class getStudentController
         if(isset($_POST['ImportStudent'])){
             $file = $_FILES['file']['tmp_name']; // the file here is type not name
             $sheetData = getExcelReturnData($file);
+//            print_r($sheetData);
+//            print(sizeof($sheetData[1])); // 6
+            /**
+             * preprocessing phase
+             * the $sheetData should have highest Column equivalent to F
+             * if they do , check every single column name (index at 1)
+             * to make sure it have the same name
+             **/
+            $numberOfColumn = sizeof($sheetData[1]); // number of column of the file
+            if($numberOfColumn != 6){ // the number column uploading this file will be 6
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , please try again");';
+                echo '</script>';
+                return ;
+            }
+            $temp = $sheetData[1]['A']; // initialie collumn
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "id"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the first column, which is supposed to be \'id\'");';
+                echo '</script>';
+                return;
+            }
+            $temp = $sheetData[1]['B'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "hodem"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the second column, which is supposed to be \'hodem\'");';
+                echo '</script>';
+                return;
+            }
+            $temp = $sheetData[1]['C'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "ten"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the third column, which is supposed to be \'ten\'");';
+                echo '</script>';
+                return;
+            }
+            $temp = $sheetData[1]['D'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "ngaysinh"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the fouth column, which is supposed to be \'ngaysinh\'");';
+                echo '</script>';
+                return;
+            }
+            $temp = $sheetData[1]['E'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
 
-            for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
+            if($temp != "account"){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file is not in right format , check the fifth column, which is supposed to be \'account\'");';
+                    echo '</script>';
+                    return;
+            }
+            $temp = $sheetData[1]['F'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+
+            if($temp != "password"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the sixth column, which is supposed to be \'password\'");';
+                echo '</script>';
+                return;
+            }
+
+            /**
+             * adding data to the database
+            **/
+            for($row = 2 ; $row <= sizeof($sheetData) ; $row ++) { // iterate through the row , data start from 2
                 $id = $sheetData[$row]['A'];
                 $hodem = $sheetData[$row]['B'];
                 $ten = $sheetData[$row]['C'];
@@ -26,15 +94,19 @@ class getStudentController
                 $model = new getStudentModel();
                 $stmt = $model->getIDOnly($id);
                 $idSV = ""; // this won't do much
-                $stmt ->fetch([$idSV]);
-                if($stmt->rowCount() > 0){ // the id already exist
-                    $model -> UpdateStudentInfo($id , $hodem , $ten , $ngaysinh); // update the information of the id
-                    $model -> UpdateAccount($pass,$id); // update the password of the Student
-                }else{ //the id doesn't exist
-                    $model -> addStudentData($id , $hodem , $ten , $ngaysinh);
-                    $model -> createStudentAccount($pass,$id);
+                $stmt->fetch([$idSV]);
+                if ($stmt->rowCount() > 0) { // the id already exist
+                    $model->UpdateStudentInfo($id, $hodem, $ten, $ngaysinh); // update the information of the id
+                    $model->UpdateAccount($pass, $id); // update the password of the Student
+                } else { //the id doesn't exist
+                    $model->addStudentData($id, $hodem, $ten, $ngaysinh);
+                    $model->createStudentAccount($pass, $id);
                 }
             }
+
+            echo '<script language="javascript">';
+            echo 'window.alert("Upload successfully");';
+            echo '</script>';
         }
     }
 
