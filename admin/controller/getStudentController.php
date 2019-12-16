@@ -84,29 +84,69 @@ class getStudentController
             /**
              * adding data to the database
             **/
+//            we will create an array to report error in javascript
+            $has_error = 0;
+               $missing_error = "Mising error on:";
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++) { // iterate through the row , data start from 2
+                $execute = 1; // the flag value for error
+                $missing_data = 0; // for every row of data we have a flag to know if it is wrong or not if it wrong dont add it
                 $id = $sheetData[$row]['A'];
+                if(empty($id)){
+                    $missing_data = 1;
+                    $execute = 0;
+
+                }
                 $hodem = $sheetData[$row]['B'];
+                if(empty($hodem)){
+                    $missing_data = 1;
+                    $execute = 0;
+
+                }
                 $ten = $sheetData[$row]['C'];
+                if(empty($ten)){
+                    $missing_data = 1;
+                    $execute = 0;
+
+                }
                 $ngaysinh = $sheetData[$row]['D'];
-                $account = $sheetData[$row]['E'];
+                if(empty($ngaysinh)){
+                    $missing_data = 1;
+                    $execute = 0;
+
+                }
+                $account = $sheetData[$row]['E']; // this is ignored
+
                 $pass = $sheetData[$row]['F'];
+                if(empty($pass)){
+                    $missing_data = 1;
+                    $execute = 0;
+
+                }
+
                 $model = new getStudentModel();
                 $stmt = $model->getIDOnly($id);
-                $idSV = ""; // this won't do much
+                $idSV = ""; // this won't do much but helping fetch the data
                 $stmt->fetch([$idSV]);
-                if ($stmt->rowCount() > 0) { // the id already exist
-                    $model->UpdateStudentInfo($id, $hodem, $ten, $ngaysinh); // update the information of the id
-                    $model->UpdateAccount($pass, $id); // update the password of the Student
-                } else { //the id doesn't exist
-                    $model->addStudentData($id, $hodem, $ten, $ngaysinh);
-                    $model->createStudentAccount($pass, $id);
-                }
+                if($execute == 1){ // no error happen
+                    if ($stmt->rowCount() > 0) { // the id already exist
+                        $model->UpdateStudentInfo($id, $hodem, $ten, $ngaysinh); // update the information of the id
+                        $model->UpdateAccount($pass, $id); // update the password of the Student
+                    } else{ //the id doesn't exist
+                        $model->addStudentData($id, $hodem, $ten, $ngaysinh); // add the student info with new id
+                        $model->createStudentAccount($pass, $id); // update student password
+                    }}
             }
 
-            echo '<script language="javascript">';
-            echo 'window.alert("Upload successfully");';
-            echo '</script>';
+            if($has_error == 0) { // if error occur
+                echo '<script language="javascript">';
+                echo 'window.alert("Upload successfully");';
+                echo '</script>';
+            }
+            else {
+                echo '<script language = "javascript">
+                       alert(\"$error\");
+                      </script>';
+            }
         }
     }
 
