@@ -4,6 +4,11 @@
 //require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../model/getStudentModel.php";
 require_once dirname(__FILE__)."/../../utils/getExcelData.php";
+/**
+ * these are global variance used for index javascript
+ **/
+$decision = 1; // make decsion for errorAddStudent
+$errorAddStudent = "";
 class getStudentController
 {
     private $model; // set up model
@@ -143,17 +148,20 @@ class getStudentController
                         $model->createStudentAccount($pass, $id); // update student password
                     }}
             }
-            $error = "";
-            $error += $missing_error;
+            echo '<script language="javascript">';
+            echo 'var tmp = <?php echo $error?>';
+            echo '</script>';
+            //$error += $missing_error;
             if($has_error == 0) { // if error occur
                 echo '<script language="javascript">';
                 echo 'window.alert("Upload successfully");';
                 echo '</script>';
             }
             else {
-                echo "<script language = \"javascript\">
-                       alert('<?php echo $error?>\);
-                      </script>";
+                 global $decision ;
+                 global $errorAddStudent; // this will be edited hella it
+                 $decision = 0; // change the global decisionS
+                 $errorAddStudent = "Upload unsccessfully";
             }
         }
     }
