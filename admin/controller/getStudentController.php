@@ -15,7 +15,7 @@ class getStudentController
         if(isset($_POST['ImportStudent'])){
             $file = $_FILES['file']['tmp_name']; // the file here is type not name
             $sheetData = getExcelReturnData($file);
-//            print_r($sheetData);
+            print_r($sheetData);
 //            print(sizeof($sheetData[1])); // 6
             /**
              * preprocessing phase
@@ -85,44 +85,51 @@ class getStudentController
              * adding data to the database
             **/
 //            we will create an array to report error in javascript
-            $has_error = 0;
+               $has_error = 0; // use to decide if should return ("Upload successfully or not")
                $missing_error = "Mising error on:";
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++) { // iterate through the row , data start from 2
                 $execute = 1; // the flag value for error
                 $missing_data = 0; // for every row of data we have a flag to know if it is wrong or not if it wrong dont add it
                 $id = $sheetData[$row]['A'];
-                if(empty($id)){
+                if($id == "null"){
                     $missing_data = 1;
                     $execute = 0;
-
+                    $has_error = 1;
                 }
+                echo $id;
                 $hodem = $sheetData[$row]['B'];
-                if(empty($hodem)){
+                if($hodem == "null"){
                     $missing_data = 1;
                     $execute = 0;
-
+                    $has_error = 1;
                 }
+                echo $hodem;
                 $ten = $sheetData[$row]['C'];
-                if(empty($ten)){
+                if($ten == "null"){
                     $missing_data = 1;
                     $execute = 0;
-
+                    $has_error = 1;
                 }
+                echo $ten;
                 $ngaysinh = $sheetData[$row]['D'];
-                if(empty($ngaysinh)){
+                if($ngaysinh == "null"){
                     $missing_data = 1;
                     $execute = 0;
-
+                    $has_error = 1;
                 }
+                echo $ngaysinh;
                 $account = $sheetData[$row]['E']; // this is ignored
-
                 $pass = $sheetData[$row]['F'];
-                if(empty($pass)){
+                if($pass == "null"){
                     $missing_data = 1;
                     $execute = 0;
-
+                    $has_error = 1;
                 }
-
+                echo $pass;
+                if($missing_data == 1) // if there is a missing data error do this
+                {
+                    $missing_error += "\n line $row";
+                }
                 $model = new getStudentModel();
                 $stmt = $model->getIDOnly($id);
                 $idSV = ""; // this won't do much but helping fetch the data
@@ -136,16 +143,17 @@ class getStudentController
                         $model->createStudentAccount($pass, $id); // update student password
                     }}
             }
-
+            $error = "";
+            $error += $missing_error;
             if($has_error == 0) { // if error occur
                 echo '<script language="javascript">';
                 echo 'window.alert("Upload successfully");';
                 echo '</script>';
             }
             else {
-                echo '<script language = "javascript">
-                       alert(\"$error\");
-                      </script>';
+                echo "<script language = \"javascript\">
+                       alert('<?php echo $error?>\);
+                      </script>";
             }
         }
     }
