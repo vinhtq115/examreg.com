@@ -182,6 +182,11 @@ if(isset($_POST["DeleteCourse"])){
         document.getElementById('main').style.marginLeft = '0';
     }
 
+        var errorAddStudentError = <?php echo json_encode($errorAddStudent);?> get these global variance
+        var call = <?php echo json_encode($decision);?> // get the global variance
+        if(call == 0){
+            window.alert(errorAddStudentError);
+        }
 </script>
 </body>
 
