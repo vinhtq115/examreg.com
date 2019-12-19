@@ -237,6 +237,38 @@ active_button.onclick = function () {
     }
 };
 
+// Hành vi cho nút tắt kỳ thi hiện tại
+let disable_active_button = document.getElementById('disable-active-button');
+disable_active_button.onclick = function () {
+    // Xóa thông báo cũ
+    if (document.getElementById("message") != null) {
+        removeElement("message");
+    }
+    // Bắt đầu Ajax Engine và gửi request
+    let ajaxEngine = new XMLHttpRequest(); // Tạo đối tượng Ajax Engine
+    ajaxEngine.open("POST", "ajax.php", true);
+    ajaxEngine.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    ajaxEngine.send("disable=" + 1);
+    // Xử lý sau khi Ajax trả về
+    ajaxEngine.onreadystatechange = function () {
+        if (ajaxEngine.readyState == 4 && ajaxEngine.status == 200) { // OK
+            let response = JSON.parse(ajaxEngine.responseText);
+            refresh_table();
+            var success;
+            var message;
+            if (response.hasOwnProperty("success_msg")) {
+                success = 1;
+                message = response["success_msg"];
+            } else { // Lỗi
+                success = -1;
+                message = response["error_msg"];
+            }
+            // Thêm vào sau form active
+            active_form.parentNode.insertBefore(createMessage(message, success), active_form.nextSibling);
+        }
+    };
+};
+
 // Hàm tạo thông báo
 function createMessage(_message, success) {
     var message = document.createElement("div");

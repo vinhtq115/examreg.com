@@ -108,6 +108,13 @@
                     $res->error_msg = "Kỳ thi không tồn tại trong hệ thống.";
                 }
             }
+        } elseif (isset($_POST["disable"]) && $_POST["disable"] == 1) { // Nếu là disable
+            $count = $kythictrl->disableActive();
+            if ($count >= 1) { // Thành công nếu có 1+ bản ghi được update.
+                $res->success_msg = "Đã tắt kỳ thi hiện tại";
+            } else { // Thất bại nếu không có bản ghi nào được update.
+                $res->error_msg = "Không có kỳ thi nào đang là kỳ thi hiện tại.";
+            }
         } elseif (isset($_POST["edit"]) && $_POST["edit"] == 1) { // Nếu là edit
             if (!isset($_POST["makythi"]) || empty($_POST["makythi"])) { // Nếu trống mã kỳ thi
                 $res->error_msg = "Mã kỳ thi không được để trống.";

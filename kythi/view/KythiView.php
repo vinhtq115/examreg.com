@@ -153,7 +153,8 @@ class KythiView {
                         <label for='makythi'>Mã kỳ thi</label>
                         <input list='danhsachkythi' type='text' class='form-control' id='makythi_active' name='makythi' placeholder='Nhập mã kỳ thi' minlength='1' maxlength='11' required>
                     </div>
-                    <button type='button' class='btn btn-primary' id='active-button'>Đặt làm kỳ thi hiện tại.</button>
+                    <button type='button' class='btn btn-primary' id='active-button'>Đặt làm kỳ thi hiện tại</button>
+                    <button type='button' class='btn btn-secondary' id='disable-active-button'>Tắt kỳ thi hiện tại</button>
                 </form>";
         return $html;
     }

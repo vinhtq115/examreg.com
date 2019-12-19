@@ -123,4 +123,8 @@ class KythiController {
     public function setActive($makythi) {
         return $this->kythi->setActive($makythi);
     }
+
+    public function disableActive() {
+        return $this->kythi->disableActive();
+    }
 }

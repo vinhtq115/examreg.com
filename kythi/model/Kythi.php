@@ -62,6 +62,24 @@ class Kythi extends PDOData {
     }
 
     /**
+     * Bỏ kỳ thi hiện tại.
+     * @return int : Số bản ghi được cập nhật
+     */
+    public function disableActive() {
+        // Khóa bảng
+        $sql = "LOCK TABLES kythi WRITE";
+        $this->doSql($sql);
+        // Bỏ kỳ thi hiện tại
+        $sql = "UPDATE kythi SET active = 0";
+        $c = $this->doSql($sql);
+        // Mở khóa bảng
+        $sql = "UNLOCK TABLES";
+        $this->doSql($sql);
+
+        return $c;
+    }
+
+    /**
      * Hàm thêm học kỳ.
      * @param $nambatdau: Năm bắt đầu học kỳ.
      * @param $namketthuc: Năm kết thúc học kỳ.
