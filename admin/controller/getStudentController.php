@@ -94,6 +94,7 @@ class getStudentController
              **/
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++) { // iterate through the row , data start from 2
                 $id = $sheetData[$row]['A'];
+                $ids = preg_replace('/\s+/', '', $id); // delete all  white space
                 if($id == "null"){
                     $missing_data = 1;
                     $has_error = 1;
@@ -109,7 +110,7 @@ class getStudentController
                     $has_error = 1;
                 }
 //                echo $id;
-                $hodem = $sheetData[$row]['B'];
+                $hodem = $sheetData[$row]['B']; //ho dem need white space
                 if($hodem == "null"){
                     $missing_data = 1;
                     $has_error = 1;
@@ -120,6 +121,7 @@ class getStudentController
                 }
 //                echo $hodem;
                 $ten = $sheetData[$row]['C'];
+                $ten = preg_replace('/\s+/', '', $ten); // delete all  white space
                 if($ten == "null"){
                     $missing_data = 1;
                     $has_error = 1;
@@ -130,6 +132,7 @@ class getStudentController
                 }
 //                echo $ten;
                 $ngaysinh = $sheetData[$row]['D'];
+                $ngaysinh = preg_replace('/\s+/', '', $ngaysinh); // delete all  white space
                 if($ngaysinh == "null"){
                     $missing_data = 1;
                     $has_error = 1;
@@ -144,6 +147,7 @@ class getStudentController
 //                echo $ngaysinh;
                 $account = $sheetData[$row]['E']; // this is ignored
                 $pass = $sheetData[$row]['F'];
+                $pass = preg_replace('/\s+/', '', $pass); // delete all  white space
                 if($pass == "null"){
                     $missing_data = 1;
                     $has_error = 1;
@@ -160,6 +164,10 @@ class getStudentController
                 $ngaysinh = $sheetData[$row]['D'];
                 $account = $sheetData[$row]['E']; // this is ignored
                 $pass = $sheetData[$row]['F'];
+                $id = preg_replace('/\s+/', '', $id); // delete all  white space
+                $ten = preg_replace('/\s+/', '', $ten); // delete all  white space
+                $ngaysinh = preg_replace('/\s+/', '', $ngaysinh); // delete all  white space
+                $account = preg_replace('/\s+/', '', $account); // delete all  white space
                 $model = new getStudentModel();
                 $stmt = $model->getIDOnly($id);
                 $idSV = ""; // this won't do much but helping fetch the data
@@ -245,11 +253,108 @@ class getStudentController
         if(isset($_POST['UpdateDis'])){
             $file = $_FILES['file']['tmp_name']; // the file here is type not name
             $sheetData = getExcelReturnData($file);
+            /**preprocessing**/
+            $has_error = 0 ;
+            $missing_data = 0;
+            $wrong_format = 0;
+            $numberOfColumn = sizeof($sheetData[1]); // number of column of the file
+            if($numberOfColumn != 2){ // the number column uploading this file will be 6
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , please try again");';
+                echo '</script>';
+                return ;
+            }
+            $temp = $sheetData[1]['A'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+
+            if($temp != "id"){ // check file format
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the first column, which is supposed to be \'id\'");';
+                echo '</script>';
+                return ;
+            }
+            $temp = $sheetData[1]['B'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "qualification"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the second column, which is supposed to be \'qualification\'");';
+                echo '</script>';
+                return ;
+            }
+            for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
+                $idsinhvien = $sheetData[$row]['A'];
+                $idsinhvien = preg_replace('/\s+/', '', $idsinhvien); // delete all  white space
+                if($idsinhvien == "null"){ // is empty
+                    $has_error = 1;
+                    $missing_data = 1;
+                }
+                if(strlen($idsinhvien) > 20){ // longer than limit in database
+                    $has_error = 1;
+                    $wrong_format = 1;
+                }
+                if(ctype_digit($idsinhvien)){ // check if ID is digit only
+                    continue;
+                }else{
+                    $wrong_format= 1;
+                    $has_error = 1;
+                }
+                $qualification = $sheetData[$row]['B'];
+                $qualification = preg_replace('/\s+/', '', $qualification); // delete all  white space
+                if($qualification == "null"){
+                    $has_error = 1;
+                    $missing_data = 1;
+                }
+                if(strlen($qualification) > 20){
+                    $has_error = 1;
+                    $wrong_format = 1;
+                }
+                if($qualification == "1" || $qualification == "0" || $qualification == 1 ||$qualification == 0){ // the format for qualification
+                    continue;
+                }else{
+                    $has_error = 1;
+                    $wrong_format = 1;
+                }
+            }
+            if($has_error == 1){
+                $execute = 0; //what to do
+                if($missing_data == 1){
+                    $execute = 1;
+                }
+                if($wrong_format == 1){
+                    $execute = 2;
+                }
+                if($missing_data == 1 && $wrong_format == 1){
+                    $execute = 12;
+                }
+                if($execute == 1){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have empty/null data");';
+                    echo '</script>';
+                }
+                if($execute == 2){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have wrong data format in some data");';
+                    echo '</script>';
+                }
+                if($execute == 12){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have empty/null data and wrong data format in some data");';
+                    echo '</script>';
+                }
+            }
+            /**
+             * execute the function
+             **/
+            if($has_error == 0){
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
                 $idsinhvien = $sheetData[$row]['A'];
                 $qualification = $sheetData[$row]['B'];
                 $model = new getStudentModel();
                 $model->updateDisqualifiedStudent($idsinhvien,$qualification);
+            }
+                echo '<script language="javascript">';
+                echo 'window.alert("Update Successfully");';
+                echo '</script>';
             }
         }
     }
