@@ -9,7 +9,7 @@ class LoginView
                 <div class=\"modal-content\">
                     <div class=\"modal-header\">
                         <h4 class=\"modal-title\">
-                            <span class = \"form-title\" >Sign In</span>
+                            <span class = \"form-title\" >SIGN IN</span>
                         </h4>
                     </div>
                     <div class=\"modal-body\">
@@ -27,7 +27,7 @@ class LoginView
                                 </div>
                             </div>
                             <div class=\"form-group\">
-                                <button type=\"submit\" id = \"submit-btn\" class=\"btn btn-primary btn-block btn-lg\">Sign In</button>
+                                <button type=\"submit\" id = \"submit-btn\" class=\"btn btn-primary btn-block btn-lg\">SIGN IN</button>
                             </div>
                         </form>
                     </div>

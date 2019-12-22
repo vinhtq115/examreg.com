@@ -25,13 +25,13 @@ body {
     color: #999;
     border-radius: 1px;
     margin-bottom: 15px;
-    background: #d9f6fc;
+    background: #e6ffe6;
     border: 1px solid #f3f3f3;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 25px;
-}#d9f6fc
+}
 .modal-login .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 .modal-login label {
     font-weight: normal;
@@ -54,18 +54,20 @@ body {
     border-width: 0 0 1px 0;
     padding-left: 12px;
     border-radius: 0;
+    padding-bottom: 10px;
 }
 .modal-login .btn {
-    font-size: 16px;
+    padding-top: 10px;
+    font-size: 20px;
     font-weight: bold;
-    background: #17a2b8;
+    background: #0ad5f5;
     border-radius: 3px;
     border: none;
     min-width: 140px;
     outline: none !important;
 }
 .modal-login .btn:hover, .modal-login .btn:focus {
-    background: #17a2b8;
+    background: #0ad5f5;
 }
 .modal-login a {
     color: #f2f2f2;
@@ -85,15 +87,15 @@ body {
     font-size: 21px;
 }
 .form-title{
-    font-family: Poppins-Bold;
-    font-weight: bolder;
-    font-size: 24px;
-    color: #17a2b8;
+    font-family:  Times;
+    font-weight: bold;
+    font-size: 30px;
+    color: #0ad5f5;
     line-height: 1.2;
     text-align: center;
     width: 100%;
     display: block;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
 }
 #myModal{
     margin-top: 300px;
