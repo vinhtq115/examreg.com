@@ -29,7 +29,6 @@ if($_SESSION["id"] != ""){
 <body>
 <?php
         $usercontroller = new LoginController();//call the controller
-        $usercontroller->__construct();
    ?>
 
 </body>

@@ -8,7 +8,9 @@ class LoginView
             <div class=\"modal-dialog modal-login\">
                 <div class=\"modal-content\">
                     <div class=\"modal-header\">
-                        <h4 class=\"modal-title\">Sign In</h4>
+                        <h4 class=\"modal-title\">
+                            <span class = \"form-title\" >Sign In</span>
+                        </h4>
                     </div>
                     <div class=\"modal-body\">
                         <form action=\"\" method=\"post\">
