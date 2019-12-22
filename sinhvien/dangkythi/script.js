@@ -115,3 +115,8 @@ function removeElement(elementId) {
     var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
 }
+
+// Hành vi cho nút download
+document.getElementById("download").onclick = function () {
+    window.open("download.php");
+};

@@ -89,6 +89,10 @@
                 echo "<p id='table2hash' hidden>".hash("sha256", $registered_table)."</p>";
             ?>
         </div>
+        <div class="float-right">
+            <button id="print" class="btn btn-default"><i class="fas fa-print"></i> In phiếu báo dự thi</button>
+            <button id="download" class="btn btn-primary"><i class="fas fa-download"></i> Download</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
