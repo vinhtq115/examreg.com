@@ -4,9 +4,6 @@
 //require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../model/getStudentModel.php";
 require_once dirname(__FILE__)."/../../utils/getExcelData.php";
-/**
- * these are global variance used for index javascript
- **/
 
 class getStudentController
 {
@@ -88,8 +85,8 @@ class getStudentController
              * adding data to the database
             **/
 //            we will create an array to report error in javascript
-               $has_error = 0; // use to decide if should return ("Upload successfully or not")
-               $missing_data = 0;
+               $has_error = 0; // use to decide if add to data base or not
+               $missing_data = 0; //turn one upon equivalent error
                $date_error = 0;
                $other_data_error = 0;
              /**
@@ -101,10 +98,24 @@ class getStudentController
                     $missing_data = 1;
                     $has_error = 1;
                 }
+                if(ctype_digit($id)){ // check if ID is digit only
+                    continue;
+                }else{
+                    $other_data_error = 1;
+                    $has_error = 1;
+                }
+                if(strlen($id) > 20){ // longer the database limit
+                    $other_data_error = 1;
+                    $has_error = 1;
+                }
 //                echo $id;
                 $hodem = $sheetData[$row]['B'];
                 if($hodem == "null"){
                     $missing_data = 1;
+                    $has_error = 1;
+                }
+                if(strlen($hodem) > 50){
+                    $other_data_error = 1;
                     $has_error = 1;
                 }
 //                echo $hodem;
@@ -113,7 +124,10 @@ class getStudentController
                     $missing_data = 1;
                     $has_error = 1;
                 }
-
+                if(strlen($ten) > 50){
+                    $other_data_error = 1;
+                    $has_error = 1;
+                }
 //                echo $ten;
                 $ngaysinh = $sheetData[$row]['D'];
                 if($ngaysinh == "null"){
@@ -124,6 +138,7 @@ class getStudentController
                     continue;
                 } else {
                     $date_error = 1;
+                    $has_error = 1;
                 }
 
 //                echo $ngaysinh;
@@ -133,7 +148,6 @@ class getStudentController
                     $missing_data = 1;
                     $has_error = 1;
                 }
-
             }
             /**
              * now decide to add to database or not
