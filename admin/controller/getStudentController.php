@@ -258,7 +258,7 @@ class getStudentController
             $missing_data = 0;
             $wrong_format = 0;
             $numberOfColumn = sizeof($sheetData[1]); // number of column of the file
-            if($numberOfColumn != 2){ // the number column uploading this file will be 6
+            if($numberOfColumn != 2){ // the number column uploading this file will be 3
                 echo '<script language="javascript">';
                 echo 'window.alert("The file is not in right format , please try again");';
                 echo '</script>';
@@ -363,13 +363,124 @@ class getStudentController
         if(isset($_POST["UpdateCourses"])){
             $file = $_FILES['file']['tmp_name']; // the file here is type not name
             $sheetData = getExcelReturnData($file);
+            $has_error = 0;
+            /**
+             * preparing step
+             **/
+            $numberOfColumn = sizeof($sheetData[1]); // number of column of the file
+            if($numberOfColumn != 3){ // the number column uploading this file will be 3
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , please try again");';
+                echo '</script>';
+                return ;
+            }
+            $temp = $sheetData[1]['A'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "idSV"){ // check file format
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the first column, which is supposed to be \'id\'");';
+                echo '</script>';
+                return ;
+            }
+            $temp = $sheetData[1]['B'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "courseID"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the second column, which is supposed to be \'course\'");';
+                echo '</script>';
+                return ;
+            }
+            $temp = $sheetData[1]['C'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "termID"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the third column, which is supposed to be \'term\'");';
+                echo '</script>';
+                return ;
+            }
+            $has_error = 0;
+            $wrong_format = 0;
+            $missing_data = 0;
+            for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
+                $id = $sheetData[$row]['A'];
+                $courseID = $sheetData[$row]['B'];
+                $kythi = $sheetData[$row]['C'];
+                $id = preg_replace('/\s+/', '', $id); // delete all  white space
+                $courseID = preg_replace('/\s+/', '', $courseID); // delete all  white space
+                $kythi = preg_replace('/\s+/', '', $kythi); // delete all  white space
+                if(!ctype_digit($id)){ // if digit string
+                    $wrong_format = 1;
+                    $has_error = 1;
+                }
+                if(!ctype_digit($kythi)){ // if digit string
+                    $wrong_format = 1;
+                    $has_error = 1;
+                }
+                if(strlen($id) > 11){
+                    $wrong_format = 1;
+                    $has_error = 1;
+                }
+                if(strlen($courseID)>20){
+                    $wrong_format = 1;
+                    $has_error = 1;
+                }
+                if(strlen($kythi)>20){
+                    $wrong_format = 1;
+                    $has_error = 1;
+                }
+                if($id == "null"){
+                    $missing_data = 1;
+                    $has_error = 1;
+                }
+                if($courseID == "null"){
+                    $missing_data = 1;
+                    $has_error = 1;
+                }
+                if($kythi == "null"){
+                    $missing_data = 1;
+                    $has_error = 1;
+                }
+            }
+            if($has_error == 1){
+                $execute = 0;
+                if($missing_data == 1){
+                    $execute = 1;
+                }
+                if($wrong_format == 1){
+                    $execute = 2;
+                }
+                if($missing_data == 1 && $wrong_format == 1){
+                    $execute = 12;
+                }
+                if($execute == 1){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("File appears to have missing/null data");';
+                    echo '</script>';
+                    return ;
+                }
+                if($execute == 2){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("File appears to have wrong data format");';
+                    echo '</script>';
+                    return ;
+                }
+                if($execute == 12){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("File appears to have missing/null data and wrong data format");';
+                    echo '</script>';
+                    return ;
+                }
+            }
+            /**
+            **/
+            if($has_error == 0){
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
                 $id = $sheetData[$row]['A'];
                 $courseID = $sheetData[$row]['B'];
                 $kythi = $sheetData[$row]['C'];
                 $model = new getStudentModel();
                 $model->updateCourse($id , $courseID , $kythi);
-            }
+            }}
         }
     }
 
@@ -377,12 +488,40 @@ class getStudentController
         if(isset($_POST["DeleteStudent"])){
             $file = $_FILES['file']['tmp_name']; // the file here is type not name
             $sheetData = getExcelReturnData($file);
+            $collumnNumber = sizeof($sheetData[1]);
+            if($collumnNumber != 1){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , please try again");';
+                echo '</script>';
+                return ;
+            }
+            $temp = $sheetData[1]['A'];
+            $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+            if($temp != "id"){
+                echo '<script language="javascript">';
+                echo 'window.alert("The file is not in right format , check the collumn name which is supposed to be \'id\'");';
+                echo '</script>';
+                return ;
+            }
+            for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
+                $temp = $sheetData[$row]['A'];
+                $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
+                if(!ctype_digit($temp)){ // if digit string
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appear to have wrong data format");';
+                    echo '</script>';
+                    return ;
+                }
+            }
 
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++){ // iterate through the row , data start from 2
                 $id = $sheetData[$row]['A'];
                 $model = new getStudentModel();
                 $model->DeleteStudentWID($id);
             }
+            echo '<script language="javascript">';
+            echo 'window.alert("The data have been removed");';
+            echo '</script>';
         }
     }
 
