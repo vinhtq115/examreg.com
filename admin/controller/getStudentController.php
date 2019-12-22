@@ -7,8 +7,7 @@ require_once dirname(__FILE__)."/../../utils/getExcelData.php";
 /**
  * these are global variance used for index javascript
  **/
-$decision = 1; // make decsion for errorAddStudent
-$errorAddStudent = "";
+
 class getStudentController
 {
     private $model; // set up model
@@ -20,8 +19,7 @@ class getStudentController
         if(isset($_POST['ImportStudent'])){
             $file = $_FILES['file']['tmp_name']; // the file here is type not name
             $sheetData = getExcelReturnData($file);
-            print_r($sheetData);
-//            print(sizeof($sheetData[1])); // 6
+//            print_r($sheetData);
             /**
              * preprocessing phase
              * the $sheetData should have highest Column equivalent to F
@@ -63,7 +61,7 @@ class getStudentController
             $temp = preg_replace('/\s+/', '', $temp); // delete all  white space
             if($temp != "ngaysinh"){
                 echo '<script language="javascript">';
-                echo 'window.alert("The file is not in right format , check the fouth column, which is supposed to be \'ngaysinh\'");';
+                echo 'window.alert("The file is not in right format , check the fourth column, which is supposed to be \'ngaysinh\'");';
                 echo '</script>';
                 return;
             }
@@ -91,77 +89,140 @@ class getStudentController
             **/
 //            we will create an array to report error in javascript
                $has_error = 0; // use to decide if should return ("Upload successfully or not")
-               $missing_error = "Mising error on:";
+               $missing_data = 0;
+               $date_error = 0;
+               $other_data_error = 0;
+             /**
+              * this is a pre-procedure step
+             **/
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++) { // iterate through the row , data start from 2
-                $execute = 1; // the flag value for error
-                $missing_data = 0; // for every row of data we have a flag to know if it is wrong or not if it wrong dont add it
                 $id = $sheetData[$row]['A'];
                 if($id == "null"){
                     $missing_data = 1;
-                    $execute = 0;
                     $has_error = 1;
                 }
-                echo $id;
+//                echo $id;
                 $hodem = $sheetData[$row]['B'];
                 if($hodem == "null"){
                     $missing_data = 1;
-                    $execute = 0;
                     $has_error = 1;
                 }
-                echo $hodem;
+//                echo $hodem;
                 $ten = $sheetData[$row]['C'];
                 if($ten == "null"){
                     $missing_data = 1;
-                    $execute = 0;
                     $has_error = 1;
                 }
-                echo $ten;
+
+//                echo $ten;
                 $ngaysinh = $sheetData[$row]['D'];
                 if($ngaysinh == "null"){
                     $missing_data = 1;
-                    $execute = 0;
                     $has_error = 1;
+                } //check data format
+                if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$ngaysinh)) {
+                    continue;
+                } else {
+                    $date_error = 1;
                 }
-                echo $ngaysinh;
+
+//                echo $ngaysinh;
                 $account = $sheetData[$row]['E']; // this is ignored
                 $pass = $sheetData[$row]['F'];
                 if($pass == "null"){
                     $missing_data = 1;
-                    $execute = 0;
                     $has_error = 1;
                 }
-                echo $pass;
-                if($missing_data == 1) // if there is a missing data error do this
-                {
-                    $missing_error += "\n line $row";
-                }
+
+            }
+            /**
+             * now decide to add to database or not
+            **/
+            if($has_error == 0){
+                for($row = 2 ; $row <= sizeof($sheetData) ; $row ++) { // iterate through the row , data start from 2
+                $id = $sheetData[$row]['A'];
+                $hodem = $sheetData[$row]['B'];
+                $ten = $sheetData[$row]['C'];
+                $ngaysinh = $sheetData[$row]['D'];
+                $account = $sheetData[$row]['E']; // this is ignored
+                $pass = $sheetData[$row]['F'];
                 $model = new getStudentModel();
                 $stmt = $model->getIDOnly($id);
                 $idSV = ""; // this won't do much but helping fetch the data
                 $stmt->fetch([$idSV]);
-                if($execute == 1){ // no error happen
-                    if ($stmt->rowCount() > 0) { // the id already exist
-                        $model->UpdateStudentInfo($id, $hodem, $ten, $ngaysinh); // update the information of the id
-                        $model->UpdateAccount($pass, $id); // update the password of the Student
-                    } else{ //the id doesn't exist
-                        $model->addStudentData($id, $hodem, $ten, $ngaysinh); // add the student info with new id
-                        $model->createStudentAccount($pass, $id); // update student password
-                    }}
+                if ($stmt->rowCount() > 0) { // the id already exist
+                    $model->UpdateStudentInfo($id, $hodem, $ten, $ngaysinh); // update the information of the id
+                    $model->UpdateAccount($pass, $id); // update the password of the Student
+                } else{ //the id doesn't exist
+                    $model->addStudentData($id, $hodem, $ten, $ngaysinh); // add the student info with new id
+                    $model->createStudentAccount($pass, $id); // update student password
+                }}
             }
-            echo '<script language="javascript">';
-            echo 'var tmp = <?php echo $error?>';
-            echo '</script>';
-            //$error += $missing_error;
+
             if($has_error == 0) { // if error occur
                 echo '<script language="javascript">';
                 echo 'window.alert("Upload successfully");';
                 echo '</script>';
             }
-            else {
-                 global $decision ;
-                 global $errorAddStudent; // this will be edited hella it
-                 $decision = 0; // change the global decisionS
-                 $errorAddStudent = "Upload unsccessfully";
+            else { //decide what to alert , a long but effective approach
+                $execute = 0;
+                if($date_error == 1){
+                    $execute = 1;
+                }
+                if($missing_data == 1){
+                    $execute = 2;
+                }
+                if($other_data_error == 1){
+                    $execute = 3;
+                }
+                if($date_error == 1 && $missing_data == 1){
+                    $execute = 12;
+                }
+                if($date_error == 1 && $other_data_error == 1){
+                    $execute = 13;
+                }
+                if($missing_data == 1 && $other_data_error == 1){
+                    $execute = 23;
+                }
+                if($missing_data == 1 && $other_data_error == 1 && $date_error == 1){
+                    $execute = 123;
+                }
+                if($execute == 1){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have wrong date format in some data");';
+                    echo '</script>';
+                }
+                else if($execute == 2){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have empty/null data");';
+                    echo '</script>';
+                }
+                else if($execute == 3){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have empty/null data");';
+                    echo '</script>';
+                }
+                else if($execute == 12){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have empty/null data and wrong date format in some data");';
+                    echo '</script>';
+                }
+                else if($execute = 13){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have wrong data format and wrong data format in some data");';
+                    echo '</script>';
+                }
+                else if($execute = 23){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have empty/null data and wrong data format in some data");';
+                    echo '</script>';
+                }
+                else if($execute = 123){
+                    echo '<script language="javascript">';
+                    echo 'window.alert("The file appears to have empty/null data , wrong data format and wrong date format in some data");';
+                    echo '</script>';
+                }
+
             }
         }
     }
@@ -250,6 +311,3 @@ class getStudentController
         }
     }
 }
-
-//$control = new getStudentController();
-//$control->getStudentData();

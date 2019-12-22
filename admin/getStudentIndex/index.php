@@ -5,7 +5,6 @@ require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
 require_once dirname(__FILE__)."/../controller/getStudentController.php";
 //require dirname(__FILE__)."/../../vendor/autoload.php";
 //require_once dirname(__FILE__)."/../../vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php"; // include phpspreadsheet from vendor
-
 if($_SESSION["isAdmin"] != 1){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
@@ -63,7 +62,7 @@ if(isset($_POST["DeleteCourse"])){
 
     <ul class="navbar-nav">
         <li><a href = "#">Student Management</li>
-<!--        this is no link , this is just abusing the good css of tag a-->
+        <!--        this is no link , this is just abusing the good css of tag a-->
     </ul>
 </nav>
 
@@ -90,7 +89,7 @@ if(isset($_POST["DeleteCourse"])){
             </thead>
             <tbody>
             <?php
-             $control->getStudentData();
+            $control->getStudentData();
             ?>
             </tbody>
         </table>
@@ -142,16 +141,16 @@ if(isset($_POST["DeleteCourse"])){
         </thead>
         <tbody>
         <?php
-            $control->getSVCourseSem();
+        $control->getSVCourseSem();
         ?>
         </tbody>
     </table>
 
     <form action = "" method="POST">
-            <input name = "sinhvienID" class = "form-control" required = "required" placeholder="Student ID">
-            <input name = "courseID" class = "form-control" required = "required" placeholder="Course ID">
-            <input name = "semID" class = "form-control" required = "required" placeholder="Semester ID">
-            <button class = "btn btn-primary btn-danger" name = "DeleteCourse">Submit</button>
+        <input name = "sinhvienID" class = "form-control" required = "required" placeholder="Student ID">
+        <input name = "courseID" class = "form-control" required = "required" placeholder="Course ID">
+        <input name = "semID" class = "form-control" required = "required" placeholder="Semester ID">
+        <button class = "btn btn-primary btn-danger" name = "DeleteCourse">Submit</button>
     </form>
     <br />
     <br />
@@ -170,24 +169,8 @@ if(isset($_POST["DeleteCourse"])){
 </div>
 <!--TODO: Add delete for every update-->
 </div>
+<script src = "responsive.js"></script>
 
-<script>
-    function openSlideMenu(){
-        document.getElementById('side-menu').style.width = '250px';
-        document.getElementById('main').style.marginLeft = '250px';
-    }
-
-    function closeSlideMenu(){
-        document.getElementById('side-menu').style.width = '0';
-        document.getElementById('main').style.marginLeft = '0';
-    }
-
-        var errorAddStudentError = <?php echo json_encode($errorAddStudent);?> get these global variance
-        var call = <?php echo json_encode($decision);?> // get the global variance
-        if(call == 0){
-            window.alert(errorAddStudentError);
-        }
-</script>
 </body>
 
 </html>
