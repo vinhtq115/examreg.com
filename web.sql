@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2019 at 05:45 PM
+-- Generation Time: Dec 22, 2019 at 01:50 PM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
--- PHP Version: 7.3.12-1+ubuntu18.04.1+deb.sury.org+1
+-- PHP Version: 7.3.13-1+ubuntu18.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,10 +44,8 @@ INSERT INTO `account` (`id`, `password`, `isAdmin`, `idsinhvien`) VALUES
 ('17021345', '*4264A63AF9DB6B1D2839E745DBD9297A06700919', 0, '17021345'),
 ('17021353', '*12453C42110E67C856D612317C1B48E4DA5A8333', 0, '17021353'),
 ('17021357', '*00A51F3F48415C7D4E8908980D443C29C69B60C9', 0, '17021357'),
-('17023451', '*FCDD6646AD21761B5C5581010613CDD5156C8D8D', 0, '17023451'),
 ('17023456', '*A674691EB6BD51FF0FB11C6939B7AE6FCD961072', 0, '17023456'),
 ('17026457', '*B78B1D698FFE28065491B3D8D26307C86101DC51', 0, '17026457'),
-('17028912', '*A815C9304685DDA98450FD9F3EEFFF92B9F387E0', 0, '17028912'),
 ('vinhtq115', '*00A51F3F48415C7D4E8908980D443C29C69B60C9', 1, NULL);
 
 -- --------------------------------------------------------
@@ -84,7 +82,9 @@ INSERT INTO `cathi` (`macathi`, `mahocphan`, `makythi`, `ngaythi`, `giobatdau`, 
 (16, 'MAT1093 1', 1, '2017-12-27', '08:00:00', '09:00:00'),
 (17, 'PHY1100 2', 1, '2018-03-01', '08:00:00', '09:00:00'),
 (18, 'MAT1041 10', 5, '2019-12-24', '08:00:00', '09:30:00'),
-(19, 'ELT2035 20', 5, '2019-12-31', '14:00:00', '15:30:00');
+(19, 'ELT2035 20', 5, '2019-12-31', '14:00:00', '15:30:00'),
+(20, 'MAT1041 10', 5, '2019-12-30', '08:00:00', '09:30:00'),
+(21, 'INT3011 1', 5, '2019-12-28', '13:00:00', '14:30:00');
 
 -- --------------------------------------------------------
 
@@ -204,7 +204,7 @@ CREATE TABLE `phongthi` (
 --
 
 INSERT INTO `phongthi` (`maphongthi`, `diadiem`, `soluongmay`) VALUES
-('PM 201-G2', 'Tầng 2 tòa nhà G2', 48),
+('PM 201-G2', 'Tầng 2 tòa nhà G2', 1),
 ('PM 202-G2', 'Tầng 2 tòa nhà G2', 48),
 ('PM 208-G2', 'Tầng 2 tòa nhà G2', 50),
 ('PM 305-G2', 'Tầng 3 nhà G2', 46),
@@ -230,7 +230,10 @@ INSERT INTO `phongthi_cathi` (`macathi`, `maphongthi`) VALUES
 (2, 'PM 201-G2'),
 (18, 'PM 208-G2'),
 (18, 'PM 306-G2'),
-(19, 'PM 201-G2');
+(19, 'PM 201-G2'),
+(20, 'PM 208-G2'),
+(21, 'PM 202-G2'),
+(21, 'PM 405-E3');
 
 -- --------------------------------------------------------
 
@@ -254,12 +257,10 @@ INSERT INTO `sinhvien` (`id`, `hodem`, `ten`, `ngaysinh`, `dudieukienduthi`) VAL
 ('17021204', 'Nguyễn Việt', 'An', '1999-04-01', 0),
 ('17021311', 'Cao Minh', 'Nhật', '1999-06-10', 1),
 ('17021345', 'Nguyễn Công Trường ', 'Giang', '1999-10-01', 1),
-('17021353', 'Nguyễn Duy ', 'Thái ', '1999-05-03', 1),
+('17021353', 'Nguyễn Duy ', 'Thái ', '1999-05-03', 0),
 ('17021357', 'Trần Quang', 'Vinh', '1999-05-11', 1),
-('17023451', 'Nguyễn Quỳnh ', 'Mai', '1999-08-06', 1),
 ('17023456', 'Lê Đình', 'Thiện', '1999-07-03', 1),
-('17026457', 'Nguyễn Đình Nhật', 'Minh', '1999-04-03', 1),
-('17028912', 'Đặng Nhật ', 'Linh', '1999-07-06', 1);
+('17026457', 'Nguyễn Đình Nhật', 'Minh', '1999-04-03', 0);
 
 -- --------------------------------------------------------
 
@@ -278,7 +279,9 @@ CREATE TABLE `sinhvien_cathi_phongthi` (
 --
 
 INSERT INTO `sinhvien_cathi_phongthi` (`masinhvien`, `macathi`, `maphongthi`) VALUES
-('17021357', 2, 'PM 201-G2');
+('17021357', 19, 'PM 201-G2'),
+('17021357', 20, 'PM 208-G2'),
+('17021357', 21, 'PM 202-G2');
 
 -- --------------------------------------------------------
 
@@ -291,6 +294,15 @@ CREATE TABLE `sinhvien_hoc_hocphan` (
   `mahocphan` varchar(20) NOT NULL,
   `idhocky` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sinhvien_hoc_hocphan`
+--
+
+INSERT INTO `sinhvien_hoc_hocphan` (`masinhvien`, `mahocphan`, `idhocky`) VALUES
+('17021357', 'ELT2035 20', 5),
+('17021357', 'INT3011 1', 5),
+('17021357', 'MAT1041 10', 5);
 
 --
 -- Indexes for dumped tables
@@ -355,6 +367,7 @@ ALTER TABLE `sinhvien`
 -- Indexes for table `sinhvien_cathi_phongthi`
 --
 ALTER TABLE `sinhvien_cathi_phongthi`
+  ADD UNIQUE KEY `masinhvien_2` (`masinhvien`,`macathi`,`maphongthi`),
   ADD KEY `masinhvien` (`masinhvien`),
   ADD KEY `macathi` (`macathi`),
   ADD KEY `maphongthi` (`maphongthi`);
@@ -363,9 +376,9 @@ ALTER TABLE `sinhvien_cathi_phongthi`
 -- Indexes for table `sinhvien_hoc_hocphan`
 --
 ALTER TABLE `sinhvien_hoc_hocphan`
+  ADD UNIQUE KEY `masinhvien_2` (`masinhvien`,`mahocphan`,`idhocky`),
   ADD KEY `masinhvien` (`masinhvien`),
   ADD KEY `mahocphan` (`mahocphan`),
-  ADD KEY `svhhp_hp` (`mahocphan`,`idhocky`),
   ADD KEY `idhocky` (`idhocky`);
 
 --
@@ -376,7 +389,7 @@ ALTER TABLE `sinhvien_hoc_hocphan`
 -- AUTO_INCREMENT for table `cathi`
 --
 ALTER TABLE `cathi`
-  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `hocphan`
@@ -394,13 +407,13 @@ ALTER TABLE `kythi`
 -- AUTO_INCREMENT for table `phongthi_cathi`
 --
 ALTER TABLE `phongthi_cathi`
-  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `sinhvien_cathi_phongthi`
 --
 ALTER TABLE `sinhvien_cathi_phongthi`
-  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `macathi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables

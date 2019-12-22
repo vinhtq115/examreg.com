@@ -55,6 +55,10 @@ class SinhvienController {
         return $this->view->instruction();
     }
 
+    /**
+     * Hiện kỳ thi hiện tại.
+     * @return string: HTML
+     */
     public function showCurrentSemester() {
         $current_semester = $this->model->getCurrentSemester();
         return $this->view->currentSemester(json_encode($current_semester));

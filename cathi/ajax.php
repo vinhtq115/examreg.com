@@ -1,5 +1,5 @@
 <?php
-    // Kiểm tra session xem có phải là admin không. Nếu không thì logout.
+    // Kiểm tra session xem có phải là admin không. Nếu không thì trả về homepage.
     session_start();
     if($_SESSION["isAdmin"] != 1){
         header("Location:http://examreg.com/");

@@ -44,12 +44,15 @@
                 </li>
                 <?php
                     if ($controller->isQualified()) { // Nếu đủ điều kiện dự thi
+                        $_SESSION["dudieukienduthi"] = true;
                         echo "<li class='nav-item'>
                                 <a class='nav-link' href='/sinhvien/dangkythi'>Đăng ký thi</a>
                               </li>
                               <li class='nav-item'>
                                 <a class='nav-link' href='/sinhvien/indangkythi'>In đăng ký thi</a>
                               </li>";
+                    } else {
+                        $_SESSION["dudieukienduthi"] = false;
                     }
                 ?>
             </ul>

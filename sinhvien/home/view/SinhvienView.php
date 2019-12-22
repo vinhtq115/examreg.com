@@ -24,7 +24,7 @@ class SinhvienView {
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
             foreach ($this->data as $key => $value) {
-                $html .= "Xin chào ".$value["hodem"]." ".$value["ten"]." (".$value["ngaysinh"]."). Mã số sinh viên của bạn là ".$value["id"];
+                $html .= "Xin chào ".$value["hodem"]." ".$value["ten"]." (".$value["ngaysinh"]."). Mã số sinh viên của bạn là ".$value["id"].".";
                 break;
             }
         }
@@ -39,16 +39,18 @@ class SinhvienView {
      */
     public function currentSemester($semester) {
         $processed = json_decode($semester, true);
-        $html = "<div class='alert alert-primary' role='alert'>";
         $size = sizeof($processed); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
+            $html = "<div class='alert alert-primary' role='alert'>";
             foreach ($processed as $key => $value) {
                 $html .= "Kỳ thi hiện tại sẽ diễn ra từ ngày ".$value["ngaybatdau"]." đến ngày ".$value["ngayketthuc"].".";
                 break;
             }
+            $html .= "</div>";
+            return $html;
+        } else {
+            return null;
         }
-        $html .= "</div>";
-        return $html;
     }
 
     /**
