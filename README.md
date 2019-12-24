@@ -13,7 +13,7 @@ Project for INT3306-20.
 * [ ] Quản trị viên nhập danh sách sinh viên không đủ điều kiện dự thi (từ Excel). 
 * [x] Quản trị viên tạo kỳ thi, thêm các ca thi cho kỳ thi, thêm các phòng thi (phòng máy) cho ca thi, lập lịch (ngày thi, giờ bắt đầu, giờ kết thúc) cho các ca thi, xác định môn thi cho từng ca thi.
 * [x] Sinh viên đăng ký ca thi mà sinh viên đủ điều kiện dự thi và đang còn chỗ trống (chưa đủ số lượng đăng ký theo số máy).
-* [ ] Sinh viên download/in phiếu báo dự thi sau khi đăng ký thành công.
+* [x] Sinh viên download/in phiếu báo dự thi sau khi đăng ký thành công.
 * [ ] Quản trị viên in danh sách thí sinh dự thi theo từng phòng thi của các ca thi.
 
 ## Checklist others:
