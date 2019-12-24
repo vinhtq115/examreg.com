@@ -2,11 +2,9 @@
 session_start();
 require_once dirname(__FILE__)."/../controller/LogoutController.php";
 require_once dirname(__FILE__)."/../controller/ChangePassController.php";
-
-if($_SESSION["isAdmin"] != 1 && $_SESSION["isAdmin"] != 0){
+if(!isset($_SESSION["isAdmin"])){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
-
 if(isset($_POST['changePass'])){ // upon submiting form , this will work
     $controller = new ChangePassController();
     $controller->changePass();
@@ -18,18 +16,9 @@ if(isset($_POST['changePass'])){ // upon submiting form , this will work
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Change Password</title>
-    <link href="/../../bootstrap/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/../../externals/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/../../css/responsive.css">
-    <style>
-        .container{
-            margin-top: 250px;
-        }
-        .navbar{
-            background-color:#1FAADE;
-            overflow:hidden;
-            height:65px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/../../css/changePass.css">
 </head>
 <body>
 <nav class="navbar">
@@ -40,12 +29,23 @@ if(isset($_POST['changePass'])){ // upon submiting form , this will work
             <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
             <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
         </svg>
+           <img src="/../../css/img/logo.png" alt="examregImage">
       </a>
     </span>
 </nav>
 <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="http://examreg.com/account/view/LogoutView.php">Log out</a>
+<!--    <a href="http://examreg.com/admin/view/AdminView.php" ><img src = "/css/img/smallhome.png">HomePage</a>-->
+<!--    <a href="http://examreg.com/monthi/"><img src = "/css/img/smallbook.png">Subjects</a>-->
+<!--    <a href="http://examreg.com/hocphan/"><img src = "/css/img/smallglass.png">Courses</a>-->
+<!--    <a href="http://examreg.com/kythi/"><img src = "/css/img/term.png">Term</a>-->
+<!--    <a href="http://examreg.com/quanlyphongthi/"><img src = "/css/img/lamp.png">Room</a>-->
+<!--    <a href="http://examreg.com/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Student</a>-->
+    <?php
+        $con = new ChangePassController();
+        $con->returnOption();
+    ?>
+    <a href="http://examreg.com/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Log out</a>
 </div>
 
 <div id="main">
@@ -53,7 +53,7 @@ if(isset($_POST['changePass'])){ // upon submiting form , this will work
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Change Password</div>
+                    <div class="card-header" id = "title">Change Password</div>
                     <div class="card-body">
                         <form action="" method="POST">
                             <div class="form-group row">

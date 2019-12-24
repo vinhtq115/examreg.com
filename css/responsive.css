@@ -5,9 +5,24 @@ body{
 }
 
 .navbar{
-    background-color:#3CB371;
+    background-color:#3d63c4;
     overflow:hidden;
     height:65px;
+}
+.navbar p{
+    float:left;
+    display:block;
+    color:#f2f2f2;
+    font-weight: bold;
+    text-align:center;
+    padding:14px 16px;
+    text-decoration:none;
+    font-size:17px;
+}
+
+.navbar p:hover{
+    background-color:#ddd;
+    color:#000;
 }
 
 .navbar a{
@@ -21,13 +36,18 @@ body{
 }
 
 .navbar ul{
-    margin:8px 0 0 0;
+    float: left;
+    margin:8px;
     list-style:none;
 }
 
 .navbar a:hover{
     background-color:#ddd;
     color:#000;
+}
+
+.navbar-nav{
+    float:left;
 }
 
 .side-nav{

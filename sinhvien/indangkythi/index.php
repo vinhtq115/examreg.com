@@ -40,21 +40,21 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/sinhvien/home">Trang chủ</a>
+                <a class="nav-link" href="/sinhvien/home"><img src = "/css/img/smallhome.png">Trang chủ</a>
             </li>
             <li class='nav-item'>
-                <a class='nav-link' href='/sinhvien/dangkythi'>Đăng ký thi</a>
+                <a class='nav-link' href='/sinhvien/dangkythi'><img src = "/css/img/register.png">Đăng ký thi</a>
             </li>
             <li class='nav-item active'>
-                <a class='nav-link disabled' href='/sinhvien/indangkythi'>In đăng ký thi</a>
+                <a class='nav-link disabled' href='/sinhvien/indangkythi'><img src = "/css/img/printer.png">In đăng ký thi</a>
             </li>
         </ul>
         <ul class="navbar-nav mr-1">
             <li class="nav-item">
-                <a class="nav-link" href="/account/view/ChangePassView.php"><i class="fas fa-lock"></i>Đổi mật khẩu</a>
+                <a class="nav-link" href="/account/view/ChangePassView.php"><img src = "/css/img/smalltext.png"></i>Đổi mật khẩu</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/account/view/LogoutView.php"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+                <a class="nav-link" href="/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png"></i>Đăng xuất</a>
             </li>
         </ul>
     </div>

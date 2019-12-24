@@ -21,8 +21,8 @@ if(!$decide){ // return false
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student HomePage</title>
     <link rel="stylesheet" type="text/css" href="/../../css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="/../../css/getStudentTable.css">
-    <link rel="stylesheet" type="text/css" href="/../../css/getStudent.css">
+    <link href="/externals/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet"/>
+
     <style>
         .navbar{
             background-color:#1F7DDE;
@@ -49,15 +49,15 @@ if(!$decide){ // return false
 
 <body>
 <nav class="navbar">
-    <span class="open-slide">
-      <a href="#" onclick="openSlideMenu()">
-        <svg width="30" height="30">
-            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
-            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
-            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
-        </svg>
-      </a>
-    </span>
+<!--    <span class="open-slide">-->
+<!--      <a href="#" onclick="openSlideMenu()">-->
+<!--        <svg width="30" height="30">-->
+<!--            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>-->
+<!--            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>-->
+<!--            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>-->
+<!--        </svg>-->
+<!--      </a>-->
+<!--    </span>-->
 
     <ul class="navbar-nav">
         <li><img src="/../../css/img/logo.png" alt="examregImage"></li>
