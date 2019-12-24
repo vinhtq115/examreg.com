@@ -19,6 +19,8 @@
     "ext-pdo": "*",
     "ext-json": "*",
     "ext-mysqli": "*",
-    "ext-imap": "*"
+    "ext-imap": "*",
+    "dompdf/dompdf": "dev-master",
+    "ncjoes/office-converter": "*"
   }
 }

@@ -120,3 +120,16 @@ function removeElement(elementId) {
 document.getElementById("download").onclick = function () {
     window.open("download.php");
 };
+
+// Hành vi cho nút xuất
+document.getElementById("print").onclick = function () {
+    var pdf = document.createElement("object");
+    pdf.setAttribute("data", "print.php");
+    pdf.setAttribute("id", "pdf");
+    pdf.setAttribute("type", "application/pdf");
+    var pdf_embed = document.createElement("embed");
+    pdf_embed.setAttribute("src", "print.php");
+    pdf_embed.setAttribute("type", "application/pdf");
+    pdf.appendChild(pdf_embed);
+    document.getElementById("pdfhere").appendChild(pdf);
+};

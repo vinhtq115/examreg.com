@@ -1,6 +1,7 @@
 <?php
     session_start();
-    if($_SESSION["isAdmin"] != 0 || !isset($_SESSION["id"])) { // Nếu là admin hoặc chưa login thì cho về trang chủ
+
+    if(!isset($_SESSION["isAdmin"]) || $_SESSION["isAdmin"] != 0 || !isset($_SESSION["id"])) { // Nếu là admin hoặc chưa login thì cho về trang chủ
         header("Location:http://examreg.com/");
     }
     // Kiểm tra xem có đủ điều kiện thi không. Nếu không thì cũng cho về trang chủ

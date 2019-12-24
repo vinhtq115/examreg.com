@@ -90,9 +90,11 @@
             ?>
         </div>
         <div class="float-right">
-            <button id="print" class="btn btn-default"><i class="fas fa-print"></i> In phiếu báo dự thi</button>
+            <button id="print" class="btn btn-default"><i class="fas fa-print"></i> Xuất phiếu báo dự thi</button>
             <button id="download" class="btn btn-primary"><i class="fas fa-download"></i> Download</button>
         </div>
+    </div>
+    <div id="pdfhere" class="position-relative">
     </div>
     <script src="script.js"></script>
 </body>
