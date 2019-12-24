@@ -50,9 +50,6 @@
                         $_SESSION["dudieukienduthi"] = true;
                         echo "<li class='nav-item'>
                                 <a class='nav-link' href='/sinhvien/dangkythi'><img src = \"/css/img/register.png\">Đăng ký thi</a>
-                              </li>
-                              <li class='nav-item'>
-                                <a class='nav-link' href='/sinhvien/indangkythi'><img src = \"/css/img/printer.png\">In đăng ký thi</a>
                               </li>";
                     } else {
                         $_SESSION["dudieukienduthi"] = false;
