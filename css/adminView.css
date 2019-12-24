@@ -5,11 +5,22 @@ body{
     background-color:#f4f4f4;
 }
 
+#random-nav{
+    float: left;
+}
+
 /* Global */
+
+.title{
+    margin-left: 50px;
+}
 .container{
     width:80%;
     margin:auto;
     overflow:hidden;
+}
+.container-upper{
+    width: 60%;
 }
 
 ul{

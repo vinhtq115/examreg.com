@@ -33,7 +33,7 @@ if(isset($_POST["DeleteCourse"])){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Student Managing</title>
+    <title>Quản lí sinh viên</title>
     <script src="/externals/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <link href="/externals/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/getStudent.css">
@@ -56,29 +56,21 @@ if(isset($_POST["DeleteCourse"])){
 </head>
 <body>
 <nav class="navbar">
-    <ul class="navbar-nav" id ="on-left">
+    <ul class="navbar-nav" id = on-left>
         <li><p>Examreg</p></li>
-        <li class = "nav-item"><a href="http://examreg.com/admin/view/AdminView.php" ><img src = "/css/img/smallhome.png">HomePage</a></li>
-        <li class = "nav-item"><a href="http://examreg.com/monthi/"><img src = "/css/img/smallbook.png">Subjects</a></li>
-        <li class = "nav-item"><a href="http://examreg.com/hocphan/"><img src = "/css/img/smallglass.png">Courses</a></li>
-        <li class = "nav-item"><a href="http://examreg.com/kythi/"><img src = "/css/img/term.png">Term</a></li>
-        <li class = "nav-item"><a href="http://examreg.com/quanlyphongthi/"><img src = "/css/img/lamp.png">Room</a></li>
-        <li class = "nav-item"><a href="http://examreg.com/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Student</a></li>
+        <li class = "nav-item"><a href="http://examreg.com/admin/view/AdminView.php" ><img src = "/css/img/smallhome.png">Trang chủ</a></li>
+        <li class = "nav-item"><a href="http://examreg.com/monthi/"><img src = "/css/img/smallbook.png">Môn thi</a></li>
+        <li class = "nav-item"><a href="http://examreg.com/hocphan/"><img src = "/css/img/smallglass.png">Học phần</a></li>
+        <li class = "nav-item"><a href="http://examreg.com/kythi/"><img src = "/css/img/term.png">Kỳ thi</a></li>
+        <li class = "nav-item"><a href="http://examreg.com/quanlyphongthi/"><img src = "/css/img/lamp.png">Phòng Thi</a></li>
+        <li class = "nav-item"><a href="http://examreg.com/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Quản lí sinh viên</a></li>
     </ul>
     <ul class = "navbar-nav" id = "on-right">
-        <li><a href="http://examreg.com/account/view/ChangePassView.php"><img src = "/css/img/smalltext.png">Alter Password</a></li>
-        <li><a class = "right-bar" href="http://examreg.com/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Log out</a></li>
+        <li><a href="http://examreg.com/account/view/ChangePassView.php"><img src = "/css/img/smalltext.png">Đổi mật khẩu</a></li>
+        <li><a class = "right-bar" href="http://examreg.com/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Đăng xuất</a></li>
     </ul>
 </nav>
 
-<!--<div id="side-menu" class="side-nav">-->
-<!--    <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>-->
-<!--    <a href="http://examreg.com/admin/view/AdminView.php" ><img src = "/css/img/smallhome.png">HomePage</a>-->
-<!--    <a href="http://examreg.com/monthi/"><img src = "/css/img/smallbook.png">Subjects</a>-->
-<!--    <a href="http://examreg.com/hocphan/"><img src = "/css/img/smallglass.png">Courses</a>-->
-<!--    <a href="http://examreg.com/account/view/ChangePassView.php"><img src = "/css/img/smalltext.png">Alter Password</a>-->
-<!--    <a href="http://examreg.com/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Log out</a>-->
-<!--</div>-->
 
 <div id="main">
     <div class = "container box">
@@ -124,7 +116,7 @@ if(isset($_POST["DeleteCourse"])){
 </div>
 
 <div class="container box">
-    <h3 align="center">Delete Student</h3></h3><br />
+    <h3 align="center">Xoá Sinh Viên Khỏi Hệ Thống</h3></h3><br />
     <form method="POST" enctype="multipart/form-data">
         <label>Chọn file Excel</label>
         <input type="file" name="file"/>
@@ -140,8 +132,8 @@ if(isset($_POST["DeleteCourse"])){
         <thead>
         <tr>
             <td>Mã sinh viên</td>
-            <td>Ma hoc phan</td>
-            <td>Ma Ki Thi</td>
+            <td>Mã học phần</td>
+            <td>Mã kỳ thi</td>
         </tr>
         </thead>
         <tbody>
@@ -155,14 +147,14 @@ if(isset($_POST["DeleteCourse"])){
         <input name = "sinhvienID" class = "form-control" required = "required" placeholder="Student ID">
         <input name = "courseID" class = "form-control" required = "required" placeholder="Course ID">
         <input name = "semID" class = "form-control" required = "required" placeholder="Semester ID">
-        <button class = "btn btn-primary btn-danger" name = "DeleteCourse">Submit</button>
+        <button class = "btn btn-primary btn-danger" name = "DeleteCourse">Tải lên</button>
     </form>
     <br />
     <br />
 </div>
 
 <div class="container box">
-    <h3 align="center">Update Courses</h3></h3><br />
+    <h3 align="center">Cập nhập sinh viên và khoá học</h3></h3><br />
     <form align = "center" method="POST" enctype="multipart/form-data">
         <label>Chọn file Excel</label>
         <input type="file" name="file"/>
