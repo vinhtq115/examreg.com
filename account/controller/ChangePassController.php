@@ -9,8 +9,6 @@ class ChangePassController{
             $RenewPass = $_POST["renewpass"]; //
             $id = $_SESSION["id"]; // id from session
             if($newPass == $RenewPass){
-                echo $_SESSION["id"];
-                echo $newPass;
                 $model = new AccountModel();
                 $model->changePass($newPass,$id);
                 echo "<script>
