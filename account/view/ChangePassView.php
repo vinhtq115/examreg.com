@@ -16,38 +16,89 @@ if(isset($_POST['changePass'])){ // upon submiting form , this will work
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Đổi Mật Khẩu</title>
-    <link href="/../../externals/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/../../css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="/../../css/changePass.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="../../externals/fontawesome/css/all.min.css">
+    <!--Bootstrap core CSS-->
+    <link rel="stylesheet" href="../../externals/bootstrap/css/bootstrap.min.css">
+    <!--Material Design Bootstrap-->
+    <link rel="stylesheet" href="../../externals/MDB/css/mdb.min.css">
+    <!--MDBootstrap Datatables-->
+    <link rel="stylesheet" href="../../externals/MDB/css/addons/datatables.min.css">
+    <!--JQuery-->
+    <script src="/externals/jquery/jquery-3.4.1.min.js"></script>
+    <!--Bootstrap tooltips-->
+    <script src="/externals/popper.js/umd/popper.min.js"></script>
+    <!--Bootstrap core JavaScript-->
+    <script src="/externals/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/changePass.css">
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-<nav class="navbar">
-    <span class="open-slide">
-      <a href="#" onclick="openSlideMenu()">
-        <svg width="30" height="30">
-            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
-            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
-            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
-        </svg>
-           <img src="/../../css/img/logo.png" alt="examregImage">
-      </a>
-    </span>
-</nav>
-<div id="side-menu" class="side-nav">
-    <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <!--    <a href="http://examreg.com/admin/view/AdminView.php" ><img src = "/css/img/smallhome.png">HomePage</a>-->
-    <!--    <a href="http://examreg.com/monthi/"><img src = "/css/img/smallbook.png">Subjects</a>-->
-    <!--    <a href="http://examreg.com/hocphan/"><img src = "/css/img/smallglass.png">Courses</a>-->
-    <!--    <a href="http://examreg.com/kythi/"><img src = "/css/img/term.png">Term</a>-->
-    <!--    <a href="http://examreg.com/quanlyphongthi/"><img src = "/css/img/lamp.png">Room</a>-->
-    <!--    <a href="http://examreg.com/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Student</a>-->
-    <?php
-    $con = new ChangePassController();
-    $con->returnOption();
-    ?>
-    <a href="http://examreg.com/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Đăng xuất</a>
-</div>
-
+<?php
+    if ($_SESSION["isAdmin"] == 1) {
+        echo "<!--Thanh điều hướng cho admin-->
+    <nav class=\"navbar navbar-expand-lg navbar-dark primary-color\">
+        <!-- Tên trang web -->
+        <a class=\"navbar-brand\" href=\"/\">ExamReg</a>
+        <!-- Nội dung thanh điều hướng -->
+        <div class=\"collapse navbar-collapse\">
+            <!-- Đường dẫn -->
+            <ul class=\"navbar-nav mr-auto\">
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/\"><img src = \"/css/img/smallhome.png\">Trang chủ</a>
+                </li>
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/monthi\"><img src = \"/css/img/smallbook.png\">Môn thi</a>
+                </li>
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/hocphan\"><img src = \"/css/img/smallglass.png\">Học phần</a>
+                </li>
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/kythi\"><img src = \"/css/img/term.png\">Kỳ thi</a>
+                </li>
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/quanlyphongthi\"><img src = \"/css/img/lamp.png\">Phòng thi</a>
+                </li>
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/admin/getStudentIndex/\"><img src = \"/css/img/smallStudent.png\">Sinh viên</a>
+                </li>
+            </ul>
+            <ul class=\"navbar-nav mr-1\">
+                <li class=\"nav-item active\">
+                    <a class=\"nav-link disabled\" href=\"/account/view/ChangePassView.php\"><img src = \"/css/img/smalltext.png\">Đổi mật khẩu</a>
+                </li>
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/account/view/LogoutView.php\"><img src = \"/css/img/smalldoor.png\">Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
+    </nav>";
+    } else {
+        echo "<!--Thanh điều hướng cho sinh viên-->
+    <nav class=\"navbar navbar-expand-lg navbar-dark primary-color\">
+        <a class=\"navbar-brand\" href=\"/\">ExamReg</a>
+        <div class=\"collapse navbar-collapse\">
+            <ul class=\"navbar-nav mr-auto\">
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/sinhvien/home\"><img src = \"/css/img/smallhome.png\">Trang chủ</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/sinhvien/dangkythi'><img src = \"/css/img/register.png\">Đăng ký thi</a>
+                </li>
+            </ul>
+            <ul class=\"navbar-nav mr-1\">
+                <li class=\"nav-item active\">
+                    <a class=\"nav-link disabled\" href=\"/account/view/ChangePassView.php\"><img src = \"/css/img/smalltext.png\">Đổi mật khẩu</a>
+                </li>
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"/account/view/LogoutView.php\"><img src = \"/css/img/smalldoor.png\">Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
+    </nav>";
+    }
+?>
 <div id="main">
     <div class="container">
         <div class="row justify-content-center">
@@ -81,18 +132,5 @@ if(isset($_POST['changePass'])){ // upon submiting form , this will work
             </div>
         </div>
     </div>
-
-
-    <script>
-        function openSlideMenu(){
-            document.getElementById('side-menu').style.width = '250px';
-            document.getElementById('main').style.marginLeft = '250px';
-        }
-
-        function closeSlideMenu(){
-            document.getElementById('side-menu').style.width = '0';
-            document.getElementById('main').style.marginLeft = '0';
-        }
-    </script>
 </body>
 </html>

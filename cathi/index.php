@@ -54,30 +54,30 @@
             <!-- Đường dẫn -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Trang chủ</a>
+                    <a class="nav-link" href="/"><img src = "/css/img/smallhome.png">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/monthi">Môn thi</a>
+                    <a class="nav-link" href="/monthi"><img src = "/css/img/smallbook.png">Môn thi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/hocphan">Học phần</a>
+                    <a class="nav-link" href="/hocphan"><img src = "/css/img/smallglass.png">Học phần</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kythi">Kỳ thi</a>
+                    <a class="nav-link" href="/kythi"><img src = "/css/img/term.png">Kỳ thi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/quanlyphongthi">Phòng thi</a>
+                    <a class="nav-link" href="/quanlyphongthi"><img src = "/css/img/lamp.png">Phòng thi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/getStudentIndex/">Sinh viên</a>
+                    <a class="nav-link" href="/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Sinh viên</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-1">
                 <li class="nav-item">
-                    <a class="nav-link" href="/account/view/ChangePassView.php"><i class="fas fa-lock"></i>Đổi mật khẩu</a>
+                    <a class="nav-link" href="/account/view/ChangePassView.php"><img src = "/css/img/smalltext.png">Đổi mật khẩu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/account/view/LogoutView.php"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+                    <a class="nav-link" href="/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Đăng xuất</a>
                 </li>
             </ul>
         </div>

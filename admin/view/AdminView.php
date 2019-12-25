@@ -13,28 +13,66 @@ if($_SESSION["isAdmin"] != 1){
     <meta name="viewport" content="width=device-width">
     <title>Trang chủ quản trị viên</title>
     <link rel="stylesheet" type="text/css" href="/css/adminView.css">
-    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <!--<link rel="stylesheet" type="text/css" href="/css/header.css">-->
     <script src="/externals/jquery/jquery-3.4.1.js"></script>
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="/externals/fontawesome/css/all.min.css">
+    <!--Bootstrap core CSS-->
+    <link rel="stylesheet" href="/externals/bootstrap/css/bootstrap.min.css">
+    <!--Material Design Bootstrap-->
+    <link rel="stylesheet" href="/externals/MDB/css/mdb.min.css">
+    <!--MDBootstrap Datatables-->
+    <link rel="stylesheet" href="/externals/MDB/css/addons/datatables.min.css">
+    <!--JQuery-->
+    <script src="/externals/jquery/jquery-3.4.1.min.js"></script>
+    <!--Bootstrap tooltips-->
+    <script src="/externals/popper.js/umd/popper.min.js"></script>
+    <!--Bootstrap core JavaScript-->
+    <script src="/externals/bootstrap/js/bootstrap.min.js"></script>
+    <!--MDB core JavaScript-->
+    <script src="/externals/MDB/js/mdb.min.js"></script>
+    <!--MDBootstrap Datatables-->
+    <script src="/externals/MDB/js/addons/datatables.min.js"></script>
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-<header>
-    <div class="container">
-        <div id="branding">
-            <h1 class = "title"><span class="highlight">Exam</span>Reg</h1>
-        </div>
-        <nav class = "navbar">
-<!--            <ul class = "navbar-nav">-->
-                <li class = "current"><a href="http://examreg.com/monthi/"><img src = "/css/img/smallbook.png">Môn thi</a></li>
-                <li class = "current"><a href="http://examreg.com/hocphan/"><img src = "/css/img/smallglass.png">Học phần</a></li>
-                <li class = "current"><a href="http://examreg.com/kythi/"><img src = "/css/img/term.png">Kỳ thi</a></li>
-                <li class = "current"><a href="http://examreg.com/quanlyphongthi/"><img src = "/css/img/lamp.png">Phòng Thi</a></li>
-                <li class = "current"><a href="http://examreg.com/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Quản lí sinh viên</a></li>
-                <li class="current"><a href="http://examreg.com/account/view/ChangePassView.php"><img src = "/css/img/smalltext.png">Đổi mật khẩu</a></li>
-                <li class="current"><a href="http://examreg.com/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Đăng xuất</a></li>
-<!--            </ul>-->
-        </nav>
+<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+    <!-- Tên trang web -->
+    <a class="navbar-brand" href="/">ExamReg</a>
+    <!-- Nội dung thanh điều hướng -->
+    <div class="collapse navbar-collapse">
+        <!-- Đường dẫn -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link disabled" href="/"><img src = "/css/img/smallhome.png">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/monthi"><img src = "/css/img/smallbook.png">Môn thi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/hocphan"><img src = "/css/img/smallglass.png">Học phần</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/kythi"><img src = "/css/img/term.png">Kỳ thi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/quanlyphongthi"><img src = "/css/img/lamp.png">Phòng thi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Sinh viên</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-1">
+            <li class="nav-item">
+                <a class="nav-link" href="/account/view/ChangePassView.php"><img src = "/css/img/smalltext.png">Đổi mật khẩu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/account/view/LogoutView.php"><img src = "/css/img/smalldoor.png">Đăng xuất</a>
+            </li>
+        </ul>
     </div>
-</header>
+</nav>
 <section id="showcase">
     <div class="container">
         <h1>TRANG QUẢN TRỊ HỆ THỐNG KỲ THI</h1>
@@ -73,7 +111,7 @@ if($_SESSION["isAdmin"] != 1){
         <div class="box">
             <a href="http://examreg.com/account/view/ChangePassView.php"><img src="/css/img/clock.png"></a>
             <h3>Đổi mật khẩu</h3>
-            <p>Cho phép thay đổi mật </p>
+            <p>Cho phép thay đổi mật khẩu</p>
         </div>
     </div>
 </section>
