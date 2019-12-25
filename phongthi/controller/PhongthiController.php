@@ -83,4 +83,13 @@ class PhongthiController {
     public function delete($maphongthi) {
         return $this->phongthi->delete($maphongthi);
     }
+
+    /**
+     * Kiểm tra xem ca thi có phòng thi không.
+     * @param $maphongthi: Mã phòng thi.
+     * @return bool
+     */
+    public function check($maphongthi) {
+        return $this->phongthi->check($maphongthi);
+    }
 }

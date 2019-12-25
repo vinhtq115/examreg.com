@@ -50,7 +50,6 @@
         if (!$temp) {
             header("Location: http://examreg.com/404.html");
         }
-
         // Ca thi tồn tại trong hệ thống
         echo "<p id='kythi' hidden>".$_GET["kythi"]."</p>"; // Chứa mã kỳ thi
         echo "<p id='cathi' hidden>".$_GET["cathi"]."</p>"; // Chứa mã ca thi

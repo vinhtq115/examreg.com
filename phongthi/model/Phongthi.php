@@ -105,4 +105,19 @@ class Phongthi extends PDOData {
 
         return 1;
     }
+
+    /**
+     * Kiểm tra xem ca thi có phòng thi không.
+     * @param $maphongthi: Mã phòng thi.
+     * @return bool
+     */
+    public function check($maphongthi) {
+        // Kiểm tra xem mã phòng thi đã tồn tại trong ca thi chưa
+        $sql = "SELECT * FROM phongthi_cathi WHERE maphongthi = ? AND macathi = ?";
+        $arr = $this->doPreparedQuery($sql, [$maphongthi, $this->cathi]);
+        if (count($arr) > 0) { // Phòng thi đã có sẵn trong ca thi
+            return true;
+        }
+        return false;
+    }
 }

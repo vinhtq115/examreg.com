@@ -5,6 +5,12 @@ var table_hash = document.getElementById("tablehash").innerText;
 let makythi = document.getElementById("kythi").innerText;
 let macathi = document.getElementById("cathi").innerText;
 
+// Mở URL trong tab mới
+function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+
 // Lấy dữ liệu từ bảng ban đầu
 var _data = [];
 var tbody_phongthi = document.getElementById('tablephongthi').childNodes[1];
@@ -12,6 +18,11 @@ for (var i = 0; i < tbody_phongthi.childElementCount; i++) {
     _data.push([tbody_phongthi.childNodes[i].childNodes[0].innerText, // Mã phòng thi
                 tbody_phongthi.childNodes[i].childNodes[1].innerText, // Địa điểm
                 tbody_phongthi.childNodes[i].childNodes[2].innerText]); // Số lượng máy
+    let maphongthi = tbody_phongthi.childNodes[i].childNodes[0].innerText;
+    // Set action cho danh sách
+    tbody_phongthi.childNodes[i].childNodes[3].onclick = function () {
+        openInNewTab("/phongthi/print.php?kythi=" + makythi + "&cathi=" + macathi + "&phongthi=" + maphongthi);
+    }
 }
 
 // Bật pagination
@@ -151,6 +162,11 @@ function refresh_table() {
                     _data.push([tbody_phongthi.childNodes[i].childNodes[0].innerText, // Mã phòng thi
                         tbody_phongthi.childNodes[i].childNodes[1].innerText, // Địa điểm
                         tbody_phongthi.childNodes[i].childNodes[2].innerText]); // Số lượng máy
+                    let maphongthi = tbody_phongthi.childNodes[i].childNodes[0].innerText;
+                    // Set action cho danh sách
+                    tbody_phongthi.childNodes[i].childNodes[3].onclick = function () {
+                        openInNewTab("/phongthi/print.php?kythi=" + makythi + "&cathi=" + macathi + "&phongthi=" + maphongthi);
+                    }
                 }
                 $('#tablephongthi').DataTable();
                 $('.dataTables_length').addClass('bs-select');

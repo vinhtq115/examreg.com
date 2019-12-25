@@ -24,19 +24,21 @@ class PhongthiView {
         $html .= "<th class='th-sm'>Mã phòng thi</th>";
         $html .= "<th class='th-sm'>Địa điểm</th>";
         $html .= "<th class='th-sm'>Số lượng máy</th>";
+        $html .= "<th class='th-sm'>Danh sách thi</th>";
         $html .= "</tr></thead><tbody>";
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
             foreach ($this->data as $key => $value) {
                 $html .= "<tr>";
-                $html .= "<td>" . $value["maphongthi"] . "</td>";
-                $html .= "<td>" . $value["diadiem"] . "</td>";
-                $html .= "<td>" . $value["soluongmay"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["maphongthi"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["diadiem"] . "</td>";
+                $html .= "<td class='align-middle'>" . $value["soluongmay"] . "</td>";
+                $html .= "<td class='qlct align-middle'><btn class='btn btn-indigo btn-sm m-0 print-btn'>Danh sách</btn></td>";
                 $html .= "</tr>";
             }
         }
         $html .= "</tbody><tfoot><tr>";
-        $html .= "<th>Mã phòng thi</th><th>Địa điểm</th><th>Số lượng máy</th>";
+        $html .= "<th>Mã phòng thi</th><th>Địa điểm</th><th>Số lượng máy</th><th>Danh sách thi</th>";
         $html .= "</tr></tfoot></table>";
 
         return $html;

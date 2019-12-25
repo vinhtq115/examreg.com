@@ -22,7 +22,7 @@
     // Tạo file PDF tạm
     $filename_pdf = uniqid(rand(), true) . '.pdf';
     $pdfpath = sys_get_temp_dir().'/'.$filename_pdf;
-
+    // Chuyển định dạng
     $converter = new OfficeConverter($docxpath);
     $converter->convertTo($filename_pdf); // Chuyển định dạng file DOCX sang PDF
 
