@@ -20,7 +20,6 @@
     "ext-json": "*",
     "ext-mysqli": "*",
     "ext-imap": "*",
-    "dompdf/dompdf": "dev-master",
     "ncjoes/office-converter": "*"
   }
 }
