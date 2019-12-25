@@ -133,7 +133,11 @@ if(isset($_POST["DeleteCourse"])){
         <tr>
             <td>Mã sinh viên</td>
             <td>Mã học phần</td>
-            <td>Mã kỳ thi</td>
+            <td>Tên môn thi</td>
+            <td>Số tín</td>
+            <td>Học kì</td>
+            <td>Bắt đầu</td>
+            <td>Kết thúc</td>
         </tr>
         </thead>
         <tbody>
@@ -164,7 +168,6 @@ if(isset($_POST["DeleteCourse"])){
     <br />
     <br />
 </div>
-<!--TODO: Add delete for every update-->
 </div>
 <!--<script src = "responsive.js"></script>-->
 </body>

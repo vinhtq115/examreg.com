@@ -478,9 +478,28 @@ class getStudentController
                 $id = $sheetData[$row]['A'];
                 $courseID = $sheetData[$row]['B'];
                 $kythi = $sheetData[$row]['C'];
+//                TODO:add check system to see if it should add the hocphan with no subject
                 $model = new getStudentModel();
-                $model->updateCourse($id , $courseID , $kythi);
-            }}
+                $masinhvien = "";
+                $mamonthi = "";
+                $maky = "";
+                $stmt_sinhvien = $model->getIDOnly($id); //check if the student exist
+                $stmt_hocphan = $model->getSubjectID($courseID); // check if the courseID match available subject
+                $stmt_maky = $model->getTerm($kythi);
+                $stmt_sinhvien->execute([$masinhvien]);
+                $stmt_hocphan->execute([$mamonthi]);
+                $stmt_maky->execute([$maky]);
+                if($stmt_hocphan->rowCount()>0 && $stmt_sinhvien->rowCount()>0 && $stmt_maky->rowCount()) { // so the course id exist
+                    //before the update course step , let do a check data step
+//                    TODO: ask Vinh about the repeating
+                    $model->updateCourse($id, $courseID, $kythi);
+                }
+            }
+                echo '<script language="javascript">';
+                echo 'window.alert("Update successfully");';
+                echo '</script>';
+                return ;
+            }
         }
     }
 
@@ -550,11 +569,28 @@ class getStudentController
         $mahocphan = "";
         $idhocky = "";
         $stmt = $usermodel->getStudentCourseHKInfo();
-        $stmt->execute([$masinhvien,$mahocphan,$idhocky]); // The info will be parsed to these variance
+        $stmt->execute([$masinhvien,$mahocphan,$idhocky]); // The info will be parsed to these variances
         //echo $stmt->rowCount();
         if($stmt->rowCount()){
             while($row= $stmt->fetch()){
-                echo "<tr><td>".$row['masinhvien']."</td><td>".$row["mahocphan"]."</td><td>".$row["idhocky"]."</td></tr>";
+                //add subject name to the table (subbject equivalent to hocphan)
+                $stmt_monthi = $usermodel->getCourseSubject($row["mahocphan"]);
+                $tenmonthi = "";
+                $tinchi = "";
+                $stmt_monthi->execute([$tenmonthi,$tinchi]);
+                if($stmt_monthi->rowCount()){
+                $some_row = $stmt_monthi->fetch();
+                    $hocky = "";
+                    $ngaybatdau = "";
+                    $ngayketthuc = "";
+                    $kythi_stmt = $usermodel->getTermInfo($row["idhocky"]);
+                    $kythi_stmt->execute([$hocky,$ngaybatdau,$ngayketthuc]);
+                    if($kythi_stmt->rowCount()){
+                        $ky_row = $kythi_stmt->fetch();
+                        echo "<tr><td>".$row['masinhvien']."</td><td>".$row["mahocphan"]."</td><td>".$some_row["tenmonthi"]."</td><td>".$some_row["tinchi"]."</td>
+                        <td>".$ky_row["ky"]."</td><td>".$ky_row["ngaybatdau"]."</td><td>".$ky_row["ngayketthuc"]."</td></tr>";
+                    }
+                }
             } // print the vars out on the table
         }
     }

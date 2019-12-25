@@ -71,5 +71,29 @@ class getStudentModel extends PDOData{
             $sql = "DELETE FROM `sinhvien_hoc_hocphan` WHERE `masinhvien`='$sinhvien' AND `mahocphan`='$hocphan' AND `idhocky`='$hocky';";
             $this->TrySQL($sql);
         }
+
+        public function getCourseSubject($idhocphan){
+            //this get id subject id
+            $stmt = $this->db->query("SELECT tenmonthi, tinchi
+FROM monthi
+INNER JOIN hocphan ON monthi.mamonthi=hocphan.mamonthi WHERE hocphan.mahocphan = '$idhocphan';;");
+            //no get the subject name
+            return $stmt; // return stmt first then fetch later on controller
+        }
+
+        public function getSubjectID($idhocphan){
+            $stmt = $this->db->query("SELECT  `mamonthi` FROM `hocphan` WHERE `mahocphan` = '$idhocphan';"); // prepare the query for controller
+            return $stmt; // return stmt first then fetch later on controller
+        }
+
+        public function getTerm($maky){
+            $stmt = $this->db->query("SELECT `id` FROM `kythi` WHERE `id` = '$maky';"); // prepare the query for controller
+            return $stmt; // return stmt first then fetch later on controller
+        }
+
+        public function getTermInfo($maky){
+            $stmt = $this->db->query("SELECT  `ky`, `ngaybatdau`, `ngayketthuc` FROM `kythi` WHERE `id` = '$maky'"); // prepare the query for controller
+            return $stmt; // return stmt first then fetch later on controller
+        }
 }
 
