@@ -26,7 +26,7 @@ class AccountModel extends PDOData{
     }
 
     public function changePass($password,$id){ // this function is used to change the password
-        $sql = "UPDATE `account` SET `password`= PASSWORD('$password') WHERE `id`= '$id';";
-        $this->TrySQL($sql);
+        $sql = "UPDATE `account` SET `password`= PASSWORD(?) WHERE `id`= ?";
+        $this->doPreparedQuery($sql, [$password, $id]);
     }
 };

@@ -1,10 +1,7 @@
 <?php
 session_start();
 require_once dirname(__FILE__)."/../../account/controller/LogoutController.php";
-//require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../controller/getStudentController.php";
-//require dirname(__FILE__)."/../../vendor/autoload.php";
-//require_once dirname(__FILE__)."/../../vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php"; // include phpspreadsheet from vendor
 if($_SESSION["isAdmin"] != 1){
     header("Location:http://examreg.com/account/view/LogoutView.php");
 }
@@ -77,6 +74,7 @@ if(isset($_POST["DeleteCourse"])){
         <table class="content-table">
             <thead>
             <tr>
+                <td>STT</td>
                 <td>Mã sinh viên</td>
                 <td>Họ đệm</td>
                 <td>Tên</td>

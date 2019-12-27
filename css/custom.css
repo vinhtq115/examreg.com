@@ -1,5 +1,5 @@
 /**
- * Set default style for invalid elements.
+ * Định dạng kiểu mẫu cho giá trị không hợp lệ
  */
 :not(output):-moz-ui-invalid {
     box-shadow: 0 0 0 0;

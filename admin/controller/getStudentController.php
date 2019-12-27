@@ -92,7 +92,7 @@ class getStudentController
              **/
             for($row = 2 ; $row <= sizeof($sheetData) ; $row ++) { // iterate through the row , data start from 2
                 $id = $sheetData[$row]['A'];
-                $ids = preg_replace('/\s+/', '', $id); // delete all  white space
+                $id = preg_replace('/\s+/', '', $id); // delete all  white space
                 if($id == "null"){
                     $missing_data = 1;
                     $has_error = 1;
@@ -554,8 +554,10 @@ class getStudentController
         $stmt->execute([$id,$hodem,$ten,$ngaythi,$dudieukienthi]); // The info will be parsed to these variance
         //echo $stmt->rowCount();
         if($stmt->rowCount()){
+            $number = 0;
             while($row= $stmt->fetch()){
-                echo "<tr><td>".$row['id']."</td><td>".$row["hodem"]."</td><td>".$row["ten"]."</td><td>".$row["ngaysinh"]."</td><td>".$row["dudieukienduthi"]."</td></tr>";
+                $number = $number + 1;
+                echo "<tr><td>$number</td><td>".$row['id']."</td><td>".$row["hodem"]."</td><td>".$row["ten"]."</td><td>".$row["ngaysinh"]."</td><td>".$row["dudieukienduthi"]."</td></tr>";
             } // print the vars out on the table
         }
     }

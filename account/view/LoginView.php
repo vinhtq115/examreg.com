@@ -4,7 +4,7 @@ class LoginView
 
     public function getView(){
         $html = "
-        <div id=\"myModal\" >
+        <div id=\"modal-login\">
             <div class=\"modal-dialog modal-login\">
                 <div class=\"modal-content\">
                     <div class=\"modal-header\">
@@ -34,8 +34,7 @@ class LoginView
                 </div>
             </div>
         </div>
-        <!--/body>
-        </html-->";
+               ";
         echo $html;
     }
 }

@@ -1,108 +1,131 @@
+/*BODY*/
 body {
-    font-family: 'Varela Round', sans-serif;
+    font-family: Montserrat-Bold;
+    background-color: #f2f2f2;
+    background-image: url("img/study.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+/**/
+/*form nhập giữa màn hình*/
 .modal-login {
+    /*thay đổi bootstrap form-login*/
     width: 350px;
+    margin-top: 300px;
 }
+
 .modal-login .modal-content {
+    /*Khối form nằm giữa page*/
     padding: 20px;
     border-radius: 5px;
     border: none;
+    color: #999;
+    border-radius: 1px;
+    margin-bottom: 15px;
+    /*background: #e6ffe6;*/
+    background: #ffffff;
+    border: 1px solid #f3f3f3;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 25px;
 }
+
 .modal-login .modal-header {
+    /*Chỉnh khung của title*/
     border-bottom: none;
     position: relative;
     justify-content: center;
 }
 
-.modal-login h4 {
-    color: #636363;
-    text-align: center;
-    font-size: 26px;
-    margin-top: 0;
-}
-.modal-login .modal-content {
-    color: #999;
-    border-radius: 1px;
-    margin-bottom: 15px;
-    background: #e6ffe6;
-    border: 1px solid #f3f3f3;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 25px;
-}
-.modal-login .form-group {
-    margin-bottom: 25px;
-}
-.modal-login label {
-    font-weight: normal;
-    font-size: 13px;
-}
-.modal-login .form-control {
-    min-height: 38px;
-    padding-left: 5px;
-    box-shadow: none !important;
-    border-width: 0 0 1px 0;
-    border-radius: 0;
-}
-.modal-login .form-control:focus {
-    border-color: #ccc;
-}
-.modal-login .input-group-addon {
-    max-width: 50px;
-    text-align: center;
-    background: #f2f2f2;
-    border-width: 0 0 1px 0;
-    padding-left: 12px;
-    border-radius: 0;
-    padding-bottom: 10px;
-}
-.modal-login .btn {
-    padding-top: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    background: #0ad5f5;
-    border-radius: 3px;
-    border: none;
-    min-width: 140px;
-    outline: none !important;
-}
-.modal-login .btn:hover, .modal-login .btn:focus {
-    background: #0ad5f5;
-}
-.modal-login a {
-    color: #f2f2f2;
-    text-decoration: underline;
-}
-.modal-login a:hover {
-    text-decoration: none;
-}
-.modal-login a {
-    color: #17a2b8;
-    text-decoration: none;
-}
-.modal-login a:hover {
-    text-decoration: underline;
-}
-.modal-login .fa {
-    font-size: 21px;
-}
 .form-title{
+    /*Chỉnh sign in*/
     font-family:  Times;
     font-weight: bold;
     font-size: 30px;
-    color: #0ad5f5;
+    color:#028ED9;
     line-height: 1.2;
     text-align: center;
     width: 100%;
     display: block;
     padding-bottom: 15px;
 }
-#myModal{
-    margin-top: 300px;
+
+.modal-login h4 {
+    /*title h4*/
+    color: #636363;
+    text-align: center;
+    font-size: 26px;
+    margin-top: 0;
 }
-body{
-    background-color: #f2f2f2;
-    background-image: url("img/study.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+
+.modal-login .form-group {
+    margin-bottom: 25px;
 }
+
+.modal-login .form-control {
+    /*Kiểm tra để trống*/
+    min-height: 38px;
+    padding-left: 5px;
+    box-shadow: none !important;
+    border-width: 0 0 1px 0;
+    border-radius: 0;
+    border-color: #028ED9;
+
+}
+.modal-login .form-control:focus {
+border-color: #ccc;
+}
+.modal-login .input-group-addon {
+    /*Gắn Icon*/
+    max-width: 50px;
+    text-align: center;
+    background: #f2f2f2;
+    border-width: 0 0 1px 0;
+    border-color: #028ED9;
+    padding-left: 12px;
+    border-radius: 0;
+    padding-bottom: 10px;
+}
+/**/
+/*FormButton*/
+.modal-login .btn {
+    padding-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    background: #028ED9;
+    border-radius: 25px;
+    /*round the button*/
+    border: none;
+    min-width: 140px;
+    outline: none !important;
+}
+.modal-login .btn:hover, .modal-login .btn:focus {
+    background: #028ED9;
+}
+/**/
+
+/*.modal-login label {*/
+/*    font-weight: normal;*/
+/*    font-size: 13px;*/
+/*}*/
+/*.modal-login a {*/
+/*    color: #f2f2f2;*/
+/*    text-decoration: underline;*/
+/*}*/
+/*.modal-login a:hover {*/
+/*    text-decoration: none;*/
+/*}*/
+/*.modal-login a {*/
+/*    color: #17a2b8;*/
+/*    text-decoration: none;*/
+/*}*/
+/*.modal-login a:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+/*.modal-login .fa {*/
+/*    font-size: 21px;*/
+/*}*/
+
+/*#myModal{*/
+/*    !**!*/
+/*    margin-top: 300px;*/
+/*}*/

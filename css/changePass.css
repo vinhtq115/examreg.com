@@ -1,19 +1,26 @@
-.container{
-    margin-top: 250px;
-}
-.navbar{
-    background-color:#4d94ff;
-    overflow:hidden;
-}
+/*Body*/
 body{
     background-color: #f2f2f2;
     background-image: url("/css/img/password.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
+/**/
+/*Khối form nằm giữa page*/
 #title{
     font-weight: bold;
 }
+.container{
+    margin-top: 250px;
+}
 .form-control{
+    /*Đảm bảo form k trống*/
     font-weight: bold;
 }
+/**/
+/*Navigation bar*/
+.navbar{
+    background-color:#4d94ff;
+    overflow:hidden;
+}
+
