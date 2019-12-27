@@ -1,4 +1,5 @@
 <?php
+    // Kiểm tra session
     session_start();
     if($_SESSION["isAdmin"] != 1){
         header("Location:http://examreg.com/");

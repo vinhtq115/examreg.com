@@ -17,13 +17,13 @@ if(isset($_POST['changePass'])){ // upon submiting form , this will work
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Đổi Mật Khẩu</title>
     <!--Font Awesome-->
-    <link rel="stylesheet" href="../../externals/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/externals/fontawesome/css/all.min.css">
     <!--Bootstrap core CSS-->
-    <link rel="stylesheet" href="../../externals/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/externals/bootstrap/css/bootstrap.min.css">
     <!--Material Design Bootstrap-->
-    <link rel="stylesheet" href="../../externals/MDB/css/mdb.min.css">
+    <link rel="stylesheet" href="/externals/MDB/css/mdb.min.css">
     <!--MDBootstrap Datatables-->
-    <link rel="stylesheet" href="../../externals/MDB/css/addons/datatables.min.css">
+    <link rel="stylesheet" href="/externals/MDB/css/addons/datatables.min.css">
     <!--JQuery-->
     <script src="/externals/jquery/jquery-3.4.1.min.js"></script>
     <!--Bootstrap tooltips-->
@@ -38,61 +38,61 @@ if(isset($_POST['changePass'])){ // upon submiting form , this will work
 <?php
     if ($_SESSION["isAdmin"] == 1) {
         echo "<!--Thanh điều hướng cho admin-->
-    <nav class=\"navbar navbar-expand-lg navbar-dark primary-color\">
+    <nav class='navbar navbar-expand-lg navbar-dark primary-color'>
         <!-- Tên trang web -->
-        <a class=\"navbar-brand\" href=\"/\">ExamReg</a>
+        <a class='navbar-brand' href='/'>ExamReg</a>
         <!-- Nội dung thanh điều hướng -->
-        <div class=\"collapse navbar-collapse\">
+        <div class='collapse navbar-collapse'>
             <!-- Đường dẫn -->
-            <ul class=\"navbar-nav mr-auto\">
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/\"><img src = \"/css/img/smallhome.png\">Trang chủ</a>
+            <ul class='navbar-nav mr-auto'>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/'><img src = '/css/img/smallhome.png'>Trang chủ</a>
                 </li>
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/monthi\"><img src = \"/css/img/smallbook.png\">Môn thi</a>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/monthi'><img src = '/css/img/smallbook.png'>Môn thi</a>
                 </li>
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/hocphan\"><img src = \"/css/img/smallglass.png\">Học phần</a>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/hocphan'><img src = '/css/img/smallglass.png'>Học phần</a>
                 </li>
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/kythi\"><img src = \"/css/img/term.png\">Kỳ thi</a>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/kythi'><img src = '/css/img/term.png'>Kỳ thi</a>
                 </li>
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/quanlyphongthi\"><img src = \"/css/img/lamp.png\">Phòng thi</a>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/quanlyphongthi'><img src = '/css/img/lamp.png'>Phòng thi</a>
                 </li>
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/admin/getStudentIndex/\"><img src = \"/css/img/smallStudent.png\">Sinh viên</a>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/students'><img src = '/css/img/smallStudent.png'>Sinh viên</a>
                 </li>
             </ul>
-            <ul class=\"navbar-nav mr-1\">
-                <li class=\"nav-item active\">
-                    <a class=\"nav-link disabled\" href=\"/account/view/ChangePassView.php\"><img src = \"/css/img/smalltext.png\">Đổi mật khẩu</a>
+            <ul class='navbar-nav mr-1'>
+                <li class='nav-item active'>
+                    <a class='nav-link disabled' href='/account/view/ChangePassView.php'><img src = '/css/img/smalltext.png'>Đổi mật khẩu</a>
                 </li>
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/account/view/LogoutView.php\"><img src = \"/css/img/smalldoor.png\">Đăng xuất</a>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/account/view/LogoutView.php'><img src = '/css/img/smalldoor.png'>Đăng xuất</a>
                 </li>
             </ul>
         </div>
     </nav>";
     } else {
         echo "<!--Thanh điều hướng cho sinh viên-->
-    <nav class=\"navbar navbar-expand-lg navbar-dark primary-color\">
-        <a class=\"navbar-brand\" href=\"/\">ExamReg</a>
-        <div class=\"collapse navbar-collapse\">
-            <ul class=\"navbar-nav mr-auto\">
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/sinhvien/home\"><img src = \"/css/img/smallhome.png\">Trang chủ</a>
+    <nav class='navbar navbar-expand-lg navbar-dark primary-color'>
+        <a class='navbar-brand' href='/'>ExamReg</a>
+        <div class='collapse navbar-collapse'>
+            <ul class='navbar-nav mr-auto'>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/sinhvien/home'><img src = '/css/img/smallhome.png'>Trang chủ</a>
                 </li>
                 <li class='nav-item'>
-                    <a class='nav-link' href='/sinhvien/dangkythi'><img src = \"/css/img/register.png\">Đăng ký thi</a>
+                    <a class='nav-link' href='/sinhvien/dangkythi'><img src = '/css/img/register.png'>Đăng ký thi</a>
                 </li>
             </ul>
-            <ul class=\"navbar-nav mr-1\">
-                <li class=\"nav-item active\">
-                    <a class=\"nav-link disabled\" href=\"/account/view/ChangePassView.php\"><img src = \"/css/img/smalltext.png\">Đổi mật khẩu</a>
+            <ul class='navbar-nav mr-1'>
+                <li class='nav-item active'>
+                    <a class='nav-link disabled' href='/account/view/ChangePassView.php'><img src = '/css/img/smalltext.png'>Đổi mật khẩu</a>
                 </li>
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"/account/view/LogoutView.php\"><img src = \"/css/img/smalldoor.png\">Đăng xuất</a>
+                <li class='nav-item'>
+                    <a class='nav-link' href='/account/view/LogoutView.php'><img src = '/css/img/smalldoor.png'>Đăng xuất</a>
                 </li>
             </ul>
         </div>

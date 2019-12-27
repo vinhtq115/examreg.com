@@ -28,7 +28,6 @@
     <script src="/externals/MDB/js/addons/datatables.min.js"></script>
     <!--Custom CSS-->
     <link rel="stylesheet" href="/css/custom.css">
-    <!--<link rel="stylesheet" href="../css/header.css">-->
 </head>
 <body>
     <!--Thanh điều hướng-->
@@ -55,7 +54,7 @@
                     <a class="nav-link" href="/quanlyphongthi"><img src = "/css/img/lamp.png">Phòng thi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Sinh viên</a>
+                    <a class="nav-link" href="/students"><img src = "/css/img/smallStudent.png">Sinh viên</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-1">

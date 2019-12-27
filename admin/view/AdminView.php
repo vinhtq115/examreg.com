@@ -60,7 +60,7 @@ if($_SESSION["isAdmin"] != 1){
                 <a class="nav-link" href="/quanlyphongthi"><img src = "/css/img/lamp.png">Phòng thi</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/getStudentIndex/"><img src = "/css/img/smallStudent.png">Sinh viên</a>
+                <a class="nav-link" href="/students"><img src = "/css/img/smallStudent.png">Sinh viên</a>
             </li>
         </ul>
         <ul class="navbar-nav mr-1">
@@ -83,7 +83,7 @@ if($_SESSION["isAdmin"] != 1){
 <section id="boxes">
     <div class="container">
         <div class="box">
-            <a href="http://examreg.com/admin/getStudentIndex/"><img src="/css/img/graduate-student.png"></a> <!--This will redirect to getting student excel-->
+            <a href="http://examreg.com/students/"><img src="/css/img/graduate-student.png"></a> <!--This will redirect to getting student excel-->
             <h3>Quản lý sinh viên</h3>
             <p>Trang quản lý danh sách sinh viên, cấp tài khoản, cập nhật trạng thái đủ điều kiện dự thi</p>
         </div>
