@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 22, 2019 at 01:50 PM
+-- Generation Time: Dec 27, 2019 at 02:44 PM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.3.13-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -46,7 +46,7 @@ INSERT INTO `account` (`id`, `password`, `isAdmin`, `idsinhvien`) VALUES
 ('17021357', '*00A51F3F48415C7D4E8908980D443C29C69B60C9', 0, '17021357'),
 ('17023456', '*A674691EB6BD51FF0FB11C6939B7AE6FCD961072', 0, '17023456'),
 ('17026457', '*B78B1D698FFE28065491B3D8D26307C86101DC51', 0, '17026457'),
-('vinhtq115', '*00A51F3F48415C7D4E8908980D443C29C69B60C9', 1, NULL);
+('vinhtq115', '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -228,7 +228,6 @@ CREATE TABLE `phongthi_cathi` (
 
 INSERT INTO `phongthi_cathi` (`macathi`, `maphongthi`) VALUES
 (2, 'PM 201-G2'),
-(18, 'PM 208-G2'),
 (18, 'PM 306-G2'),
 (19, 'PM 201-G2'),
 (20, 'PM 208-G2'),
@@ -279,9 +278,10 @@ CREATE TABLE `sinhvien_cathi_phongthi` (
 --
 
 INSERT INTO `sinhvien_cathi_phongthi` (`masinhvien`, `macathi`, `maphongthi`) VALUES
+('17021357', 18, 'PM 306-G2'),
+('17023456', 18, 'PM 306-G2'),
 ('17021357', 19, 'PM 201-G2'),
-('17021357', 20, 'PM 208-G2'),
-('17021357', 21, 'PM 202-G2');
+('17021357', 21, 'PM 405-E3');
 
 -- --------------------------------------------------------
 
@@ -353,7 +353,7 @@ ALTER TABLE `phongthi`
 -- Indexes for table `phongthi_cathi`
 --
 ALTER TABLE `phongthi_cathi`
-  ADD UNIQUE KEY `macathi_2` (`macathi`,`maphongthi`),
+  ADD PRIMARY KEY (`macathi`,`maphongthi`),
   ADD KEY `macathi` (`macathi`),
   ADD KEY `maphongthi` (`maphongthi`);
 
@@ -370,7 +370,8 @@ ALTER TABLE `sinhvien_cathi_phongthi`
   ADD UNIQUE KEY `masinhvien_2` (`masinhvien`,`macathi`,`maphongthi`),
   ADD KEY `masinhvien` (`masinhvien`),
   ADD KEY `macathi` (`macathi`),
-  ADD KEY `maphongthi` (`maphongthi`);
+  ADD KEY `maphongthi` (`maphongthi`),
+  ADD KEY `sinhvien_cathi_phongthi_ibfk_2` (`macathi`,`maphongthi`);
 
 --
 -- Indexes for table `sinhvien_hoc_hocphan`
@@ -450,8 +451,7 @@ ALTER TABLE `phongthi_cathi`
 --
 ALTER TABLE `sinhvien_cathi_phongthi`
   ADD CONSTRAINT `sinhvien_cathi_phongthi_ibfk_1` FOREIGN KEY (`masinhvien`) REFERENCES `sinhvien` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `sinhvien_cathi_phongthi_ibfk_2` FOREIGN KEY (`macathi`) REFERENCES `cathi` (`macathi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `sinhvien_cathi_phongthi_ibfk_3` FOREIGN KEY (`maphongthi`) REFERENCES `phongthi` (`maphongthi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `sinhvien_cathi_phongthi_ibfk_2` FOREIGN KEY (`macathi`,`maphongthi`) REFERENCES `phongthi_cathi` (`macathi`, `maphongthi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sinhvien_hoc_hocphan`

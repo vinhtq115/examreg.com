@@ -1,7 +1,5 @@
 <?php
 //include the tool to be able to get data from Excell xls file
-//include dirname(__FILE__)."/../Classes/PHPExcel.php";
-//require_once dirname(__FILE__)."/../view/getStudentView.php";
 require_once dirname(__FILE__)."/../model/getStudentModel.php";
 require_once dirname(__FILE__)."/../../utils/getExcelData.php";
 
@@ -562,7 +560,7 @@ class getStudentController
         }
     }
 
-    function getSVCourseSem() // This will get Student info and desplay on the screen
+    function getSVCourseSem() // This will get Student info and display on the screen
     { // get the student data
         $usermodel = new getStudentModel();
         $masinhvien = "";
