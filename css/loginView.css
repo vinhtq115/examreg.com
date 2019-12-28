@@ -16,9 +16,6 @@ body {
 
 .modal-login .modal-content {
     /*Khối form nằm giữa page*/
-    padding: 20px;
-    border-radius: 5px;
-    border: none;
     color: #999;
     border-radius: 1px;
     margin-bottom: 15px;
@@ -68,11 +65,11 @@ body {
     box-shadow: none !important;
     border-width: 0 0 1px 0;
     border-radius: 0;
-    border-color: #028ED9;
+    border-color: #ccc;
 
 }
 .modal-login .form-control:focus {
-border-color: #ccc;
+border-color: #028ED9;
 }
 .modal-login .input-group-addon {
     /*Gắn Icon*/
@@ -85,6 +82,7 @@ border-color: #ccc;
     border-radius: 0;
     padding-bottom: 10px;
 }
+
 /**/
 /*FormButton*/
 .modal-login .btn {
