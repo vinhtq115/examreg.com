@@ -17,8 +17,8 @@ class MonthiController {
      */
     public function __construct() {
         $this->monthi = new Monthi();
-        $this->data = json_encode($this->monthi->getAll());
-        $this->view = new MonthiView($this->data);
+        $this->data = json_encode($this->monthi->getAll()); // Lấy danh sách môn thi
+        $this->view = new MonthiView($this->data); // Khởi tạo view và gán dữ liệu
     }
 
     /**

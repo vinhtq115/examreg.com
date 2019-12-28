@@ -11,9 +11,9 @@ require dirname(__FILE__).'/../../../vendor/autoload.php';
 
 class IndangkythiController {
     private $model; // Model Indangkythi
-    private $thongtinsinhvien;
-    private $thongtinhocky;
-    private $cathidadangky;
+    private $thongtinsinhvien; // Chứa thông tin về sinh viên
+    private $thongtinhocky; // Chứa thông tin về học kỳ
+    private $cathidadangky; // Chứa các ca thi đã đăng ký
 
     /**
      * IndangkythiController constructor.

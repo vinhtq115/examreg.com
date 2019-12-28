@@ -27,9 +27,9 @@ class HocphanView {
      */
     public function tableView() {
         $html = "<table id='tablehocphan' class='table table-bordered table-striped table-hover table-sm'><thead><tr>";
-        $html .= "<th class=\"th-sm\">Mã môn thi</th>";
-        $html .= "<th class=\"th-sm\">Tên môn thi</th>";
-        $html .= "<th class=\"th-sm\">Mã học phần</th>";
+        $html .= "<th class='th-sm'>Mã môn thi</th>";
+        $html .= "<th class='th-sm'>Tên môn thi</th>";
+        $html .= "<th class='th-sm'>Mã học phần</th>";
         $html .= "</tr></thead><tbody>";
         $size = sizeof($this->data); // Chứa kích cỡ mảng data
         if ($size > 0) { // Trả về dữ liệu nếu size > 0
@@ -59,7 +59,7 @@ class HocphanView {
         for ($i = 0; $i < $size; $i++) {
             $a = json_encode($this->data[$i]);
             $b = json_decode($a);
-            $html .= "<option value=\"".$b->mahocphan."\">".$b->tenmonthi." --- ".$b->mahocphan;
+            $html .= "<option value='".$b->mahocphan."'>".$b->tenmonthi." --- ".$b->mahocphan;
         }
         $html .= "</datalist>";
         return $html;
@@ -70,15 +70,15 @@ class HocphanView {
      */
     public function addForm() {
         $html = "<form id='form_add' autocomplete='off'>
-                  <div class=\"form-group\">
-                    <label for=\"mamonthi_add\">Mã môn thi</label>
-                    <input type=\"text\" list='danhsachmonhoc' class=\"form-control\" id=\"mamonthi_add\" name=\"mamonthi\" placeholder=\"Nhập mã môn thi muốn thêm học phần\" maxlength='20' minlength='1' required>
+                  <div class='form-group'>
+                    <label for='mamonthi_add'>Mã môn thi</label>
+                    <input type='text' list='danhsachmonhoc' class='form-control' id='mamonthi_add' name='mamonthi' placeholder='Nhập mã môn thi muốn thêm học phần' maxlength='20' minlength='1' required>
                   </div>
-                  <div class=\"form-group\">
-                    <label for=\"mahocphan_add\">Mã học phần</label>
-                    <input type=\"text\" class=\"form-control\" id=\"mahocphan_add\" name=\"mahocphan\" placeholder=\"Nhập mã học phần muốn thêm\" maxlength='20' minlength='1' required>
+                  <div class='form-group'>
+                    <label for='mahocphan_add'>Mã học phần</label>
+                    <input type='text' class='form-control' id='mahocphan_add' name='mahocphan' placeholder='Nhập mã học phần muốn thêm' maxlength='20' minlength='1' required>
                   </div>";
-        $html .= "<button type=\"button\" id='add-button' class=\"btn btn-primary\">Thêm</button></form>";
+        $html .= "<button type='button' id='add-button' class='btn btn-primary'>Thêm</button></form>";
         return $html;
     }
 
@@ -89,9 +89,9 @@ class HocphanView {
         $html = "<form method='post' id='form_delete' autocomplete='off'>
                   <div class='form-group'>
                     <label for='mahocphan_delete'>Mã học phần</label>
-                    <input list='danhsachhocphan' type='text' class='form-control' id=\"mahocphan_delete\" name=\"mahocphan\" placeholder=\"Nhập mã học phần cần xóa\" required>
+                    <input list='danhsachhocphan' type='text' class='form-control' id='mahocphan_delete' name='mahocphan' placeholder='Nhập mã học phần cần xóa' required>
                   </div>";
-        $html .= "<button type=\"button\" id='delete-button' class=\"btn btn-danger\">Xóa</button></form>";
+        $html .= "<button type='button' id='delete-button' class='btn btn-danger'>Xóa</button></form>";
         return $html;
     }
 }

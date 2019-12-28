@@ -20,9 +20,9 @@ class HocphanController {
      */
     public function __construct() {
         $this->hocphan = new Hocphan();
-        $this->data = json_encode($this->hocphan->getAll());
-        $this->view = new HocphanView($this->data);
-        $this->monthictrl = new MonthiController();
+        $this->data = json_encode($this->hocphan->getAll()); // Lấy dữ liệu học phần
+        $this->view = new HocphanView($this->data); // Khởi tạo view và gán dữ liệu
+        $this->monthictrl = new MonthiController(); // Dùng để lấy datalist của môn thi
     }
 
     /**

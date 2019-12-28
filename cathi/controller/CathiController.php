@@ -21,11 +21,11 @@ class CathiController {
      */
     public function __construct($kythi) {
         $this->cathi = new Cathi($kythi);
-        $data = $this->cathi->getAll();;
+        $data = $this->cathi->getAll(); // Lấy các ca thi của kỳ thi
         $this->data = json_encode($data);
-        $this->view = new CathiView($this->data, $kythi);
-        $this->view->setYear($this->getYear()[0]);
-        $this->hocphanctrl = new HocphanController();
+        $this->view = new CathiView($this->data, $kythi); // Tạo view và gán dữ liệu
+        $this->view->setYear($this->getYear()[0]); // Cài năm bắt đầu và năm kết thúc
+        $this->hocphanctrl = new HocphanController(); // Dùng để lấy datalist
     }
 
     /**

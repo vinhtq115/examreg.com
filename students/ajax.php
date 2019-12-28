@@ -13,8 +13,8 @@
         $res = new stdClass(); // Chứa response
         $table1 = $ctrl->tableSV();
         $table2 = $ctrl->tableSVHHP();
-        $hash1 = hash('sha256', $table1); // Hash của SV
-        $hash2 = hash('sha256', $table2); // Hash của SVHHP
+        $hash1 = hash('sha256', $table1); // Hash của bảng SV
+        $hash2 = hash('sha256', $table2); // Hash của bảng SVHHP
         // Client kiểm tra xem hash của client có trùng server không. Nếu không trùng, server trả về bảng và hash mới.
         if (isset($_GET['hash1'])) { // Check hash bảng sinh viên
             if ($_GET['hash1'] != $hash1) {

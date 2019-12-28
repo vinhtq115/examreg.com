@@ -83,7 +83,7 @@ if($_SESSION["isAdmin"] != 1){
 <section id="boxes">
     <div class="container">
         <div class="box">
-            <a href="http://examreg.com/students/"><img src="/css/img/graduate-student.png"></a> <!--This will redirect to getting student excel-->
+            <a href="http://examreg.com/students/"><img src="/css/img/graduate-student.png"></a>
             <h3>Quản lý sinh viên</h3>
             <p>Trang quản lý danh sách sinh viên, cấp tài khoản, cập nhật trạng thái đủ điều kiện dự thi</p>
         </div>

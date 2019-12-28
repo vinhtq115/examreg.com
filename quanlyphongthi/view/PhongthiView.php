@@ -98,7 +98,7 @@ class PhongthiView {
     public function editForm() {
         $html = "<form method='post' id='form_edit' autocomplete='off'>
                     <div class='form-group'>
-                        <label for='maphongthi_edit'>Mã môn thi</label>
+                        <label for='maphongthi_edit'>Mã phòng thi</label>
                         <input list='danhsachphongthi' type='text' class='form-control' id='maphongthi_edit' name='maphongthi' placeholder='Nhập mã phòng thi muốn sửa' maxlength='20' minlength='1' required>
                     </div>
                   <div class='form-group'>

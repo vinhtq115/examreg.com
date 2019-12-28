@@ -2,11 +2,11 @@
 session_start();
 require_once dirname(__FILE__)."/account/controller/LoginController.php";
 require_once dirname(__FILE__)."/account/view/LoginView.php";
-
+// Kiểm tra session
 if($_SESSION["id"] != ""){
-    if($_SESSION["isAdmin"] == 1){
+    if($_SESSION["isAdmin"] == 1){ // Nếu là admin thì đưa về menu admin
         header('Location: http://examreg.com/admin/view/AdminView.php');
-    }else if($_SESSION["isAdmin"] == 0){
+    }else if($_SESSION["isAdmin"] == 0){ // Nếu là sinh viên thì đưa về menu sinh viên
         header('Location: http://examreg.com/sinhvien');
     }
 }
@@ -28,8 +28,7 @@ if($_SESSION["id"] != ""){
 </head>
 <body>
 <?php
-        $usercontroller = new LoginController();//call the controller
-   ?>
-
+        $usercontroller = new LoginController();
+?>
 </body>
 </html>

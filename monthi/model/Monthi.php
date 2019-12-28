@@ -44,8 +44,8 @@ class Monthi extends PDOData {
         $sql = "LOCK TABLES monthi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã môn thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM monthi WHERE mamonthi = '$mamonthi'";
-        $arr = $this->doQuery($sql); // Lấy mảng môn thi trùng mã vừa nhập
+        $sql = "SELECT * FROM monthi WHERE mamonthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$mamonthi]); // Lấy mảng môn thi trùng mã vừa nhập
         if (count($arr) > 0) { // Môn học đã tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -73,8 +73,8 @@ class Monthi extends PDOData {
         $sql = "LOCK TABLES monthi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã môn thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM monthi WHERE mamonthi = '$mamonthi'";
-        $arr = $this->doQuery($sql); // Lấy mảng môn thi trùng mã vừa nhập
+        $sql = "SELECT * FROM monthi WHERE mamonthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$mamonthi]); // Lấy mảng môn thi trùng mã vừa nhập
         if (count($arr) == 0) { // Môn học không tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -83,13 +83,13 @@ class Monthi extends PDOData {
         }
         // Môn học tồn tại trong hệ thống
         // Xóa môn học khỏi CSDL
-        $sql = "DELETE FROM monthi WHERE monthi.mamonthi = '$mamonthi'";
-        $c = $this->doSql($sql);
+        $sql = "DELETE FROM monthi WHERE monthi.mamonthi = ?";
+        $this->doPreparedQuery($sql, [$mamonthi]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 
     /**
@@ -105,8 +105,8 @@ class Monthi extends PDOData {
         $sql = "LOCK TABLES monthi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã môn thi cũ có tồn tại trong CSDL không
-        $sql = "SELECT * FROM monthi WHERE mamonthi = '$old_mamonthi'";
-        $arr = $this->doQuery($sql); // Lấy mảng môn thi trùng mã vừa nhập
+        $sql = "SELECT * FROM monthi WHERE mamonthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$old_mamonthi]); // Lấy mảng môn thi trùng mã vừa nhập
         if (count($arr) == 0) { // Mã môn học cũ không tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -117,8 +117,8 @@ class Monthi extends PDOData {
         // Mã môn học cũ tồn tại trong hệ thống.
         if ($old_mamonthi != $mamonthi) { // Trường hợp sửa mã môn thi
             // Kiểm tra xem mã môn thi mới đã tồn tại trong CSDL chưa
-            $sql = "SELECT * FROM monthi WHERE mamonthi = '$mamonthi'";
-            $arr = $this->doQuery($sql); // Lấy mảng môn thi trùng mã vừa nhập
+            $sql = "SELECT * FROM monthi WHERE mamonthi = ?";
+            $arr = $this->doPreparedQuery($sql, [$mamonthi]); // Lấy mảng môn thi trùng mã vừa nhập
             if (count($arr) > 0) { // Môn học đã tồn tại trong hệ thống
                 // Mở khóa bảng
                 $sql = "UNLOCK TABLES";

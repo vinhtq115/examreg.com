@@ -53,8 +53,8 @@ class Phongthi extends PDOData {
         $sql = "LOCK TABLES phongthi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã phòng thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM phongthi WHERE maphongthi = '$maphongthi'";
-        $arr = $this->doQuery($sql); // Lấy mảng phòng thi trùng mã vừa nhập
+        $sql = "SELECT * FROM phongthi WHERE maphongthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$maphongthi]); // Lấy mảng phòng thi trùng mã vừa nhập
         if (count($arr) > 0) { // Mã phòng thi đã tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -82,8 +82,8 @@ class Phongthi extends PDOData {
         $sql = "LOCK TABLES phongthi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã phòng thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM phongthi WHERE maphongthi = '$maphongthi'";
-        $arr = $this->doQuery($sql); // Lấy mảng phòng thi trùng mã vừa nhập
+        $sql = "SELECT * FROM phongthi WHERE maphongthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$maphongthi]); // Lấy mảng phòng thi trùng mã vừa nhập
         if (count($arr) == 0) { // Mã phòng thi đã tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -92,13 +92,13 @@ class Phongthi extends PDOData {
         }
         // Mã phòng học đã tồn tại trong hệ thống
         // Xóa phòng học khỏi CSDL
-        $sql = "DELETE FROM phongthi WHERE phongthi.maphongthi = '$maphongthi'";
-        $c = $this->doSql($sql);
+        $sql = "DELETE FROM phongthi WHERE phongthi.maphongthi = ?";
+        $this->doPreparedQuery($sql, [$maphongthi]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 
     /**
@@ -114,8 +114,8 @@ class Phongthi extends PDOData {
         $sql = "LOCK TABLES phongthi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã phòng thi cũ có tồn tại trong CSDL không
-        $sql = "SELECT * FROM phongthi WHERE maphongthi = '$old_maphongthi'";
-        $arr = $this->doQuery($sql); // Lấy mảng phòng thi trùng mã vừa nhập
+        $sql = "SELECT * FROM phongthi WHERE maphongthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$old_maphongthi]); // Lấy mảng phòng thi trùng mã vừa nhập
         if (count($arr) == 0) { // Mã phòng thi cũ không tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -125,8 +125,8 @@ class Phongthi extends PDOData {
         // Mã phòng thi cũ tồn tại trong hệ thống.
         if ($old_maphongthi != $maphongthi) { // Trường hợp sửa mã phòng thi
             // Kiểm tra xem mã phòng thi mới đã tồn tại trong CSDL chưa
-            $sql = "SELECT * FROM phongthi WHERE maphongthi = '$maphongthi'";
-            $arr = $this->doQuery($sql); // Lấy mảng phòng thi trùng mã vừa nhập
+            $sql = "SELECT * FROM phongthi WHERE maphongthi = ?";
+            $arr = $this->doPreparedQuery($sql, [$maphongthi]); // Lấy mảng phòng thi trùng mã vừa nhập
             if (count($arr) > 0) { // Phòng thi đã tồn tại trong hệ thống
                 // Mở khóa bảng
                 $sql = "UNLOCK TABLES";

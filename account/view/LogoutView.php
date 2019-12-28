@@ -1,4 +1,5 @@
 <?php
-require_once dirname(__FILE__)."/../controller/LogoutController.php";
-$logout = new LogoutController();
-$logout -> endSession();
+    require_once dirname(__FILE__)."/../controller/LogoutController.php";
+    // Tạo LogoutController và kết thúc session
+    $logout = new LogoutController();
+    $logout -> endSession();

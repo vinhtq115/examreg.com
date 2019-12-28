@@ -145,7 +145,7 @@
         </div>
         <div>
             <h3>Cập nhập sinh viên học học phần</h3>
-            <form align = "center" method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 <label>Chọn file Excel: </label>
                 <input type="file" name="file"/>
                 <br />

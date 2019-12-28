@@ -17,8 +17,8 @@ class KythiController {
      */
     public function __construct() {
         $this->kythi = new Kythi();
-        $this->data = json_encode($this->kythi->getAll());
-        $this->view = new KythiView($this->data);
+        $this->data = json_encode($this->kythi->getAll()); // Lấy danh sách kỳ thi
+        $this->view = new KythiView($this->data); // Khởi tạo view và gán data
     }
 
     /**

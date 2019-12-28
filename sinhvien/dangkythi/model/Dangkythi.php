@@ -116,31 +116,32 @@ class Dangkythi extends PDOData {
             return 1;
         }
         // Kiểm tra xem mã phòng thi có tồn tại không
-        $sql = "SELECT * FROM phongthi WHERE maphongthi = '$maphongthi'";
-        $arr = $this->doQuery($sql);
+        $sql = "SELECT * FROM phongthi WHERE maphongthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$maphongthi]);
         if (count($arr) == 0) { // Không tồn tại ca thi trong kỳ thi hiện tại
             return 2;
         }
         // Kiểm tra xem ca thi có phòng thi đó hay không
-        $sql = "SELECT * FROM phongthi_cathi WHERE maphongthi = '$maphongthi' AND macathi = '$macathi'";
-        $arr = $this->doQuery($sql);
+        $sql = "SELECT * FROM phongthi_cathi WHERE maphongthi = ? AND macathi = ?";
+        $arr = $this->doPreparedQuery($sql, [$maphongthi, $macathi]);
         if (count($arr) == 0) { // Không tồn tại ca thi trong kỳ thi hiện tại
             return 3;
         }
         // Kiểm tra xem còn đủ máy trong phòng không
-        $sql = "SELECT soluongmay FROM phongthi WHERE maphongthi = '$maphongthi'";
-        $arr = $this->doQuery($sql);
+        $sql = "SELECT soluongmay FROM phongthi WHERE maphongthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$maphongthi]);
         $soluongmay = 0; // Số lượng máy của phòng
         foreach ($arr as $key => $value) {
             $soluongmay = $value["soluongmay"];
         }
-        $sql = "SELECT a.currentsv FROM (SELECT COUNT(masinhvien) currentsv, macathi, maphongthi FROM sinhvien_cathi_phongthi GROUP BY macathi, maphongthi) a WHERE macathi = '$macathi' AND maphongthi = '$maphongthi'";
-        $arr = $this->doQuery($sql);
+        $sql = "SELECT a.currentsv FROM (SELECT COUNT(masinhvien) currentsv, macathi, maphongthi FROM sinhvien_cathi_phongthi 
+                GROUP BY macathi, maphongthi) a WHERE macathi = ? AND maphongthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$macathi, $maphongthi]);
         $soluongmaydaco = 0; // Số lượng máy đã có thí sinh đăng ký
         foreach ($arr as $key => $value) {
             $soluongmaydaco = $value["currentsv"];
         }
-        if ($soluongmay-$soluongmaydaco <= 0) {
+        if ($soluongmay-$soluongmaydaco <= 0) { // Full slot không còn chỗ
             return 4;
         }
         // Đăng ký

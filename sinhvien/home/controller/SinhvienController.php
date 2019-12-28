@@ -18,9 +18,9 @@ class SinhvienController {
      */
     public function __construct($mssv) {
         $this->model = new Sinhvien($mssv);
-        $data = $this->model->getInfo();
+        $data = $this->model->getInfo(); // Lấy thông tin sinh viên
         $this->data = json_encode($data);
-        $this->view = new SinhvienView($this->data);
+        $this->view = new SinhvienView($this->data); // Khởi tạo view và gán dữ liệu
     }
 
     /**

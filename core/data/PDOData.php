@@ -97,18 +97,5 @@ class PDOData
         }
         return $count;
     }
-
-    /**
-     * Just Run SQL(Insert , Delete , Update,....) and Return Nothing
-     * PDOD way
-     */
-    public function TrySQL($sql){
-        try {
-            $this->db->exec($sql);
-        }catch(PDOException $e){
-            echo $sql . "<br>" . $e->getMessage();
-        }
-    }
-
 }
 

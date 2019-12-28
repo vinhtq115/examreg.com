@@ -1,5 +1,10 @@
 <?php
-    function checkInteger($x) { // To check if a number is float or integer. true if integer, false if float
+    /**
+     * Kiểm tra một số xem là float hay int.
+     * @param $x: Float hoặc int
+     * @return bool: True nếu int, false nếu float
+     */
+    function checkInteger($x) {
         if (is_float($x))
             return false;
         return true;

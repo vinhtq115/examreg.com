@@ -36,12 +36,12 @@ class Kythi extends PDOData {
     /**
      * Set kỳ thi hiện tại.
      * @param $makythi : Mã kỳ thi
-     * @return int : Số bản ghi được cập nhật
+     * @return int : 1 nếu OK và 0 nếu thất bại
      */
     public function setActive($makythi) {
         // Kiểm tra xem mã kỳ thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM kythi WHERE id = '$makythi'";
-        $arr = $this->doQuery($sql); // Lấy mảng kỳ thi trùng mã vừa nhập
+        $sql = "SELECT * FROM kythi WHERE id = ?";
+        $arr = $this->doPreparedQuery($sql, [$makythi]); // Lấy mảng kỳ thi trùng mã vừa nhập
         if (count($arr) == 0) { // Kỳ thi không tồn tại trong hệ thống
             return 0;
         }
@@ -52,13 +52,13 @@ class Kythi extends PDOData {
         $sql = "UPDATE kythi SET active = 0";
         $this->doSql($sql);
         // Set kỳ thi hiện tại
-        $sql = "UPDATE kythi SET active = 1 WHERE kythi.id = '$makythi'";
-        $c = $this->doSql($sql);
+        $sql = "UPDATE kythi SET active = 1 WHERE kythi.id = ?";
+        $this->doPreparedQuery($sql, [$makythi]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 
     /**
@@ -93,8 +93,8 @@ class Kythi extends PDOData {
         $sql = "LOCK TABLES kythi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem kỳ thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM kythi WHERE nambatdau = '$nambatdau' AND namketthuc = '$namketthuc' AND ky = '$hocky'";
-        $arr = $this->doQuery($sql); // Lấy mảng kỳ thi trùng tham số đầu vào
+        $sql = "SELECT * FROM kythi WHERE nambatdau = ? AND namketthuc = ? AND ky = ?";
+        $arr = $this->doPreparedQuery($sql, [$nambatdau, $namketthuc, $hocky]); // Lấy mảng kỳ thi trùng tham số đầu vào
         if (count($arr) > 0) { // Kỳ thi đã tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -103,13 +103,13 @@ class Kythi extends PDOData {
         }
         // Kỳ thi chưa tồn tại trong hệ thống.
         // Thêm môn học vào CSDL
-        $sql = "INSERT INTO kythi(ky, nambatdau, namketthuc, ngaybatdau, ngayketthuc) VALUES ('$hocky', '$nambatdau', '$namketthuc', '$ngaybatdau', '$ngayketthuc')";
-        $c = $this->doSql($sql);
+        $sql = "INSERT INTO kythi(ky, nambatdau, namketthuc, ngaybatdau, ngayketthuc) VALUES (?, ?, ?, ?, ?)";
+        $this->doPreparedQuery($sql, [$hocky, $nambatdau, $namketthuc, $ngaybatdau, $ngayketthuc]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 
     /**
@@ -122,8 +122,8 @@ class Kythi extends PDOData {
         $sql = "LOCK TABLES kythi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã kỳ thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM kythi WHERE id = '$makythi'";
-        $arr = $this->doQuery($sql); // Lấy mảng kỳ thi trùng mã vừa nhập
+        $sql = "SELECT * FROM kythi WHERE id = ?";
+        $arr = $this->doPreparedQuery($sql, [$makythi]); // Lấy mảng kỳ thi trùng mã vừa nhập
         if (count($arr) == 0) { // Kỳ thi không tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -132,13 +132,13 @@ class Kythi extends PDOData {
         }
         // Kỳ thi tồn tại trong hệ thống
         // Xóa kỳ thi khỏi CSDL
-        $sql = "DELETE FROM kythi WHERE kythi.id = '$makythi'";
-        $c = $this->doSql($sql);
+        $sql = "DELETE FROM kythi WHERE kythi.id = ?";
+        $this->doPreparedQuery($sql, [$makythi]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 
     /**
@@ -156,8 +156,8 @@ class Kythi extends PDOData {
         $sql = "LOCK TABLES kythi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã kỳ thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM kythi WHERE id = '$id'";
-        $arr = $this->doQuery($sql); // Lấy mảng kỳ thi trùng mã vừa nhập
+        $sql = "SELECT * FROM kythi WHERE id = ?";
+        $arr = $this->doPreparedQuery($sql, [$id]); // Lấy mảng kỳ thi trùng mã vừa nhập
         if (count($arr) == 0) { // Mã kỳ thi không tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -165,8 +165,8 @@ class Kythi extends PDOData {
             return 0;
         }
         // Kiểm tra xem mã thông tin kỳ thi mới có tồn tại trong CSDL không
-        $sql = "SELECT * FROM kythi WHERE nambatdau = '$nambatdau' AND namketthuc = '$namketthuc' AND ky = '$ky'";
-        $arr = $this->doQuery($sql); // Lấy mảng kỳ thi trùng mã vừa nhập
+        $sql = "SELECT * FROM kythi WHERE nambatdau = ? AND namketthuc = ? AND ky = ?";
+        $arr = $this->doPreparedQuery($sql, [$nambatdau, $namketthuc, $ky]); // Lấy mảng kỳ thi trùng mã vừa nhập
         if (count($arr) > 0) { // Kỳ thi mới tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -174,12 +174,12 @@ class Kythi extends PDOData {
             return 0;
         }
         // Sửa thông tin
-        $sql = "UPDATE kythi SET ky = '$ky', nambatdau = '$nambatdau', namketthuc = '$namketthuc', ngaybatdau = '$ngaybatdau', ngayketthuc = '$ngayketthuc' WHERE kythi.id = '$id'";
-        $c = $this->doSql($sql);
+        $sql = "UPDATE kythi SET ky = ?, nambatdau = ?, namketthuc = ?, ngaybatdau = ?, ngayketthuc = ? WHERE kythi.id = ?";
+        $this->doPreparedQuery($sql, [$ky, $nambatdau, $namketthuc, $ngaybatdau, $ngayketthuc, $id]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 }

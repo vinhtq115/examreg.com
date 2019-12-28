@@ -17,8 +17,8 @@ class PhongthiController {
      */
     public function __construct() {
         $this->phongthi = new Phongthi();
-        $this->data = json_encode($this->phongthi->getAll());
-        $this->view = new PhongthiView($this->data);
+        $this->data = json_encode($this->phongthi->getAll()); // Lấy dữ liệu phòng thi
+        $this->view = new PhongthiView($this->data); // Khởi tạo view và gán dữ liệu
     }
 
     /**

@@ -1,11 +1,8 @@
 <?php
     session_start();
-//    if($_SESSION["isAdmin"] != 0 || !isset($_SESSION["id"])) {
-//        header("Location:http://examreg.com/");
-//    }
-      if(!isset($_SESSION["isAdmin"])){
-          header("Location:http://examreg.com/account/view/LogoutView.php");
-      }
+    if(!isset($_SESSION["isAdmin"])){
+      header("Location:http://examreg.com/account/view/LogoutView.php");
+    }
 ?>
 <html lang="en">
 <head>

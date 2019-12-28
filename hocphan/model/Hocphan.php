@@ -50,23 +50,30 @@ class Hocphan extends PDOData {
      */
     public function add($mahocphan, $mamonthi) {
         // Kiểm tra xem mã môn thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM monthi WHERE mamonthi = '$mamonthi'";
-        $arr = $this->doQuery($sql); // Lấy mảng môn thi trùng mã vừa nhập
+        $sql = "SELECT * FROM monthi WHERE mamonthi = ?";
+        $arr = $this->doPreparedQuery($sql, [$mamonthi]); // Lấy mảng môn thi trùng mã vừa nhập
         if (count($arr) == 0) { // Môn học không tồn tại trong hệ thống
             return 0;
         }
         // Môn học đã tồn tại trong hệ thống.
+        // Kiểm tra xem mã học phần có tồn tại trong CSDL không
+        $sql = "SELECT * FROM hocphan WHERE mahocphan = ?";
+        $arr = $this->doPreparedQuery($sql, [$mahocphan]); // Lấy mảng học phần trùng mã vừa nhập
+        if (count($arr) != 0) { // Học phần đã tồn tại trong hệ thống
+            return 0;
+        }
+        // Học phần đã tồn tại trong hệ thống.
         // Khóa bảng
         $sql = "LOCK TABLES hocphan WRITE";
         $this->doSql($sql);
         // Thêm học phần vào CSDL
-        $sql = "INSERT INTO `hocphan` (`mahocphan`, `mamonthi`) VALUES ('$mahocphan', '$mamonthi')";
-        $c = $this->doSql($sql);
+        $sql = "INSERT INTO `hocphan` (`mahocphan`, `mamonthi`) VALUES (?, ?)";
+        $this->doPreparedQuery($sql, [$mahocphan, $mamonthi]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 
     /**
@@ -79,8 +86,8 @@ class Hocphan extends PDOData {
         $sql = "LOCK TABLES hocphan WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã học phần có tồn tại trong CSDL không
-        $sql = "SELECT * FROM hocphan WHERE mahocphan = '$mahocphan'";
-        $arr = $this->doQuery($sql); // Lấy mảng học phần trùng mã vừa nhập
+        $sql = "SELECT * FROM hocphan WHERE mahocphan = ?";
+        $arr = $this->doPreparedQuery($sql, [$mahocphan]); // Lấy mảng học phần trùng mã vừa nhập
         if (count($arr) == 0) { // Học phần không tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -89,12 +96,12 @@ class Hocphan extends PDOData {
         }
         // Học phần tồn tại trong hệ thống
         // Xóa học phần khỏi CSDL
-        $sql = "DELETE FROM hocphan WHERE hocphan.mahocphan = '$mahocphan'";
-        $c = $this->doSql($sql);
+        $sql = "DELETE FROM hocphan WHERE hocphan.mahocphan = ?";
+        $this->doPreparedQuery($sql, [$mahocphan]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 }

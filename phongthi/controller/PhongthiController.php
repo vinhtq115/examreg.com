@@ -20,10 +20,10 @@ class PhongthiController {
      */
     public function __construct($macathi) {
         $this->phongthi = new Phongthi($macathi);
-        $data = $this->phongthi->getAll();
+        $data = $this->phongthi->getAll(); // Lấy danh sách phòng thi của ca thi
         $this->data = json_encode($data);
-        $this->view = new PhongthiView($this->data);
-        $this->quanlyphongthictrl = new \quanlyphongthi\controller\PhongthiController();
+        $this->view = new PhongthiView($this->data); // Khởi tạo view và gán data
+        $this->quanlyphongthictrl = new \quanlyphongthi\controller\PhongthiController(); // Dùng để lấy danh sách toàn bộ phòng thi
     }
 
     /**

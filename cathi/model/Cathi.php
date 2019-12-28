@@ -60,8 +60,8 @@ class Cathi extends PDOData {
         $sql = "LOCK TABLES cathi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem ca thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM cathi WHERE mahocphan = '$mahocphan' AND ngaythi = '$ngaythi' AND giobatdau = '$giobatdau' AND gioketthuc = '$gioketthuc' AND makythi = '$this->kythi'";
-        $arr = $this->doQuery($sql); // Lấy mảng ca thi trùng thông tin vừa nhập
+        $sql = "SELECT * FROM cathi WHERE mahocphan = ? AND ngaythi = ? AND giobatdau = ? AND gioketthuc = ? AND makythi = ?";
+        $arr = $this->doPreparedQuery($sql, [$mahocphan, $ngaythi, $giobatdau, $gioketthuc, $this->kythi]); // Lấy mảng ca thi trùng thông tin vừa nhập
         if (count($arr) > 0) { // Ca thi tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -69,13 +69,13 @@ class Cathi extends PDOData {
             return 0;
         }
         // Thêm ca thi vào CSDL
-        $sql = "INSERT INTO cathi (mahocphan, makythi, ngaythi, giobatdau, gioketthuc) VALUES ('$mahocphan', '$this->kythi', '$ngaythi', '$giobatdau', '$gioketthuc')";
-        $c = $this->doSql($sql);
+        $sql = "INSERT INTO cathi (mahocphan, makythi, ngaythi, giobatdau, gioketthuc) VALUES (?, ?, ?, ?, ?)";
+        $this->doPreparedQuery($sql, [$mahocphan, $this->kythi, $ngaythi, $giobatdau, $gioketthuc]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 
     /**
@@ -88,8 +88,8 @@ class Cathi extends PDOData {
         $sql = "LOCK TABLES cathi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã ca thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM cathi WHERE macathi = '$macathi' AND makythi = '$this->kythi'";
-        $arr = $this->doQuery($sql); // Lấy mảng ca thi trùng mã vừa nhập
+        $sql = "SELECT * FROM cathi WHERE macathi = ? AND makythi = ?";
+        $arr = $this->doPreparedQuery($sql, [$macathi, $this->kythi]); // Lấy mảng ca thi trùng mã vừa nhập
         if (count($arr) == 0) { // Ca thi không tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -98,13 +98,13 @@ class Cathi extends PDOData {
         }
         // Ca thi tồn tại trong hệ thống
         // Xóa ca thi khỏi CSDL
-        $sql = "DELETE FROM cathi WHERE cathi.macathi = '$macathi' AND cathi.makythi = '$this->kythi'";
-        $c = $this->doSql($sql);
+        $sql = "DELETE FROM cathi WHERE cathi.macathi = ? AND cathi.makythi = ?";
+        $this->doPreparedQuery($sql, [$macathi, $this->kythi]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 
     /**
@@ -121,8 +121,8 @@ class Cathi extends PDOData {
         $sql = "LOCK TABLES cathi WRITE";
         $this->doSql($sql);
         // Kiểm tra xem mã ca thi có tồn tại trong CSDL không
-        $sql = "SELECT * FROM cathi WHERE macathi = '$macathi' AND makythi = '$this->kythi'";
-        $arr = $this->doQuery($sql); // Lấy mảng ca thi trùng mã vừa nhập
+        $sql = "SELECT * FROM cathi WHERE macathi = ? AND makythi = ?";
+        $arr = $this->doPreparedQuery($sql, [$macathi, $this->kythi]); // Lấy mảng ca thi trùng mã vừa nhập
         if (count($arr) == 0) { // Ca thi không tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -131,8 +131,8 @@ class Cathi extends PDOData {
         }
         // Ca thi tồn tại trong hệ thống
         // Kiểm tra xem thông tin ca thi mới có tồn tại trong CSDL không
-        $sql = "SELECT * FROM cathi WHERE mahocphan = '$mahocphan' AND ngaythi = '$ngaythi' AND giobatdau = '$giobatdau' AND gioketthuc = '$gioketthuc' AND makythi = '$this->kythi'";
-        $arr = $this->doQuery($sql); // Lấy mảng ca thi trùng thông tin mới
+        $sql = "SELECT * FROM cathi WHERE mahocphan = ? AND ngaythi = ? AND giobatdau = ? AND gioketthuc = ? AND makythi = ?";
+        $arr = $this->doPreparedQuery($sql, [$mahocphan, $ngaythi, $giobatdau, $gioketthuc, $this->kythi]); // Lấy mảng ca thi trùng thông tin mới
         if (count($arr) > 0) { // Ca thi mới tồn tại trong hệ thống
             // Mở khóa bảng
             $sql = "UNLOCK TABLES";
@@ -140,12 +140,12 @@ class Cathi extends PDOData {
             return 0;
         }
         // Sửa thông tin
-        $sql = "UPDATE cathi SET mahocphan = '$mahocphan', ngaythi = '$ngaythi', giobatdau = '$giobatdau', gioketthuc = '$gioketthuc' WHERE cathi.macathi = '$macathi' AND cathi.makythi = '$this->kythi'";
-        $c = $this->doSql($sql);
+        $sql = "UPDATE cathi SET mahocphan = ?, ngaythi = ?, giobatdau = ?, gioketthuc = ? WHERE cathi.macathi = ? AND cathi.makythi = ?";
+        $this->doPreparedQuery($sql, [$mahocphan, $ngaythi, $giobatdau, $gioketthuc, $macathi, $this->kythi]);
         // Mở khóa bảng
         $sql = "UNLOCK TABLES";
         $this->doSql($sql);
 
-        return $c;
+        return 1;
     }
 }
