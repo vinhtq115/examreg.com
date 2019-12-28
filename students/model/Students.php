@@ -121,7 +121,7 @@ class Students extends PDOData {
      * @return array: Mảng sinh viên học học phần của từng kỳ.
      */
     public function getSVHHP() {
-        return $this->doQuery("SELECT svhhp.masinhvien, CONCAT(sv.hodem, \" \", sv.ten) hoten , svhhp.mahocphan, mt.tenmonthi, CONCAT(\"Kỳ \", kt.ky, \" năm học \", kt.nambatdau, \"-\", kt.namketthuc) hocky FROM sinhvien_hoc_hocphan svhhp INNER JOIN sinhvien sv ON svhhp.masinhvien = sv.id INNER JOIN hocphan hp ON hp.mahocphan = svhhp.mahocphan INNER JOIN monthi mt ON hp.mamonthi = mt.mamonthi INNER JOIN kythi kt ON kt.id = svhhp.idhocky ORDER BY idhocky, masinhvien");
+        return $this->doQuery("SELECT svhhp.masinhvien, CONCAT(sv.hodem, \" \", sv.ten) hoten , svhhp.mahocphan, mt.tenmonthi, CONCAT(\"Kỳ \", kt.ky, \" năm học \", kt.nambatdau, \"-\", kt.namketthuc) hocky FROM sinhvien_hoc_hocphan svhhp INNER JOIN sinhvien sv ON svhhp.masinhvien = sv.id INNER JOIN hocphan hp ON hp.mahocphan = svhhp.mahocphan INNER JOIN monthi mt ON hp.mamonthi = mt.mamonthi INNER JOIN kythi kt ON kt.id = svhhp.idhocky ORDER BY idhocky, masinhvien, mahocphan");
     }
 
     /**

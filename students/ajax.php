@@ -16,18 +16,14 @@
         $hash1 = hash('sha256', $table1); // Hash của bảng SV
         $hash2 = hash('sha256', $table2); // Hash của bảng SVHHP
         // Client kiểm tra xem hash của client có trùng server không. Nếu không trùng, server trả về bảng và hash mới.
-        if (isset($_GET['hash1'])) { // Check hash bảng sinh viên
-            if ($_GET['hash1'] != $hash1) {
-                $res->table = $table1;
-            }
-            $res->hash = $hash1;
-        } else if (isset($_GET['hash2'])) { // Check hash bảng sinh viên học học phần
-            if ($_GET['hash2'] != $hash2) {
-                $res->table = $table2;
-            }
-            $res->hash = $hash2;
+        if (!isset($_GET['hash1']) || $_GET['hash1'] != $hash1) { // Check hash bảng sinh viên
+            $res->table1 = $table1;
         }
-
+        $res->hash1 = $hash1;
+        if (!isset($_GET['hash2']) || $_GET['hash2'] != $hash2) { // Check hash bảng sinh viên học học phần
+            $res->table2 = $table2;
+        }
+        $res->hash2 = $hash2;
         echo json_encode($res); // Trả về kết quả
     } else {
         $res = new stdClass();
